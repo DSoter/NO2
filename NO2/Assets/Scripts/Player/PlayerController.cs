@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
 
     // Local Variables
     private Vector2 _moveDirection = new Vector2(0,0);
+    private Vector2 _lookDirection = new Vector2(1, 0);
     private bool _isRunning = false;
     private PlayerState _state = PlayerState.Move;
 
@@ -46,7 +47,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
 
         switch (_state)
@@ -55,11 +56,11 @@ public class PlayerController : MonoBehaviour
 
                 if (_isRunning)
                 {
-                    _rigidbody.linearVelocity = _runningSpeed * Time.fixedDeltaTime * _moveDirection.normalized;
+                    _rigidbody.linearVelocity = _runningSpeed * _moveDirection;
                 }
                 else
                 {
-                    _rigidbody.linearVelocity = _walkingSpeed * Time.fixedDeltaTime * _moveDirection.normalized;
+                    _rigidbody.linearVelocity = _walkingSpeed * _moveDirection;
                 }
 
                 break;
@@ -69,11 +70,9 @@ public class PlayerController : MonoBehaviour
 
 
         }
-       
 
+        UpdateLookDirection();
         HandleAnimatorParams();
-
-        _renderer.flipX = (_moveDirection.x < 0);
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -100,11 +99,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void UpdateLookDirection()
+    {
+        if(_moveDirection.magnitude > 0)
+        {
+            _lookDirection = _moveDirection.normalized;
+        }
+
+        _renderer.flipX = (_lookDirection.x < 0);
+    }
 
     private void HandleAnimatorParams()
     {
-        _animator.SetFloat("xDir", _moveDirection.x);
-        _animator.SetFloat("yDir", _moveDirection.y);
+        _animator.SetFloat("xDir", _lookDirection.x);
+        _animator.SetFloat("yDir", _lookDirection.y);
         _animator.SetBool("isIdle", _state == PlayerState.Move && _moveDirection == Vector2.zero);
         _animator.SetBool("isWalking", _state == PlayerState.Move && !_isRunning && _moveDirection != Vector2.zero);
         _animator.SetBool("isRunning", _state == PlayerState.Move && _isRunning && _moveDirection != Vector2.zero);     

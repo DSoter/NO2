@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private Animator _animator;
     private SpriteRenderer _renderer;
-    private PolygonCollider2D _polygonCollider;
 
     // InputSystem 
     private InputSystem m_Actions;
@@ -35,7 +34,6 @@ public class PlayerController : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _renderer = GetComponent<SpriteRenderer>();
-        _polygonCollider = GetComponent<PolygonCollider2D>();
 
         m_Actions = new InputSystem();
         m_Player = m_Actions.Player;
@@ -48,12 +46,6 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void LateUpdate()
-    {
-        if(_polygonCollider != null) { 
-            _polygonCollider.CreateFromSprite(_renderer.sprite);
-        }
-    }
     private void FixedUpdate()
     {
 

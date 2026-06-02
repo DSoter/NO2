@@ -18,7 +18,7 @@ public class DeathTrigguer : MonoBehaviour
             }
 
             // Desactivar el trigger para que no se use más de una vez
-            GetComponent<Collider2D>().enabled = false;
+            //GetComponent<Collider2D>().enabled = false;
         }
     }
 }

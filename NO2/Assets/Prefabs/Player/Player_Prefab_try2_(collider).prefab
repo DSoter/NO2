@@ -158,6 +158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   _walkingSpeed: 150
   _runningSpeed: 250
+  deathSound: {fileID: 8300000, guid: 635a0038b9b863f409947d5d641440f1, type: 3}
 --- !u!61 &1728810054660856816
 BoxCollider2D:
   m_ObjectHideFlags: 0

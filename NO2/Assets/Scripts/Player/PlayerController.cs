@@ -1,6 +1,7 @@
  using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,9 +19,15 @@ public class PlayerController : MonoBehaviour
     private bool _isRunning = false;
     private PlayerState _state = PlayerState.Move;
 
+    //Secene controler
+    private SceneController _sceneController;
+
     // Movement Configuration
     [SerializeField] private float _walkingSpeed = 50f;
     [SerializeField] private float _runningSpeed = 100f;
+
+    [Header("Sonidos")]
+    [SerializeField] private AudioClip  deathSound;
 
 
 
@@ -46,6 +53,8 @@ public class PlayerController : MonoBehaviour
 
         m_Player.Run.performed += OnRun;
         m_Player.Run.canceled += OnRun;
+
+        _sceneController = FindAnyObjectByType<SceneController>();
 
     }
 
@@ -130,5 +139,25 @@ public class PlayerController : MonoBehaviour
     public void SetDead(bool isDead)
     {
         if (isDead){ _state = PlayerState.Dead; }   
+    }
+
+
+    public void Death()//and respawn other player or the logic
+    {
+        if (deathSound != null)
+            GameManager.Instance.audioManager.PlaySound(deathSound);
+        StartCoroutine(WaitAndKill(0.5f));
+    }
+    IEnumerator WaitAndKill(float segundos)
+    {
+        SetDead(true);
+        _renderer.color = Color.red;
+
+        yield return new WaitForSeconds(segundos);
+
+        SetDead(false);
+        _sceneController.SpawnPlayer();
+        Destroy(transform.gameObject);
+
     }
 }

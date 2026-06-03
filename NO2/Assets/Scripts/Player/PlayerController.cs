@@ -30,6 +30,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip  deathSound;
 
 
+    [Header("Player data")]
+    [SerializeField] private PlayerData _playerData;
+
+
 
 
     public enum PlayerState

@@ -159,6 +159,7 @@ MonoBehaviour:
   _walkingSpeed: 150
   _runningSpeed: 250
   deathSound: {fileID: 8300000, guid: 635a0038b9b863f409947d5d641440f1, type: 3}
+  _playerData: {fileID: 11400000, guid: 707aa1a40a1bb064193fd4f6f25fcc6a, type: 2}
 --- !u!61 &1728810054660856816
 BoxCollider2D:
   m_ObjectHideFlags: 0

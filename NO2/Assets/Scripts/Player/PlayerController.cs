@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,10 +23,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _runningSpeed = 100f;
 
 
+
+
     public enum PlayerState
     {
         Move,
-        Roll
+        Roll,
+        Dead
     }
 
     void Awake()
@@ -48,7 +51,6 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-
         switch (_state)
         {
             case PlayerState.Move:
@@ -67,6 +69,9 @@ public class PlayerController : MonoBehaviour
 
                 break;
 
+            case PlayerState.Dead:
+                _rigidbody.linearVelocity = Vector2.zero;
+                return;
 
         }
        
@@ -121,5 +126,9 @@ public class PlayerController : MonoBehaviour
     void OnDisable()
     {
         m_Player.Disable();
+    }
+    public void SetDead(bool isDead)
+    {
+        if (isDead){ _state = PlayerState.Dead; }   
     }
 }

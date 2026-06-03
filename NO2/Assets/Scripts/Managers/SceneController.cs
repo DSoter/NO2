@@ -11,8 +11,9 @@ public class SceneController : MonoBehaviour
     [Header("Sonidos")]
     [SerializeField] private AudioClip theme, deathSound;
 
-
+    //Cosas jugador
     private GameObject player;
+    private PlayerController _playerController;
 
     void Start()
     {
@@ -26,7 +27,7 @@ public class SceneController : MonoBehaviour
     private void SpawnPlayer()
     {
         player = Instantiate<GameObject>(prefabPersonaje);
-
+        _playerController = player.GetComponent<PlayerController>();
         player.transform.position = currentSpawnPoint.transform.position;
     }
 
@@ -39,12 +40,12 @@ public class SceneController : MonoBehaviour
     }
     IEnumerator WaitAndKill(float segundos)
     {
-        //playerController.SetCanMove(false);
+        _playerController.SetDead(true);
         player.GetComponent<SpriteRenderer>().color = Color.red;
 
         yield return new WaitForSeconds(segundos);
 
-        //playerController.SetCanMove(true);
+        _playerController.SetDead(false);
         Destroy(player);
         SpawnPlayer();
     }

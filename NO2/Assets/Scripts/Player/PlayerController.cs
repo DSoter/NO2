@@ -84,6 +84,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (Time.timeScale == 0f) return;
         switch (_state)
         {
             case PlayerState.Move:

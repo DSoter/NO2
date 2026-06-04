@@ -2,6 +2,8 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,15 +22,40 @@ public class PlayerController : MonoBehaviour
     private bool _isRunning = false;
     private PlayerState _state = PlayerState.Move;
 
+    //Secene controler
+    private SceneController _sceneController;
+
     // Movement Configuration
     [SerializeField] private float _walkingSpeed = 3f;
     [SerializeField] private float _runningSpeed = 5f;
+
+    [Header("Sonidos")]
+    [SerializeField] private AudioClip  deathSound;
+
+
+    [Header("Player data")]
+    [SerializeField] private PlayerData _playerData;
+
+
+
+    //Interactuar con objetos
+    [HideInInspector] public GameObject objetoInteractuable;
+    private bool _puedeInteractuar;
+
+
+
+    //UIEmergente
+    private GameObject _canvas;
+    private GameObject _imagenUI;
+    private GameObject _textoUI;
+    [SerializeField] private Sprite _teclaE;
 
 
     public enum PlayerState
     {
         Move,
-        Roll
+        Roll,
+        Dead
     }
 
     void Awake()
@@ -47,11 +74,20 @@ public class PlayerController : MonoBehaviour
         m_Player.Run.canceled += OnRun;
 
         m_Player.Roll.started += OnRoll;
+        m_Player.Interact.performed += OnInteract;
+        m_Player.Interact.canceled += OnInteract;
+
+        _sceneController = FindAnyObjectByType<SceneController>();
+
+        _canvas = transform.GetChild(0).gameObject;
+        _imagenUI = _canvas.transform.GetChild(0).gameObject;
+        _textoUI = _canvas.transform.GetChild(1).gameObject;
+
     }
 
     private void Update()
     {
-
+        if (Time.timeScale == 0f) return;
         switch (_state)
         {
             case PlayerState.Move:
@@ -73,10 +109,27 @@ public class PlayerController : MonoBehaviour
 
                 break;
 
+            case PlayerState.Dead:
+                _rigidbody.linearVelocity = Vector2.zero;
+                return;
 
         }
 
         HandleAnimatorParams();
+
+        _renderer.flipX = (_moveDirection.x < 0);
+
+
+        if (_puedeInteractuar)
+        {
+            _canvas.SetActive(true);
+            _imagenUI.GetComponent<Image>().sprite = _teclaE;
+        }
+        else
+        {
+            _canvas.SetActive(false);
+        }
+
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -100,6 +153,17 @@ public class PlayerController : MonoBehaviour
         if (context.canceled)
         {
             _isRunning = false;
+        }
+    }
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (_puedeInteractuar) { objetoInteractuable.GetComponent<InteractuablePrueba>().interact(); }
+        }
+        if (context.canceled)
+        {
+            
         }
     }
 
@@ -154,5 +218,35 @@ public class PlayerController : MonoBehaviour
     void OnDisable()
     {
         m_Player.Disable();
+    }
+    public void SetDead(bool isDead)
+    {
+        if (isDead){ _state = PlayerState.Dead; }   
+    }
+    public void SetPuedeInteractuar(bool interact)
+    {
+        _puedeInteractuar = interact;
+    }
+    public bool GetPuedeInteractuar()
+    {
+        return _puedeInteractuar;
+    }
+    public void Death()//and respawn other player or the logic
+    {
+        if (deathSound != null)
+            GameManager.Instance.audioManager.PlaySound(deathSound);
+        StartCoroutine(WaitAndKill(0.5f));
+    }
+    IEnumerator WaitAndKill(float segundos)
+    {
+        SetDead(true);
+        _renderer.color = Color.red;
+
+        yield return new WaitForSeconds(segundos);
+
+        SetDead(false);
+        _sceneController.SpawnPlayer();
+        Destroy(transform.gameObject);
+
     }
 }

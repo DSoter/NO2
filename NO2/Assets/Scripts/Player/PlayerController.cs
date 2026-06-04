@@ -1,4 +1,5 @@
- using Unity.VisualScripting;
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
 
     // Local Variables
     private Vector2 _moveDirection = new Vector2(0,0);
+    private Vector2 _lookDirection = new Vector2(1, 0);
     private bool _isRunning = false;
     private PlayerState _state = PlayerState.Move;
 
@@ -24,8 +26,8 @@ public class PlayerController : MonoBehaviour
     private SceneController _sceneController;
 
     // Movement Configuration
-    [SerializeField] private float _walkingSpeed = 50f;
-    [SerializeField] private float _runningSpeed = 100f;
+    [SerializeField] private float _walkingSpeed = 3f;
+    [SerializeField] private float _runningSpeed = 5f;
 
     [Header("Sonidos")]
     [SerializeField] private AudioClip  deathSound;
@@ -71,6 +73,7 @@ public class PlayerController : MonoBehaviour
         m_Player.Run.performed += OnRun;
         m_Player.Run.canceled += OnRun;
 
+        m_Player.Roll.started += OnRoll;
         m_Player.Interact.performed += OnInteract;
         m_Player.Interact.canceled += OnInteract;
 
@@ -82,24 +85,27 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (Time.timeScale == 0f) return;
         switch (_state)
         {
             case PlayerState.Move:
 
+                UpdateLookDirection();
+
                 if (_isRunning)
                 {
-                    _rigidbody.linearVelocity = _runningSpeed * Time.fixedDeltaTime * _moveDirection.normalized;
+                    _rigidbody.linearVelocity = _runningSpeed * _moveDirection;
                 }
                 else
                 {
-                    _rigidbody.linearVelocity = _walkingSpeed * Time.fixedDeltaTime * _moveDirection.normalized;
+                    _rigidbody.linearVelocity = _walkingSpeed * _moveDirection;
                 }
 
                 break;
             case PlayerState.Roll:
+
 
                 break;
 
@@ -108,7 +114,6 @@ public class PlayerController : MonoBehaviour
                 return;
 
         }
-       
 
         HandleAnimatorParams();
 
@@ -162,14 +167,44 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnRoll(InputAction.CallbackContext context)
+    {
+        if (context.started && _state != PlayerState.Roll)
+        {
+            StartCoroutine(RollCoroutine());
+        }
+    }
+
+    private IEnumerator RollCoroutine()
+    {
+        _state = PlayerState.Roll;
+
+        _rigidbody.linearVelocity = 6 * _lookDirection;
+        yield return new WaitForSeconds(0.3f);
+        _rigidbody.linearVelocity = 2 * _lookDirection;
+        yield return new WaitForSeconds(0.2f);
+
+        _state = PlayerState.Move;
+    }
+
+    private void UpdateLookDirection()
+    {
+        if(_moveDirection.magnitude > 0)
+        {
+            _lookDirection = _moveDirection.normalized;
+        }
+
+        _renderer.flipX = (_lookDirection.x < 0);
+    }
 
     private void HandleAnimatorParams()
     {
-        _animator.SetFloat("xDir", _moveDirection.x);
-        _animator.SetFloat("yDir", _moveDirection.y);
+        _animator.SetFloat("xDir", _lookDirection.x);
+        _animator.SetFloat("yDir", _lookDirection.y);
         _animator.SetBool("isIdle", _state == PlayerState.Move && _moveDirection == Vector2.zero);
         _animator.SetBool("isWalking", _state == PlayerState.Move && !_isRunning && _moveDirection != Vector2.zero);
-        _animator.SetBool("isRunning", _state == PlayerState.Move && _isRunning && _moveDirection != Vector2.zero);     
+        _animator.SetBool("isRunning", _state == PlayerState.Move && _isRunning && _moveDirection != Vector2.zero);
+        _animator.SetBool("isRolling", _state == PlayerState.Roll);
     }
 
     void OnDestroy()

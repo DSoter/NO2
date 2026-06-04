@@ -155,5 +155,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49258779a67641f4c93f829ec488d361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  _walkingSpeed: 150
-  _runningSpeed: 250
+  _walkingSpeed: 3
+  _runningSpeed: 5

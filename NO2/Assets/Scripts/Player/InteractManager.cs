@@ -17,7 +17,7 @@ public class InteractManager : MonoBehaviour
     private GameObject _canvas;
     private GameObject _imagenUI;
     private GameObject _textoUI;
-    [SerializeField] private Sprite _teclaE;
+    [SerializeField] private Sprite _keySpriteE;
 
 
     //player controller
@@ -35,7 +35,7 @@ public class InteractManager : MonoBehaviour
     }
     private void Start()
     {
-        _playerController = FindAnyObjectByType<PlayerController>();
+        _playerController = GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -44,7 +44,7 @@ public class InteractManager : MonoBehaviour
         if (_puedeInteractuar)
         {
             _canvas.SetActive(true);
-            _imagenUI.GetComponent<Image>().sprite = _teclaE;
+            _imagenUI.GetComponent<Image>().sprite = _keySpriteE;
         }
         else
         {
@@ -56,7 +56,9 @@ public class InteractManager : MonoBehaviour
     {
         if (context.performed)
         {
-            if (_puedeInteractuar && _playerController.GetState() == PlayerController.PlayerState.Move) { objetoInteractuable.GetComponent<InteractuablePrueba>().interact(); }
+            if (_puedeInteractuar && _playerController.GetState() == PlayerController.PlayerState.Move) {
+                objetoInteractuable.GetComponent<InteractuablePrueba>().interact(); // <--- ejemplo para usar Interfaze      //      en vez de un interactuable exacto usar IInteractable
+            }
         }
         if (context.canceled)
         {

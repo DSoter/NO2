@@ -34,11 +34,6 @@ public class PlayerController : MonoBehaviour
     [Header("Player data")]
     [SerializeField] private PlayerData _playerData;
 
-
-
-    
-
-
     public enum PlayerState
     {
         Move,
@@ -54,6 +49,8 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+        _sceneController = FindAnyObjectByType<SceneController>();
+
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _renderer = GetComponent<SpriteRenderer>();
@@ -68,17 +65,10 @@ public class PlayerController : MonoBehaviour
         m_Player.Run.canceled += OnRun;
 
         m_Player.Roll.started += OnRoll;
-        
-
-        _sceneController = FindAnyObjectByType<SceneController>();
-
-        
-
     }
 
     private void Update()
     {
-        if (Time.timeScale == 0f) return;
         switch (_state)
         {
             case PlayerState.Move:
@@ -99,20 +89,15 @@ public class PlayerController : MonoBehaviour
 
 
                 break;
-
             case PlayerState.Dead:
+
                 _rigidbody.linearVelocity = Vector2.zero;
+
                 return;
 
         }
 
         HandleAnimatorParams();
-
-        _renderer.flipX = (_moveDirection.x < 0);
-
-
-        
-
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -151,6 +136,8 @@ public class PlayerController : MonoBehaviour
     private IEnumerator RollCoroutine()
     {
         _state = PlayerState.Roll;
+
+        UpdateLookDirection();
 
         _rigidbody.linearVelocity = 6 * _lookDirection;
         yield return new WaitForSeconds(0.3f);

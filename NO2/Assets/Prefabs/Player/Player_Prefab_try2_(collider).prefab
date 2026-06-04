@@ -89,6 +89,7 @@ GameObject:
   - component: {fileID: 1363480059194287446}
   - component: {fileID: 5548025482173766279}
   - component: {fileID: 1728810054660856816}
+  - component: {fileID: 132464971765904495}
   m_Layer: 0
   m_Name: Player_Prefab_try2_(collider)
   m_TagString: Player
@@ -232,12 +233,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49258779a67641f4c93f829ec488d361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  _walkingSpeed: 150
-  _runningSpeed: 250
+  _walkingSpeed: 3
+  _runningSpeed: 5
   deathSound: {fileID: 8300000, guid: 635a0038b9b863f409947d5d641440f1, type: 3}
   _playerData: {fileID: 11400000, guid: 707aa1a40a1bb064193fd4f6f25fcc6a, type: 2}
-  objetoInteractuable: {fileID: 0}
-  _teclaE: {fileID: -7926641448441953039, guid: cd8289ea5ee412d4bbdca2c0aef2895a, type: 3}
 --- !u!61 &1728810054660856816
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -284,6 +283,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.37677035, y: 0.3166522}
   m_EdgeRadius: 0
+--- !u!114 &132464971765904495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7308374800647762407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fca001cfd3562f448626eb6cc840c3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractManager
+  objetoInteractuable: {fileID: 0}
+  _teclaE: {fileID: -7926641448441953039, guid: cd8289ea5ee412d4bbdca2c0aef2895a, type: 3}
 --- !u!1 &8047530624285702385
 GameObject:
   m_ObjectHideFlags: 0

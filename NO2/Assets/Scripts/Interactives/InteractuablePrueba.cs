@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InteractuablePrueba : MonoBehaviour
 {
-    private PlayerController _playerController;
+    private InteractManager _playerController;
     public void interact()
     {
         Destroy(gameObject);
@@ -14,7 +14,7 @@ public class InteractuablePrueba : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
 
-            if (_playerController == null) { _playerController = collision.GetComponent<PlayerController>();}
+            if (_playerController == null) { _playerController = collision.GetComponent<InteractManager>();}
             if (!_playerController.GetPuedeInteractuar())
             {
                 _playerController.SetPuedeInteractuar(true);

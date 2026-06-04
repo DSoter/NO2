@@ -2,7 +2,6 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -38,17 +37,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-    //Interactuar con objetos
-    [HideInInspector] public GameObject objetoInteractuable;
-    private bool _puedeInteractuar;
-
-
-
-    //UIEmergente
-    private GameObject _canvas;
-    private GameObject _imagenUI;
-    private GameObject _textoUI;
-    [SerializeField] private Sprite _teclaE;
+    
 
 
     public enum PlayerState
@@ -57,6 +46,12 @@ public class PlayerController : MonoBehaviour
         Roll,
         Dead
     }
+
+    public PlayerState GetState()
+    {
+        return _state;
+    }
+
 
     void Awake()
     {
@@ -74,14 +69,11 @@ public class PlayerController : MonoBehaviour
         m_Player.Run.canceled += OnRun;
 
         m_Player.Roll.started += OnRoll;
-        m_Player.Interact.performed += OnInteract;
-        m_Player.Interact.canceled += OnInteract;
+        
 
         _sceneController = FindAnyObjectByType<SceneController>();
 
-        _canvas = transform.GetChild(0).gameObject;
-        _imagenUI = _canvas.transform.GetChild(0).gameObject;
-        _textoUI = _canvas.transform.GetChild(1).gameObject;
+        
 
     }
 
@@ -120,15 +112,7 @@ public class PlayerController : MonoBehaviour
         _renderer.flipX = (_moveDirection.x < 0);
 
 
-        if (_puedeInteractuar)
-        {
-            _canvas.SetActive(true);
-            _imagenUI.GetComponent<Image>().sprite = _teclaE;
-        }
-        else
-        {
-            _canvas.SetActive(false);
-        }
+        
 
     }
 
@@ -155,17 +139,7 @@ public class PlayerController : MonoBehaviour
             _isRunning = false;
         }
     }
-    public void OnInteract(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            if (_puedeInteractuar) { objetoInteractuable.GetComponent<InteractuablePrueba>().interact(); }
-        }
-        if (context.canceled)
-        {
-            
-        }
-    }
+    
 
     public void OnRoll(InputAction.CallbackContext context)
     {
@@ -223,14 +197,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isDead){ _state = PlayerState.Dead; }   
     }
-    public void SetPuedeInteractuar(bool interact)
-    {
-        _puedeInteractuar = interact;
-    }
-    public bool GetPuedeInteractuar()
-    {
-        return _puedeInteractuar;
-    }
+    
     public void Death()//and respawn other player or the logic
     {
         if (deathSound != null)

@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -20,8 +21,8 @@ public class PlayerController : MonoBehaviour
     private PlayerState _state = PlayerState.Move;
 
     // Movement Configuration
-    [SerializeField] private float _walkingSpeed = 50f;
-    [SerializeField] private float _runningSpeed = 100f;
+    [SerializeField] private float _walkingSpeed = 3f;
+    [SerializeField] private float _runningSpeed = 5f;
 
 
     public enum PlayerState
@@ -45,6 +46,7 @@ public class PlayerController : MonoBehaviour
         m_Player.Run.performed += OnRun;
         m_Player.Run.canceled += OnRun;
 
+        m_Player.Roll.started += OnRoll;
     }
 
     private void Update()
@@ -53,6 +55,8 @@ public class PlayerController : MonoBehaviour
         switch (_state)
         {
             case PlayerState.Move:
+
+                UpdateLookDirection();
 
                 if (_isRunning)
                 {
@@ -66,12 +70,12 @@ public class PlayerController : MonoBehaviour
                 break;
             case PlayerState.Roll:
 
+
                 break;
 
 
         }
 
-        UpdateLookDirection();
         HandleAnimatorParams();
     }
 
@@ -99,6 +103,26 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnRoll(InputAction.CallbackContext context)
+    {
+        if (context.started && _state != PlayerState.Roll)
+        {
+            StartCoroutine(RollCoroutine());
+        }
+    }
+
+    private IEnumerator RollCoroutine()
+    {
+        _state = PlayerState.Roll;
+
+        _rigidbody.linearVelocity = 6 * _lookDirection;
+        yield return new WaitForSeconds(0.3f);
+        _rigidbody.linearVelocity = 2 * _lookDirection;
+        yield return new WaitForSeconds(0.2f);
+
+        _state = PlayerState.Move;
+    }
+
     private void UpdateLookDirection()
     {
         if(_moveDirection.magnitude > 0)
@@ -115,7 +139,8 @@ public class PlayerController : MonoBehaviour
         _animator.SetFloat("yDir", _lookDirection.y);
         _animator.SetBool("isIdle", _state == PlayerState.Move && _moveDirection == Vector2.zero);
         _animator.SetBool("isWalking", _state == PlayerState.Move && !_isRunning && _moveDirection != Vector2.zero);
-        _animator.SetBool("isRunning", _state == PlayerState.Move && _isRunning && _moveDirection != Vector2.zero);     
+        _animator.SetBool("isRunning", _state == PlayerState.Move && _isRunning && _moveDirection != Vector2.zero);
+        _animator.SetBool("isRolling", _state == PlayerState.Roll);
     }
 
     void OnDestroy()

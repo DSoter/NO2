@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 165209380123099980}
   - component: {fileID: 4870212720846815958}
   - component: {fileID: 6034420583255633428}
+  - component: {fileID: 8919698925306661134}
+  - component: {fileID: 2930592965807506257}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -47,8 +49,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f70309c8513395449b4a29a0cd9b5a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
-  musicSource: {fileID: 0}
-  sfxSource: {fileID: 0}
+  musicSource: {fileID: 1075975825043648962}
+  sfxSource: {fileID: 7459610150170198263}
 --- !u!114 &6034420583255633428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,6 +64,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   audioManager: {fileID: 0}
+--- !u!114 &8919698925306661134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410176089906247750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61f617048e5b94744af405cdcc1369f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PauseMenuHandler
+  pauseSceneName: PauseMenu
+  enterPauseSound: {fileID: 0}
+  exitPauseSound: {fileID: 0}
+--- !u!114 &2930592965807506257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410176089906247750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75b11191e3399ae498aa88676dc9e0c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveAndLoadManager
+  prueba:
+    objetoRecogido: 0
 --- !u!1 &516718627763750330
 GameObject:
   m_ObjectHideFlags: 0

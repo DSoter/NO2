@@ -38,7 +38,7 @@ public class MainMenuSceneManager : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene(1);
+        GameManager.Instance.GetComponent<CheckpointManager>().StartScene("PruebaTileMap");
     }
 
     public void QuitGame()

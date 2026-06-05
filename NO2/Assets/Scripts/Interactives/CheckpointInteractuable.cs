@@ -1,13 +1,14 @@
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class CheckpointInteractuable : Interactable
 {
     public override void Interact()
     {
-        SceneController sc = FindAnyObjectByType<SceneController>();
-        if (sc != null)
+        CheckpointManager cm = GameManager.Instance.GetComponent<CheckpointManager>();
+        if (cm != null)
         {
-            sc.UpdateSpawnPoint(this.transform);
+            cm.UpdateSpawnPoint(transform);
+            cm.SetCurrentSceneName(SceneManager.GetActiveScene().name);
 
             //esto es pa reproducir sonido
             //sc.ReproducirCheckPoint(); 

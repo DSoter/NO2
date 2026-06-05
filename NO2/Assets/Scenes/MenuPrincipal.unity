@@ -119,11 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!82 &66320087 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 7459610150170198263, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
-  m_PrefabInstance: {fileID: 843141662}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &74698844
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,45 +635,23 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1782051244287317021, guid: f9484fbf7bfd23640b43cde916c632a9, type: 3}
   m_PrefabInstance: {fileID: 447781131}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &484375801 stripped
+--- !u!1 &680799621 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 410176089906247750, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
   m_PrefabInstance: {fileID: 843141662}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &484375805
+--- !u!114 &680799627
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 484375801}
+  m_GameObject: {fileID: 680799621}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61f617048e5b94744af405cdcc1369f2, type: 3}
+  m_Script: {fileID: 11500000, guid: 02e54cd4bf678ec4db3621e15bb74aaf, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PauseMenuHandler
-  pauseSceneName: PauseMenu
-  enterPauseSound: {fileID: 0}
-  exitPauseSound: {fileID: 0}
---- !u!114 &484375806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 484375801}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75b11191e3399ae498aa88676dc9e0c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SaveAndLoadManager
-  prueba:
-    objetoRecogido: 0
---- !u!82 &606628914 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 1075975825043648962, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
-  m_PrefabInstance: {fileID: 843141662}
-  m_PrefabAsset: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::CheckpointManager
 --- !u!224 &700852239 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1782051244287317021, guid: f9484fbf7bfd23640b43cde916c632a9, type: 3}
@@ -736,24 +709,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
-    - target: {fileID: 4870212720846815958, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
-      propertyPath: sfxSource
-      value: 
-      objectReference: {fileID: 66320087}
-    - target: {fileID: 4870212720846815958, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
-      propertyPath: musicSource
-      value: 
-      objectReference: {fileID: 606628914}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 410176089906247750, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 484375805}
-    - targetCorrespondingSourceObject: {fileID: 410176089906247750, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 484375806}
+      addedObject: {fileID: 680799627}
   m_SourcePrefab: {fileID: 100100000, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
 --- !u!1 &935856231
 GameObject:

@@ -198,7 +198,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(segundos);
 
         SetDead(false);
-        _sceneController.SpawnPlayer();
+        GameManager.Instance.GetComponent<CheckpointManager>().SpawnPlayerAfterDeath();
         Destroy(transform.gameObject);
 
     }

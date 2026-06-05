@@ -2,36 +2,13 @@ using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class InteractuablePrueba : MonoBehaviour
+public class InteractuablePrueba : Interactable
 {
-    private InteractManager _playerController;
-    public void interact()
+    Interactable interactable;
+    public override void Interact()
     {
-        Destroy(gameObject);
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-
-            if (_playerController == null) { _playerController = collision.GetComponent<InteractManager>();}
-            if (!_playerController.GetPuedeInteractuar())
-            {
-                _playerController.SetPuedeInteractuar(true);
-                _playerController.objetoInteractuable = gameObject;
-            }
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-
-            if (_playerController.GetPuedeInteractuar())
-            {
-                _playerController.SetPuedeInteractuar(false);
-                _playerController.objetoInteractuable = null;
-            }
-        }
+        if(gameObject is null) { Debug.Log("No se detecta el game Object"); }
+        else { Destroy(gameObject); }
+            
     }
 }

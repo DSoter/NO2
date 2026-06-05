@@ -296,7 +296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractManager
   objetoInteractuable: {fileID: 0}
-  _teclaE: {fileID: -7926641448441953039, guid: cd8289ea5ee412d4bbdca2c0aef2895a, type: 3}
+  _teclaE: {fileID: 8905617430408200198, guid: d5980a0850638cb44a10ea3f03fd045b, type: 3}
 --- !u!1 &8047530624285702385
 GameObject:
   m_ObjectHideFlags: 0

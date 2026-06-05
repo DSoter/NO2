@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public class Badge : ScriptableObject
 {
     public string objectName;
-    public string achievementRelated;
+    public Logro achievementRelated;
     public string description;
     public string size;
     public UnityEvent effect;

@@ -31,7 +31,6 @@ public class SceneController : MonoBehaviour
         player.transform.position = currentSpawnPoint.transform.position;
     }
 
-
     
 
 

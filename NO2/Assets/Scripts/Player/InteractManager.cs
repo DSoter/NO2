@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,7 +8,8 @@ using UnityEngine.UI;
 public class InteractManager : MonoBehaviour
 {
     //Interactuar con objetos
-    [HideInInspector] public GameObject objetoInteractuable;
+    [HideInInspector] public Interactable interactableObject;
+    [HideInInspector] public List<Interactable> interactables;
     private bool _puedeInteractuar;
 
     // InputSystem 
@@ -32,6 +35,7 @@ public class InteractManager : MonoBehaviour
         _canvas = transform.GetChild(0).gameObject;
         _imagenUI = _canvas.transform.GetChild(0).gameObject;
         _textoUI = _canvas.transform.GetChild(1).gameObject;
+        interactables = new List<Interactable>();
     }
     private void Start()
     {
@@ -56,8 +60,8 @@ public class InteractManager : MonoBehaviour
     {
         if (context.performed)
         {
-            if (_puedeInteractuar && _playerController.GetState() == PlayerController.PlayerState.Move) {
-                objetoInteractuable.GetComponent<InteractuablePrueba>().interact(); // <--- ejemplo para usar Interfaze      //      en vez de un interactuable exacto usar IInteractable
+            if (_puedeInteractuar && _playerController.GetState() == PlayerController.PlayerState.Move) { 
+                interactableObject.Interact();
             }
         }
         if (context.canceled)

@@ -660,6 +660,20 @@ MonoBehaviour:
   pauseSceneName: PauseMenu
   enterPauseSound: {fileID: 0}
   exitPauseSound: {fileID: 0}
+--- !u!114 &484375806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 484375801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75b11191e3399ae498aa88676dc9e0c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveAndLoadManager
+  prueba:
+    objetoRecogido: 0
 --- !u!82 &606628914 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 1075975825043648962, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
@@ -737,6 +751,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 410176089906247750, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 484375805}
+    - targetCorrespondingSourceObject: {fileID: 410176089906247750, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 484375806}
   m_SourcePrefab: {fileID: 100100000, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
 --- !u!1 &935856231
 GameObject:

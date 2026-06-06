@@ -49,7 +49,9 @@ public class CheckpointManager : MonoBehaviour
     }
     public void SpawnPlayer()
     {
-        if (currentSceneName is null) { currentSceneName = SceneManager.GetActiveScene().name; }
+        if (currentSceneName is null) {
+            currentSceneName = SceneManager.GetActiveScene().name;
+        }
         if (!(SceneManager.GetActiveScene().name.Equals(currentSceneName))) {
             hasToSpawnPlayer = true;
             SceneManager.LoadScene(currentSceneName);
@@ -60,7 +62,9 @@ public class CheckpointManager : MonoBehaviour
     }
     public void SpawnPlayerAfterDeath()
     {
-        if (currentSceneName is null) { currentSceneName = SceneManager.GetActiveScene().name; }
+        if (currentSceneName is null) {
+            currentSceneName = SceneManager.GetActiveScene().name;
+        }
         if (!SceneManager.GetActiveScene().name.Equals(currentSceneName))
         {
             hasToSpawnPlayerAfterDeath = true;

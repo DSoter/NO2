@@ -14,8 +14,13 @@ public abstract class Interactable : MonoBehaviour
 
         if (collision.CompareTag("Player"))
         {
-            if (_playerController == null) { _playerController = collision.GetComponent<InteractManager>(); }
+            if (_playerController == null) 
+            {
+                _playerController = collision.GetComponent<InteractManager>(); 
+            }
+
             _playerController.interactables.Add(this);
+
             if (_playerController.interactables.Count == 1)
             {
                 _playerController.SetPuedeInteractuar(true);

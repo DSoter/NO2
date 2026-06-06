@@ -23,14 +23,10 @@ public class PlayerController : MonoBehaviour
     //Secene controler
     private SceneController _sceneController;
 
-    // Movement Configuration
-    [SerializeField] private float _walkingSpeed = 3f;
-    [SerializeField] private float _runningSpeed = 5f;
-
     [Header("Sonidos")]
-    [SerializeField] private AudioClip  deathSound;
+    [SerializeField] private AudioClip deathSound;
 
-
+    [Space(5)]
     [Header("Player data")]
     [SerializeField] private PlayerData _playerData;
 
@@ -77,11 +73,11 @@ public class PlayerController : MonoBehaviour
 
                 if (_isRunning)
                 {
-                    _rigidbody.linearVelocity = _runningSpeed * _moveDirection;
+                    _rigidbody.linearVelocity = _playerData.WalkingSpeed * _moveDirection;
                 }
                 else
                 {
-                    _rigidbody.linearVelocity = _walkingSpeed * _moveDirection;
+                    _rigidbody.linearVelocity = _playerData.RunningSpeed * _moveDirection;
                 }
 
                 break;

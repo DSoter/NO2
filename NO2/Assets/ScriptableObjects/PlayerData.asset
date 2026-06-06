@@ -14,16 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
   maxHealth: 0
   maxStamina: 0
-  maxOxygen: 0
-  walkingSpeed: 0
-  runningSpeed: 0
+  secondsUntilStaminaRegeneration: 0
   staminaRegenerationSpeed: 0
+  maxOxygen: 0
   oxigenDropingSpeed: 0
-  rollCooldown: 0
-  damageBasicAttack: 0
-  cooldoownBasicAttack: 0
-  durationBasicAttack: 0
-  damageChargeAttack: 0
-  cooldoownChargeAttack: 0
-  durationChargeOfChargeAttack: 0
-  durationChargeAttack: 0
+  walkingSpeed: 3
+  runningSpeed: 5
+  iniRollingSpeed: 0
+  endRollingSpeed: 0
+  basicAttackDamage: 0
+  chargeAttackDamage: 0

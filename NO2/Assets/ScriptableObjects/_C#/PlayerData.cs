@@ -7,16 +7,21 @@ public class PlayerData : ScriptableObject
 {
 
     [Header("Health")]
+    [SerializeField] private float health;
     [SerializeField] private float maxHealth;
 
     [Space(5)]
     [Header("Stamina")]
+    [SerializeField] private float stamina;
     [SerializeField] private float maxStamina;
     [SerializeField] private float secondsUntilStaminaRegeneration;
     [SerializeField] private float staminaRegenerationSpeed;
+    [SerializeField] private float runningStaminaCost;
+    [SerializeField] private float rollingStaminaCost;
 
     [Space(5)]
     [Header("Oxygen")]
+    [SerializeField] private float oxygen;
     [SerializeField] private float maxOxygen;
     [SerializeField] private float oxigenDropingSpeed;
 
@@ -34,7 +39,28 @@ public class PlayerData : ScriptableObject
 
 
 
-    // Access Properties
+    // Read and write properties
+    public float Health
+    {
+        get { return health; }
+        set { health = value; }
+    }
+
+    public float Stamina
+    {
+        get { return stamina; }
+        set { stamina = value; }
+    }
+
+    public float Oxygen
+    {
+        get { return oxygen; }
+        set { oxygen = value; }
+    }
+
+
+    // Read only properties
+
     public float MaxHealth 
     { 
         get {  return maxHealth; }
@@ -58,6 +84,14 @@ public class PlayerData : ScriptableObject
     public float StaminaRegenerationSpeed
     {
         get { return staminaRegenerationSpeed; }
+    }
+    public float RunningStaminaCost
+    {
+        get { return runningStaminaCost; }
+    }
+    public float RollingStaminaCost
+    {
+        get { return rollingStaminaCost; }
     }
 
     public float OxigenDropingSpeed

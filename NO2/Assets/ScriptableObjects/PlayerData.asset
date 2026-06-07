@@ -12,15 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6ba87a4b3f8a146b4139e434e936c4, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
-  maxHealth: 0
-  maxStamina: 0
-  secondsUntilStaminaRegeneration: 0
-  staminaRegenerationSpeed: 0
-  maxOxygen: 0
+  health: 0
+  maxHealth: 20
+  stamina: 0
+  maxStamina: 10
+  secondsUntilStaminaRegeneration: 1
+  staminaRegenerationSpeed: 5
+  runningStaminaCost: 2
+  rollingStaminaCost: 4
+  oxygen: 0
+  maxOxygen: 20
   oxigenDropingSpeed: 0
   walkingSpeed: 3
   runningSpeed: 5
-  iniRollingSpeed: 0
-  endRollingSpeed: 0
+  iniRollingSpeed: 7
+  endRollingSpeed: 2
   basicAttackDamage: 0
   chargeAttackDamage: 0

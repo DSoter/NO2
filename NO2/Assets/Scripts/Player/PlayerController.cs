@@ -73,11 +73,11 @@ public class PlayerController : MonoBehaviour
 
                 if (_isRunning)
                 {
-                    _rigidbody.linearVelocity = _playerData.WalkingSpeed * _moveDirection;
+                    _rigidbody.linearVelocity = _playerData.RunningSpeed * _moveDirection;
                 }
                 else
                 {
-                    _rigidbody.linearVelocity = _playerData.RunningSpeed * _moveDirection;
+                    _rigidbody.linearVelocity = _playerData.WalkingSpeed * _moveDirection;
                 }
 
                 break;
@@ -135,9 +135,10 @@ public class PlayerController : MonoBehaviour
 
         UpdateLookDirection();
 
-        _rigidbody.linearVelocity = 6 * _lookDirection;
+        _rigidbody.linearVelocity = _playerData.IniRollingSpeed * _lookDirection;
         yield return new WaitForSeconds(0.3f);
-        _rigidbody.linearVelocity = 2 * _lookDirection;
+
+        _rigidbody.linearVelocity = _playerData.EndRollingSpeed * _lookDirection;
         yield return new WaitForSeconds(0.2f);
 
         _state = PlayerState.Move;

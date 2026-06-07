@@ -86,8 +86,8 @@ GameObject:
   - component: {fileID: 255655421128169799}
   - component: {fileID: 4671196641079420140}
   - component: {fileID: 8272714048974360551}
-  - component: {fileID: 1363480059194287446}
   - component: {fileID: 5548025482173766279}
+  - component: {fileID: 1363480059194287446}
   - component: {fileID: 1728810054660856816}
   - component: {fileID: 132464971765904495}
   m_Layer: 0
@@ -194,6 +194,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5548025482173766279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7308374800647762407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49258779a67641f4c93f829ec488d361, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  deathSound: {fileID: 8300000, guid: 635a0038b9b863f409947d5d641440f1, type: 3}
+  _playerData: {fileID: 11400000, guid: 707aa1a40a1bb064193fd4f6f25fcc6a, type: 2}
 --- !u!50 &1363480059194287446
 Rigidbody2D:
   serializedVersion: 5
@@ -221,22 +235,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &5548025482173766279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7308374800647762407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49258779a67641f4c93f829ec488d361, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  _walkingSpeed: 3
-  _runningSpeed: 5
-  deathSound: {fileID: 8300000, guid: 635a0038b9b863f409947d5d641440f1, type: 3}
-  _playerData: {fileID: 11400000, guid: 707aa1a40a1bb064193fd4f6f25fcc6a, type: 2}
 --- !u!61 &1728810054660856816
 BoxCollider2D:
   m_ObjectHideFlags: 0

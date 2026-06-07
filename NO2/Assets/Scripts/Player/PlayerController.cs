@@ -1,10 +1,12 @@
 using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+
+
     // Gameobject Componentes
     private Rigidbody2D _rigidbody;
     private Animator _animator;
@@ -17,12 +19,15 @@ public class PlayerController : MonoBehaviour
     // Local Variables
     private Vector2 _moveDirection = new Vector2(0,0);
     private Vector2 _lookDirection = new Vector2(1, 0);
+    private float _staminaRegenTimer = 0;
     private bool _isRunning = false;
+    private bool canRoll => _state != PlayerState.Roll && HasStamina();
     private PlayerState _state = PlayerState.Move;
 
     //Secene controler
     private SceneController _sceneController;
 
+    //References
     [Header("Sonidos")]
     [SerializeField] private AudioClip deathSound;
 
@@ -61,6 +66,8 @@ public class PlayerController : MonoBehaviour
         m_Player.Run.canceled += OnRun;
 
         m_Player.Roll.started += OnRoll;
+
+        _playerData.Stamina = _playerData.MaxStamina;
     }
 
     private void Update()
@@ -71,14 +78,16 @@ public class PlayerController : MonoBehaviour
 
                 UpdateLookDirection();
 
-                if (_isRunning)
+                if (_isRunning && HasStamina())
                 {
-                    _rigidbody.linearVelocity = _playerData.RunningSpeed * _moveDirection;
+                    Run();
                 }
                 else
                 {
-                    _rigidbody.linearVelocity = _playerData.WalkingSpeed * _moveDirection;
+                    Walk();   
                 }
+
+                HandleStaminaRegeneration();
 
                 break;
             case PlayerState.Roll:
@@ -94,6 +103,36 @@ public class PlayerController : MonoBehaviour
         }
 
         HandleAnimatorParams();
+    }
+
+    private void Run() 
+    {
+        if (_moveDirection.magnitude > 0)
+        {
+            ConsumeStamina(_playerData.RunningStaminaCost * Time.deltaTime);
+        }
+
+        _rigidbody.linearVelocity = _playerData.RunningSpeed * _moveDirection;
+
+    }
+
+    private void Walk()
+    {
+        _rigidbody.linearVelocity = _playerData.WalkingSpeed * _moveDirection;
+    }
+
+    private void HandleStaminaRegeneration()
+    {
+        bool shouldRegenerate = _staminaRegenTimer >= _playerData.SecondsUntilStaminaRegeneration && (!_isRunning || _moveDirection.magnitude == 0);
+
+        if (shouldRegenerate)
+        {
+            _playerData.Stamina = Mathf.Min(_playerData.MaxStamina, _playerData.Stamina + _playerData.StaminaRegenerationSpeed * Time.deltaTime);
+        }
+        else 
+        {
+            _staminaRegenTimer += Time.deltaTime;
+        }
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -114,16 +153,17 @@ public class PlayerController : MonoBehaviour
         if (context.performed){
             _isRunning = true;
         }
+
         if (context.canceled)
         {
             _isRunning = false;
         }
     }
-    
+   
 
     public void OnRoll(InputAction.CallbackContext context)
     {
-        if (context.started && _state != PlayerState.Roll)
+        if (context.started && canRoll)
         {
             StartCoroutine(RollCoroutine());
         }
@@ -134,12 +174,14 @@ public class PlayerController : MonoBehaviour
         _state = PlayerState.Roll;
 
         UpdateLookDirection();
+        ConsumeStamina(_playerData.RollingStaminaCost);
 
         _rigidbody.linearVelocity = _playerData.IniRollingSpeed * _lookDirection;
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.3f); // Change to PlayerData
+
 
         _rigidbody.linearVelocity = _playerData.EndRollingSpeed * _lookDirection;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.2f); // Change to PlayerData
 
         _state = PlayerState.Move;
     }
@@ -159,28 +201,27 @@ public class PlayerController : MonoBehaviour
         _animator.SetFloat("xDir", _lookDirection.x);
         _animator.SetFloat("yDir", _lookDirection.y);
         _animator.SetBool("isIdle", _state == PlayerState.Move && _moveDirection == Vector2.zero);
-        _animator.SetBool("isWalking", _state == PlayerState.Move && !_isRunning && _moveDirection != Vector2.zero);
-        _animator.SetBool("isRunning", _state == PlayerState.Move && _isRunning && _moveDirection != Vector2.zero);
+        _animator.SetBool("isWalking", _state == PlayerState.Move && _moveDirection != Vector2.zero && (!_isRunning || _isRunning && !HasStamina()));
+        _animator.SetBool("isRunning", _state == PlayerState.Move && _moveDirection != Vector2.zero && _isRunning && HasStamina());
         _animator.SetBool("isRolling", _state == PlayerState.Roll);
     }
 
-    void OnDestroy()
+    private bool HasStamina()
     {
-        m_Actions.Dispose();
+        return _playerData.Stamina > 0;
     }
-    void OnEnable()
+
+    private void ConsumeStamina(float amount)
     {
-        m_Player.Enable();
+        _staminaRegenTimer = 0;
+        _playerData.Stamina = Mathf.Max(0, _playerData.Stamina - amount);
     }
-    void OnDisable()
-    {
-        m_Player.Disable();
-    }
+
     public void SetDead(bool isDead)
     {
-        if (isDead){ _state = PlayerState.Dead; }   
+        if (isDead) { _state = PlayerState.Dead; }
     }
-    
+
     public void Death()//and respawn other player or the logic
     {
         if (deathSound != null)
@@ -199,4 +240,20 @@ public class PlayerController : MonoBehaviour
         Destroy(transform.gameObject);
 
     }
+
+    
+
+    void OnDestroy()
+    {
+        m_Actions.Dispose();
+    }
+    void OnEnable()
+    {
+        m_Player.Enable();
+    }
+    void OnDisable()
+    {
+        m_Player.Disable();
+    }
+
 }

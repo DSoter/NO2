@@ -72,6 +72,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        HandleAnimatorParams();
+
         switch (_state)
         {
             case PlayerState.Move:
@@ -102,7 +104,6 @@ public class PlayerController : MonoBehaviour
 
         }
 
-        HandleAnimatorParams();
     }
 
     private void Run() 

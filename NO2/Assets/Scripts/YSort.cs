@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class TopDownSort : MonoBehaviour
+public class YSort : MonoBehaviour
 {
     private SpriteRenderer _renderer;
 

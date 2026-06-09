@@ -8,8 +8,6 @@ public class RebindButton : MonoBehaviour
     [SerializeField] private TMP_Text buttonText;
     [SerializeField] private int indexInput;
 
-    private InputSystem m_Actions;
-    private InputSystem.PlayerActions m_Player;
 
     private InputActionRebindingExtensions.RebindingOperation rebindingOperation;
     private void Start()
@@ -18,7 +16,7 @@ public class RebindButton : MonoBehaviour
 
         if (!string.IsNullOrEmpty(json))
         {
-            m_Actions.asset.LoadBindingOverridesFromJson(json);
+            actionReference.action.actionMap.asset.LoadBindingOverridesFromJson(json);
         }
         buttonText.text = InputControlPath.ToHumanReadableString(
                 actionReference.action.bindings[indexInput].effectivePath,
@@ -58,7 +56,7 @@ public class RebindButton : MonoBehaviour
             );
         PlayerPrefs.SetString(
     "rebinds",
-    m_Actions.asset.SaveBindingOverridesAsJson()
+    actionReference.action.actionMap.asset.SaveBindingOverridesAsJson()
 );
     }
 }

@@ -58,6 +58,13 @@ public class PlayerController : MonoBehaviour
         _renderer = GetComponent<SpriteRenderer>();
 
         m_Actions = new InputSystem();
+
+        string json = PlayerPrefs.GetString("rebinds", "");
+        if (!string.IsNullOrEmpty(json))
+        {
+            m_Actions.asset.LoadBindingOverridesFromJson(json);
+        }
+
         m_Player = m_Actions.Player;
 
         m_Player.Move.performed += OnMove;

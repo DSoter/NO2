@@ -80,7 +80,11 @@ public class InteractManager : MonoBehaviour
 
     void OnDestroy()
     {
-        m_Actions.Dispose();
+        //if (m_Actions != null)
+        //{
+        //    m_Actions.Dispose();
+        //    m_Actions = null;
+        //}
     }
     void OnEnable()
     {

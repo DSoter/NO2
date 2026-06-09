@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6034420583255633428}
   - component: {fileID: 8919698925306661134}
   - component: {fileID: 2930592965807506257}
+  - component: {fileID: 7521091902895558689}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -93,6 +94,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SaveAndLoadManager
   prueba:
     objetoRecogido: 0
+--- !u!114 &7521091902895558689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410176089906247750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02e54cd4bf678ec4db3621e15bb74aaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CheckpointManager
 --- !u!1 &516718627763750330
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,7 +147,7 @@ AudioSource:
   m_GameObject: {fileID: 516718627763750330}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: fad348ec9c2f7484f9ecb5e82f1a49e7, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -263,7 +276,7 @@ AudioSource:
   m_GameObject: {fileID: 784359564506383910}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 090c2e4ae79628f4fa24ca65176611a0, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1

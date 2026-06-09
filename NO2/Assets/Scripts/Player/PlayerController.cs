@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+
         _sceneController = FindAnyObjectByType<SceneController>();
 
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -237,8 +238,18 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(segundos);
 
         SetDead(false);
-        GameManager.Instance.GetComponent<CheckpointManager>().SpawnPlayerAfterDeath();
-        Destroy(transform.gameObject);
+
+        m_Player.Disable();
+        m_Player.Move.performed -= OnMove;
+        m_Player.Move.canceled -= OnMove;
+        m_Player.Run.performed -= OnRun;
+        m_Player.Run.canceled -= OnRun;
+        m_Player.Roll.started -= OnRoll;
+        m_Actions.Dispose();
+
+        CheckpointManager cm = GameManager.Instance.GetComponent<CheckpointManager>();
+        Destroy(gameObject); // Destruir primero
+        cm.SpawnPlayerAfterDeath(); // Llamar despu�s, desde un objeto que sobrevive
 
     }
 
@@ -246,7 +257,11 @@ public class PlayerController : MonoBehaviour
 
     void OnDestroy()
     {
-        m_Actions.Dispose();
+        if (m_Actions != null)
+        {
+            m_Actions.Dispose();
+            m_Actions = null;
+        }
     }
     void OnEnable()
     {

@@ -1,43 +1,56 @@
+using System.Collections;
+using System.IO;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class CheckpointManager : MonoBehaviour
 {
-    private Transform currentSpawnPoint;
+    [SerializeField] private string sceneWhereRespawn;
+    public int idRespawn;
+    public int idSpawn;
     private string currentSceneName;
     private bool hasToSpawnPlayer;
     private bool hasToSpawnPlayerAfterDeath;
-    public void UpdateSpawnPoint(Transform newSpawn)
+    private static int debugCounter;
+
+
+    public string SceneWhereRespawn
     {
-        currentSpawnPoint = newSpawn;
+        get { return sceneWhereRespawn; }
+        set { sceneWhereRespawn = value; }
     }
-    public Transform GetCurrentSpawnPoint()
+    public int IdRespawn
     {
-        return currentSpawnPoint;
+        get { return idRespawn; }
+        set {  idRespawn = value; }
     }
-    public void SetCurrentSpawnPoint(Transform newSpawn)
+    public int IdSpawn
     {
-        currentSpawnPoint = newSpawn;
+        get { return idSpawn; }
+        set { idSpawn = value; }
+    }
+    public string CurrentSceneName
+    {
+        get { return currentSceneName; }
+        set { currentSceneName = value; }
+    }
+    public bool HasToSpawnPlayer
+    {
+        get { return hasToSpawnPlayer; }
+        set { hasToSpawnPlayer = value; }
+    }
+    public bool HasToSpawnPlayerAfterDeath
+    {
+        get {return hasToSpawnPlayerAfterDeath; }
+        set { hasToSpawnPlayerAfterDeath = value; }
     }
 
-    public string GetCurrentSceneName()
-    {
-        return currentSceneName;
-    }
-    public void SetCurrentSceneName(string newName)
-    {
-        currentSceneName = newName;
-    }
 
-    public void FinishScene(string sceneName, Transform newSpawnPoint)
+    public void FinishScene(string sceneName, int newSpawnPoint)
     {
-        SceneController sc = FindAnyObjectByType<SceneController>();
-        if (sc != null)
-        {
-            sc.UpdateSpawnPoint(newSpawnPoint);
-        }
         currentSceneName= sceneName;
-        SceneManager.LoadScene(sceneName);
+        idSpawn = newSpawnPoint;
         SpawnPlayer();
     }
     public void StartScene(string sceneName)
@@ -56,39 +69,110 @@ public class CheckpointManager : MonoBehaviour
             hasToSpawnPlayer = true;
             SceneManager.LoadScene(currentSceneName);
         }
-        SceneController sc = FindAnyObjectByType<SceneController>(); 
-        sc.SpawnPlayer();
+        else { 
+            SceneController sc = FindAnyObjectByType<SceneController>();
+            if (sc is null)
+            {
+                Debug.LogError("SceneController no encontrado");
+                return;
+            }
+            sc.SpawnPlayer();
+        }
 
     }
+
     public void SpawnPlayerAfterDeath()
     {
-        if (currentSceneName is null) {
-            currentSceneName = SceneManager.GetActiveScene().name;
-        }
-        if (!SceneManager.GetActiveScene().name.Equals(currentSceneName))
-        {
-            hasToSpawnPlayerAfterDeath = true;
-            SceneManager.LoadScene(currentSceneName);
-        }
-        SceneController sc = FindAnyObjectByType<SceneController>();
-        sc.SpawnPlayerAfterDeath();
-    }
-    public bool GetHasToSpawn()
-    {
-        return hasToSpawnPlayer;
-    }
-    public void SetHasToSpawn(bool value)
-    {
-        hasToSpawnPlayer= value;
+        StartCoroutine(SpawnAfterDeathCoroutine());
     }
 
-    public bool GetHasToSpawnAfterDeath()
+    private IEnumerator SpawnAfterDeathCoroutine()
     {
-        return hasToSpawnPlayerAfterDeath;
+        yield return null; 
+
+        if (sceneWhereRespawn is not null)
+        { if (sceneWhereRespawn.Equals("")) { sceneWhereRespawn = null; } }
+
+        if (sceneWhereRespawn is not null)
+        {
+            if (!SceneManager.GetActiveScene().name.Equals(sceneWhereRespawn))
+            {
+                hasToSpawnPlayerAfterDeath = true;
+                SceneManager.LoadScene(sceneWhereRespawn);
+            }
+            else
+            {
+                SceneController sc = FindAnyObjectByType<SceneController>();
+                if (sc is null)
+                {
+                    Debug.LogError("SceneController no encontrado");
+                    //return;
+                }
+                sc.SpawnPlayerAfterDeath();
+            }
+        }
+        else
+        {
+            SceneController sc = FindAnyObjectByType<SceneController>();
+            if (sc is null)
+            {
+                Debug.LogError("SceneController no encontrado");
+                //return;
+            }
+            sc.SpawnPlayerAfterDeath();
+        }
     }
-    public void SetHasToSpawnAfterDeath(bool value)
+    //public void SpawnPlayerAfterDeath()
+    //{
+    //    if (sceneWhereRespawn is not null)
+    //    { if (sceneWhereRespawn.Equals("")) { sceneWhereRespawn = null; } }
+
+    //    if (sceneWhereRespawn is not null) {
+    //        if (!SceneManager.GetActiveScene().name.Equals(sceneWhereRespawn))
+    //        {
+    //            hasToSpawnPlayerAfterDeath = true;
+    //            File.AppendAllText("C:/Temp/debug.txt",
+    //$"LoadScene llamado: {sceneWhereRespawn} | StackTrace: {System.Environment.StackTrace}\n");
+    //            SceneManager.LoadScene(sceneWhereRespawn);
+    //        }
+    //        else
+    //        {
+    //            SceneController sc = FindAnyObjectByType<SceneController>();
+    //            if (sc is null)
+    //            {
+    //                Debug.LogError("SceneController no encontrado");
+    //                return;
+    //            }
+    //            sc.SpawnPlayerAfterDeath();
+    //        }
+    //    }
+    //    else
+    //    {
+    //        SceneController sc = FindAnyObjectByType<SceneController>();
+    //        if (sc is null)
+    //        {
+    //            Debug.LogError("SceneController no encontrado");
+    //            return;
+    //        }
+    //        sc.SpawnPlayerAfterDeath();
+    //    }
+
+    //}
+    public void UpdateSpawnPointAfterDeath(Transform transform)
     {
-        hasToSpawnPlayerAfterDeath = value;
+        if (currentSceneName is null) { return; }
+        else
+        {
+            SceneController sc = FindAnyObjectByType<SceneController>();
+            if (sc is null)
+            {
+                Debug.LogError("SceneController no encontrado");
+
+                return;
+            }
+            idRespawn = sc.obtainIdSpawnPoint(transform);
+        }
     }
+
 
 }

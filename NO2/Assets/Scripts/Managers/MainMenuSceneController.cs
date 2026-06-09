@@ -9,6 +9,7 @@ public class MainMenuSceneManager : MonoBehaviour
 {
 
     public Button playButton;
+    [SerializeField] private string nameFirstScene;
     public GameObject canvasCredits;
     public GameObject canvasOptions;
     [SerializeField] private AudioClip theme;
@@ -38,7 +39,7 @@ public class MainMenuSceneManager : MonoBehaviour
 
     public void StartGame()
     {
-        GameManager.Instance.GetComponent<CheckpointManager>().StartScene("PruebaTileMap");
+        GameManager.Instance.GetComponent<CheckpointManager>().StartScene(nameFirstScene);
     }
 
     public void QuitGame()

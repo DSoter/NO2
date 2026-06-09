@@ -6,6 +6,7 @@ public class DeathTrigguer : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("PLAYER DEAD");
             other.GetComponent<PlayerController>().Death();
             
             // Desactivar el trigger para que no se use más de una vez

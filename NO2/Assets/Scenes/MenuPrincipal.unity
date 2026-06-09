@@ -591,6 +591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuSceneManager
   playButton: {fileID: 1309221728}
+  nameFirstScene: PruebaTileMap
   canvasCredits: {fileID: 2141946945}
   canvasOptions: {fileID: 2141946945}
   theme: {fileID: 8300000, guid: 116f3d61bd64421458f89e867bf3381f, type: 3}
@@ -1648,6 +1649,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02e54cd4bf678ec4db3621e15bb74aaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CheckpointManager
+  sceneWhereRespawn: 
+  idRespawn: 0
+  idSpawn: 0
 --- !u!1 &716211866
 GameObject:
   m_ObjectHideFlags: 0

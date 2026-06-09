@@ -13,7 +13,7 @@ public class KeybindsOptionsManager : MonoBehaviour
         {
             case "Interact":
                
-                m_Player.Interact.ApplyBindingOverride( (inputName);
+                m_Player.Interact.ApplyBindingOverride( (inputName));
                 break;
         }
     }

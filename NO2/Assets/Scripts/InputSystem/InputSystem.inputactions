@@ -185,8 +185,30 @@
                 },
                 {
                     "name": "",
+                    "id": "a35a1d24-f036-4d11-8ec1-f515627744c5",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Run",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "d494aa43-0f4f-421c-ba37-44eeb66b74ec",
                     "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Roll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6ee0a58a-87ae-424c-ba04-cc26ee55de1a",
+                    "path": "",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -207,6 +229,17 @@
                 },
                 {
                     "name": "",
+                    "id": "a65e657a-77fd-42a8-b44b-85e3b8546330",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "06a989d1-9687-40ea-a2a2-589aa7e684da",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
@@ -218,8 +251,30 @@
                 },
                 {
                     "name": "",
+                    "id": "9e5c7471-49e0-4a4f-b9d6-b3a6735fec6b",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WeakAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "740b7aa6-20a4-4cbf-8395-1302fbe7a241",
                     "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StrongAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c3293ed9-dd88-41af-ae30-b55dbe765c4d",
+                    "path": "",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

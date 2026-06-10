@@ -2,5 +2,5 @@ using UnityEngine;
 
 public class SpawnId : MonoBehaviour
 {
-    public int spawnId;
+    public int spawnId; //llamarlo propiedad alpargata
 }

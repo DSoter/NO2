@@ -13,7 +13,6 @@ public class CheckpointInteractuable : Interactable
         if (cm != null)
         {
             sc.UpdateSpawnPointAfterDeath(transform);
-            //cm.UpdateSpawnPointAfterDeath(transform);
             SpawnId si = GetComponent<SpawnId>();
             cm.IdRespawn = si.spawnId;
             cm.SceneWhereRespawn = SceneManager.GetActiveScene().name;

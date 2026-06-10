@@ -32,7 +32,8 @@ public class SceneController : MonoBehaviour
     {
 
         checkpoints = new List<Transform>();
-        List<SpawnId> listaAux = FindObjectsByType<SpawnId>()
+        //List<GameObject> listaAux = GameObject.FindGameObjectsWithTag("Player"); alpargata
+        List <SpawnId> listaAux = FindObjectsByType<SpawnId>()
             .OrderBy(c => c.spawnId)
             .ToList();
         for (int i = 0; i < listaAux.Count; i++)
@@ -43,9 +44,11 @@ public class SceneController : MonoBehaviour
         currentSpawnPointId = checkpoints.IndexOf(currentSpawnPoint);
         if (currentSpawnPointId < 0 || currentSpawnPointId>checkpoints.Count) { currentSpawnPointId = checkpoints.IndexOf(currentSpawnPoint); }
         _checkpointManager = GameManager.Instance.GetComponent<CheckpointManager>();
+
+
         if (_checkpointManager.HasToSpawnPlayer)
         {
-            _checkpointManager.HasToSpawnPlayer =false;
+            _checkpointManager.HasToSpawnPlayer = false;
             SpawnPlayer();
             
         }
@@ -64,11 +67,17 @@ public class SceneController : MonoBehaviour
     }
     public void SpawnPlayer()
     {
-        if (_checkpointManager.IdSpawn >0) { currentSpawnPointId = _checkpointManager.IdSpawn; }//este if solo ocurre si el spawn es a un transform asignado por un tp
+        if (_checkpointManager.IdSpawn > 0)
+        {
+            currentSpawnPointId = _checkpointManager.IdSpawn; 
+        }//este if solo ocurre si el spawn es a un transform asignado por un tp
+
         currentSpawnPoint = checkpoints[currentSpawnPointId];
+
         player = Instantiate<GameObject>(prefabPersonaje);
         _playerController = player.GetComponent<PlayerController>();
         player.transform.position = currentSpawnPoint.transform.position;
+
         if (_checkpointManager.IdSpawn > 0)
         {
             player.transform.position -= new Vector3(1,0,0);
@@ -97,8 +106,13 @@ public class SceneController : MonoBehaviour
                 if (SceneManager.GetActiveScene().name.Equals(_checkpointManager.SceneWhereRespawn))
                 {
                     currentSpawnPointAfterDeath = _checkpointManager.IdRespawn;
-                    if (currentSpawnPointAfterDeath >= checkpoints.Count) { Debug.Log("xd"); }
-                    else { currentSpawnPoint = checkpoints[currentSpawnPointAfterDeath]; }
+                    if (currentSpawnPointAfterDeath >= checkpoints.Count) 
+                    {
+                        Debug.Log("xd"); 
+                    }
+                    else { 
+                        currentSpawnPoint = checkpoints[currentSpawnPointAfterDeath]; 
+                    }
                         
                 }
             }

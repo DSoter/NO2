@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using System.Collections;
 using System.Runtime.CompilerServices;
 using UnityEngine;
@@ -24,9 +25,6 @@ public class PlayerController : MonoBehaviour
     private bool canRoll => _state != PlayerState.Roll && HasStamina();
     private PlayerState _state = PlayerState.Move;
 
-    //Secene controler
-    private SceneController _sceneController;
-
     //References
     [Header("Sonidos")]
     [SerializeField] private AudioClip deathSound;
@@ -50,9 +48,6 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-
-        _sceneController = FindAnyObjectByType<SceneController>();
-
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _renderer = GetComponent<SpriteRenderer>();
@@ -119,6 +114,7 @@ public class PlayerController : MonoBehaviour
         if (_moveDirection.magnitude > 0)
         {
             ConsumeStamina(_playerData.RunningStaminaCost * Time.deltaTime);
+
         }
 
         _rigidbody.linearVelocity = _playerData.RunningSpeed * _moveDirection;
@@ -228,7 +224,9 @@ public class PlayerController : MonoBehaviour
 
     public void SetDead(bool isDead)
     {
-        if (isDead) { _state = PlayerState.Dead; }
+        if (isDead) {
+            _state = PlayerState.Dead;
+        }
     }
 
     public void Death()//and respawn other player or the logic

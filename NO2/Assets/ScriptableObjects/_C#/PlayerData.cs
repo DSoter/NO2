@@ -13,6 +13,7 @@ public class PlayerData : ScriptableObject
     [Space(5)]
     [Header("Stamina")]
     [SerializeField] private float stamina;
+    [SerializeField] private float iniMaxStamina;
     [SerializeField] private float maxStamina;
     [SerializeField] private float secondsUntilStaminaRegeneration;
     [SerializeField] private float staminaRegenerationSpeed;
@@ -69,6 +70,11 @@ public class PlayerData : ScriptableObject
     public float MaxStamina
     {
         get { return maxStamina; }
+    }
+
+    public float IniMaxStamina
+    {
+        get { return iniMaxStamina; }
     }
 
     public float MaxOxygen

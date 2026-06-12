@@ -2,5 +2,12 @@ using UnityEngine;
 
 public class SpawnId : MonoBehaviour
 {
-    public int spawnId; //llamarlo propiedad alpargata
+    private int spawnid; 
+
+    public int IdSpawn {
+        get
+        { 
+            return spawnid; 
+        }
+    }
 }

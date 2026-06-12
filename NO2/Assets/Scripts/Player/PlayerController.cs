@@ -54,21 +54,9 @@ public class PlayerController : MonoBehaviour
 
         m_Actions = new InputSystem();
 
-        string json = PlayerPrefs.GetString("rebinds", "");
-        if (!string.IsNullOrEmpty(json))
-        {
-            m_Actions.asset.LoadBindingOverridesFromJson(json);
-        }
+        PrefsToKeybinds();
 
-        m_Player = m_Actions.Player;
-
-        m_Player.Move.performed += OnMove;
-        m_Player.Move.canceled += OnMove;
-
-        m_Player.Run.performed += OnRun;
-        m_Player.Run.canceled += OnRun;
-
-        m_Player.Roll.started += OnRoll;
+        PrepareActions();
 
         _playerData.Stamina = _playerData.MaxStamina;
     }
@@ -244,17 +232,11 @@ public class PlayerController : MonoBehaviour
 
         SetDead(false);
 
-        m_Player.Disable();
-        m_Player.Move.performed -= OnMove;
-        m_Player.Move.canceled -= OnMove;
-        m_Player.Run.performed -= OnRun;
-        m_Player.Run.canceled -= OnRun;
-        m_Player.Roll.started -= OnRoll;
-        m_Actions.Dispose();
+        DisposeActions();
 
         CheckpointManager cm = GameManager.Instance.GetComponent<CheckpointManager>();
         Destroy(gameObject); // Destruir primero
-        cm.SpawnPlayerAfterDeath(); // Llamar despu�s, desde un objeto que sobrevive
+        cm.RespawnPlayer(); // Llamar despu�s, desde un objeto que sobrevive
 
     }
 
@@ -275,6 +257,56 @@ public class PlayerController : MonoBehaviour
     void OnDisable()
     {
         m_Player.Disable();
+    }
+
+    public void PrefsToKeybinds()
+    {
+        m_Actions = new InputSystem();
+
+        string json = PlayerPrefs.GetString("rebinds", "");
+        if (!string.IsNullOrEmpty(json))
+        {
+            m_Actions.asset.LoadBindingOverridesFromJson(json);
+        }
+
+        m_Player = m_Actions.Player;
+    }
+
+    public void UpdateMActions()
+    {
+        StartCoroutine(WaitAndChangeBindings());
+    }
+ 
+    IEnumerator WaitAndChangeBindings()
+    {
+        DisposeActions();
+
+        yield return null;
+        PrefsToKeybinds();
+        PrepareActions();
+    }
+    private void DisposeActions()
+    {
+        m_Player.Disable();
+        m_Player.Move.performed -= OnMove;
+        m_Player.Move.canceled -= OnMove;
+        m_Player.Run.performed -= OnRun;
+        m_Player.Run.canceled -= OnRun;
+        m_Player.Roll.started -= OnRoll;
+        m_Actions.Dispose();
+    }
+
+    private void PrepareActions()
+    {
+        m_Player = m_Actions.Player;
+
+        m_Player.Move.performed += OnMove;
+        m_Player.Move.canceled += OnMove;
+
+        m_Player.Run.performed += OnRun;
+        m_Player.Run.canceled += OnRun;
+
+        m_Player.Roll.started += OnRoll;
     }
 
 }

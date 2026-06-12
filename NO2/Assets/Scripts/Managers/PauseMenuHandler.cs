@@ -80,6 +80,9 @@ public class PauseMenuHandler : MonoBehaviour
 				GameManager.Instance.audioManager.PlaySound(exitPauseSound);
 			Time.timeScale = 1f;
 			SceneManager.UnloadSceneAsync(pauseSceneName);
+
+			//UpdateActionsPlayer();
+			//UpdateActionInteract();
 		}
 	}
 
@@ -110,4 +113,30 @@ public class PauseMenuHandler : MonoBehaviour
 	//{
 	//	m_UI.Disable();
 	//}
+	private void UpdateActionsPlayer()
+	{
+		GameObject playerReference = GameObject.FindWithTag("Player");
+		if (playerReference is null)
+		{
+			Debug.Log("Player not found");
+		}
+		else
+		{
+			playerReference.GetComponent<PlayerController>().UpdateMActions();
+		}
+	}
+
+
+    private void UpdateActionInteract()
+    {
+        GameObject playerReference = GameObject.FindWithTag("Player");
+        if (playerReference is null)
+        {
+            Debug.Log("Player not found");
+        }
+        else
+        {
+            playerReference.GetComponent<InteractManager>().UpdateRebindingInteract();
+        }
+    }
 }

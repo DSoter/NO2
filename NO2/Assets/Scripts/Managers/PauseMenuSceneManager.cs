@@ -38,6 +38,7 @@ public class PauseMenuSceneManager : MonoBehaviour
 	public void Reanudar()
 	{
 		PauseMenuHandler.Instance.TogglePause();
+
 	}
 
 	public void BotonSalir()

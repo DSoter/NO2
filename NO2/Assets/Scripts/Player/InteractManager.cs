@@ -1,9 +1,11 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class InteractManager : MonoBehaviour
 {
@@ -28,9 +30,14 @@ public class InteractManager : MonoBehaviour
     private void Awake()
     {
         m_Actions = new InputSystem();
-        m_Player = m_Actions.Player;
-        m_Player.Interact.performed += OnInteract;
-        m_Player.Interact.canceled += OnInteract;
+
+        PrefsToKeybinds();
+
+
+        PrepareActions();
+
+        
+
 
         _canvas = transform.GetChild(0).gameObject;
         _imagenUI = _canvas.transform.GetChild(0).gameObject;
@@ -48,7 +55,7 @@ public class InteractManager : MonoBehaviour
         if (_puedeInteractuar)
         {
             _canvas.SetActive(true);
-            _imagenUI.GetComponent<Image>().sprite = _keySpriteE;
+            _imagenUI.GetComponent<UnityEngine.UI.Image>().sprite = _keySpriteE;
         }
         else
         {
@@ -94,4 +101,51 @@ public class InteractManager : MonoBehaviour
     {
         m_Player.Disable();
     }
+
+    public void UpdateRebindingInteract()
+    {
+        StartCoroutine(WaitAndChangeBindings());
+        
+        
+    }
+    IEnumerator WaitAndChangeBindings()
+    {
+        DisposeActions();
+        
+        yield return null;
+        PrefsToKeybinds();
+        PrepareActions();
+    }
+
+ 
+
+    public void PrefsToKeybinds()
+    {
+        m_Actions = new InputSystem();
+
+        string json = PlayerPrefs.GetString("rebinds", "");
+        if (!string.IsNullOrEmpty(json))
+        {
+            m_Actions.asset.LoadBindingOverridesFromJson(json);
+        }
+
+        m_Player = m_Actions.Player;
+    }
+    private void DisposeActions()
+    {
+        m_Player.Disable();
+        m_Player.Interact.performed -= OnInteract;
+        m_Player.Interact.canceled -= OnInteract;
+        m_Actions.Dispose();
+    }
+
+    private void PrepareActions()
+    {
+        m_Player = m_Actions.Player;
+
+        m_Player.Interact.performed += OnInteract; 
+        m_Player.Interact.canceled += OnInteract; 
+    }
+
 }
+

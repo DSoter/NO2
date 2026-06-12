@@ -9,7 +9,7 @@ public class CheckpointManager : MonoBehaviour
     [SerializeField] private string sceneWhereRespawn;
     public int idRespawn;
     public int idSpawn;
-    private string currentSceneName;
+    private string nextScene;
     private bool hasToSpawnPlayer;
     private bool hasToSpawnPlayerAfterDeath;
     [SerializeField] private float gateTransitionSeconds;
@@ -30,10 +30,10 @@ public class CheckpointManager : MonoBehaviour
         get { return idSpawn; }
         set { idSpawn = value; }
     }
-    public string CurrentSceneName
+    public string NextScene
     {
-        get { return currentSceneName; }
-        set { currentSceneName = value; }
+        get { return nextScene; }
+        set { nextScene = value; }
     }
     public bool HasToSpawnPlayer
     {
@@ -53,7 +53,7 @@ public class CheckpointManager : MonoBehaviour
 
     public void FinishScene(string sceneName, int newSpawnPoint)
     {
-        currentSceneName= sceneName;
+        nextScene = sceneName;
         idSpawn = newSpawnPoint;
         SpawnPlayer();
     }
@@ -66,11 +66,11 @@ public class CheckpointManager : MonoBehaviour
     }
     public void SpawnPlayer()
     {
-        if (currentSceneName is null)
+        if (nextScene is null)
         {
-            currentSceneName = SceneManager.GetActiveScene().name;
-        }
-        if (SceneManager.GetActiveScene().name.Equals(currentSceneName))
+            nextScene = SceneManager.GetActiveScene().name;
+        }   
+        if (SceneManager.GetActiveScene().name.Equals(nextScene))
         {
             SceneController sc = FindAnyObjectByType<SceneController>();
             if (sc is null)
@@ -83,12 +83,12 @@ public class CheckpointManager : MonoBehaviour
         else
         {            
             hasToSpawnPlayer = true;
-            SceneManager.LoadScene(currentSceneName);
+            SceneManager.LoadScene(nextScene);
         }
 
     }
 
-    public void SpawnPlayerAfterDeath()//poner nombre a respawn alpargata
+    public void RespawnPlayer()//poner nombre a respawn alpargata
     {
         StartCoroutine(SpawnAfterDeathCoroutine());
     }
@@ -107,7 +107,7 @@ public class CheckpointManager : MonoBehaviour
                     Debug.LogError("SceneController no encontrado");
                     //return;
                 }
-                sc.SpawnPlayerAfterDeath();
+                sc.RespawnPlayer();
             }
             else
             {
@@ -124,7 +124,7 @@ public class CheckpointManager : MonoBehaviour
                         Debug.LogError("SceneController no encontrado");
                         //return;
                     }
-                    sc.SpawnPlayerAfterDeath();
+                    sc.RespawnPlayer();
                 }
             }
         }
@@ -136,7 +136,7 @@ public class CheckpointManager : MonoBehaviour
                 Debug.LogError("SceneController no encontrado");
                 //return;
             }
-            sc.SpawnPlayerAfterDeath();
+            sc.RespawnPlayer();
         }
     }
 

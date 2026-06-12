@@ -34,7 +34,7 @@ public class SceneController : MonoBehaviour
         checkpoints = new List<Transform>();
         //List<GameObject> listaAux = GameObject.FindGameObjectsWithTag("Player"); alpargata
         List <SpawnId> listaAux = FindObjectsByType<SpawnId>()
-            .OrderBy(c => c.spawnId)
+            .OrderBy(c => c.IdSpawn)
             .ToList();
         for (int i = 0; i < listaAux.Count; i++)
         {
@@ -55,7 +55,7 @@ public class SceneController : MonoBehaviour
         if (_checkpointManager.HasToSpawnPlayerAfterDeath)
         {
             _checkpointManager.HasToSpawnPlayerAfterDeath = false;
-            SpawnPlayerAfterDeath();
+            RespawnPlayer();
             
         }
 
@@ -85,12 +85,12 @@ public class SceneController : MonoBehaviour
         _checkpointManager.IdSpawn = -1;
     }
 
-    public void SpawnPlayerAfterDeath()
+    public void RespawnPlayer()
     {
 
         _checkpointManager.IdSpawn = -1;
         currentSpawnPoint = checkpoints[currentSpawnPointId];
-        _checkpointManager.CurrentSceneName= SceneManager.GetActiveScene().name;
+        _checkpointManager.NextScene= SceneManager.GetActiveScene().name;
 
         if (_checkpointManager.IdRespawn < 0)
         {

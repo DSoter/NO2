@@ -13,6 +13,7 @@ public class CheckpointManager : MonoBehaviour
     private bool hasToSpawnPlayer;
     private bool hasToSpawnPlayerAfterDeath;
     [SerializeField] private float gateTransitionSeconds;
+    [SerializeField] private Transform playerReference;
 
 
     public string SceneWhereRespawn
@@ -48,6 +49,11 @@ public class CheckpointManager : MonoBehaviour
     public float GateTransitionSeconds
     {
         get { return gateTransitionSeconds; }
+    }
+    public Transform PlayerReference
+    {
+        get { return playerReference; }
+        set { playerReference = value; }
     }
 
 

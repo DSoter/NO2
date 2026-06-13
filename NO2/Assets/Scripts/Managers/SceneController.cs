@@ -80,6 +80,7 @@ public class SceneController : MonoBehaviour
         currentSpawnPoint = checkpoints[currentSpawnPointId];
 
         player = Instantiate<GameObject>(prefabPersonaje);
+        _checkpointManager.PlayerReference = player.transform;
         _playerController = player.GetComponent<PlayerController>();
         player.transform.position = currentSpawnPoint.transform.position;
 
@@ -123,6 +124,7 @@ public class SceneController : MonoBehaviour
             }
         }
         player = Instantiate<GameObject>(prefabPersonaje);
+        _checkpointManager.PlayerReference = player.transform;
         _playerController = player.GetComponent<PlayerController>();
         player.transform.position = currentSpawnPoint.transform.position;
     }

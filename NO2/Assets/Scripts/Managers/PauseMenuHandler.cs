@@ -113,17 +113,5 @@ public class PauseMenuHandler : MonoBehaviour
 	//{
 	//	m_UI.Disable();
 	//}
-	private void UpdateActionsPlayer()
-	{
-		GameObject playerReference = GameObject.FindWithTag("Player");
-		if (playerReference is null)
-		{
-			Debug.Log("Player not found");
-		}
-		else
-		{
-			playerReference.GetComponent<PlayerController>().UpdateMActions();
-		}
-	}
 
 }

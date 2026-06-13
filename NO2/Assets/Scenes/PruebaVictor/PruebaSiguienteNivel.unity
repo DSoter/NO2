@@ -187,6 +187,10 @@ PrefabInstance:
       propertyPath: spawnId
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8230149320003936403, guid: 26cb78a6af99f774a9e3014ceefb46da, type: 3}
+      propertyPath: spawnid
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -535,7 +539,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9b1a840d2551184581abaad5c77f1eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnId
-  spawnId: 0
+  spawnid: 0
 --- !u!1 &1409343231
 GameObject:
   m_ObjectHideFlags: 0

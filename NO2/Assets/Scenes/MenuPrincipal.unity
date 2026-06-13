@@ -316,27 +316,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
---- !u!1 &680799621 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 410176089906247750, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
-  m_PrefabInstance: {fileID: 843141662}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &680799627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 680799621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02e54cd4bf678ec4db3621e15bb74aaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CheckpointManager
-  sceneWhereRespawn: 
-  idRespawn: 0
-  idSpawn: 0
-  gateTransitionSeconds: 0
 --- !u!114 &716211868 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8551123390126993230, guid: e4cb207a5644d1e46b91785d0dd41bfd, type: 3}
@@ -411,10 +390,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 410176089906247750, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 680799627}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
 --- !u!1 &878234614 stripped
 GameObject:

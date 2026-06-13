@@ -7,9 +7,9 @@ using UnityEngine.SceneManagement;
 public class CheckpointManager : MonoBehaviour
 {
     [SerializeField] private string sceneWhereRespawn;
-    public int idRespawn;
+    [SerializeField] public int idRespawn;
     public int idSpawn;
-    private string nextScene;
+    [SerializeField] private string nextScene;
     private bool hasToSpawnPlayer;
     private bool hasToSpawnPlayerAfterDeath;
     [SerializeField] private float gateTransitionSeconds;
@@ -90,10 +90,10 @@ public class CheckpointManager : MonoBehaviour
 
     public void RespawnPlayer()//poner nombre a respawn alpargata
     {
-        StartCoroutine(SpawnAfterDeathCoroutine());
+        StartCoroutine(RespawnCoroutine());
     }
 
-    private IEnumerator SpawnAfterDeathCoroutine()
+    private IEnumerator RespawnCoroutine()
     {
         yield return null; 
 

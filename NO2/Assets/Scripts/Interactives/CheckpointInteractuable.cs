@@ -14,7 +14,8 @@ public class CheckpointInteractuable : Interactable
         {
             sc.UpdateSpawnPointAfterDeath(transform);
             SpawnId si = GetComponent<SpawnId>();
-            cm.IdRespawn = si.IdSpawn;
+            int id = si.IdSpawn;
+            cm.IdRespawn = id;
             cm.SceneWhereRespawn = SceneManager.GetActiveScene().name;
             Debug.Log(SceneManager.GetActiveScene().name);
             //esto es pa reproducir sonido

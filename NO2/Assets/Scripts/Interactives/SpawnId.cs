@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class SpawnId : MonoBehaviour
 {
-    private int spawnid; 
+    [SerializeField] private int spawnid;
+
 
     public int IdSpawn {
         get
@@ -10,4 +11,11 @@ public class SpawnId : MonoBehaviour
             return spawnid; 
         }
     }
+#if UNITY_EDITOR
+    private void Reset()
+    {
+        SpawnId[] allSpawnIds = FindObjectsByType<SpawnId>();
+        spawnid = allSpawnIds.Length - 1; // El actual ya está incluido
+    }
+#endif
 }

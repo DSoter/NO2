@@ -572,6 +572,10 @@ PrefabInstance:
       propertyPath: spawnId
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5608422688076337642, guid: a4a84618584beb245b11b5f950958b78, type: 3}
+      propertyPath: spawnid
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7543410730610923333, guid: a4a84618584beb245b11b5f950958b78, type: 3}
       propertyPath: m_Name
       value: Checkpoint_placeholder
@@ -15872,6 +15876,10 @@ PrefabInstance:
       propertyPath: spawnId
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5608422688076337642, guid: a4a84618584beb245b11b5f950958b78, type: 3}
+      propertyPath: spawnid
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7543410730610923333, guid: a4a84618584beb245b11b5f950958b78, type: 3}
       propertyPath: m_Name
       value: Hoguerra_prueba_0
@@ -15983,6 +15991,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8230149320003936403, guid: 26cb78a6af99f774a9e3014ceefb46da, type: 3}
       propertyPath: spawnId
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8230149320003936403, guid: 26cb78a6af99f774a9e3014ceefb46da, type: 3}
+      propertyPath: spawnid
       value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []

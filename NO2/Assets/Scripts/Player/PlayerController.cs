@@ -13,9 +13,8 @@ public class PlayerController : MonoBehaviour
     private Animator _animator;
     private SpriteRenderer _renderer;
 
-    // InputSystem 
-    private InputSystem m_Actions;
-    private InputSystem.PlayerActions m_Player;
+    
+
 
     // Local Variables
     private Vector2 _moveDirection = new Vector2(0,0);
@@ -25,8 +24,15 @@ public class PlayerController : MonoBehaviour
     private bool canRoll => _state != PlayerState.Roll && HasStamina();
     private PlayerState _state = PlayerState.Move;
 
-    //References
-    [Header("Sonidos")]
+    // InputSystem 
+    private InputActionReference _moveRef, _runRef, _rollRef, _weakAttackRef, _strongAttackRef;
+    [Header("Input System")]
+    [SerializeField] private InputActionAsset _inputSystemReference;
+
+
+
+   //References
+   [Header("Sonidos")]
     [SerializeField] private AudioClip deathSound;
 
     [Space(5)]
@@ -52,13 +58,14 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _renderer = GetComponent<SpriteRenderer>();
 
+        Debug.Log("Antes de inicializar actions");
+        InitializePrefsActions();
+        Debug.Log("Despues de inicializar actions");
+        //m_Actions = new InputSystem();
 
-        //InitializePrefsActions();
-        m_Actions = new InputSystem();
+        //PrefsToKeybinds();
 
-        PrefsToKeybinds();
-
-        PrepareActions();
+        //PrepareActions();
 
         _playerData.Stamina = _playerData.MaxStamina;
     }
@@ -246,95 +253,65 @@ public class PlayerController : MonoBehaviour
 
     void OnDestroy()
     {
-        if (m_Actions != null)
-        {
-            m_Actions.Dispose();
-            m_Actions = null;
-        }
+        DisposeActions();
     }
     void OnEnable()
     {
-        m_Player.Enable();
+        EnableActions();
     }
     void OnDisable()
     {
-        m_Player.Disable();
+        DisposeActions();
     }
 
-    public void PrefsToKeybinds()
-    {
-        m_Actions = new InputSystem();
-
-        string json = PlayerPrefs.GetString("rebinds", "");
-        if (!string.IsNullOrEmpty(json))
-        {
-            m_Actions.asset.LoadBindingOverridesFromJson(json);
-        }
-
-        m_Player = m_Actions.Player;
-    }
+ 
 
     private void InitializePrefsActions()
     {
-        InputActionAsset asset = Resources.Load<InputActionAsset>("InputSystem");
+
 
         string json = PlayerPrefs.GetString("rebinds", "");
         if (!string.IsNullOrEmpty(json))
         {
-            asset.LoadBindingOverridesFromJson(json);
+            _inputSystemReference.LoadBindingOverridesFromJson(json);
         }
 
-        InputActionMap playerMap = asset.FindActionMap("Player");
+        InputActionMap playerMap = _inputSystemReference.FindActionMap("Player");
 
-        InputActionReference moveRef = InputActionReference.Create(playerMap.FindAction("Move"));
-        InputActionReference runRef = InputActionReference.Create(playerMap.FindAction("Run"));
-        InputActionReference rollRef = InputActionReference.Create(playerMap.FindAction("Roll"));
-        InputActionReference weakAttackRef = InputActionReference.Create(playerMap.FindAction("WeakAttack"));
-        InputActionReference strongAttackRef = InputActionReference.Create(playerMap.FindAction("StrongAttack"));
+        _moveRef = InputActionReference.Create(playerMap.FindAction("Move"));
+        _runRef = InputActionReference.Create(playerMap.FindAction("Run"));
+        _rollRef = InputActionReference.Create(playerMap.FindAction("Roll"));
+        _weakAttackRef = InputActionReference.Create(playerMap.FindAction("WeakAttack"));
+        _strongAttackRef = InputActionReference.Create(playerMap.FindAction("StrongAttack"));
 
-        moveRef.action.performed += OnMove;
-        moveRef.action.canceled += OnMove;
-        runRef.action.performed += OnRun;
-        runRef.action.canceled += OnRun;
-        rollRef.action.started += OnRoll;
-        //weakAttackRef.action.performed += OnWeakAttack;
-        //strongAttackRef.action.performed += OnStrongAttack;
+        EnableActions();
+        playerMap.Enable();
     }
-    public void UpdateMActions()
-    {
-        StartCoroutine(WaitAndChangeBindings());
-    }
- 
-    IEnumerator WaitAndChangeBindings()
-    {
-        DisposeActions();
 
-        yield return null;
-        PrefsToKeybinds();
-        PrepareActions();
-    }
     private void DisposeActions()
     {
-        m_Player.Disable();
-        m_Player.Move.performed -= OnMove;
-        m_Player.Move.canceled -= OnMove;
-        m_Player.Run.performed -= OnRun;
-        m_Player.Run.canceled -= OnRun;
-        m_Player.Roll.started -= OnRoll;
-        m_Actions.Dispose();
+        if (_moveRef != null)
+        {
+            _moveRef.action.performed -= OnMove;
+            _moveRef.action.canceled -= OnMove;
+            _runRef.action.performed -= OnRun;
+            _runRef.action.canceled -= OnRun;
+            _rollRef.action.started -= OnRoll;
+            //_weakAttackRef.action.performed -= OnWeakAttack;
+            //_strongAttackRef.action.performed -= OnStrongAttack;
+            _inputSystemReference.FindActionMap("Player").Disable();
+        }
     }
 
-    private void PrepareActions()
+    private void EnableActions()
     {
-        m_Player = m_Actions.Player;
-
-        m_Player.Move.performed += OnMove;
-        m_Player.Move.canceled += OnMove;
-
-        m_Player.Run.performed += OnRun;
-        m_Player.Run.canceled += OnRun;
-
-        m_Player.Roll.started += OnRoll;
+        _moveRef.action.performed += OnMove;
+        _moveRef.action.canceled += OnMove;
+        _runRef.action.performed += OnRun;
+        _runRef.action.canceled += OnRun;
+        _rollRef.action.started += OnRoll;
+        //weakAttackRef.action.performed += OnWeakAttack;
+        //strongAttackRef.action.performed += OnStrongAttack;
     }
 
 }

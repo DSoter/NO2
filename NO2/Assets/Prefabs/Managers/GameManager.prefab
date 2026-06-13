@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8919698925306661134}
   - component: {fileID: 2930592965807506257}
   - component: {fileID: 7521091902895558689}
+  - component: {fileID: 7038373842693858928}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -106,6 +107,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02e54cd4bf678ec4db3621e15bb74aaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CheckpointManager
+  sceneWhereRespawn: 
+  idRespawn: 0
+  idSpawn: 0
+  nextScene: 
+  gateTransitionSeconds: 0
+--- !u!114 &7038373842693858928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410176089906247750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8222e378abe011478fdd7bb0e6a644b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GUIOptionsReminder
 --- !u!1 &516718627763750330
 GameObject:
   m_ObjectHideFlags: 0

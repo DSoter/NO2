@@ -32,8 +32,13 @@ public class SceneController : MonoBehaviour
     {
 
         checkpoints = new List<Transform>();
-        //List<GameObject> listaAux = GameObject.FindGameObjectsWithTag("Player"); alpargata
-        List <SpawnId> listaAux = FindObjectsByType<SpawnId>()
+        GameObject[] arrayAux = GameObject.FindGameObjectsWithTag("SpawnPoint");
+        List<SpawnId> list = new List<SpawnId>();
+        for (int i = 0; i < arrayAux.Length; i++)
+        {
+            list.Add(arrayAux[i].GetComponent<SpawnId>()); 
+        }
+        List <SpawnId> listaAux = list
             .OrderBy(c => c.IdSpawn)
             .ToList();
         for (int i = 0; i < listaAux.Count; i++)

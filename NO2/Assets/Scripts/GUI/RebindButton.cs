@@ -23,8 +23,6 @@ public class RebindButton : MonoBehaviour
                 InputControlPath.HumanReadableStringOptions.OmitDevice
             );
 
-        if (actionReference is null ) { Debug.Log("Falta Action Reference"); }
-        if (buttonText is null) { Debug.Log("Falta TMP_Text"); }
         
     }
     public void StartRebinding()
@@ -47,6 +45,8 @@ public class RebindButton : MonoBehaviour
         rebindingOperation.Start();
     }
 
+    
+
     private void UpdateBindingText()
     {
         buttonText.text =
@@ -58,5 +58,16 @@ public class RebindButton : MonoBehaviour
     "rebinds",
     actionReference.action.actionMap.asset.SaveBindingOverridesAsJson()
 );
+
+        RefreshUIInteractManager();
+    }
+
+    private void RefreshUIInteractManager()
+    {
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null)
+        {
+            player.GetComponent<InteractManager>().RefreshInteractBinding();
+        }
     }
 }

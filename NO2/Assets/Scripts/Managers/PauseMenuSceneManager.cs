@@ -8,10 +8,6 @@ public class PauseMenuSceneManager : MonoBehaviour
 {
 
 	public Button defaultButton;
-	//public GameObject canvasCredits;
-	//public GameObject canvasControls;
-
-	private string pauseSceneName = "PauseMenu";
 	void Start()
 	{
 		Cursor.visible = true;
@@ -19,18 +15,7 @@ public class PauseMenuSceneManager : MonoBehaviour
 	}
 	void Update()
 	{
-		//if (canvasCredits.activeSelf || canvasControls.activeSelf)
-		//{
-		//	if (Input.anyKeyDown)
-		//	{
-		//		canvasCredits.SetActive(false);
-		//		canvasControls.SetActive(false);
-		//	}
-		//}
-		//if (Input.GetKeyDown(KeyCode.Escape))
-		//{
-		//	Reanudar();
-		//}
+
 	}
 
 

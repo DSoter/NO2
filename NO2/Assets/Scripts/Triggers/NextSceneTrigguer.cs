@@ -20,11 +20,11 @@ public class NextSceneTrigguer: MonoBehaviour
             {
                 if (gateData.sceneName1.Equals(SceneManager.GetActiveScene().name))
                 {
-                    cm.FinishScene(gateData.sceneName2, gateData.gateId2);//cambiar nombre alpargata
+                    cm.GoNextScene(gateData.sceneName2, gateData.gateId2);//cambiar nombre alpargata
                 }
                 else
                 {
-                    cm.FinishScene(gateData.sceneName1, gateData.gateId1);
+                    cm.GoNextScene(gateData.sceneName1, gateData.gateId1);
                 }
 
             }

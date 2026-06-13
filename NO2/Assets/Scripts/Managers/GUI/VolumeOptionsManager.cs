@@ -51,13 +51,15 @@ public class VolumeOptionsManager : MonoBehaviour
     public void OpenOptions()
     {
         optionsPanel.SetActive(true);
-        //_optionsOpened= true;
+        if (TryGetComponent<NotebookOptions>(out NotebookOptions notebookOptions))
+        {
+            notebookOptions.InitializeOptions();
+        }
     }
 
     public void CloseOptions()
     {
         optionsPanel.SetActive(false);
-        //_optionsOpened= false;
         PlayerPrefs.Save(); // guarda en disco
     }
 

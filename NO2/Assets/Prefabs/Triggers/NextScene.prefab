@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8230149320003936403}
   m_Layer: 0
   m_Name: NextScene
-  m_TagString: Untagged
+  m_TagString: SpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25e2a965ca58c7b419a456911c534311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NextSceneTrigguer
-  sceneName: PruebaSiguienteNivel
+  gateData: {fileID: 0}
 --- !u!114 &8230149320003936403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,4 +165,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9b1a840d2551184581abaad5c77f1eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnId
-  spawnId: 0
+  spawnid: 0

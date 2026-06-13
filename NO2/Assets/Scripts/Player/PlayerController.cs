@@ -58,9 +58,7 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _renderer = GetComponent<SpriteRenderer>();
 
-        Debug.Log("Antes de inicializar actions");
         InitializePrefsActions();
-        Debug.Log("Despues de inicializar actions");
         //m_Actions = new InputSystem();
 
         //PrefsToKeybinds();
@@ -152,6 +150,8 @@ public class PlayerController : MonoBehaviour
 
     public void OnRun(InputAction.CallbackContext context)
     {
+
+        
         if (context.performed){
             _isRunning = true;
         }
@@ -245,7 +245,7 @@ public class PlayerController : MonoBehaviour
 
         CheckpointManager cm = GameManager.Instance.GetComponent<CheckpointManager>();
         Destroy(gameObject); // Destruir primero
-        cm.RespawnPlayer(); // Llamar despu�s, desde un objeto que sobrevive
+        cm.RespawnPlayer(); // Llamar despues, desde un objeto que sobrevive
 
     }
 

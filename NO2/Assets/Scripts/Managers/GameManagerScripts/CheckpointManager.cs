@@ -51,7 +51,7 @@ public class CheckpointManager : MonoBehaviour
     }
 
 
-    public void FinishScene(string sceneName, int newSpawnPoint)
+    public void GoNextScene(string sceneName, int newSpawnPoint)
     {
         nextScene = sceneName;
         idSpawn = newSpawnPoint;
@@ -88,7 +88,7 @@ public class CheckpointManager : MonoBehaviour
 
     }
 
-    public void RespawnPlayer()//poner nombre a respawn alpargata
+    public void RespawnPlayer()
     {
         StartCoroutine(RespawnCoroutine());
     }

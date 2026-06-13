@@ -17,7 +17,6 @@ public class CheckpointInteractuable : Interactable
             int id = si.IdSpawn;
             cm.IdRespawn = id;
             cm.SceneWhereRespawn = SceneManager.GetActiveScene().name;
-            Debug.Log(SceneManager.GetActiveScene().name);
             //esto es pa reproducir sonido
             //sc.ReproducirCheckPoint(); 
             Debug.Log("Checkpoint alcanzado: " + gameObject.name);

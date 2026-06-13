@@ -81,8 +81,7 @@ public class PauseMenuHandler : MonoBehaviour
 			Time.timeScale = 1f;
 			SceneManager.UnloadSceneAsync(pauseSceneName);
 
-			//UpdateActionsPlayer();
-			//UpdateActionInteract();
+			
 		}
 	}
 
@@ -113,5 +112,7 @@ public class PauseMenuHandler : MonoBehaviour
 	//{
 	//	m_UI.Disable();
 	//}
+
+	
 
 }

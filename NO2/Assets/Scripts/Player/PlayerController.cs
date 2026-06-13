@@ -179,11 +179,11 @@ public class PlayerController : MonoBehaviour
         ConsumeStamina(_playerData.RollingStaminaCost);
 
         _rigidbody.linearVelocity = _playerData.IniRollingSpeed * _lookDirection;
-        yield return new WaitForSeconds(0.3f); // Change to PlayerData
+        yield return new WaitForSeconds(_playerData.IniRollingSeconds);
 
 
         _rigidbody.linearVelocity = _playerData.EndRollingSpeed * _lookDirection;
-        yield return new WaitForSeconds(0.2f); // Change to PlayerData
+        yield return new WaitForSeconds(_playerData.EndRollingSeconds);
 
         _state = PlayerState.Move;
     }

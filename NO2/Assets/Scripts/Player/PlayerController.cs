@@ -52,6 +52,8 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _renderer = GetComponent<SpriteRenderer>();
 
+
+        //InitializePrefsActions();
         m_Actions = new InputSystem();
 
         PrefsToKeybinds();
@@ -272,6 +274,32 @@ public class PlayerController : MonoBehaviour
         m_Player = m_Actions.Player;
     }
 
+    private void InitializePrefsActions()
+    {
+        InputActionAsset asset = Resources.Load<InputActionAsset>("InputSystem");
+
+        string json = PlayerPrefs.GetString("rebinds", "");
+        if (!string.IsNullOrEmpty(json))
+        {
+            asset.LoadBindingOverridesFromJson(json);
+        }
+
+        InputActionMap playerMap = asset.FindActionMap("Player");
+
+        InputActionReference moveRef = InputActionReference.Create(playerMap.FindAction("Move"));
+        InputActionReference runRef = InputActionReference.Create(playerMap.FindAction("Run"));
+        InputActionReference rollRef = InputActionReference.Create(playerMap.FindAction("Roll"));
+        InputActionReference weakAttackRef = InputActionReference.Create(playerMap.FindAction("WeakAttack"));
+        InputActionReference strongAttackRef = InputActionReference.Create(playerMap.FindAction("StrongAttack"));
+
+        moveRef.action.performed += OnMove;
+        moveRef.action.canceled += OnMove;
+        runRef.action.performed += OnRun;
+        runRef.action.canceled += OnRun;
+        rollRef.action.started += OnRoll;
+        //weakAttackRef.action.performed += OnWeakAttack;
+        //strongAttackRef.action.performed += OnStrongAttack;
+    }
     public void UpdateMActions()
     {
         StartCoroutine(WaitAndChangeBindings());

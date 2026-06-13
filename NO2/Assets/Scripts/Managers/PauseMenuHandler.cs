@@ -126,17 +126,4 @@ public class PauseMenuHandler : MonoBehaviour
 		}
 	}
 
-
-    private void UpdateActionInteract()
-    {
-        GameObject playerReference = GameObject.FindWithTag("Player");
-        if (playerReference is null)
-        {
-            Debug.Log("Player not found");
-        }
-        else
-        {
-            playerReference.GetComponent<InteractManager>().UpdateRebindingInteract();
-        }
-    }
 }

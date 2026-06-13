@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -22,25 +23,23 @@ public class InteractManager : MonoBehaviour
     private GameObject _canvas;
     private GameObject _imagenUI;
     private GameObject _textoUI;
-    [SerializeField] private Sprite _keySpriteE;
+    private GameObject _textoLetraImagenUI;
+    [SerializeField] private Sprite _keySprite;
 
 
+    [SerializeField] private InputActionReference actionReference;
     //player controller
     private PlayerController _playerController;
     private void Awake()
     {
-        m_Actions = new InputSystem();
-
-        PrefsToKeybinds();
-
-
-        PrepareActions();
-
+        actionReference.action.performed += OnInteract;
+        actionReference.action.canceled += OnInteract;       
         
-
+        
 
         _canvas = transform.GetChild(0).gameObject;
         _imagenUI = _canvas.transform.GetChild(0).gameObject;
+        _textoLetraImagenUI = _imagenUI.transform.GetChild(0).gameObject;
         _textoUI = _canvas.transform.GetChild(1).gameObject;
         interactables = new List<Interactable>();
     }
@@ -55,7 +54,9 @@ public class InteractManager : MonoBehaviour
         if (_puedeInteractuar)
         {
             _canvas.SetActive(true);
-            _imagenUI.GetComponent<UnityEngine.UI.Image>().sprite = _keySpriteE;
+            _imagenUI.GetComponent<UnityEngine.UI.Image>().sprite = _keySprite;
+
+            _textoLetraImagenUI.GetComponent<TextMeshProUGUI>().text = ObtainStringInteractBinding();
         }
         else
         {
@@ -85,67 +86,41 @@ public class InteractManager : MonoBehaviour
         return _puedeInteractuar;
     }
 
-    void OnDestroy()
-    {
-        //if (m_Actions != null)
-        //{
-        //    m_Actions.Dispose();
-        //    m_Actions = null;
-        //}
-    }
+
     void OnEnable()
     {
-        m_Player.Enable();
+        actionReference.action.Enable();
     }
     void OnDisable()
     {
-        m_Player.Disable();
+        actionReference.action.Disable();
+    }
+    void OnDestroy()
+    {
+        actionReference.action.performed -= OnInteract;
+        actionReference.action.canceled -= OnInteract;
     }
 
-    public void UpdateRebindingInteract()
+    private string ObtainStringInteractBinding()
     {
-        StartCoroutine(WaitAndChangeBindings());
-        
-        
-    }
-    IEnumerator WaitAndChangeBindings()
-    {
-        DisposeActions();
-        
-        yield return null;
-        PrefsToKeybinds();
-        PrepareActions();
-    }
-
- 
-
-    public void PrefsToKeybinds()
-    {
-        m_Actions = new InputSystem();
-
         string json = PlayerPrefs.GetString("rebinds", "");
         if (!string.IsNullOrEmpty(json))
         {
-            m_Actions.asset.LoadBindingOverridesFromJson(json);
+            actionReference.action.actionMap.asset.LoadBindingOverridesFromJson(json);
         }
 
-        m_Player = m_Actions.Player;
-    }
-    private void DisposeActions()
-    {
-        m_Player.Disable();
-        m_Player.Interact.performed -= OnInteract;
-        m_Player.Interact.canceled -= OnInteract;
-        m_Actions.Dispose();
+        string text =
+            InputControlPath.ToHumanReadableString(
+                actionReference.action.bindings[0].effectivePath,
+                InputControlPath.HumanReadableStringOptions.OmitDevice
+            );
+        return text;
     }
 
-    private void PrepareActions()
-    {
-        m_Player = m_Actions.Player;
 
-        m_Player.Interact.performed += OnInteract; 
-        m_Player.Interact.canceled += OnInteract; 
-    }
+ 
+
+    
 
 }
 

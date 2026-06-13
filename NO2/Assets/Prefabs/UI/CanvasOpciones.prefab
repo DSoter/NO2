@@ -396,15 +396,15 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8678628990704587213}
+  - {fileID: 7600862970067898286}
+  - {fileID: 634957653719523275}
+  - {fileID: 228699991206276780}
+  - {fileID: 6046157305682986446}
   - {fileID: 5590869453378606319}
   - {fileID: 1415221703143920681}
   - {fileID: 8616626074820474948}
   - {fileID: 3357862117582340190}
   - {fileID: 8501474941073882239}
-  - {fileID: 7600862970067898286}
-  - {fileID: 634957653719523275}
-  - {fileID: 228699991206276780}
-  - {fileID: 6046157305682986446}
   m_Father: {fileID: 8601456328208825153}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1064,6 +1064,7 @@ GameObject:
   - component: {fileID: 6033796571663658985}
   - component: {fileID: 2147048318477125720}
   - component: {fileID: 4841642640897950716}
+  - component: {fileID: 1373187388240057691}
   m_Layer: 5
   m_Name: ScrollView
   m_TagString: Untagged
@@ -1146,7 +1147,7 @@ MonoBehaviour:
   m_Content: {fileID: 4308420511032816152}
   m_Horizontal: 1
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
@@ -1161,6 +1162,20 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1373187388240057691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2654612935642079058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 228098b65dd64cd46bd6533a6d0e3482, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FastScroll
+  scrollRect: {fileID: 4841642640897950716}
+  scrollSpeed: 0.5
 --- !u!1 &2753070489404647340
 GameObject:
   m_ObjectHideFlags: 0
@@ -1724,7 +1739,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1277127989873743896}
   m_HandleRect: {fileID: 4920303139439164464}
   m_Direction: 2
-  m_Value: 0.49999985
+  m_Value: 1
   m_Size: 0.55707425
   m_NumberOfSteps: 0
   m_OnValueChanged:

@@ -6,15 +6,19 @@ using UnityEngine.SceneManagement;
 
 public class CheckpointManager : MonoBehaviour
 {
-    [SerializeField] private string sceneWhereRespawn;
-    [SerializeField] public int idRespawn;
-    public int idSpawn;
-    [SerializeField] private string nextScene;
+    private string sceneWhereRespawn;
+    private int idRespawn;
+    private int idSpawn;
+    private string nextScene;
     private bool hasToSpawnPlayer;
     private bool hasToSpawnPlayerAfterDeath;
-    [SerializeField] private float gateTransitionSeconds;
-    [SerializeField] private Transform playerReference;
 
+    
+    private Transform playerReference;
+
+    private Vector2 enterGateDirection;
+    private Vector2 exitGateDirection;
+    [SerializeField] private float gateTransitionSeconds;
 
     public string SceneWhereRespawn
     {
@@ -55,14 +59,35 @@ public class CheckpointManager : MonoBehaviour
         get { return playerReference; }
         set { playerReference = value; }
     }
+    public Vector2 ExitGateDirection
+    {
+        get { return exitGateDirection; }
+        set { exitGateDirection = value; }
+    }
+    public Vector2 EnterGateDirection
+    {
+        get { return exitGateDirection; }
+        set { exitGateDirection = value; }
+    }
 
 
     public void GoNextScene(string sceneName, int newSpawnPoint)
     {
         nextScene = sceneName;
         idSpawn = newSpawnPoint;
+        StartCoroutine(NextSceneCoroutine(gateTransitionSeconds));
+        
+    }
+    private IEnumerator NextSceneCoroutine(float waitDurationSeconds)
+    {
+        
+        PlayerController playerScript= playerReference.gameObject.GetComponent<PlayerController>();
+        playerScript.ExitScene(EnterGateDirection * (-1), waitDurationSeconds);
+        yield return new WaitForSeconds(waitDurationSeconds);
         SpawnPlayer();
     }
+
+
     public void StartScene(string sceneName)
     {
         hasToSpawnPlayer = true;

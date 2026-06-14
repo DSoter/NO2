@@ -244,7 +244,7 @@ public class PlayerController : MonoBehaviour
         DisposeActions();
 
         CheckpointManager cm = GameManager.Instance.GetComponent<CheckpointManager>();
-        cm.PlayerReference =transform;
+        cm.PlayerReference = transform;
         Destroy(gameObject); // Destruir primero
         cm.RespawnPlayer(); // Llamar despues, desde un objeto que sobrevive
 
@@ -313,6 +313,11 @@ public class PlayerController : MonoBehaviour
         _rollRef.action.started += OnRoll;
         //weakAttackRef.action.performed += OnWeakAttack;
         //strongAttackRef.action.performed += OnStrongAttack;
+    }
+
+    public void ExitScene(Vector2 exitDirection, float animationDurationSeconds)
+    {
+        return;
     }
 
 }

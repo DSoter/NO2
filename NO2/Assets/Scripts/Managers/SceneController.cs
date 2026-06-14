@@ -86,7 +86,8 @@ public class SceneController : MonoBehaviour
 
         if (_checkpointManager.IdSpawn > 0)
         {
-            player.transform.position -= new Vector3(1,0,0);
+            Vector3 exitDirection = new Vector3(_checkpointManager.ExitGateDirection.x, _checkpointManager.ExitGateDirection.y, 0); 
+            player.transform.position += exitDirection;
         }
         _checkpointManager.IdSpawn = -1;
     }

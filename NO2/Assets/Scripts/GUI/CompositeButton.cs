@@ -73,14 +73,14 @@ public class CompositeButton : MonoBehaviour
                 actionReference.action.Enable();
 
                 UpdateBindingText();
-            }).OnCancel(operation => UpdateDisplayText());
+            }).OnCancel(operation => UpdateDisplayTextComposite());
 
         rebindingOperation.Start();
     }
 
     private void UpdateBindingText()
     {
-        string newPath = actionReference.action.bindings[indexInput].effectivePath;
+        string newPath = actionReference.action.bindings[compositeValue + dif].effectivePath;
 
         // Buscar conflictos en todos los RebindButton de la escena
         RebindButton[] allButtons = FindObjectsByType<RebindButton>();
@@ -117,7 +117,7 @@ public class CompositeButton : MonoBehaviour
                 );
                 // Aplicar override vacío para que quede none
                 other.actionReference.action.ApplyBindingOverride(other.compositeValue + other.dif, "");
-                other.UpdateDisplayText();
+                other.UpdateDisplayTextComposite();
             }
         }
 
@@ -134,7 +134,8 @@ public class CompositeButton : MonoBehaviour
 
         RefreshUIInteractManager();
     }
-    public void UpdateDisplayText()
+
+    public void UpdateDisplayTextComposite()
     {
         string path = actionReference.action.bindings[compositeValue + dif].effectivePath;
         buttonText.text = string.IsNullOrEmpty(path)

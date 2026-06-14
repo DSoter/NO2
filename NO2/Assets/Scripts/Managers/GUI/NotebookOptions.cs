@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.Events;
 using static UnityEngine.Rendering.DebugUI;
 
 public class NotebookOptions : MonoBehaviour
 {
     [SerializeField] private GameObject panelVolume;
     [SerializeField] private GameObject panelKeybinds;
+    [SerializeField] private UnityEvent funcReset;
 
     private GUIOptionsReminder _optionsReminder;
 
@@ -15,6 +17,7 @@ public class NotebookOptions : MonoBehaviour
 
     public void InitializeOptions()
     {
+        funcReset.Invoke();
         switch (_optionsReminder.LastNotebookOption)
         {
             case 0:
@@ -45,6 +48,7 @@ public class NotebookOptions : MonoBehaviour
     {
         _optionsReminder.LastNotebookOption = 1;
         PlayerPrefs.SetInt("LastNotebookOption", 1);
+        funcReset.Invoke();
 
         panelKeybinds.SetActive(true);
         CloseVolume();

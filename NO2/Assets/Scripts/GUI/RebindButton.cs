@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -95,7 +96,7 @@ public class RebindButton : MonoBehaviour
                 );
                 // Aplicar override vacío para que quede none
                 other.ActionReference.action.ApplyBindingOverride(other.CompositeValue + other.Dif, "");
-                other.UpdateDisplayText();
+                other.UpdateDisplayTextComposite();
             }
         }
 
@@ -121,6 +122,7 @@ public class RebindButton : MonoBehaviour
                 InputControlPath.HumanReadableStringOptions.OmitDevice
               );
     }
+
 
     private void RefreshUIInteractManager()
     {

@@ -1454,6 +1454,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NotebookOptions
   panelVolume: {fileID: 267624978}
   panelKeybinds: {fileID: 267624974}
+  funcReset:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1631211385
 MonoBehaviour:
   m_ObjectHideFlags: 0

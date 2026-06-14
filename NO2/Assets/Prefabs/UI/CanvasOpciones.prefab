@@ -4328,6 +4328,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 581683840842376815}
     m_Modifications:
+    - target: {fileID: 57937420856422804, guid: d04b15f127e0d3746a6c231eb89d552f, type: 3}
+      propertyPath: m_text
+      value: "Texto generico. \n\n\xBFDeseas confirmar? "
+      objectReference: {fileID: 0}
+    - target: {fileID: 57937420856422804, guid: d04b15f127e0d3746a6c231eb89d552f, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
+    - target: {fileID: 57937420856422804, guid: d04b15f127e0d3746a6c231eb89d552f, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 3b3b2e4eb2b0762499a53e2afc20659f, type: 2}
+    - target: {fileID: 57937420856422804, guid: d04b15f127e0d3746a6c231eb89d552f, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 59.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 57937420856422804, guid: d04b15f127e0d3746a6c231eb89d552f, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -9219666074936998794, guid: 3b3b2e4eb2b0762499a53e2afc20659f, type: 2}
+    - target: {fileID: 57937420856422804, guid: d04b15f127e0d3746a6c231eb89d552f, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 57937420856422804, guid: d04b15f127e0d3746a6c231eb89d552f, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4306815329654938792, guid: d04b15f127e0d3746a6c231eb89d552f, type: 3}
       propertyPath: m_Name
       value: PopUp

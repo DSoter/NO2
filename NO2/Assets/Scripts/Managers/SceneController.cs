@@ -110,7 +110,7 @@ public class SceneController : MonoBehaviour
                 Debug.Log("No hay escena donde respawnear");
             }
             else { 
-                if (SceneManager.GetActiveScene().name.Equals(_checkpointManager.SceneWhereRespawn))
+                if (CheckIsActiveScene(_checkpointManager.SceneWhereRespawn))
                 {
                     currentSpawnPointAfterDeath = _checkpointManager.IdRespawn;
                     if (currentSpawnPointAfterDeath >= checkpoints.Count) 
@@ -130,6 +130,10 @@ public class SceneController : MonoBehaviour
         player.transform.position = currentSpawnPoint.transform.position;
     }
 
+    private bool CheckIsActiveScene(string scene)
+    {
+        return (SceneManager.GetActiveScene().name.Equals(scene));
+    }
 
     public void UpdateSpawnPoint(Transform newSpawn)
     {

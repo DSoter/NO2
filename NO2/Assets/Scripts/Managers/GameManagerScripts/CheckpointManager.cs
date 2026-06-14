@@ -20,6 +20,8 @@ public class CheckpointManager : MonoBehaviour
     private Vector2 exitGateDirection;
     [SerializeField] private float gateTransitionSeconds;
 
+    private SceneController sc;
+
     public string SceneWhereRespawn
     {
         get { return sceneWhereRespawn; }
@@ -101,15 +103,12 @@ public class CheckpointManager : MonoBehaviour
         {
             nextScene = SceneManager.GetActiveScene().name;
         }   
-        if (SceneManager.GetActiveScene().name.Equals(nextScene))
+        if (CheckIsActiveScene(nextScene))
         {
-            SceneController sc = FindAnyObjectByType<SceneController>();
-            if (sc is null)
+            if (ExistsSceneController())
             {
-                Debug.LogError("SceneController no encontrado");
-                return;
+                sc.SpawnPlayer();
             }
-            sc.SpawnPlayer();
         }
         else
         {            
@@ -128,50 +127,54 @@ public class CheckpointManager : MonoBehaviour
     {
         yield return null; 
 
-        if (sceneWhereRespawn is not null)
+        if (sceneWhereRespawn != null)
         { 
             if (sceneWhereRespawn.Equals(""))
-            { 
-                SceneController sc = FindAnyObjectByType<SceneController>();
-                if (sc is null)
+            {
+                if (ExistsSceneController())
                 {
-                    Debug.LogError("SceneController no encontrado");
-                    //return;
+                    sc.RespawnPlayer();
                 }
-                sc.RespawnPlayer();
             }
             else
             {
-                if (!SceneManager.GetActiveScene().name.Equals(sceneWhereRespawn))
+                if (!CheckIsActiveScene(sceneWhereRespawn))
                 {
                     hasToSpawnPlayerAfterDeath = true;
                     SceneManager.LoadScene(sceneWhereRespawn);
                 }
                 else
                 {
-                    SceneController sc = FindAnyObjectByType<SceneController>();
-                    if (sc is null)
+                    if (ExistsSceneController())
                     {
-                        Debug.LogError("SceneController no encontrado");
-                        //return;
+                        sc.RespawnPlayer();
                     }
-                    sc.RespawnPlayer();
                 }
             }
         }
         else
         {
-            SceneController sc = FindAnyObjectByType<SceneController>();
-            if (sc is null)
+            if (ExistsSceneController())
             {
-                Debug.LogError("SceneController no encontrado");
-                //return;
+                sc.RespawnPlayer();
             }
-            sc.RespawnPlayer();
         }
     }
 
-   
 
+    private bool CheckIsActiveScene(string scene)
+    {
+        return (SceneManager.GetActiveScene().name.Equals(scene));
+    }
+    private bool ExistsSceneController()
+    {
+        sc = FindAnyObjectByType<SceneController>();
+        if (sc == null)
+        {
+            Debug.LogError("SceneController no encontrado");
+            return false;
+        }
+        return true;
+    }
 
 }

@@ -21,6 +21,8 @@ public class CheckpointManager : MonoBehaviour
     [SerializeField] private float gateTransitionSeconds;
 
     private SceneController sc;
+    private DiverseMenusManager _menusManager;
+    private bool managerPaused;
 
     public string SceneWhereRespawn
     {
@@ -70,6 +72,11 @@ public class CheckpointManager : MonoBehaviour
     {
         get { return exitGateDirection; }
         set { exitGateDirection = value; }
+    }
+    public bool ManagerPaused
+    {
+        get { return managerPaused; }
+        set { managerPaused = value; }
     }
 
 
@@ -127,8 +134,18 @@ public class CheckpointManager : MonoBehaviour
     {
         yield return null; 
 
+        OpenGameOver();
+
+        
+    }
+
+    public void RespawnAfterGameOver()
+    {
+
+        _menusManager.OpenMenus();//Para cerrar el menú
+
         if (sceneWhereRespawn != null)
-        { 
+        {
             if (sceneWhereRespawn.Equals(""))
             {
                 if (ExistsSceneController())
@@ -160,7 +177,15 @@ public class CheckpointManager : MonoBehaviour
             }
         }
     }
-
+    private void OpenGameOver()
+    {
+        Debug.Log("Vamos a llamar a open menus");
+        managerPaused = true;
+        _menusManager = GameManager.Instance.GetComponent<DiverseMenusManager>();
+        _menusManager.MenuIndex = 0;
+        _menusManager.OpenMenus();
+        Debug.Log("Se ha llamado a openMenus");
+    }
 
     private bool CheckIsActiveScene(string scene)
     {

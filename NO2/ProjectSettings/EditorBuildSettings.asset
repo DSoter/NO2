@@ -20,5 +20,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PruebaVictor/PruebaSiguienteNivel.unity
     guid: b9fc83c7ac250f2478acd6eb59394f50
+  - enabled: 1
+    path: Assets/Scenes/MenusAndGameOver.unity
+    guid: a0ee6b0eb35d8b042ab16d48258a3d88
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

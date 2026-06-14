@@ -515,6 +515,7 @@ MonoBehaviour:
   sfxSlider: {fileID: 1840611228}
   soundOn: {fileID: 1827507276}
   soundOff: {fileID: 2013125527}
+  actionReference: {fileID: 4014850048532301077, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}
 --- !u!4 &1282879279
 Transform:
   m_ObjectHideFlags: 0

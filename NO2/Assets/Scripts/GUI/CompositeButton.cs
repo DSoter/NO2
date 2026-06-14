@@ -10,12 +10,28 @@ public class CompositeButton : MonoBehaviour
     [SerializeField] private int indexInput;
     [SerializeField] private int compositeValue;
 
+
     private int dif;
 
     private InputSystem m_Actions;
     private InputSystem.PlayerActions m_Player;
 
     private InputActionRebindingExtensions.RebindingOperation rebindingOperation;
+
+
+    public InputActionReference ActionReference
+    {
+        get { return actionReference; }
+    }
+    public int CompositeValue
+    {
+        get { return compositeValue; }
+    }
+    public int Dif
+    {
+        get { return dif; }
+    }
+
     private void Start()
     {
         string json = PlayerPrefs.GetString("rebinds", "");
@@ -49,7 +65,7 @@ public class CompositeButton : MonoBehaviour
         actionReference.action.Disable();
 
         rebindingOperation = actionReference.action
-            .PerformInteractiveRebinding(compositeValue+dif).WithControlsExcluding("<Keyboard>/escape")
+            .PerformInteractiveRebinding(compositeValue+dif).WithCancelingThrough("<Keyboard>/escape")
             .OnComplete(operation =>
             {
                 operation.Dispose();
@@ -57,21 +73,84 @@ public class CompositeButton : MonoBehaviour
                 actionReference.action.Enable();
 
                 UpdateBindingText();
-            });
+            }).OnCancel(operation => UpdateDisplayText());
 
         rebindingOperation.Start();
     }
 
     private void UpdateBindingText()
     {
-        buttonText.text =
-            InputControlPath.ToHumanReadableString(
-                actionReference.action.bindings[compositeValue+dif].effectivePath,
-                InputControlPath.HumanReadableStringOptions.OmitDevice
-            );
+        string newPath = actionReference.action.bindings[indexInput].effectivePath;
+
+        // Buscar conflictos en todos los RebindButton de la escena
+        RebindButton[] allButtons = FindObjectsByType<RebindButton>();
+        foreach (RebindButton other in allButtons)
+        {
+            if (other == this) continue;
+
+            string otherPath = other.ActionReference.action.bindings[other.IndexInput].effectivePath;
+            if (otherPath == newPath)
+            {
+                // Limpiar el binding conflictivo
+                InputActionRebindingExtensions.RemoveBindingOverride(
+                    other.ActionReference.action,
+                    other.IndexInput
+                );
+                // Aplicar override vacío para que quede none
+                other.ActionReference.action.ApplyBindingOverride(other.IndexInput, "");
+                other.UpdateDisplayText();
+            }
+        }
+
+        CompositeButton[] compositeButtons = FindObjectsByType<CompositeButton>();
+        foreach (CompositeButton other in compositeButtons)
+        {
+            if (other == this) continue;
+
+            string otherPath = other.actionReference.action.bindings[other.compositeValue + other.dif].effectivePath;
+            if (otherPath == newPath)
+            {
+                // Limpiar el binding conflictivo
+                InputActionRebindingExtensions.RemoveBindingOverride(
+                    other.actionReference.action,
+                    other.compositeValue + other.dif
+                );
+                // Aplicar override vacío para que quede none
+                other.actionReference.action.ApplyBindingOverride(other.compositeValue + other.dif, "");
+                other.UpdateDisplayText();
+            }
+        }
+
+
+        buttonText.text = InputControlPath.ToHumanReadableString(
+            newPath,
+            InputControlPath.HumanReadableStringOptions.OmitDevice
+        );
+
         PlayerPrefs.SetString(
-    "rebinds",
-    actionReference.action.actionMap.asset.SaveBindingOverridesAsJson()
-);
+            "rebinds",
+            actionReference.action.actionMap.asset.SaveBindingOverridesAsJson()
+        );
+
+        RefreshUIInteractManager();
+    }
+    public void UpdateDisplayText()
+    {
+        string path = actionReference.action.bindings[compositeValue + dif].effectivePath;
+        buttonText.text = string.IsNullOrEmpty(path)
+            ? "None"
+            : InputControlPath.ToHumanReadableString(
+                path,
+                InputControlPath.HumanReadableStringOptions.OmitDevice
+              );
+    }
+
+    private void RefreshUIInteractManager()
+    {
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null)
+        {
+            player.GetComponent<InteractManager>().RefreshInteractBinding();
+        }
     }
 }

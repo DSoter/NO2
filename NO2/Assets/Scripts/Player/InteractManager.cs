@@ -97,7 +97,6 @@ public class InteractManager : MonoBehaviour
     }
     void OnDisable()
     {
-        Debug.Log("InteractManager OnDisable llamado");
         actionReference.action.Disable();
     }
     void OnDestroy()

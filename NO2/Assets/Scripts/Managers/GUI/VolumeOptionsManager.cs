@@ -14,6 +14,8 @@ public class VolumeOptionsManager : MonoBehaviour
     public Slider sfxSlider;
     public GameObject soundOn;
     public GameObject soundOff;
+    [SerializeField] private InputActionReference actionReference;
+    private bool _wantsToExit;
 
 
     //private InputSystem m_Actions;
@@ -27,6 +29,11 @@ public class VolumeOptionsManager : MonoBehaviour
         float savedMusic = PlayerPrefs.GetFloat("MusicVolume", 0.7f);
         float savedSFX = PlayerPrefs.GetFloat("SFXVolume", 0.7f);
 
+
+        actionReference.action.performed += OnEscape;
+        actionReference.action.canceled += OnEscape;
+
+
         masterSlider.value = savedMasterMusic;
         musicSlider.value = savedMusic;
         sfxSlider.value = savedSFX;
@@ -39,14 +46,14 @@ public class VolumeOptionsManager : MonoBehaviour
         musicSlider.onValueChanged.AddListener(SetMusicVolume);
         sfxSlider.onValueChanged.AddListener(SetSFXVolume);
     }
-    //private void Update()
-    //{
-    //    if (_wantsToExit && _optionsOpened)
-    //    {
-    //        _wantsToExit= false;
-    //        CloseOptions();
-    //    }
-    //}
+    private void Update()
+    {
+        if (_wantsToExit && optionsPanel.activeSelf)
+        {
+            _wantsToExit = false;
+            CloseOptions();
+        }
+    }
 
     public void OpenOptions()
     {
@@ -103,21 +110,26 @@ public class VolumeOptionsManager : MonoBehaviour
         }
     }
 
+    void OnEnable()
+    {
+        actionReference.action.Enable();
+    }
+    void OnDisable()
+    {
+        actionReference.action.Disable();
+    }
+    void OnDestroy()
+    {
+        actionReference.action.performed -= OnEscape;
+        actionReference.action.canceled -= OnEscape;
+    }
 
-    //public void OnEscape(InputAction.CallbackContext context)
-    //{
-    //    if (context.performed)
-    //    {
-    //        _wantsToExit = true;
-    //    }
-    //}
-    //void OnDestroy()
-    //{
-    //    m_Actions.Dispose();
-    //}
-    //void OnEnable()
-    //{
-    //    m_UI.Enable();
-    //}
+    public void OnEscape(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            _wantsToExit = true;
+        }
+    }
 
 }

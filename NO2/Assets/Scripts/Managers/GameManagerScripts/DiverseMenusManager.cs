@@ -7,6 +7,8 @@ public class DiverseMenusManager : MonoBehaviour
 {
     private int menuIndex;
 
+    private int menuIndexAux;
+
     //GameOver 0
     //Map 1
     //Bandges 2
@@ -22,12 +24,20 @@ public class DiverseMenusManager : MonoBehaviour
     [SerializeField] private string menusSceneName = "MenusAndGameOver";
 
     // InputSystem 
-    private InputActionReference _mapRef, _flowerRef, _badgesRef, _scapeRef;
+    private InputActionReference _mapRef, _flowerRef, _badgesRef, _scapeRef, _goLeft, _goRight;
     [Header("Input System")]
     [SerializeField] private InputActionAsset _inputSystemReference;
 
     private bool _wantsToOpen;
     private bool _isOpen;
+
+    private bool _wantsToPause;
+
+    public bool _WantsToPause
+    {
+        get { return _wantsToPause; }
+        set { _wantsToPause = value; }
+    }
 
     private void Awake()
     {
@@ -36,11 +46,20 @@ public class DiverseMenusManager : MonoBehaviour
 
     private void Update()
     {
+        if (_wantsToPause)
+        {
+            _wantsToPause = false;
+            if (_isOpen)
+            {
+                _wantsToOpen = true;
+            }
+        }
         if (_wantsToOpen)
         {
             _wantsToOpen= false;
             OpenMenus();
         }
+        
     }
 
     public void OpenMenus()
@@ -64,6 +83,37 @@ public class DiverseMenusManager : MonoBehaviour
 
 
         }
+    }
+
+    public void ChangeMenus()
+    {
+        if (!_isOpen || menuIndex == menuIndexAux)//Si no hay menu abierto o el menú que está abierto es el mismo se llama a open menus 
+        {
+            menuIndex = menuIndexAux;
+            OpenMenus();    
+        }
+        else
+        {
+            MenusHandler mh = FindAnyObjectByType<MenusHandler>();
+            if (mh == null) 
+            {
+                Debug.Log("No se ha encontrado el menu handler");
+                return;
+            }
+            menuIndex = menuIndexAux; //esto no hace falta
+            switch (menuIndexAux)
+            {
+                
+                case 1:
+                    mh.OpenMapMenu(); break;
+                case 2:
+                    mh.OpenBadgesMenu(); break;
+                case 3:
+                    mh.OpenFlowerMenu(); break;
+
+            }
+        }
+
     }
 
     public void QuitToMainMenu()
@@ -91,14 +141,7 @@ public class DiverseMenusManager : MonoBehaviour
 
 
 
-    public void OnEscape(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            //_wantsToPause = true;
-            //OpenMenus();
-        }
-    }
+    
 
 
 
@@ -107,8 +150,8 @@ public class DiverseMenusManager : MonoBehaviour
     {
         if (context.performed)
         {
-            menuIndex = 1;
-            OpenMenus();
+            menuIndexAux = 1;
+            ChangeMenus();
         }
     }
     
@@ -116,16 +159,78 @@ public class DiverseMenusManager : MonoBehaviour
     {
         if (context.performed)
         {
-            menuIndex = 2;
-            OpenMenus();
+            menuIndexAux = 2;
+            ChangeMenus();
         }
     }
     public void OnBadge(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            menuIndex = 3;
-            OpenMenus();
+            menuIndexAux = 3;
+            ChangeMenus();
+        }
+    }
+    public void OnLeft(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (_isOpen)
+            {
+                MenusHandler mh = FindAnyObjectByType<MenusHandler>();
+                switch (menuIndex)
+                {
+                    //1Mapa
+                    //2Badge
+                    //3Flower
+
+                    //Al restar uno se queda
+                    //1Flower
+                    //2Mapa
+                    //3Badge
+                    case 1:
+                        menuIndex = 3;
+                        mh.OpenFlowerMenu(); break;
+                    case 2:
+                        menuIndex = 1;
+                        mh.OpenMapMenu(); break;
+                    case 3:
+                        menuIndex = 2;
+                        mh.OpenBadgesMenu(); break;
+
+                }
+            }
+        }
+    }
+    public void OnRight(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (_isOpen)
+            {
+                MenusHandler mh = FindAnyObjectByType<MenusHandler>();
+                switch (menuIndex)
+                {
+                    //1Mapa
+                    //2Badge
+                    //3Flower
+
+                    //Al sumar uno se queda
+                    //1Badge
+                    //2Flower
+                    //3Mapa
+                    case 1:
+                        menuIndex = 2;
+                        mh.OpenBadgesMenu(); break;
+                    case 2:
+                        menuIndex = 3;
+                        mh.OpenFlowerMenu(); break;
+                    case 3:
+                        menuIndex = 1;
+                        mh.OpenMapMenu(); break;
+
+                }
+            }
         }
     }
 
@@ -145,6 +250,8 @@ public class DiverseMenusManager : MonoBehaviour
         _flowerRef = InputActionReference.Create(UIMap.FindAction("OpenFlowers"));
         _badgesRef = InputActionReference.Create(UIMap.FindAction("OpenBadges"));
         _scapeRef = InputActionReference.Create(UIMap.FindAction("Escape"));
+        _goLeft = InputActionReference.Create(UIMap.FindAction("GoLeft"));
+        _goRight = InputActionReference.Create(UIMap.FindAction("GoRight"));
 
         EnableActions();
         UIMap.Enable();
@@ -156,7 +263,12 @@ public class DiverseMenusManager : MonoBehaviour
             _mapRef.action.performed -= OnMap;
             _flowerRef.action.performed -= OnFlower;
             _badgesRef.action.performed  -= OnBadge;
-            _scapeRef.action.performed -= OnEscape;
+            _goLeft.action.performed -= OnLeft;
+            _goRight.action.performed -= OnRight;
+
+            //_scapeRef.action.performed -= OnEscape;
+
+
             _inputSystemReference.FindActionMap("Player").Disable();
         }
     }
@@ -166,9 +278,13 @@ public class DiverseMenusManager : MonoBehaviour
         _mapRef.action.performed += OnMap;
         _flowerRef.action.performed += OnFlower;
         _badgesRef.action.performed += OnBadge;
-        _scapeRef.action.performed += OnEscape;
-        //weakAttackRef.action.performed += OnWeakAttack;
-        //strongAttackRef.action.performed += OnStrongAttack;
+        _goLeft.action.performed += OnLeft;
+        _goRight.action.performed += OnRight;
+
+        //_scapeRef.action.performed += OnEscape;
+
+
+
     }
 
 

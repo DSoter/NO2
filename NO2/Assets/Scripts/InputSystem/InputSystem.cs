@@ -418,6 +418,24 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""GoLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""9f05bf65-d696-4a96-825a-438c6b9eb825"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""GoRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""16f23f66-68b7-4099-830b-92166b13d3ac"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -519,6 +537,50 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""action"": ""OpenBadges"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fe8b3208-964c-42fa-a75f-736c7cf61b7a"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GoLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a6f6f815-7aad-4934-98f8-b104c06d7135"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GoLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0bed7479-0dbd-4f9e-b016-fb8dc55e8f4c"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GoRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7c750e2c-2e76-4e45-8afe-f7b149fc5d97"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GoRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -540,6 +602,8 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
         m_UI_OpenMap = m_UI.FindAction("OpenMap", throwIfNotFound: true);
         m_UI_OpenFlowers = m_UI.FindAction("OpenFlowers", throwIfNotFound: true);
         m_UI_OpenBadges = m_UI.FindAction("OpenBadges", throwIfNotFound: true);
+        m_UI_GoLeft = m_UI.FindAction("GoLeft", throwIfNotFound: true);
+        m_UI_GoRight = m_UI.FindAction("GoRight", throwIfNotFound: true);
     }
 
     ~@InputSystem()
@@ -777,6 +841,8 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_OpenMap;
     private readonly InputAction m_UI_OpenFlowers;
     private readonly InputAction m_UI_OpenBadges;
+    private readonly InputAction m_UI_GoLeft;
+    private readonly InputAction m_UI_GoRight;
     /// <summary>
     /// Provides access to input actions defined in input action map "UI".
     /// </summary>
@@ -808,6 +874,14 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "UI/OpenBadges".
         /// </summary>
         public InputAction @OpenBadges => m_Wrapper.m_UI_OpenBadges;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/GoLeft".
+        /// </summary>
+        public InputAction @GoLeft => m_Wrapper.m_UI_GoLeft;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/GoRight".
+        /// </summary>
+        public InputAction @GoRight => m_Wrapper.m_UI_GoRight;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -849,6 +923,12 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
             @OpenBadges.started += instance.OnOpenBadges;
             @OpenBadges.performed += instance.OnOpenBadges;
             @OpenBadges.canceled += instance.OnOpenBadges;
+            @GoLeft.started += instance.OnGoLeft;
+            @GoLeft.performed += instance.OnGoLeft;
+            @GoLeft.canceled += instance.OnGoLeft;
+            @GoRight.started += instance.OnGoRight;
+            @GoRight.performed += instance.OnGoRight;
+            @GoRight.canceled += instance.OnGoRight;
         }
 
         /// <summary>
@@ -875,6 +955,12 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
             @OpenBadges.started -= instance.OnOpenBadges;
             @OpenBadges.performed -= instance.OnOpenBadges;
             @OpenBadges.canceled -= instance.OnOpenBadges;
+            @GoLeft.started -= instance.OnGoLeft;
+            @GoLeft.performed -= instance.OnGoLeft;
+            @GoLeft.canceled -= instance.OnGoLeft;
+            @GoRight.started -= instance.OnGoRight;
+            @GoRight.performed -= instance.OnGoRight;
+            @GoRight.canceled -= instance.OnGoRight;
         }
 
         /// <summary>
@@ -1000,5 +1086,19 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnOpenBadges(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "GoLeft" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnGoLeft(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "GoRight" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnGoRight(InputAction.CallbackContext context);
     }
 }

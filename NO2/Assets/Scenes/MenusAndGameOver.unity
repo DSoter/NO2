@@ -392,6 +392,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 706372152}
     m_Modifications:
     - target: {fileID: 57937420856422804, guid: d04b15f127e0d3746a6c231eb89d552f, type: 3}
+      propertyPath: m_text
+      value: "Texto generico. \n\n\xBFDeseas conf irmar? "
+      objectReference: {fileID: 0}
+    - target: {fileID: 57937420856422804, guid: d04b15f127e0d3746a6c231eb89d552f, type: 3}
       propertyPath: m_fontSize
       value: 72
       objectReference: {fileID: 0}
@@ -415,6 +419,22 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 172032543456361862, guid: d04b15f127e0d3746a6c231eb89d552f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1830.033
+      objectReference: {fileID: 0}
+    - target: {fileID: 172032543456361862, guid: d04b15f127e0d3746a6c231eb89d552f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 747.0375
+      objectReference: {fileID: 0}
+    - target: {fileID: 172032543456361862, guid: d04b15f127e0d3746a6c231eb89d552f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 8.2018
+      objectReference: {fileID: 0}
+    - target: {fileID: 172032543456361862, guid: d04b15f127e0d3746a6c231eb89d552f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 116.4862
+      objectReference: {fileID: 0}
     - target: {fileID: 4306815329654938792, guid: d04b15f127e0d3746a6c231eb89d552f, type: 3}
       propertyPath: m_Name
       value: PopUp GameOver
@@ -429,15 +449,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5575291648932941222, guid: d04b15f127e0d3746a6c231eb89d552f, type: 3}
       propertyPath: m_Color.b
-      value: 0.227451
+      value: 0.0062642097
       objectReference: {fileID: 0}
     - target: {fileID: 5575291648932941222, guid: d04b15f127e0d3746a6c231eb89d552f, type: 3}
       propertyPath: m_Color.g
-      value: 0.227451
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5575291648932941222, guid: d04b15f127e0d3746a6c231eb89d552f, type: 3}
       propertyPath: m_Color.r
-      value: 0.67058825
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8024268870563104930, guid: d04b15f127e0d3746a6c231eb89d552f, type: 3}
       propertyPath: m_Pivot.x

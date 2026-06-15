@@ -24,7 +24,7 @@ public class MenusHandler : MonoBehaviour
         {
             //GameOver 0
             //Map 1
-            //Bandges 2
+            //Badges 2
             //Flowers 3
             case 0:
                 OpenGameOver();
@@ -38,6 +38,8 @@ public class MenusHandler : MonoBehaviour
             case 3:
                 OpenFlowerMenu();
                 break;
+
+                
 
         }
     }

@@ -1,6 +1,5 @@
 using NUnit.Framework;
 using System.Collections.Generic;
-using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PlayerData", menuName = "Scriptable Objects/PlayerData")]
@@ -14,6 +13,7 @@ public class PlayerData : ScriptableObject
     [Space(5)]
     [Header("Stamina")]
     [SerializeField] private float stamina;
+    [SerializeField] private float iniMaxStamina;
     [SerializeField] private float maxStamina;
     [SerializeField] private float secondsUntilStaminaRegeneration;
     [SerializeField] private float staminaRegenerationSpeed;
@@ -34,38 +34,23 @@ public class PlayerData : ScriptableObject
     [SerializeField] private float endRollingSpeed;
 
     [Space(5)]
-    [Header("Timings")]
-    [SerializeField] private float iniRollingSeconds;
-    [SerializeField] private float endRollingSeconds;
-
-    [Space(5)]
     [Header("Damages")]
     [SerializeField] private float basicAttackDamage;
     [SerializeField] private float chargeAttackDamage;
 
-    // Events
 
-    public event Action OnHealthChanged;
-    public event Action OnStaminaChanged;
 
     // Read and write properties
     public float Health
     {
         get { return health; }
-        set {
-            health = value;
-            OnHealthChanged?.Invoke();
-        }
+        set { health = value; }
     }
 
     public float Stamina
     {
         get { return stamina; }
-        set
-        { 
-            stamina = value; 
-            OnStaminaChanged?.Invoke();
-        }
+        set { stamina = value; }
     }
 
     public float Oxygen
@@ -79,12 +64,17 @@ public class PlayerData : ScriptableObject
 
     public float MaxHealth 
     { 
-        get {  return maxHealth;    }
+        get {  return maxHealth; }
     }
 
     public float MaxStamina
     {
         get { return maxStamina; }
+    }
+
+    public float IniMaxStamina
+    {
+        get { return iniMaxStamina; }
     }
 
     public float MaxOxygen
@@ -134,14 +124,6 @@ public class PlayerData : ScriptableObject
     {
         get { return endRollingSpeed; }
     }
-    public float IniRollingSeconds
-    {
-        get { return iniRollingSeconds; }
-    }
-    public float EndRollingSeconds
-    {
-        get { return endRollingSeconds; }
-    }
 
     public float BasicAttackDamage
     {
@@ -152,5 +134,7 @@ public class PlayerData : ScriptableObject
     {
         get { return chargeAttackDamage; }
     }
+
+
 
 }

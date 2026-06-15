@@ -32,8 +32,13 @@ public class SceneController : MonoBehaviour
     {
 
         checkpoints = new List<Transform>();
-        //List<GameObject> listaAux = GameObject.FindGameObjectsWithTag("Player"); alpargata
-        List <SpawnId> listaAux = FindObjectsByType<SpawnId>()
+        GameObject[] arrayAux = GameObject.FindGameObjectsWithTag("SpawnPoint");
+        List<SpawnId> list = new List<SpawnId>();
+        for (int i = 0; i < arrayAux.Length; i++)
+        {
+            list.Add(arrayAux[i].GetComponent<SpawnId>()); 
+        }
+        List <SpawnId> listaAux = list
             .OrderBy(c => c.IdSpawn)
             .ToList();
         for (int i = 0; i < listaAux.Count; i++)
@@ -75,12 +80,14 @@ public class SceneController : MonoBehaviour
         currentSpawnPoint = checkpoints[currentSpawnPointId];
 
         player = Instantiate<GameObject>(prefabPersonaje);
+        _checkpointManager.PlayerReference = player.transform;
         _playerController = player.GetComponent<PlayerController>();
         player.transform.position = currentSpawnPoint.transform.position;
 
         if (_checkpointManager.IdSpawn > 0)
         {
-            player.transform.position -= new Vector3(1,0,0);
+            Vector3 exitDirection = new Vector3(_checkpointManager.ExitGateDirection.x, _checkpointManager.ExitGateDirection.y, 0); 
+            player.transform.position += exitDirection;
         }
         _checkpointManager.IdSpawn = -1;
     }
@@ -103,7 +110,7 @@ public class SceneController : MonoBehaviour
                 Debug.Log("No hay escena donde respawnear");
             }
             else { 
-                if (SceneManager.GetActiveScene().name.Equals(_checkpointManager.SceneWhereRespawn))
+                if (CheckIsActiveScene(_checkpointManager.SceneWhereRespawn))
                 {
                     currentSpawnPointAfterDeath = _checkpointManager.IdRespawn;
                     if (currentSpawnPointAfterDeath >= checkpoints.Count) 
@@ -118,10 +125,15 @@ public class SceneController : MonoBehaviour
             }
         }
         player = Instantiate<GameObject>(prefabPersonaje);
+        _checkpointManager.PlayerReference = player.transform;
         _playerController = player.GetComponent<PlayerController>();
         player.transform.position = currentSpawnPoint.transform.position;
     }
 
+    private bool CheckIsActiveScene(string scene)
+    {
+        return (SceneManager.GetActiveScene().name.Equals(scene));
+    }
 
     public void UpdateSpawnPoint(Transform newSpawn)
     {

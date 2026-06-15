@@ -1,3 +1,4 @@
+
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -46,8 +47,13 @@ public class PauseMenuHandler : MonoBehaviour
 	bool CanPauseInCurrentScene()
 	{
 		string escenaActiva = SceneManager.GetActiveScene().name;
-		// Solo permitimos pausar si NO estamos en menus principales
-		return escenaActiva != "MenuPrincipal" && escenaActiva != "Splash" ;
+        // Solo permitimos pausar si NO estamos en menus principales
+        Scene scene = SceneManager.GetSceneByName("MenusAndGameOver");
+
+        // Comprobar si la escena está cargada (incluyendo modo Additive)
+        if (scene.isLoaded) { return false; }
+
+        return escenaActiva != "MenuPrincipal" && escenaActiva != "Splash" && escenaActiva != "MenusAndGameOver" ;
 	}
 
 	bool CanRestartCurrentScene()
@@ -55,12 +61,12 @@ public class PauseMenuHandler : MonoBehaviour
 		return !isPaused && CanPauseInCurrentScene();
 	}
 
-	void RestartCurrentScene()
-	{
-		Time.timeScale = 1f;
-		Scene escenaActiva = SceneManager.GetActiveScene();
-		SceneManager.LoadScene(escenaActiva.name);
-	}
+	//void RestartCurrentScene()
+	//{
+	//	Time.timeScale = 1f;
+	//	Scene escenaActiva = SceneManager.GetActiveScene();
+	//	SceneManager.LoadScene(escenaActiva.name);
+	//}
 
 	public void TogglePause()
 	{
@@ -81,8 +87,7 @@ public class PauseMenuHandler : MonoBehaviour
 			Time.timeScale = 1f;
 			SceneManager.UnloadSceneAsync(pauseSceneName);
 
-			//UpdateActionsPlayer();
-			//UpdateActionInteract();
+			
 		}
 	}
 
@@ -98,6 +103,8 @@ public class PauseMenuHandler : MonoBehaviour
         if (context.performed)
         {
             _wantsToPause = true;
+            DiverseMenusManager _menuManager = GameManager.Instance.GetComponent<DiverseMenusManager>();
+			_menuManager._WantsToPause = true;
         }
     }
 
@@ -113,5 +120,7 @@ public class PauseMenuHandler : MonoBehaviour
 	//{
 	//	m_UI.Disable();
 	//}
+
+	
 
 }

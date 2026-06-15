@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GateData
   sceneName1: PruebaTileMap
   gateId1: 3
+  gateDirection1: {x: 1, y: 0}
   sceneName2: PruebaSiguienteNivel
   gateId2: 1
+  gateDirection2: {x: -1, y: 0}

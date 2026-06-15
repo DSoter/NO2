@@ -6,14 +6,23 @@ using UnityEngine.SceneManagement;
 
 public class CheckpointManager : MonoBehaviour
 {
-    [SerializeField] private string sceneWhereRespawn;
-    [SerializeField] public int idRespawn;
-    public int idSpawn;
-    [SerializeField] private string nextScene;
+    private string sceneWhereRespawn;
+    private int idRespawn;
+    private int idSpawn;
+    private string nextScene;
     private bool hasToSpawnPlayer;
     private bool hasToSpawnPlayerAfterDeath;
+
+    
+    private Transform playerReference;
+
+    private Vector2 enterGateDirection;
+    private Vector2 exitGateDirection;
     [SerializeField] private float gateTransitionSeconds;
 
+    private SceneController sc;
+    private DiverseMenusManager _menusManager;
+    private bool managerPaused;
 
     public string SceneWhereRespawn
     {
@@ -49,14 +58,45 @@ public class CheckpointManager : MonoBehaviour
     {
         get { return gateTransitionSeconds; }
     }
+    public Transform PlayerReference
+    {
+        get { return playerReference; }
+        set { playerReference = value; }
+    }
+    public Vector2 ExitGateDirection
+    {
+        get { return exitGateDirection; }
+        set { exitGateDirection = value; }
+    }
+    public Vector2 EnterGateDirection
+    {
+        get { return exitGateDirection; }
+        set { exitGateDirection = value; }
+    }
+    public bool ManagerPaused
+    {
+        get { return managerPaused; }
+        set { managerPaused = value; }
+    }
 
 
-    public void FinishScene(string sceneName, int newSpawnPoint)
+    public void GoNextScene(string sceneName, int newSpawnPoint)
     {
         nextScene = sceneName;
         idSpawn = newSpawnPoint;
+        StartCoroutine(NextSceneCoroutine(gateTransitionSeconds));
+        
+    }
+    private IEnumerator NextSceneCoroutine(float waitDurationSeconds)
+    {
+        
+        PlayerController playerScript= playerReference.gameObject.GetComponent<PlayerController>();
+        playerScript.ExitScene(EnterGateDirection * (-1), waitDurationSeconds);
+        yield return new WaitForSeconds(waitDurationSeconds);
         SpawnPlayer();
     }
+
+
     public void StartScene(string sceneName)
     {
         hasToSpawnPlayer = true;
@@ -70,15 +110,12 @@ public class CheckpointManager : MonoBehaviour
         {
             nextScene = SceneManager.GetActiveScene().name;
         }   
-        if (SceneManager.GetActiveScene().name.Equals(nextScene))
+        if (CheckIsActiveScene(nextScene))
         {
-            SceneController sc = FindAnyObjectByType<SceneController>();
-            if (sc is null)
+            if (ExistsSceneController())
             {
-                Debug.LogError("SceneController no encontrado");
-                return;
+                sc.SpawnPlayer();
             }
-            sc.SpawnPlayer();
         }
         else
         {            
@@ -88,7 +125,7 @@ public class CheckpointManager : MonoBehaviour
 
     }
 
-    public void RespawnPlayer()//poner nombre a respawn alpargata
+    public void RespawnPlayer()
     {
         StartCoroutine(RespawnCoroutine());
     }
@@ -97,50 +134,72 @@ public class CheckpointManager : MonoBehaviour
     {
         yield return null; 
 
-        if (sceneWhereRespawn is not null)
-        { 
+        OpenGameOver();
+
+        
+    }
+
+    public void RespawnAfterGameOver()
+    {
+
+        _menusManager.OpenMenus();//Para cerrar el menú
+
+        if (sceneWhereRespawn != null)
+        {
             if (sceneWhereRespawn.Equals(""))
-            { 
-                SceneController sc = FindAnyObjectByType<SceneController>();
-                if (sc is null)
+            {
+                if (ExistsSceneController())
                 {
-                    Debug.LogError("SceneController no encontrado");
-                    //return;
+                    sc.RespawnPlayer();
                 }
-                sc.RespawnPlayer();
             }
             else
             {
-                if (!SceneManager.GetActiveScene().name.Equals(sceneWhereRespawn))
+                if (!CheckIsActiveScene(sceneWhereRespawn))
                 {
                     hasToSpawnPlayerAfterDeath = true;
                     SceneManager.LoadScene(sceneWhereRespawn);
                 }
                 else
                 {
-                    SceneController sc = FindAnyObjectByType<SceneController>();
-                    if (sc is null)
+                    if (ExistsSceneController())
                     {
-                        Debug.LogError("SceneController no encontrado");
-                        //return;
+                        sc.RespawnPlayer();
                     }
-                    sc.RespawnPlayer();
                 }
             }
         }
         else
         {
-            SceneController sc = FindAnyObjectByType<SceneController>();
-            if (sc is null)
+            if (ExistsSceneController())
             {
-                Debug.LogError("SceneController no encontrado");
-                //return;
+                sc.RespawnPlayer();
             }
-            sc.RespawnPlayer();
         }
     }
+    private void OpenGameOver()
+    {
+        Debug.Log("Vamos a llamar a open menus");
+        managerPaused = true;
+        _menusManager = GameManager.Instance.GetComponent<DiverseMenusManager>();
+        _menusManager.MenuIndex = 0;
+        _menusManager.OpenMenus();
+        Debug.Log("Se ha llamado a openMenus");
+    }
 
-   
-
+    private bool CheckIsActiveScene(string scene)
+    {
+        return (SceneManager.GetActiveScene().name.Equals(scene));
+    }
+    private bool ExistsSceneController()
+    {
+        sc = FindAnyObjectByType<SceneController>();
+        if (sc == null)
+        {
+            Debug.LogError("SceneController no encontrado");
+            return false;
+        }
+        return true;
+    }
 
 }

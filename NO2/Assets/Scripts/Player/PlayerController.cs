@@ -58,9 +58,7 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _renderer = GetComponent<SpriteRenderer>();
 
-        Debug.Log("Antes de inicializar actions");
         InitializePrefsActions();
-        Debug.Log("Despues de inicializar actions");
         //m_Actions = new InputSystem();
 
         //PrefsToKeybinds();
@@ -72,10 +70,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-
         if(Time.timeScale == 0)
         {
-            return;
+            return;W
         }
 
         HandleAnimatorParams();
@@ -158,6 +155,8 @@ public class PlayerController : MonoBehaviour
 
     public void OnRun(InputAction.CallbackContext context)
     {
+
+        
         if (context.performed){
             _isRunning = true;
         }
@@ -250,8 +249,9 @@ public class PlayerController : MonoBehaviour
         DisposeActions();
 
         CheckpointManager cm = GameManager.Instance.GetComponent<CheckpointManager>();
+        cm.PlayerReference = transform;
         Destroy(gameObject); // Destruir primero
-        cm.RespawnPlayer(); // Llamar despu�s, desde un objeto que sobrevive
+        cm.RespawnPlayer(); // Llamar despues, desde un objeto que sobrevive
 
     }
 
@@ -318,6 +318,11 @@ public class PlayerController : MonoBehaviour
         _rollRef.action.started += OnRoll;
         //weakAttackRef.action.performed += OnWeakAttack;
         //strongAttackRef.action.performed += OnStrongAttack;
+    }
+
+    public void ExitScene(Vector2 exitDirection, float animationDurationSeconds)
+    {
+        return;
     }
 
 }

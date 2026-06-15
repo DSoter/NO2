@@ -30,6 +30,8 @@ public class InteractManager : MonoBehaviour
     [SerializeField] private InputActionReference actionReference;
     //player controller
     private PlayerController _playerController;
+
+    private string _cachedBindingText;
     private void Awake()
     {
         actionReference.action.performed += OnInteract;
@@ -42,6 +44,8 @@ public class InteractManager : MonoBehaviour
         _textoLetraImagenUI = _imagenUI.transform.GetChild(0).gameObject;
         _textoUI = _canvas.transform.GetChild(1).gameObject;
         interactables = new List<Interactable>();
+
+        RefreshInteractBinding();
     }
     private void Start()
     {
@@ -56,7 +60,7 @@ public class InteractManager : MonoBehaviour
             _canvas.SetActive(true);
             _imagenUI.GetComponent<UnityEngine.UI.Image>().sprite = _keySprite;
 
-            _textoLetraImagenUI.GetComponent<TextMeshProUGUI>().text = ObtainStringInteractBinding();
+            _textoLetraImagenUI.GetComponent<TextMeshProUGUI>().text = _cachedBindingText;
         }
         else
         {
@@ -101,20 +105,12 @@ public class InteractManager : MonoBehaviour
         actionReference.action.canceled -= OnInteract;
     }
 
-    private string ObtainStringInteractBinding()
+    public void RefreshInteractBinding()
     {
-        string json = PlayerPrefs.GetString("rebinds", "");
-        if (!string.IsNullOrEmpty(json))
-        {
-            actionReference.action.actionMap.asset.LoadBindingOverridesFromJson(json);
-        }
-
-        string text =
-            InputControlPath.ToHumanReadableString(
-                actionReference.action.bindings[0].effectivePath,
-                InputControlPath.HumanReadableStringOptions.OmitDevice
-            );
-        return text;
+        _cachedBindingText = InputControlPath.ToHumanReadableString(
+         actionReference.action.bindings[0].effectivePath,
+         InputControlPath.HumanReadableStringOptions.OmitDevice
+     );
     }
 
 

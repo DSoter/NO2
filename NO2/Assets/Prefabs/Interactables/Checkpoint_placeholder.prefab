@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5608422688076337642}
   m_Layer: 0
   m_Name: Checkpoint_placeholder
-  m_TagString: Untagged
+  m_TagString: SpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,7 +131,7 @@ BoxCollider2D:
   m_Offset: {x: 0.03862357, y: 0.09656191}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0}
     oldSize: {x: 2.93, y: 3.18}
     newSize: {x: 2.93, y: 3.18}
     adaptiveTilingThreshold: 0.5
@@ -164,4 +164,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9b1a840d2551184581abaad5c77f1eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnId
-  spawnId: 0
+  spawnid: 0

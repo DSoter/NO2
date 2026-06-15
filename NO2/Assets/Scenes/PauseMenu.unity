@@ -1454,6 +1454,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NotebookOptions
   panelVolume: {fileID: 267624978}
   panelKeybinds: {fileID: 267624974}
+  funcReset:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1631211385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1475,6 +1478,7 @@ MonoBehaviour:
   sfxSlider: {fileID: 267624975}
   soundOn: {fileID: 0}
   soundOff: {fileID: 0}
+  actionReference: {fileID: 4014850048532301077, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}
 --- !u!1 &1684827447
 GameObject:
   m_ObjectHideFlags: 0

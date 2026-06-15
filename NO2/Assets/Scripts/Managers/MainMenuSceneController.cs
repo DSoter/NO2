@@ -19,12 +19,7 @@ public class MainMenuSceneManager : MonoBehaviour
     {
         if (canvasCredits.activeSelf || canvasOptions.activeSelf)
         {
-            //if (Input.anyKeyDown)
-            //{
-            //    canvasCredits.SetActive(false);
-            //    canvasOptions.SetActive(false);
-
-            //}
+            
         }
     }
 

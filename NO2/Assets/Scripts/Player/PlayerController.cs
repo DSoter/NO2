@@ -72,12 +72,6 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-
-        if(Time.timeScale == 0)
-        {
-            return;
-        }
-
         HandleAnimatorParams();
 
         switch (_state)

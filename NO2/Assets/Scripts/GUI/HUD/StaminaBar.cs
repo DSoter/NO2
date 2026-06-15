@@ -12,22 +12,28 @@ public class StaminaBar : MonoBehaviour
 
     void Start()
     {
+
         _rectTransform = GetComponent<RectTransform>();
         _staminaMask = transform.GetChild(0).gameObject.GetComponent<Image>();
 
         _startingHeight = _rectTransform.sizeDelta.y;
+
+        UpdateMaxStamina();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        UpdateMaxStamina(_playerData.MaxStamina);
-        UpdateCurrentStamina();
+        _playerData.OnStaminaChanged += UpdateCurrentStamina;
     }
 
-    public void UpdateMaxStamina(float amount)
+    private void OnDisable()
     {
-        _rectTransform.sizeDelta = new Vector2(amount, _startingHeight);
+        _playerData.OnStaminaChanged -= UpdateCurrentStamina;
+    }
+
+    public void UpdateMaxStamina()
+    {
+        _rectTransform.sizeDelta = new Vector2(_playerData.MaxStamina, _startingHeight);
     }
 
     public void UpdateCurrentStamina()

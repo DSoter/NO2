@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class StaminaBar : MonoBehaviour
 {
-    [SerializeField] private PlayerData playerData;
+    [SerializeField] private PlayerData _playerData;
 
     private RectTransform _rectTransform;
     private Image _staminaMask;
@@ -12,26 +12,32 @@ public class StaminaBar : MonoBehaviour
 
     void Start()
     {
+
         _rectTransform = GetComponent<RectTransform>();
         _staminaMask = transform.GetChild(0).gameObject.GetComponent<Image>();
 
         _startingHeight = _rectTransform.sizeDelta.y;
+
+        UpdateMaxStamina();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        UpdateMaxStamina(playerData.MaxStamina);
-        UpdateCurrentStamina();
+        _playerData.OnStaminaChanged += UpdateCurrentStamina;
     }
 
-    public void UpdateMaxStamina(float amount)
+    private void OnDisable()
     {
-        _rectTransform.sizeDelta = new Vector2(amount, _startingHeight);
+        _playerData.OnStaminaChanged -= UpdateCurrentStamina;
+    }
+
+    public void UpdateMaxStamina()
+    {
+        _rectTransform.sizeDelta = new Vector2(_playerData.MaxStamina, _startingHeight);
     }
 
     public void UpdateCurrentStamina()
     {
-        _staminaMask.fillAmount = playerData.Stamina / playerData.MaxStamina;
+        _staminaMask.fillAmount = _playerData.Stamina / _playerData.MaxStamina;
     }
 }

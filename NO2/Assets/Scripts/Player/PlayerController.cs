@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour
     [Header("Player data")]
     [SerializeField] private PlayerData _playerData;
 
+    [SerializeField] private float _acceleration = 25f;
+
     public enum PlayerState
     {
         Move,
@@ -72,7 +74,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if(Time.timeScale == 0)
+        if (Time.timeScale == 0)
         {
             return;
         }
@@ -84,16 +86,6 @@ public class PlayerController : MonoBehaviour
             case PlayerState.Move:
 
                 UpdateLookDirection();
-
-                if (_isRunning && HasStamina())
-                {
-                    Run();
-                }
-                else
-                {
-                    Walk();   
-                }
-
                 HandleStaminaRegeneration();
 
                 break;
@@ -103,12 +95,39 @@ public class PlayerController : MonoBehaviour
                 break;
             case PlayerState.Dead:
 
-                _rigidbody.linearVelocity = Vector2.zero;
-
-                return;
+                break;
 
         }
 
+    }
+
+    private void FixedUpdate()
+    {
+
+        switch (_state)
+        {
+            case PlayerState.Move:
+
+                if (_isRunning && HasStamina())
+                {
+                    Run();
+                }
+                else
+                {
+                    Walk();
+                }
+
+                break;
+            case PlayerState.Roll:
+
+                // La velocidad del roll se aplica como impulsos puntuales dentro de RollCoroutine,
+                // no hace falta aplicar nada continuo aqui.
+                break;
+            case PlayerState.Dead:
+
+                _rigidbody.linearVelocity = Vector2.zero;
+                break;
+        }
     }
 
     private void Run() 
@@ -119,13 +138,26 @@ public class PlayerController : MonoBehaviour
 
         }
 
-        _rigidbody.linearVelocity = _playerData.RunningSpeed * _moveDirection;
+        ApplyMovementForce(_playerData.RunningSpeed);
 
     }
 
     private void Walk()
     {
-        _rigidbody.linearVelocity = _playerData.WalkingSpeed * _moveDirection;
+        ApplyMovementForce(_playerData.WalkingSpeed);
+    }
+
+    private void ApplyMovementForce(float targetSpeed)
+    {
+        Vector2 targetVelocity = targetSpeed * _moveDirection;
+        Vector2 velocityChange = targetVelocity - _rigidbody.linearVelocity;
+
+        _rigidbody.AddForce(velocityChange * _acceleration, ForceMode2D.Force);
+    }
+    private void SetVelocityInstant(Vector2 targetVelocity)
+    {
+        Vector2 velocityChange = targetVelocity - _rigidbody.linearVelocity;
+        _rigidbody.AddForce(velocityChange, ForceMode2D.Impulse);
     }
 
     private void HandleStaminaRegeneration()
@@ -185,11 +217,11 @@ public class PlayerController : MonoBehaviour
         UpdateLookDirection();
         ConsumeStamina(_playerData.RollingStaminaCost);
 
-        _rigidbody.linearVelocity = _playerData.IniRollingSpeed * _lookDirection;
+        SetVelocityInstant(_playerData.IniRollingSpeed * _lookDirection);
         yield return new WaitForSeconds(0.3f); // Change to PlayerData
 
 
-        _rigidbody.linearVelocity = _playerData.EndRollingSpeed * _lookDirection;
+        SetVelocityInstant(_playerData.EndRollingSpeed * _lookDirection);
         yield return new WaitForSeconds(0.2f); // Change to PlayerData
 
         _state = PlayerState.Move;

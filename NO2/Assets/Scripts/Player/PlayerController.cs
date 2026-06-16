@@ -4,6 +4,8 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+// AYUDA PORFAVOR
+
 public class PlayerController : MonoBehaviour
 {
 

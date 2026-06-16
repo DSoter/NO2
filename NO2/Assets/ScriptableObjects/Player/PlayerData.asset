@@ -27,5 +27,7 @@ MonoBehaviour:
   runningSpeed: 5
   iniRollingSpeed: 8
   endRollingSpeed: 2
+  iniRollingSeconds: 0.4
+  endRollingSeconds: 0.3
   basicAttackDamage: 0
   chargeAttackDamage: 0

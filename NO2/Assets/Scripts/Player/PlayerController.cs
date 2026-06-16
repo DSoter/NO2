@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 _moveDirection = new Vector2(0,0);
     private Vector2 _lookDirection = new Vector2(1, 0);
     private float _staminaRegenTimer = 0;
+    private bool _areInputsEnabled = true;
     private bool _isRunning = false;
     private bool canRoll => _state != PlayerState.Roll && HasStamina();
     private PlayerState _state = PlayerState.Move;
@@ -120,8 +121,6 @@ public class PlayerController : MonoBehaviour
                 break;
             case PlayerState.Roll:
 
-                // La velocidad del roll se aplica como impulsos puntuales dentro de RollCoroutine,
-                // no hace falta aplicar nada continuo aqui.
                 break;
             case PlayerState.Dead:
 
@@ -176,11 +175,11 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && _areInputsEnabled)
         {
             _moveDirection = context.ReadValue<Vector2>();
         }
-        if (context.canceled)
+        if (context.canceled && _areInputsEnabled)
         {
             _moveDirection = Vector2.zero;
         }
@@ -191,11 +190,12 @@ public class PlayerController : MonoBehaviour
     {
 
         
-        if (context.performed){
+        if (context.performed && _areInputsEnabled)
+        {
             _isRunning = true;
         }
 
-        if (context.canceled)
+        if (context.canceled && _areInputsEnabled)
         {
             _isRunning = false;
         }
@@ -204,7 +204,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnRoll(InputAction.CallbackContext context)
     {
-        if (context.started && canRoll)
+        if (context.started && canRoll && _areInputsEnabled)
         {
             StartCoroutine(RollCoroutine());
         }
@@ -218,11 +218,13 @@ public class PlayerController : MonoBehaviour
         ConsumeStamina(_playerData.RollingStaminaCost);
 
         SetVelocityInstant(_playerData.IniRollingSpeed * _lookDirection);
-        yield return new WaitForSeconds(0.3f); // Change to PlayerData
+        yield return new WaitForSeconds(_playerData.IniRollingSeconds);
 
 
         SetVelocityInstant(_playerData.EndRollingSpeed * _lookDirection);
-        yield return new WaitForSeconds(0.2f); // Change to PlayerData
+        yield return new WaitForSeconds(_playerData.EndRollingSeconds);
+
+         
 
         _state = PlayerState.Move;
     }
@@ -321,6 +323,7 @@ public class PlayerController : MonoBehaviour
         _moveRef = InputActionReference.Create(playerMap.FindAction("Move"));
         _runRef = InputActionReference.Create(playerMap.FindAction("Run"));
         _rollRef = InputActionReference.Create(playerMap.FindAction("Roll"));
+        
         _weakAttackRef = InputActionReference.Create(playerMap.FindAction("WeakAttack"));
         _strongAttackRef = InputActionReference.Create(playerMap.FindAction("StrongAttack"));
 
@@ -356,7 +359,21 @@ public class PlayerController : MonoBehaviour
 
     public void ExitScene(Vector2 exitDirection, float animationDurationSeconds)
     {
-        return;
+        StartCoroutine(ExitSceneCoroutine(exitDirection, animationDurationSeconds));
     }
 
+    private IEnumerator ExitSceneCoroutine(Vector2 exitDirection, float animationDurationSeconds)
+    {
+        _state = PlayerState.Move;
+        _isRunning = false;
+
+        _areInputsEnabled = false;
+
+        _moveDirection = exitDirection.normalized;
+        yield return new WaitForSeconds(animationDurationSeconds);
+        _moveDirection = Vector2.zero;
+
+        _areInputsEnabled = true;
+
+    }
 }

@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private Animator _animator;
     private SpriteRenderer _renderer;
+    private Collider2D _collider;
 
     
 
@@ -367,12 +368,14 @@ public class PlayerController : MonoBehaviour
         _state = PlayerState.Move;
         _isRunning = false;
 
+        _collider.enabled = false;
         _areInputsEnabled = false;
 
         _moveDirection = exitDirection.normalized;
         yield return new WaitForSeconds(animationDurationSeconds);
         _moveDirection = Vector2.zero;
 
+        _collider.enabled = true;
         _areInputsEnabled = true;
 
     }

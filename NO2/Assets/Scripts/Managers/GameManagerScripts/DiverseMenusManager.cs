@@ -5,19 +5,32 @@ using UnityEngine.SceneManagement;
 
 public class DiverseMenusManager : MonoBehaviour
 {
-    private int menuIndex;
 
-    private int menuIndexAux;
 
     //GameOver 0
     //Map 1
     //Bandges 2
     //Flowers 3
 
-    public int MenuIndex
+
+    private MenuType _menuType;
+    private MenuType _futureMenuType;
+
+    public MenuType GetMenuType()
     {
-        get { return menuIndex; }
-        set { menuIndex = value; }
+        return _menuType;
+    }
+    public void SetMenuType(MenuType menuType)
+    {
+        _menuType= menuType;
+    }
+
+    public enum MenuType
+    {
+        Gameover,
+        Map,
+        Badges,
+        Flowers
     }
 
 
@@ -87,9 +100,10 @@ public class DiverseMenusManager : MonoBehaviour
 
     public void ChangeMenus()
     {
-        if (!_isOpen || menuIndex == menuIndexAux)//Si no hay menu abierto o el menú que está abierto es el mismo se llama a open menus 
+        //if (!CanOpenInCurrentScene()) { return; }
+        if (!_isOpen || _menuType == _futureMenuType)//Si no hay menu abierto o el menú que está abierto es el mismo se llama a open menus 
         {
-            menuIndex = menuIndexAux;
+            _menuType = _futureMenuType;
             OpenMenus();    
         }
         else
@@ -100,21 +114,37 @@ public class DiverseMenusManager : MonoBehaviour
                 Debug.Log("No se ha encontrado el menu handler");
                 return;
             }
-            menuIndex = menuIndexAux; //esto no hace falta
-            switch (menuIndexAux)
+            if (_menuType == MenuType.Gameover)
+            {
+                Debug.Log("Se ha intentado abrir un menú estando gameOver, no se cierra");
+            }
+            _menuType = _futureMenuType; //esto no hace falta
+            switch (_menuType)
             {
                 
-                case 1:
+                case MenuType.Map:
                     mh.OpenMapMenu(); break;
-                case 2:
+                case MenuType.Badges:
                     mh.OpenBadgesMenu(); break;
-                case 3:
+                case MenuType.Flowers:
                     mh.OpenFlowerMenu(); break;
 
             }
         }
 
     }
+
+    //private bool CanOpenInCurrentScene()
+    //{
+    //    string escenaActiva = SceneManager.GetActiveScene().name;
+    //    // Solo permitimos pausar si NO estamos en menus principales
+    //    Scene scene = SceneManager.GetSceneByName("PauseMenu");
+
+    //    // Comprobar si la escena está cargada (incluyendo modo Additive)
+    //    if (scene.isLoaded) { return false; }
+
+    //    return escenaActiva != "MenuPrincipal" && escenaActiva != "Splash";
+    //}
 
     public void QuitToMainMenu()
     {
@@ -150,7 +180,7 @@ public class DiverseMenusManager : MonoBehaviour
     {
         if (context.performed)
         {
-            menuIndexAux = 1;
+            _futureMenuType = MenuType.Map;
             ChangeMenus();
         }
     }
@@ -159,7 +189,7 @@ public class DiverseMenusManager : MonoBehaviour
     {
         if (context.performed)
         {
-            menuIndexAux = 2;
+            _futureMenuType = MenuType.Flowers;
             ChangeMenus();
         }
     }
@@ -167,7 +197,7 @@ public class DiverseMenusManager : MonoBehaviour
     {
         if (context.performed)
         {
-            menuIndexAux = 3;
+            _futureMenuType = MenuType.Badges;
             ChangeMenus();
         }
     }
@@ -178,7 +208,7 @@ public class DiverseMenusManager : MonoBehaviour
             if (_isOpen)
             {
                 MenusHandler mh = FindAnyObjectByType<MenusHandler>();
-                switch (menuIndex)
+                switch (_menuType)
                 {
                     //1Mapa
                     //2Badge
@@ -188,14 +218,14 @@ public class DiverseMenusManager : MonoBehaviour
                     //1Flower
                     //2Mapa
                     //3Badge
-                    case 1:
-                        menuIndex = 3;
+                    case MenuType.Map:
+                        _menuType= MenuType.Flowers;
                         mh.OpenFlowerMenu(); break;
-                    case 2:
-                        menuIndex = 1;
+                    case MenuType.Badges:
+                        _menuType=MenuType.Map;
                         mh.OpenMapMenu(); break;
-                    case 3:
-                        menuIndex = 2;
+                    case MenuType.Flowers:
+                        _menuType=MenuType.Badges;
                         mh.OpenBadgesMenu(); break;
 
                 }
@@ -209,7 +239,7 @@ public class DiverseMenusManager : MonoBehaviour
             if (_isOpen)
             {
                 MenusHandler mh = FindAnyObjectByType<MenusHandler>();
-                switch (menuIndex)
+                switch (_menuType)
                 {
                     //1Mapa
                     //2Badge
@@ -219,14 +249,14 @@ public class DiverseMenusManager : MonoBehaviour
                     //1Badge
                     //2Flower
                     //3Mapa
-                    case 1:
-                        menuIndex = 2;
+                    case MenuType.Map:
+                        _menuType = MenuType.Badges;
                         mh.OpenBadgesMenu(); break;
-                    case 2:
-                        menuIndex = 3;
+                    case MenuType.Badges:
+                        _menuType = MenuType.Flowers;
                         mh.OpenFlowerMenu(); break;
-                    case 3:
-                        menuIndex = 1;
+                    case MenuType.Flowers:
+                        _menuType = MenuType.Map;
                         mh.OpenMapMenu(); break;
 
                 }

@@ -20,9 +20,12 @@ public class CheckpointManager : MonoBehaviour
     private Vector2 exitGateDirection;
     [SerializeField] private float gateTransitionSeconds;
 
+
     private SceneController sc;
     private DiverseMenusManager _menusManager;
     private bool managerPaused;
+
+    private bool cameraLockedPlayer;
 
     public string SceneWhereRespawn
     {
@@ -79,6 +82,12 @@ public class CheckpointManager : MonoBehaviour
         set { managerPaused = value; }
     }
 
+    public bool CameraLockedPlayer
+    {
+        get { return  cameraLockedPlayer; }
+        set { cameraLockedPlayer = value; }
+    }
+
 
     public void GoNextScene(string sceneName, int newSpawnPoint)
     {
@@ -132,12 +141,17 @@ public class CheckpointManager : MonoBehaviour
 
     private IEnumerator RespawnCoroutine()
     {
-        yield return null; 
+        yield return null;
 
         OpenGameOver();
 
         
+
+        
     }
+
+
+
 
     public void RespawnAfterGameOver()
     {
@@ -179,10 +193,9 @@ public class CheckpointManager : MonoBehaviour
     }
     private void OpenGameOver()
     {
-        Debug.Log("Vamos a llamar a open menus");
         managerPaused = true;
         _menusManager = GameManager.Instance.GetComponent<DiverseMenusManager>();
-        _menusManager.MenuIndex = 0;
+        _menusManager.SetMenuType(DiverseMenusManager.MenuType.Gameover);
         _menusManager.OpenMenus();
         Debug.Log("Se ha llamado a openMenus");
     }

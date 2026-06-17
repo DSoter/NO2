@@ -43,6 +43,9 @@ public class PlayerController : MonoBehaviour
     [Header("Player data")]
     [SerializeField] private PlayerData _playerData;
 
+    [Space(3)]
+    [Header("Animation durations")]
+    [SerializeField] private float deathAnimationSeconds = 2f;
     [SerializeField] private float _acceleration = 25f;
 
     public enum PlayerState
@@ -272,12 +275,15 @@ public class PlayerController : MonoBehaviour
     {
         if (deathSound != null)
             GameManager.Instance.audioManager.PlaySound(deathSound);
-        StartCoroutine(WaitAndKill(0.5f));
+        StartCoroutine(WaitAndKill(deathAnimationSeconds));
     }
     IEnumerator WaitAndKill(float segundos)
     {
         SetDead(true);
         _renderer.color = Color.red;
+        CheckpointManager cm = GameManager.Instance.GetComponent<CheckpointManager>();
+
+        cm.CameraLockedPlayer = true;
 
         yield return new WaitForSeconds(segundos);
 
@@ -285,9 +291,10 @@ public class PlayerController : MonoBehaviour
 
         DisposeActions();
 
-        CheckpointManager cm = GameManager.Instance.GetComponent<CheckpointManager>();
+        
         cm.PlayerReference = transform;
         Destroy(gameObject); // Destruir primero
+        cm.CameraLockedPlayer = false;
         cm.RespawnPlayer(); // Llamar despues, desde un objeto que sobrevive
 
     }

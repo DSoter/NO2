@@ -17,6 +17,9 @@ public class SceneController : MonoBehaviour
     [Header("Sonidos")]
     [SerializeField] private AudioClip theme, deathSound;
 
+    [Header("Transition")]
+    [SerializeField] private TransitionController transition;
+
     //Cosas jugador
     private GameObject player;
     private PlayerController _playerController;

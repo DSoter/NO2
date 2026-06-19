@@ -3,7 +3,7 @@ using UnityEngine;
 public class TransitionController : MonoBehaviour
 {
 
-    private Animator _animator;
+    private Animator _animator; 
 
     void Awake()
     {
@@ -13,6 +13,7 @@ public class TransitionController : MonoBehaviour
 
     public void StartTransition(Vector2 direction, bool isOut)
     {
+        Debug.Log(Time.realtimeSinceStartup);
         if (isOut)
         {
             _animator.SetFloat("DirX", direction.x);

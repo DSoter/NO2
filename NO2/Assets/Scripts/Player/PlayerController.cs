@@ -367,22 +367,33 @@ public class PlayerController : MonoBehaviour
 
     public void ExitScene(Vector2 exitDirection, float animationDurationSeconds)
     {
+        
         StartCoroutine(ExitSceneCoroutine(exitDirection, animationDurationSeconds));
     }
 
     private IEnumerator ExitSceneCoroutine(Vector2 exitDirection, float animationDurationSeconds)
     {
+        Debug.Log(exitDirection);
+        
         _state = PlayerState.Move;
         _isRunning = false;
 
-        _collider.enabled = false;
+        if(_collider != null)
+        {
+            _collider.enabled = false;
+        }
+        
         _areInputsEnabled = false;
 
         _moveDirection = exitDirection.normalized;
         yield return new WaitForSeconds(animationDurationSeconds);
         _moveDirection = Vector2.zero;
 
-        _collider.enabled = true;
+        if (_collider != null)
+        {
+            _collider.enabled = true;
+        }
+
         _areInputsEnabled = true;
 
     }

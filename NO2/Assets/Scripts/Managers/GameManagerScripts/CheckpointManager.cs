@@ -18,7 +18,7 @@ public class CheckpointManager : MonoBehaviour
 
     private Vector2 enterGateDirection;
     private Vector2 exitGateDirection;
-    [SerializeField] private float gateTransitionSeconds;
+    [SerializeField] private float gateTransitionSeconds = 0.5f;
 
 
     private SceneController sc;
@@ -73,8 +73,8 @@ public class CheckpointManager : MonoBehaviour
     }
     public Vector2 EnterGateDirection
     {
-        get { return exitGateDirection; }
-        set { exitGateDirection = value; }
+        get { return enterGateDirection; }
+        set { enterGateDirection = value; }
     }
     public bool ManagerPaused
     {
@@ -98,10 +98,19 @@ public class CheckpointManager : MonoBehaviour
     }
     private IEnumerator NextSceneCoroutine(float waitDurationSeconds)
     {
-        
+        TransitionController tc = FindAnyObjectByType<TransitionController>();
+        if (tc != null)
+        {
+            tc.StartTransition(enterGateDirection, true);
+        }
+
+
         PlayerController playerScript= playerReference.gameObject.GetComponent<PlayerController>();
-        playerScript.ExitScene(EnterGateDirection * (-1), waitDurationSeconds);
+        playerScript.ExitScene(enterGateDirection * (-1), waitDurationSeconds);
+
+
         yield return new WaitForSeconds(waitDurationSeconds);
+
         SpawnPlayer();
     }
 
@@ -197,7 +206,6 @@ public class CheckpointManager : MonoBehaviour
         _menusManager = GameManager.Instance.GetComponent<DiverseMenusManager>();
         _menusManager.SetMenuType(DiverseMenusManager.MenuType.Gameover);
         _menusManager.OpenMenus();
-        Debug.Log("Se ha llamado a openMenus");
     }
 
     private bool CheckIsActiveScene(string scene)

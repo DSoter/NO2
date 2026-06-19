@@ -9,14 +9,52 @@ public class GeneralKeybindsManager : MonoBehaviour
     public void SaveDefaultKeybinds()
     {   
         popUp.Show(
-            "¿Deseas sobrescribir las keybinds por defecto?",
-            onConfirm: () => PlayerPrefs.SetString(
-            "defaultRebinds",
-            _inputSystemReference.SaveBindingOverridesAsJson()
-        ),
+            "¿Desas aplicar los cambios?" +
+            "Se borrará la configuración anterior",
+            onConfirm: () => ApplyChanges()
+            ,
             onCancel: () => Debug.Log("Cancelado")
         );
         
+    }
+
+    public void ApplyChanges()
+    {
+        SaveAuxBindings();
+    }
+    public void SaveAuxBindings() {
+
+        PlayerPrefs.SetString(
+            "auxRebinds",
+            _inputSystemReference.SaveBindingOverridesAsJson()
+        );
+
+    }
+    public void ApplyAuxBindings()
+    {
+        json = PlayerPrefs.GetString("auxRebinds", "");
+        if (!string.IsNullOrEmpty(json))
+        {
+            _inputSystemReference.LoadBindingOverridesFromJson(json);
+        }
+        PlayerPrefs.SetString(
+           "rebinds",
+           _inputSystemReference.SaveBindingOverridesAsJson()
+       );
+        RebindButton[] allButtons = FindObjectsByType<RebindButton>();
+        foreach (RebindButton other in allButtons)
+        {
+            other.UpdateDisplayText();
+
+        }
+
+        CompositeButton[] compositeButtons = FindObjectsByType<CompositeButton>();
+        foreach (CompositeButton other in compositeButtons)
+        {
+            other.UpdateDisplayTextComposite();
+        }
+        
+
     }
     public void ResetDefaultKeybinds()
     {

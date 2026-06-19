@@ -6,8 +6,8 @@ public class NotebookOptions : MonoBehaviour
 {
     [SerializeField] private GameObject panelVolume;
     [SerializeField] private GameObject panelKeybinds;
-    [SerializeField] private UnityEvent funcReset;
-
+    [SerializeField] private UnityEvent saveAuxKeybinds;
+    [SerializeField] private UnityEvent applyAuxKeybinds;
     private GUIOptionsReminder _optionsReminder;
 
     private void Awake()
@@ -17,7 +17,8 @@ public class NotebookOptions : MonoBehaviour
 
     public void InitializeOptions()
     {
-        funcReset.Invoke();
+        applyAuxKeybinds.Invoke();
+        saveAuxKeybinds.Invoke();
         switch (_optionsReminder.LastNotebookOption)
         {
             case 0:
@@ -46,9 +47,9 @@ public class NotebookOptions : MonoBehaviour
 
     public void OpenKeybinds()
     {
+        saveAuxKeybinds.Invoke();
         _optionsReminder.LastNotebookOption = 1;
         PlayerPrefs.SetInt("LastNotebookOption", 1);
-        funcReset.Invoke();
 
         panelKeybinds.SetActive(true);
         CloseVolume();
@@ -56,6 +57,7 @@ public class NotebookOptions : MonoBehaviour
 
     public void CloseKeybinds()
     {
+        applyAuxKeybinds.Invoke();
         panelKeybinds.SetActive(false);
         PlayerPrefs.Save(); // guarda en disco
     }

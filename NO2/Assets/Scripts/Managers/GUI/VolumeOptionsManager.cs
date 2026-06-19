@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -15,6 +16,7 @@ public class VolumeOptionsManager : MonoBehaviour
     public GameObject soundOn;
     public GameObject soundOff;
     [SerializeField] private InputActionReference actionReference;
+    [SerializeField] private UnityEvent applyAuxKeybinds;
     private bool _wantsToExit;
 
 
@@ -66,6 +68,7 @@ public class VolumeOptionsManager : MonoBehaviour
 
     public void CloseOptions()
     {
+        applyAuxKeybinds.Invoke();
         optionsPanel.SetActive(false);
         PlayerPrefs.Save(); // guarda en disco
     }

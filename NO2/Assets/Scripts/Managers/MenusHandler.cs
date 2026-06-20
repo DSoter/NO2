@@ -85,14 +85,6 @@ public class MenusHandler : MonoBehaviour
         _mapCanvas.SetActive(false);
     }
 
-    public void PushedE(DiverseMenusManager.MenuType prevMenu, DiverseMenusManager.MenuType nextMenu)
-    {
 
-    }
-
-    public void PushedQ(DiverseMenusManager.MenuType prevMenu, DiverseMenusManager.MenuType nextMenu)
-    {
-
-    }
 
 }

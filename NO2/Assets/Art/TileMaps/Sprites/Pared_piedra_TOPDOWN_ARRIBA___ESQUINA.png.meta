@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 760053d934cccdc47a0e9eae6e0f2eb3
+guid: 358707ef811fca147ae58b6d9a352921
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8406649974681788724
-    second: Pared_piedra_izq_0
+      213: -3501423347884691026
+    second: Pared_piedra_TOPDOWN_ARRIBA___ESQUINA_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 160
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,23 +100,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Pared_piedra_izq_0
+      name: Pared_piedra_TOPDOWN_ARRIBA___ESQUINA_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 100
-        height: 320
+        y: 160
+        width: 160
+        height: 160
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 43164f39c9b6aa470800000000000000
-      internalID: 8406649974681788724
+      spriteID: ea1f2153402786fc0800000000000000
+      internalID: -3501423347884691026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pared_piedra_TOPDOWN_ARRIBA___ESQUINA_1
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 160
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c657782760c2844e9966e3fd0cc62c8
+      internalID: 1102155689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pared_piedra_TOPDOWN_ARRIBA___ESQUINA_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfe6430ae6d5b1d4d9d3901d169a85d1
+      internalID: -1420028063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pared_piedra_TOPDOWN_ARRIBA___ESQUINA_3
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d42c275cf76c7564e87b84d46c99cd94
+      internalID: -33421162
       vertices: []
       indices: 
       edges: []
@@ -125,7 +191,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 0a1c586cabdd85141ad7d7e9cf6b572c
     internalID: 0
     vertices: []
     indices: 
@@ -133,9 +199,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":160.0,"y":160.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Pared_piedra_izq_0: 8406649974681788724
+      Pared_piedra_TOPDOWN_ARRIBA___ESQUINA_0: -3501423347884691026
+      Pared_piedra_TOPDOWN_ARRIBA___ESQUINA_1: 1102155689
+      Pared_piedra_TOPDOWN_ARRIBA___ESQUINA_2: -1420028063
+      Pared_piedra_TOPDOWN_ARRIBA___ESQUINA_3: -33421162
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

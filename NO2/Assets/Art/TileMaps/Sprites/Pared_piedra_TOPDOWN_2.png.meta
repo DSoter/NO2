@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 263311dab05cfa4498ff3767e385c48c
+guid: a348b814701f8ff4eb0331155565defd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1505441444419915721
-    second: Pared_piedra_izq2_0
+      213: 77190828883396816
+    second: Pared_piedra_TOPDOWN_2_0
+  - first:
+      213: -64453300250899383
+    second: Pared_piedra_TOPDOWN_2_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,23 +103,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Pared_piedra_izq2_0
+      name: Pared_piedra_TOPDOWN_2_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 101
-        height: 320
+        y: 160
+        width: 160
+        height: 160
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9cfcccc740764e410800000000000000
-      internalID: 1505441444419915721
+      spriteID: 0d8438f56ac321100800000000000000
+      internalID: 77190828883396816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pared_piedra_TOPDOWN_2_1
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 160
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94c81fd90140b1ff0800000000000000
+      internalID: -64453300250899383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pared_piedra_TOPDOWN_2_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51e42eb3f6654ff41a1b7a59ac45db89
+      internalID: -724577583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pared_piedra_TOPDOWN_2_3
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d7a43f9b1caf554092bb7cc23123bf6
+      internalID: -1811110996
       vertices: []
       indices: 
       edges: []
@@ -125,7 +194,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 26369142af3179948ad93a20ff326369
     internalID: 0
     vertices: []
     indices: 
@@ -133,9 +202,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":160.0,"y":160.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Pared_piedra_izq2_0: 1505441444419915721
+      Pared_piedra_TOPDOWN_2_0: 77190828883396816
+      Pared_piedra_TOPDOWN_2_1: -64453300250899383
+      Pared_piedra_TOPDOWN_2_2: -724577583
+      Pared_piedra_TOPDOWN_2_3: -1811110996
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

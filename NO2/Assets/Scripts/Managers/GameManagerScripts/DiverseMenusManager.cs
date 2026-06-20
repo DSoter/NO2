@@ -207,27 +207,35 @@ public class DiverseMenusManager : MonoBehaviour
         {
             if (_isOpen)
             {
+
                 MenusHandler mh = FindAnyObjectByType<MenusHandler>();
-                switch (_menuType)
-                {
-                    //1Mapa
-                    //2Badge
-                    //3Flower
+                PanelWipeSwitcher pw = FindAnyObjectByType<PanelWipeSwitcher>();
+                if (!pw.IsTransitioning) {
+                    pw.OnSwitchLeft();
+                    switch (_menuType)
+                    {
+                        //1Mapa
+                        //2Badge
+                        //3Flower
 
-                    //Al restar uno se queda
-                    //1Flower
-                    //2Mapa
-                    //3Badge
-                    case MenuType.Map:
-                        _menuType= MenuType.Flowers;
-                        mh.OpenFlowerMenu(); break;
-                    case MenuType.Badges:
-                        _menuType=MenuType.Map;
-                        mh.OpenMapMenu(); break;
-                    case MenuType.Flowers:
-                        _menuType=MenuType.Badges;
-                        mh.OpenBadgesMenu(); break;
+                        //Al restar uno se queda
+                        //1Flower
+                        //2Mapa
+                        //3Badge
+                        case MenuType.Map:
+                            _menuType= MenuType.Flowers;
+                            //mh.OpenFlowerMenu();
+                            break;
+                        case MenuType.Badges:
+                            _menuType=MenuType.Map;
+                            //mh.OpenMapMenu();
+                            break;
+                        case MenuType.Flowers:
+                            _menuType=MenuType.Badges;
+                            //mh.OpenBadgesMenu(); 
+                            break;
 
+                    } 
                 }
             }
         }
@@ -239,26 +247,34 @@ public class DiverseMenusManager : MonoBehaviour
             if (_isOpen)
             {
                 MenusHandler mh = FindAnyObjectByType<MenusHandler>();
-                switch (_menuType)
+                PanelWipeSwitcher pw = FindAnyObjectByType<PanelWipeSwitcher>();
+                if (!pw.IsTransitioning)
                 {
-                    //1Mapa
-                    //2Badge
-                    //3Flower
+                    pw.OnSwitchRight();
+                    switch (_menuType)
+                    {
+                        //1Mapa
+                        //2Badge
+                        //3Flower
 
-                    //Al sumar uno se queda
-                    //1Badge
-                    //2Flower
-                    //3Mapa
-                    case MenuType.Map:
-                        _menuType = MenuType.Badges;
-                        mh.OpenBadgesMenu(); break;
-                    case MenuType.Badges:
-                        _menuType = MenuType.Flowers;
-                        mh.OpenFlowerMenu(); break;
-                    case MenuType.Flowers:
-                        _menuType = MenuType.Map;
-                        mh.OpenMapMenu(); break;
+                        //Al sumar uno se queda
+                        //1Badge
+                        //2Flower
+                        //3Mapa
+                        case MenuType.Map:
+                            _menuType = MenuType.Badges;
+                            //mh.OpenBadgesMenu(); 
+                            break;
+                        case MenuType.Badges:
+                            _menuType = MenuType.Flowers;
+                            //mh.OpenFlowerMenu();
+                            break;
+                        case MenuType.Flowers:
+                            _menuType = MenuType.Map;
+                            //mh.OpenMapMenu();
+                            break;
 
+                    }
                 }
             }
         }

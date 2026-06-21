@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 66745211638193863}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0.53, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -257,7 +257,7 @@ GameObject:
   - component: {fileID: 849091717492364470}
   - component: {fileID: 6281903768332715252}
   - component: {fileID: 1510909487537404138}
-  - component: {fileID: 4314370141843148222}
+  - component: {fileID: 3006558068619297952}
   m_Layer: 0
   m_Name: WeakAttack
   m_TagString: Untagged
@@ -398,7 +398,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4314370141843148222
+--- !u!114 &3006558068619297952
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -407,9 +407,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5613454988008061927}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87ffa6a969177c747803f5ece880531e, type: 3}
+  m_Script: {fileID: 11500000, guid: 0db8dbdcf787e8249b1f625be2d3141d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RotatingTest
+  m_EditorClassIdentifier: '::'
 --- !u!1 &7308374800647762407
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,8 +524,10 @@ MonoBehaviour:
   _inputSystemReference: {fileID: -944628639613478452, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}
   deathSound: {fileID: 8300000, guid: 635a0038b9b863f409947d5d641440f1, type: 3}
   _playerData: {fileID: 11400000, guid: 707aa1a40a1bb064193fd4f6f25fcc6a, type: 2}
+  _weakAttack: {fileID: 3006558068619297952}
   deathAnimationSeconds: 0.5
   _acceleration: 25
+  _attackImpulse: 2
 --- !u!50 &1363480059194287446
 Rigidbody2D:
   serializedVersion: 5

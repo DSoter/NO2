@@ -24,7 +24,7 @@ MonoBehaviour:
     - {fileID: -388173907, guid: 99bf375203b40e242a01fbb9d77a53eb, type: 3}
     - {fileID: 1767072065, guid: 99bf375203b40e242a01fbb9d77a53eb, type: 3}
     - {fileID: -1963770790, guid: 99bf375203b40e242a01fbb9d77a53eb, type: 3}
-    - {fileID: 0}
+    - {fileID: -955603536, guid: 99bf375203b40e242a01fbb9d77a53eb, type: 3}
     - {fileID: -1852360433, guid: 99bf375203b40e242a01fbb9d77a53eb, type: 3}
     - {fileID: -1010411381, guid: 99bf375203b40e242a01fbb9d77a53eb, type: 3}
     m_GameObject: {fileID: 0}

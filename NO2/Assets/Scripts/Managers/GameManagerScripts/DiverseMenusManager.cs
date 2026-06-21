@@ -244,7 +244,7 @@ public class DiverseMenusManager : MonoBehaviour
         }
     }
 
-    private void SlideRight()
+    public void SlideRight()
     {
         MenusHandler mh = FindAnyObjectByType<MenusHandler>();
         PanelWipeSwitcher pw = FindAnyObjectByType<PanelWipeSwitcher>();
@@ -277,7 +277,7 @@ public class DiverseMenusManager : MonoBehaviour
             }
         }
     }
-    private void SlideLeft()
+    public void SlideLeft()
     {
         MenusHandler mh = FindAnyObjectByType<MenusHandler>();
         PanelWipeSwitcher pw = FindAnyObjectByType<PanelWipeSwitcher>();

@@ -85,6 +85,17 @@ public class MenusHandler : MonoBehaviour
         _mapCanvas.SetActive(false);
     }
 
+    public void SlideLeft()
+    {
+        DiverseMenusManager dm = FindAnyObjectByType<DiverseMenusManager>();
+        dm.SlideLeft();
+    }
+    public void SlideRight()
+    {
+        DiverseMenusManager dm = FindAnyObjectByType<DiverseMenusManager>();
+        dm.SlideRight();
+    }
+
 
 
 }

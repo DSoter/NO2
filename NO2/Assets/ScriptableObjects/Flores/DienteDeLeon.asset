@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1a9929946df054b932e35efe7f95e0, type: 3}
-  m_Name: FlorFuego
+  m_Name: DienteDeLeon
   m_EditorClassIdentifier: Assembly-CSharp::Flower
-  objectName: Flor de fuego
-  description: La "Papaver rhoeas" posee la esencia del sol causando quemaduras a
-    quien ose tocarla
-  flowerIcon: {fileID: 21300000, guid: e21bc70882a4e444aa1b307a90b98033, type: 3}
+  objectName: Flor volatil
+  description: La "Taraxacum officinale" permite causar rafagas de viento donde pasa
+  flowerIcon: {fileID: 21300000, guid: b4d3bab3f8cce5c44b64df1b01c32484, type: 3}
   basicAttack:
     m_PersistentCalls:
       m_Calls: []

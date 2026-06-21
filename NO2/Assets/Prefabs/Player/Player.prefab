@@ -326,7 +326,7 @@ MonoBehaviour:
   _inputSystemReference: {fileID: -944628639613478452, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}
   deathSound: {fileID: 8300000, guid: 635a0038b9b863f409947d5d641440f1, type: 3}
   _playerData: {fileID: 11400000, guid: 707aa1a40a1bb064193fd4f6f25fcc6a, type: 2}
-  deathAnimationSeconds: 0.5
+  deathAnimationSeconds: 1
   _acceleration: 25
 --- !u!50 &1363480059194287446
 Rigidbody2D:

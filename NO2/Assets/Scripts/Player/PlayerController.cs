@@ -263,6 +263,7 @@ public class PlayerController : MonoBehaviour
 
             // Apply small force with the attack direction
             //_rigidbody.linearVelocity = _rigidbody.linearVelocity/2;
+            _rigidbody.linearVelocity = Vector2.zero;
             _rigidbody.AddForce(_lookDirection * _attackImpulse, ForceMode2D.Impulse);
 
             // Set the attack direction in the animator

@@ -278,6 +278,9 @@ public class PlayerController : MonoBehaviour
         _weakAttack.Play(isAttackFlipped);
         _attackCounter++;
 
+        //Consume stamina
+        ConsumeStamina(_playerData.WeakAttackStaminaCost);
+
         yield return new WaitForSeconds(_playerData.WeakAttackSeconds);
 
         _lookDirection = SnapToEightDirections(_lookDirection);

@@ -1,4 +1,5 @@
-using NUnit.Framework;
+ using NUnit.Framework;
+using System;
 using System.Collections;
 using System.Runtime.CompilerServices;
 using UnityEngine;
@@ -16,16 +17,15 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer _renderer;
     private Collider2D _collider;
 
-    
-
-
     // Local Variables
     private Vector2 _moveDirection = new Vector2(0,0);
     private Vector2 _lookDirection = new Vector2(1, 0);
     private float _staminaRegenTimer = 0;
+    private int _attackCounter = 0;
     private bool _areInputsEnabled = true;
     private bool _isRunning = false;
-    private bool canRoll => _state != PlayerState.Roll && HasStamina();
+    private bool canRoll => _state == PlayerState.Move && HasStamina();
+    private bool canAttack => _state == PlayerState.Move && HasStamina();
     private PlayerState _state = PlayerState.Move;
 
     // InputSystem 
@@ -35,24 +35,32 @@ public class PlayerController : MonoBehaviour
 
 
 
-   //References
-   [Header("Sonidos")]
+    // References
+    [Header("Sonidos")]
     [SerializeField] private AudioClip deathSound;
 
     [Space(5)]
     [Header("Player data")]
     [SerializeField] private PlayerData _playerData;
 
-    [Space(3)]
+    [Space(5)]
+    [Header("Weak Attack")]
+    [SerializeField] private WeakAttackController _weakAttack;
+
+    // MOVE TO PLAYER DATA (COMPLETAR)
+    [Space(5)]
     [Header("Animation durations")]
     [SerializeField] private float deathAnimationSeconds = 2f;
     [SerializeField] private float _acceleration = 25f;
+
+    [SerializeField] private float _attackImpulse = 1f;
 
     public enum PlayerState
     {
         Move,
         Roll,
-        Dead
+        Dead,
+        WeakAttack,
     }
 
     public PlayerState GetState()
@@ -66,6 +74,7 @@ public class PlayerController : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _renderer = GetComponent<SpriteRenderer>();
+         
 
         InitializePrefsActions();
         //m_Actions = new InputSystem();
@@ -98,6 +107,9 @@ public class PlayerController : MonoBehaviour
 
 
                 break;
+            case PlayerState.WeakAttack:
+
+                break;
             case PlayerState.Dead:
 
                 break;
@@ -124,6 +136,9 @@ public class PlayerController : MonoBehaviour
 
                 break;
             case PlayerState.Roll:
+
+                break;
+            case PlayerState.WeakAttack:
 
                 break;
             case PlayerState.Dead:
@@ -233,6 +248,43 @@ public class PlayerController : MonoBehaviour
         _state = PlayerState.Move;
     }
 
+    private void OnWeakAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed && canAttack && _areInputsEnabled)
+        {
+            StartCoroutine(WeakAttackCoroutine());
+        }
+    }
+
+    private IEnumerator WeakAttackCoroutine()
+    {
+        _state = PlayerState.WeakAttack;
+
+        // Calculate the attack direction based on the mouse position
+        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0;
+        _lookDirection = (mousePos - transform.position).normalized;
+
+        // Apply small force with the attack direction
+        _rigidbody.linearVelocity = Vector2.zero;
+        _rigidbody.AddForce(_lookDirection * _attackImpulse, ForceMode2D.Impulse);
+
+        // Set the attack direction in the animator
+        _animator.SetFloat("xDir", _lookDirection.x);
+        _animator.SetFloat("yDir", _lookDirection.y);
+        _renderer.flipX = (_lookDirection.x < 0);
+
+        // Play attack animation
+        bool isAttackFlipped = (_attackCounter % 2) == 1;
+        _weakAttack.Play(isAttackFlipped);
+        _attackCounter++;
+
+        yield return new WaitForSeconds(_playerData.WeakAttackSeconds);
+
+        _state = PlayerState.Move;
+    }
+
+
     private void UpdateLookDirection()
     {
         if(_moveDirection.magnitude > 0)
@@ -251,6 +303,7 @@ public class PlayerController : MonoBehaviour
         _animator.SetBool("isWalking", _state == PlayerState.Move && _moveDirection != Vector2.zero && (!_isRunning || _isRunning && !HasStamina()));
         _animator.SetBool("isRunning", _state == PlayerState.Move && _moveDirection != Vector2.zero && _isRunning && HasStamina());
         _animator.SetBool("isRolling", _state == PlayerState.Roll);
+        _animator.SetBool("isWeakAttacking", _state == PlayerState.WeakAttack);
     }
 
     private bool HasStamina()
@@ -348,7 +401,7 @@ public class PlayerController : MonoBehaviour
             _runRef.action.performed -= OnRun;
             _runRef.action.canceled -= OnRun;
             _rollRef.action.started -= OnRoll;
-            //_weakAttackRef.action.performed -= OnWeakAttack;
+            _weakAttackRef.action.performed -= OnWeakAttack;
             //_strongAttackRef.action.performed -= OnStrongAttack;
             _inputSystemReference.FindActionMap("Player").Disable();
         }
@@ -361,7 +414,7 @@ public class PlayerController : MonoBehaviour
         _runRef.action.performed += OnRun;
         _runRef.action.canceled += OnRun;
         _rollRef.action.started += OnRoll;
-        //weakAttackRef.action.performed += OnWeakAttack;
+        _weakAttackRef.action.performed += OnWeakAttack;
         //strongAttackRef.action.performed += OnStrongAttack;
     }
 

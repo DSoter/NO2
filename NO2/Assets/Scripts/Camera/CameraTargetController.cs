@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CameraTargetController : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class CameraTargetController : MonoBehaviour
 
     private void LateUpdate()
     {
-        Vector3 mouseScreen = Input.mousePosition;
+        Vector3 mouseScreen = Mouse.current.position.ReadValue();
         mouseScreen.z = -cam.transform.position.z;
 
         Vector3 mouseWorld = cam.ScreenToWorldPoint(mouseScreen);

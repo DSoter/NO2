@@ -87,10 +87,17 @@ public class SceneController : MonoBehaviour
         _playerController = player.GetComponent<PlayerController>();
         player.transform.position = currentSpawnPoint.transform.position;
 
-        if (_checkpointManager.IdSpawn > 0)
+        if (_checkpointManager.IdSpawn > 0) //entrar desde un spawn
         {
             Vector3 exitDirection = new Vector3(_checkpointManager.ExitGateDirection.x, _checkpointManager.ExitGateDirection.y, 0); 
-            player.transform.position += exitDirection;
+            _playerController.ExitScene(exitDirection,0.5f);
+
+            TransitionController tc = FindAnyObjectByType<TransitionController>();
+            if (tc != null)
+            {
+                tc.StartTransition(exitDirection, false);
+            }
+
         }
         _checkpointManager.IdSpawn = -1;
     }

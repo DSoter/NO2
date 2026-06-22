@@ -389,7 +389,7 @@ PrefabInstance:
       objectReference: {fileID: -7520132942090517634, guid: f1bfdd064f4bc6b4aa0edfba122e967a, type: 2}
     - target: {fileID: 7521091902895558689, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
       propertyPath: gateTransitionSeconds
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

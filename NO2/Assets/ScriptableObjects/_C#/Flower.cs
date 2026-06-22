@@ -5,7 +5,10 @@ using UnityEngine.Events;
 public class Flower : ScriptableObject
 {
     public string objectName;
+    public string description;
+    public Sprite flowerIcon;
     public UnityEvent basicAttack;
     public UnityEvent chargeAttack;
     public UnityEvent vulnerablePoint;
+    
 }

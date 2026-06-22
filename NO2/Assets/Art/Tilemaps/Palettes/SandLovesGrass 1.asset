@@ -18,19 +18,19 @@ MonoBehaviour:
   m_TilingRules:
   - m_Id: 0
     m_Sprites:
-    - {fileID: 6463005847298388762, guid: f0d047ab86b4c8a4d95b19c1dc25d5aa, type: 3}
-    - {fileID: 6463005847298388762, guid: f0d047ab86b4c8a4d95b19c1dc25d5aa, type: 3}
-    - {fileID: 6463005847298388762, guid: f0d047ab86b4c8a4d95b19c1dc25d5aa, type: 3}
-    - {fileID: 6463005847298388762, guid: f0d047ab86b4c8a4d95b19c1dc25d5aa, type: 3}
-    - {fileID: 6463005847298388762, guid: f0d047ab86b4c8a4d95b19c1dc25d5aa, type: 3}
-    - {fileID: -1570404885, guid: f0d047ab86b4c8a4d95b19c1dc25d5aa, type: 3}
-    - {fileID: 1015114307, guid: f0d047ab86b4c8a4d95b19c1dc25d5aa, type: 3}
-    - {fileID: 100720344, guid: f0d047ab86b4c8a4d95b19c1dc25d5aa, type: 3}
-    - {fileID: 635818980, guid: f0d047ab86b4c8a4d95b19c1dc25d5aa, type: 3}
-    - {fileID: 651078074, guid: f0d047ab86b4c8a4d95b19c1dc25d5aa, type: 3}
-    - {fileID: -374051867, guid: f0d047ab86b4c8a4d95b19c1dc25d5aa, type: 3}
-    - {fileID: 1106315864, guid: f0d047ab86b4c8a4d95b19c1dc25d5aa, type: 3}
-    - {fileID: -267552767, guid: f0d047ab86b4c8a4d95b19c1dc25d5aa, type: 3}
+    - {fileID: -177374662, guid: f3ee2398a953b0d47b93a51afa0bafb4, type: 3}
+    - {fileID: -177374662, guid: f3ee2398a953b0d47b93a51afa0bafb4, type: 3}
+    - {fileID: -177374662, guid: f3ee2398a953b0d47b93a51afa0bafb4, type: 3}
+    - {fileID: -177374662, guid: f3ee2398a953b0d47b93a51afa0bafb4, type: 3}
+    - {fileID: -177374662, guid: f3ee2398a953b0d47b93a51afa0bafb4, type: 3}
+    - {fileID: -177374662, guid: f3ee2398a953b0d47b93a51afa0bafb4, type: 3}
+    - {fileID: -177374662, guid: f3ee2398a953b0d47b93a51afa0bafb4, type: 3}
+    - {fileID: -1720287430, guid: f3ee2398a953b0d47b93a51afa0bafb4, type: 3}
+    - {fileID: 1680973243, guid: f3ee2398a953b0d47b93a51afa0bafb4, type: 3}
+    - {fileID: 1774225645, guid: f3ee2398a953b0d47b93a51afa0bafb4, type: 3}
+    - {fileID: 1204729148, guid: f3ee2398a953b0d47b93a51afa0bafb4, type: 3}
+    - {fileID: -919257181, guid: f3ee2398a953b0d47b93a51afa0bafb4, type: 3}
+    - {fileID: -2090970120, guid: f3ee2398a953b0d47b93a51afa0bafb4, type: 3}
     m_GameObject: {fileID: 0}
     m_MinAnimationSpeed: 1
     m_MaxAnimationSpeed: 1

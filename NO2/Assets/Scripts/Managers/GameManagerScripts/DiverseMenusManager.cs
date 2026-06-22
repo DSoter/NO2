@@ -118,16 +118,38 @@ public class DiverseMenusManager : MonoBehaviour
             {
                 Debug.Log("Se ha intentado abrir un menú estando gameOver, no se cierra");
             }
-            _menuType = _futureMenuType; //esto no hace falta
+            //_menuType = _futureMenuType; //esto no hace falta
             switch (_menuType)
-            {
-                
+            {     
                 case MenuType.Map:
-                    mh.OpenMapMenu(); break;
+                    switch (_futureMenuType)
+                    {
+                        case MenuType.Badges:
+                            SlideRight();
+                            break;
+                        case MenuType.Flowers:
+                            SlideLeft(); break;
+                    }
+                    break;
                 case MenuType.Badges:
-                    mh.OpenBadgesMenu(); break;
+                    switch (_futureMenuType)
+                    {
+                        case MenuType.Flowers:
+                            SlideRight();
+                            break;
+                        case MenuType.Map:
+                            SlideLeft(); break;
+                    }break;
                 case MenuType.Flowers:
-                    mh.OpenFlowerMenu(); break;
+                    switch (_futureMenuType)
+                    {
+                        case MenuType.Badges:
+                            SlideLeft();
+                            break;
+                        case MenuType.Map:
+                            SlideRight(); break;
+                    }
+                    break;
 
             }
         }
@@ -207,28 +229,7 @@ public class DiverseMenusManager : MonoBehaviour
         {
             if (_isOpen)
             {
-                MenusHandler mh = FindAnyObjectByType<MenusHandler>();
-                switch (_menuType)
-                {
-                    //1Mapa
-                    //2Badge
-                    //3Flower
-
-                    //Al restar uno se queda
-                    //1Flower
-                    //2Mapa
-                    //3Badge
-                    case MenuType.Map:
-                        _menuType= MenuType.Flowers;
-                        mh.OpenFlowerMenu(); break;
-                    case MenuType.Badges:
-                        _menuType=MenuType.Map;
-                        mh.OpenMapMenu(); break;
-                    case MenuType.Flowers:
-                        _menuType=MenuType.Badges;
-                        mh.OpenBadgesMenu(); break;
-
-                }
+                SlideLeft();                
             }
         }
     }
@@ -238,30 +239,77 @@ public class DiverseMenusManager : MonoBehaviour
         {
             if (_isOpen)
             {
-                MenusHandler mh = FindAnyObjectByType<MenusHandler>();
-                switch (_menuType)
-                {
-                    //1Mapa
-                    //2Badge
-                    //3Flower
-
-                    //Al sumar uno se queda
-                    //1Badge
-                    //2Flower
-                    //3Mapa
-                    case MenuType.Map:
-                        _menuType = MenuType.Badges;
-                        mh.OpenBadgesMenu(); break;
-                    case MenuType.Badges:
-                        _menuType = MenuType.Flowers;
-                        mh.OpenFlowerMenu(); break;
-                    case MenuType.Flowers:
-                        _menuType = MenuType.Map;
-                        mh.OpenMapMenu(); break;
-
-                }
+                SlideRight();
             }
         }
+    }
+
+    public void SlideRight()
+    {
+        MenusHandler mh = FindAnyObjectByType<MenusHandler>();
+        PanelWipeSwitcher pw = FindAnyObjectByType<PanelWipeSwitcher>();
+        if (!pw.IsTransitioning)
+        {
+            pw.OnSwitchRight();
+            switch (_menuType)
+            {
+                //1Mapa
+                //2Badge
+                //3Flower
+
+                //Al sumar uno se queda
+                //1Badge
+                //2Flower
+                //3Mapa
+                case MenuType.Map:
+                    _menuType = MenuType.Badges;
+                    //mh.OpenBadgesMenu(); 
+                    break;
+                case MenuType.Badges:
+                    _menuType = MenuType.Flowers;
+                    //mh.OpenFlowerMenu();
+                    break;
+                case MenuType.Flowers:
+                    _menuType = MenuType.Map;
+                    //mh.OpenMapMenu();
+                    break;
+
+            }
+        }
+    }
+    public void SlideLeft()
+    {
+        MenusHandler mh = FindAnyObjectByType<MenusHandler>();
+        PanelWipeSwitcher pw = FindAnyObjectByType<PanelWipeSwitcher>();
+        if (!pw.IsTransitioning)
+        {
+            pw.OnSwitchLeft();
+            switch (_menuType)
+            {
+                //1Mapa
+                //2Badge
+                //3Flower
+
+                //Al restar uno se queda
+                //1Flower
+                //2Mapa
+                //3Badge
+                case MenuType.Map:
+                    _menuType = MenuType.Flowers;
+                    //mh.OpenFlowerMenu();
+                    break;
+                case MenuType.Badges:
+                    _menuType = MenuType.Map;
+                    //mh.OpenMapMenu();
+                    break;
+                case MenuType.Flowers:
+                    _menuType = MenuType.Badges;
+                    //mh.OpenBadgesMenu(); 
+                    break;
+
+            }
+        }
+
     }
 
     private void InitializePrefsActions()

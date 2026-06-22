@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private float _staminaRegenTimer = 0;
     private int _attackCounter = 0;
     private bool _areInputsEnabled = true;
+    private bool _isPause => Time.timeScale == 0;
     private bool _isRunning = false;
     private bool canRoll => _state == PlayerState.Move && HasStamina();
     private bool canAttack => _state == PlayerState.Move && HasStamina();
@@ -88,7 +89,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Time.timeScale == 0)
+        if (_isPause)
         {
             return;
         }
@@ -223,7 +224,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnRoll(InputAction.CallbackContext context)
     {
-        if (context.started && canRoll && _areInputsEnabled)
+        if (context.started && canRoll && _areInputsEnabled && !_isPause)
         {
             StartCoroutine(RollCoroutine());
         }
@@ -239,18 +240,15 @@ public class PlayerController : MonoBehaviour
         SetVelocityInstant(_playerData.IniRollingSpeed * _lookDirection);
         yield return new WaitForSeconds(_playerData.IniRollingSeconds);
 
-
         SetVelocityInstant(_playerData.EndRollingSpeed * _lookDirection);
         yield return new WaitForSeconds(_playerData.EndRollingSeconds);
-
-         
 
         _state = PlayerState.Move;
     }
 
     private void OnWeakAttack(InputAction.CallbackContext context)
     {
-        if (context.performed && canAttack && _areInputsEnabled)
+        if (context.performed && canAttack && _areInputsEnabled && !_isPause)
         {
             StartCoroutine(WeakAttackCoroutine());
         }
@@ -263,6 +261,7 @@ public class PlayerController : MonoBehaviour
         // Calculate the attack direction based on the mouse position
         var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
+
         _lookDirection = (mousePos - transform.position).normalized;
 
         // Apply small force with the attack direction
@@ -281,6 +280,8 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(_playerData.WeakAttackSeconds);
 
+        _lookDirection = SnapToEightDirections(_lookDirection);
+
         _state = PlayerState.Move;
     }
 
@@ -293,6 +294,16 @@ public class PlayerController : MonoBehaviour
         }
 
         _renderer.flipX = (_lookDirection.x < 0);
+    }
+
+    private Vector2 SnapToEightDirections(Vector2 direction)
+    {
+        direction.Normalize();
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        float snapped = Mathf.Round(angle / 45f) * 45f;
+        float rad = snapped * Mathf.Deg2Rad;
+
+        return new Vector2(Mathf.Cos(rad), Mathf.Sin(rad)).normalized;
     }
 
     private void HandleAnimatorParams()

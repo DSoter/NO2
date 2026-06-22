@@ -23,6 +23,11 @@ public class ChangeFlowersManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI flowerName;
     [SerializeField] private TextMeshProUGUI descriptionText;
 
+    [SerializeField] private GameObject upCircunference;
+    [SerializeField] private GameObject downCircunference;
+    [SerializeField] private GameObject upArrow;
+    [SerializeField] private GameObject downArrow;
+
     private int idFlor;
 
     private void Awake()
@@ -31,7 +36,10 @@ public class ChangeFlowersManager : MonoBehaviour
         flowers = unlockedFlowers.unlockedFlowers;
         if (flowers != null)
         {
-            equipedFlower = flowers[0];
+            if (equipedFlower  == null)
+            {
+                equipedFlower = flowers[0];
+            }
             UpdateFlowers(equipedFlower);
         }
         
@@ -94,6 +102,23 @@ public class ChangeFlowersManager : MonoBehaviour
 
         UpdateFlowers(downFlower);
         //retroceder y que la current sea la flor anterior
+    }
+
+    public void ActivateMenu()
+    {
+        upCircunference.SetActive(true);
+        downCircunference.SetActive(true);
+        upArrow.SetActive(true);
+        downArrow.SetActive(true);
+
+    }
+    public void DeactivateMenu()
+    {
+        equipedFlower = currentFlower;
+        upCircunference.SetActive(false);
+        downCircunference.SetActive(false);
+        upArrow.SetActive(false);
+        downArrow.SetActive(false);
     }
 
 }

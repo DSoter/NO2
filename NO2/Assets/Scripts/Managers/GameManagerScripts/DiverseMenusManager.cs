@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -37,7 +38,7 @@ public class DiverseMenusManager : MonoBehaviour
     [SerializeField] private string menusSceneName = "MenusAndGameOver";
 
     // InputSystem 
-    private InputActionReference _mapRef, _flowerRef, _badgesRef, _scapeRef, _goLeft, _goRight;
+    private InputActionReference _mapRef, _flowerRef, _badgesRef, _scapeRef, _goLeft, _goRight, _confirm;
     [Header("Input System")]
     [SerializeField] private InputActionAsset _inputSystemReference;
 
@@ -91,6 +92,7 @@ public class DiverseMenusManager : MonoBehaviour
         {
             //if (exitPauseSound != null)
             //    GameManager.Instance.audioManager.PlaySound(exitPauseSound);
+            CloseFlowers();
             Time.timeScale = 1f;
             SceneManager.UnloadSceneAsync(menusSceneName);
 
@@ -141,6 +143,8 @@ public class DiverseMenusManager : MonoBehaviour
                             SlideLeft(); break;
                     }break;
                 case MenuType.Flowers:
+
+                    CloseFlowers();
                     switch (_futureMenuType)
                     {
                         case MenuType.Badges:
@@ -243,6 +247,30 @@ public class DiverseMenusManager : MonoBehaviour
             }
         }
     }
+    public void OnConfirm(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (_isOpen)
+            {
+                switch (_menuType) 
+                {
+                    case MenuType.Map:
+                        //ya veremos que se hace
+                        break;
+                    case MenuType.Flowers:
+                        ChangeFlowersManager cf = FindAnyObjectByType<ChangeFlowersManager>();
+                        cf.ActivateMenu();
+
+                        break;
+                    case MenuType.Badges:
+                        //ya veremos que se hace
+                        break;
+                }
+                    
+            }
+        }
+    }
 
     public void SlideRight()
     {
@@ -270,6 +298,10 @@ public class DiverseMenusManager : MonoBehaviour
                     //mh.OpenFlowerMenu();
                     break;
                 case MenuType.Flowers:
+                    //cerramos el menu d flores
+
+                    CloseFlowers();
+
                     _menuType = MenuType.Map;
                     //mh.OpenMapMenu();
                     break;
@@ -303,6 +335,9 @@ public class DiverseMenusManager : MonoBehaviour
                     //mh.OpenMapMenu();
                     break;
                 case MenuType.Flowers:
+                    CloseFlowers();
+
+
                     _menuType = MenuType.Badges;
                     //mh.OpenBadgesMenu(); 
                     break;
@@ -310,6 +345,12 @@ public class DiverseMenusManager : MonoBehaviour
             }
         }
 
+    }
+
+    private void CloseFlowers()
+    {
+        ChangeFlowersManager cf = FindAnyObjectByType<ChangeFlowersManager>();
+        cf.DeactivateMenu();
     }
 
     private void InitializePrefsActions()
@@ -330,7 +371,7 @@ public class DiverseMenusManager : MonoBehaviour
         _scapeRef = InputActionReference.Create(UIMap.FindAction("Escape"));
         _goLeft = InputActionReference.Create(UIMap.FindAction("GoLeft"));
         _goRight = InputActionReference.Create(UIMap.FindAction("GoRight"));
-
+        _confirm = InputActionReference.Create(UIMap.FindAction("Confirm"));
         EnableActions();
         UIMap.Enable();
     }
@@ -343,6 +384,7 @@ public class DiverseMenusManager : MonoBehaviour
             _badgesRef.action.performed  -= OnBadge;
             _goLeft.action.performed -= OnLeft;
             _goRight.action.performed -= OnRight;
+            _confirm.action.performed -= OnConfirm;
 
             //_scapeRef.action.performed -= OnEscape;
 
@@ -358,6 +400,7 @@ public class DiverseMenusManager : MonoBehaviour
         _badgesRef.action.performed += OnBadge;
         _goLeft.action.performed += OnLeft;
         _goRight.action.performed += OnRight;
+        _confirm.action.performed += OnConfirm;
 
         //_scapeRef.action.performed += OnEscape;
 

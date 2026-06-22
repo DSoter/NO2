@@ -275,6 +275,7 @@ RectTransform:
   - {fileID: 1317575325558646713}
   - {fileID: 8265261020041753554}
   - {fileID: 6068543711326023451}
+  - {fileID: 1456029505177119669}
   m_Father: {fileID: 8601456328208825153}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -4322,6 +4323,226 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 45677422000041282, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
   m_PrefabInstance: {fileID: 1369560460839385451}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1483544931560621815
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4308420511032816152}
+    m_Modifications:
+    - target: {fileID: 45677422000041282, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 45677422000041282, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 45677422000041282, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 45677422000041282, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 45677422000041282, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 45677422000041282, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 45677422000041282, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 45677422000041282, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 45677422000041282, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 45677422000041282, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 45677422000041282, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -37.44734
+      objectReference: {fileID: 0}
+    - target: {fileID: 45677422000041282, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 45677422000041282, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 45677422000041282, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 45677422000041282, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 45677422000041282, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 628.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 45677422000041282, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -3570.762
+      objectReference: {fileID: 0}
+    - target: {fileID: 45677422000041282, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 45677422000041282, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 45677422000041282, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2267191741941341715, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1047994884490343238}
+    - target: {fileID: 2267191741941341715, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartRebinding
+      objectReference: {fileID: 0}
+    - target: {fileID: 2267191741941341715, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: RebindMenuButton, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4753132103343053051, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      propertyPath: actionReference
+      value: 
+      objectReference: {fileID: 1825079428015357267, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}
+    - target: {fileID: 5097625678350250470, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      propertyPath: m_text
+      value: Confirm
+      objectReference: {fileID: 0}
+    - target: {fileID: 5097625678350250470, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      propertyPath: m_fontSize
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5097625678350250470, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5906938995912607657, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      propertyPath: m_Name
+      value: KeybindRow (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5969202396626285902, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3266795209929295675}
+    - target: {fileID: 5969202396626285902, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartRebinding
+      objectReference: {fileID: 0}
+    - target: {fileID: 5969202396626285902, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: RebindMenuButton, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6826790115342658543, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      propertyPath: actionReference
+      value: 
+      objectReference: {fileID: 1825079428015357267, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}
+    - target: {fileID: 6848208806395589758, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 300
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6826790115342658543, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+    - {fileID: 4753132103343053051, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 387729952245528963, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1047994884490343238}
+    - targetCorrespondingSourceObject: {fileID: 5242486021896180446, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3266795209929295675}
+  m_SourcePrefab: {fileID: 100100000, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+--- !u!1 &1294752006679773044 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 387729952245528963, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+  m_PrefabInstance: {fileID: 1483544931560621815}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1047994884490343238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294752006679773044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9ebf4edea3863542a920593ca2a9bf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RebindMenuButton
+  actionReference: {fileID: 5128497774943243426, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}
+  buttonText: {fileID: 4198349858425386484}
+  indexInput: 0
+--- !u!224 &1456029505177119669 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 45677422000041282, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+  m_PrefabInstance: {fileID: 1483544931560621815}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4198349858425386484 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3374626253142307587, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+  m_PrefabInstance: {fileID: 1483544931560621815}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!114 &4219807802679553190 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3321783607959382609, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+  m_PrefabInstance: {fileID: 1483544931560621815}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!1 &6653946419169334313 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5242486021896180446, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
+  m_PrefabInstance: {fileID: 1483544931560621815}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3266795209929295675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6653946419169334313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9ebf4edea3863542a920593ca2a9bf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RebindMenuButton
+  actionReference: {fileID: 5128497774943243426, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}
+  buttonText: {fileID: 4219807802679553190}
+  indexInput: 1
 --- !u!1001 &1539252143622589082
 PrefabInstance:
   m_ObjectHideFlags: 0

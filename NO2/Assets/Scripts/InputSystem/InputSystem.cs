@@ -436,6 +436,15 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Confirm"",
+                    ""type"": ""Button"",
+                    ""id"": ""5d1ce5fb-8454-48af-87a6-321a4741882b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -581,6 +590,28 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""action"": ""GoRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1f3e345c-2734-4d34-bc01-258a1123439d"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""82461410-2e8d-4624-b9b4-bfb91b3de311"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -604,6 +635,7 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
         m_UI_OpenBadges = m_UI.FindAction("OpenBadges", throwIfNotFound: true);
         m_UI_GoLeft = m_UI.FindAction("GoLeft", throwIfNotFound: true);
         m_UI_GoRight = m_UI.FindAction("GoRight", throwIfNotFound: true);
+        m_UI_Confirm = m_UI.FindAction("Confirm", throwIfNotFound: true);
     }
 
     ~@InputSystem()
@@ -843,6 +875,7 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_OpenBadges;
     private readonly InputAction m_UI_GoLeft;
     private readonly InputAction m_UI_GoRight;
+    private readonly InputAction m_UI_Confirm;
     /// <summary>
     /// Provides access to input actions defined in input action map "UI".
     /// </summary>
@@ -882,6 +915,10 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "UI/GoRight".
         /// </summary>
         public InputAction @GoRight => m_Wrapper.m_UI_GoRight;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/Confirm".
+        /// </summary>
+        public InputAction @Confirm => m_Wrapper.m_UI_Confirm;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -929,6 +966,9 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
             @GoRight.started += instance.OnGoRight;
             @GoRight.performed += instance.OnGoRight;
             @GoRight.canceled += instance.OnGoRight;
+            @Confirm.started += instance.OnConfirm;
+            @Confirm.performed += instance.OnConfirm;
+            @Confirm.canceled += instance.OnConfirm;
         }
 
         /// <summary>
@@ -961,6 +1001,9 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
             @GoRight.started -= instance.OnGoRight;
             @GoRight.performed -= instance.OnGoRight;
             @GoRight.canceled -= instance.OnGoRight;
+            @Confirm.started -= instance.OnConfirm;
+            @Confirm.performed -= instance.OnConfirm;
+            @Confirm.canceled -= instance.OnConfirm;
         }
 
         /// <summary>
@@ -1100,5 +1143,12 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnGoRight(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Confirm" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnConfirm(InputAction.CallbackContext context);
     }
 }

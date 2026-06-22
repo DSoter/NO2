@@ -1242,7 +1242,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &442254423
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2181,7 +2181,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &783642178
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3015,6 +3015,10 @@ MonoBehaviour:
   downFlowerImage: {fileID: 1108820445}
   flowerName: {fileID: 4062823}
   descriptionText: {fileID: 1687610169}
+  upCircunference: {fileID: 1454633269}
+  downCircunference: {fileID: 783642177}
+  upArrow: {fileID: 1591384323}
+  downArrow: {fileID: 442254422}
 --- !u!1 &1131210685
 GameObject:
   m_ObjectHideFlags: 0
@@ -3902,7 +3906,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -6765977428329723279, guid: 03ecf75a422577e4f84e7919bcfc9d68, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3937,7 +3941,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1454633270
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4359,7 +4363,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1591384324
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4817,7 +4821,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: description text description text description text
+  m_text: No tienes ninguna flor desbloqueada
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3b3b2e4eb2b0762499a53e2afc20659f, type: 2}
   m_sharedMaterial: {fileID: -9219666074936998794, guid: 3b3b2e4eb2b0762499a53e2afc20659f, type: 2}

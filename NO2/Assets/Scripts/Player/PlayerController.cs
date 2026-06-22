@@ -175,7 +175,7 @@ public class PlayerController : MonoBehaviour
     private void SetVelocityInstant(Vector2 targetVelocity)
     {
         Vector2 velocityChange = targetVelocity - _rigidbody.linearVelocity;
-        _rigidbody.AddForce(velocityChange, ForceMode2D.Force);
+        _rigidbody.AddForce(velocityChange, ForceMode2D.Impulse);
     }
 
     private void HandleStaminaRegeneration()

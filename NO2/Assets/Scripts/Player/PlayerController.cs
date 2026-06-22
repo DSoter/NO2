@@ -252,38 +252,38 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed && canAttack && _areInputsEnabled)
         {
-            Debug.Log("Weak Attack");
-            _state = PlayerState.WeakAttack;
-
-            // Calculate the attack direction based on the mouse position
-            var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePos.z = 0;
-
-            _lookDirection = (mousePos - transform.position).normalized;
-
-            // Apply small force with the attack direction
-            //_rigidbody.linearVelocity = _rigidbody.linearVelocity/2;
-            _rigidbody.linearVelocity = Vector2.zero;
-            _rigidbody.AddForce(_lookDirection * _attackImpulse, ForceMode2D.Impulse);
-
-            // Set the attack direction in the animator
-            _animator.SetFloat("xDir", _lookDirection.x);
-            _animator.SetFloat("yDir", _lookDirection.y);
-
-            _renderer.flipX = (_lookDirection.x < 0);
-
-            // Play attack animation
-            bool isAttackFlipped = (_attackCounter % 2) == 1; 
-            _weakAttack.Play(isAttackFlipped);
-
-            _attackCounter++;
+            StartCoroutine(WeakAttackCoroutine());
         }
     }
 
-    private void EndWeakAttack()
+    private IEnumerator WeakAttackCoroutine()
     {
+        _state = PlayerState.WeakAttack;
+
+        // Calculate the attack direction based on the mouse position
+        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0;
+        _lookDirection = (mousePos - transform.position).normalized;
+
+        // Apply small force with the attack direction
+        _rigidbody.linearVelocity = Vector2.zero;
+        _rigidbody.AddForce(_lookDirection * _attackImpulse, ForceMode2D.Impulse);
+
+        // Set the attack direction in the animator
+        _animator.SetFloat("xDir", _lookDirection.x);
+        _animator.SetFloat("yDir", _lookDirection.y);
+        _renderer.flipX = (_lookDirection.x < 0);
+
+        // Play attack animation
+        bool isAttackFlipped = (_attackCounter % 2) == 1;
+        _weakAttack.Play(isAttackFlipped);
+        _attackCounter++;
+
+        yield return new WaitForSeconds(_playerData.WeakAttackSeconds);
+
         _state = PlayerState.Move;
     }
+
 
     private void UpdateLookDirection()
     {

@@ -37,6 +37,7 @@ public class PlayerData : ScriptableObject
     [Header("Timings")]
     [SerializeField] private float iniRollingSeconds;
     [SerializeField] private float endRollingSeconds;
+    [SerializeField] private float weakAttackSeconds;
 
 
     [Space(5)]
@@ -143,6 +144,11 @@ public class PlayerData : ScriptableObject
     public float EndRollingSeconds
     {
         get { return endRollingSeconds; }
+    }
+
+    public float WeakAttackSeconds
+    {
+        get { return weakAttackSeconds; }
     }
 
     public float BasicAttackDamage

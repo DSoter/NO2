@@ -20,6 +20,8 @@ public class SceneController : MonoBehaviour
     [Header("Transition")]
     [SerializeField] private TransitionController transition;
 
+    [SerializeField] private bool spawnPlayerEditor;
+
     //Cosas jugador
     private GameObject player;
     private PlayerController _playerController;
@@ -30,6 +32,15 @@ public class SceneController : MonoBehaviour
     private void Awake()
     {
         
+    }
+    private void Update()
+    {
+        if (spawnPlayerEditor)
+        {
+            spawnPlayerEditor = false;
+            SpawnPlayer();
+        }
+
     }
     void Start()
     {

@@ -420,7 +420,7 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""GoLeft"",
+                    ""name"": ""NavigateLeft"",
                     ""type"": ""Button"",
                     ""id"": ""9f05bf65-d696-4a96-825a-438c6b9eb825"",
                     ""expectedControlType"": """",
@@ -429,7 +429,7 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""GoRight"",
+                    ""name"": ""NavigateRight"",
                     ""type"": ""Button"",
                     ""id"": ""16f23f66-68b7-4099-830b-92166b13d3ac"",
                     ""expectedControlType"": """",
@@ -441,6 +441,42 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""name"": ""Confirm"",
                     ""type"": ""Button"",
                     ""id"": ""5d1ce5fb-8454-48af-87a6-321a4741882b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""GoUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""91c6fa47-dc32-4fe2-aa19-ce6af096fd2c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""GoDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""1fc99be0-26b2-498f-85b4-501fbea0ea1c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""GoLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""699a3afd-0688-4dc3-8393-bdb87d8fda88"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""GoRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""f35543e5-4a92-44bb-af1e-1c55c0d67fcf"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -554,7 +590,7 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""GoLeft"",
+                    ""action"": ""NavigateLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -565,7 +601,7 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""GoLeft"",
+                    ""action"": ""NavigateLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -576,7 +612,7 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""GoRight"",
+                    ""action"": ""NavigateRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -587,7 +623,7 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""GoRight"",
+                    ""action"": ""NavigateRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -612,6 +648,94 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""action"": ""Confirm"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""289262e8-47a2-4c59-87f1-b5cd5d01d417"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GoUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d3514b6e-fd60-4447-a850-937da1b87e9b"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GoUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e7c40e03-0e4b-4eb3-9bd2-c208c6e0cdde"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GoDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a9468eb8-636a-4ab5-b495-cdd9033c3c00"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GoDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ccac7e30-8e6f-4c27-9d28-71607bc449c2"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GoLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7a9f9936-a617-440b-acf4-61959a0dfd25"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GoLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c9d73491-825d-4cdb-aa14-e131f160dfbe"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GoRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""34a976b1-33ad-400b-9562-bbf9817f6d92"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GoRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -633,9 +757,13 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
         m_UI_OpenMap = m_UI.FindAction("OpenMap", throwIfNotFound: true);
         m_UI_OpenFlowers = m_UI.FindAction("OpenFlowers", throwIfNotFound: true);
         m_UI_OpenBadges = m_UI.FindAction("OpenBadges", throwIfNotFound: true);
+        m_UI_NavigateLeft = m_UI.FindAction("NavigateLeft", throwIfNotFound: true);
+        m_UI_NavigateRight = m_UI.FindAction("NavigateRight", throwIfNotFound: true);
+        m_UI_Confirm = m_UI.FindAction("Confirm", throwIfNotFound: true);
+        m_UI_GoUp = m_UI.FindAction("GoUp", throwIfNotFound: true);
+        m_UI_GoDown = m_UI.FindAction("GoDown", throwIfNotFound: true);
         m_UI_GoLeft = m_UI.FindAction("GoLeft", throwIfNotFound: true);
         m_UI_GoRight = m_UI.FindAction("GoRight", throwIfNotFound: true);
-        m_UI_Confirm = m_UI.FindAction("Confirm", throwIfNotFound: true);
     }
 
     ~@InputSystem()
@@ -873,9 +1001,13 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_OpenMap;
     private readonly InputAction m_UI_OpenFlowers;
     private readonly InputAction m_UI_OpenBadges;
+    private readonly InputAction m_UI_NavigateLeft;
+    private readonly InputAction m_UI_NavigateRight;
+    private readonly InputAction m_UI_Confirm;
+    private readonly InputAction m_UI_GoUp;
+    private readonly InputAction m_UI_GoDown;
     private readonly InputAction m_UI_GoLeft;
     private readonly InputAction m_UI_GoRight;
-    private readonly InputAction m_UI_Confirm;
     /// <summary>
     /// Provides access to input actions defined in input action map "UI".
     /// </summary>
@@ -908,6 +1040,26 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @OpenBadges => m_Wrapper.m_UI_OpenBadges;
         /// <summary>
+        /// Provides access to the underlying input action "UI/NavigateLeft".
+        /// </summary>
+        public InputAction @NavigateLeft => m_Wrapper.m_UI_NavigateLeft;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/NavigateRight".
+        /// </summary>
+        public InputAction @NavigateRight => m_Wrapper.m_UI_NavigateRight;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/Confirm".
+        /// </summary>
+        public InputAction @Confirm => m_Wrapper.m_UI_Confirm;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/GoUp".
+        /// </summary>
+        public InputAction @GoUp => m_Wrapper.m_UI_GoUp;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/GoDown".
+        /// </summary>
+        public InputAction @GoDown => m_Wrapper.m_UI_GoDown;
+        /// <summary>
         /// Provides access to the underlying input action "UI/GoLeft".
         /// </summary>
         public InputAction @GoLeft => m_Wrapper.m_UI_GoLeft;
@@ -915,10 +1067,6 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "UI/GoRight".
         /// </summary>
         public InputAction @GoRight => m_Wrapper.m_UI_GoRight;
-        /// <summary>
-        /// Provides access to the underlying input action "UI/Confirm".
-        /// </summary>
-        public InputAction @Confirm => m_Wrapper.m_UI_Confirm;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -960,15 +1108,27 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
             @OpenBadges.started += instance.OnOpenBadges;
             @OpenBadges.performed += instance.OnOpenBadges;
             @OpenBadges.canceled += instance.OnOpenBadges;
+            @NavigateLeft.started += instance.OnNavigateLeft;
+            @NavigateLeft.performed += instance.OnNavigateLeft;
+            @NavigateLeft.canceled += instance.OnNavigateLeft;
+            @NavigateRight.started += instance.OnNavigateRight;
+            @NavigateRight.performed += instance.OnNavigateRight;
+            @NavigateRight.canceled += instance.OnNavigateRight;
+            @Confirm.started += instance.OnConfirm;
+            @Confirm.performed += instance.OnConfirm;
+            @Confirm.canceled += instance.OnConfirm;
+            @GoUp.started += instance.OnGoUp;
+            @GoUp.performed += instance.OnGoUp;
+            @GoUp.canceled += instance.OnGoUp;
+            @GoDown.started += instance.OnGoDown;
+            @GoDown.performed += instance.OnGoDown;
+            @GoDown.canceled += instance.OnGoDown;
             @GoLeft.started += instance.OnGoLeft;
             @GoLeft.performed += instance.OnGoLeft;
             @GoLeft.canceled += instance.OnGoLeft;
             @GoRight.started += instance.OnGoRight;
             @GoRight.performed += instance.OnGoRight;
             @GoRight.canceled += instance.OnGoRight;
-            @Confirm.started += instance.OnConfirm;
-            @Confirm.performed += instance.OnConfirm;
-            @Confirm.canceled += instance.OnConfirm;
         }
 
         /// <summary>
@@ -995,15 +1155,27 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
             @OpenBadges.started -= instance.OnOpenBadges;
             @OpenBadges.performed -= instance.OnOpenBadges;
             @OpenBadges.canceled -= instance.OnOpenBadges;
+            @NavigateLeft.started -= instance.OnNavigateLeft;
+            @NavigateLeft.performed -= instance.OnNavigateLeft;
+            @NavigateLeft.canceled -= instance.OnNavigateLeft;
+            @NavigateRight.started -= instance.OnNavigateRight;
+            @NavigateRight.performed -= instance.OnNavigateRight;
+            @NavigateRight.canceled -= instance.OnNavigateRight;
+            @Confirm.started -= instance.OnConfirm;
+            @Confirm.performed -= instance.OnConfirm;
+            @Confirm.canceled -= instance.OnConfirm;
+            @GoUp.started -= instance.OnGoUp;
+            @GoUp.performed -= instance.OnGoUp;
+            @GoUp.canceled -= instance.OnGoUp;
+            @GoDown.started -= instance.OnGoDown;
+            @GoDown.performed -= instance.OnGoDown;
+            @GoDown.canceled -= instance.OnGoDown;
             @GoLeft.started -= instance.OnGoLeft;
             @GoLeft.performed -= instance.OnGoLeft;
             @GoLeft.canceled -= instance.OnGoLeft;
             @GoRight.started -= instance.OnGoRight;
             @GoRight.performed -= instance.OnGoRight;
             @GoRight.canceled -= instance.OnGoRight;
-            @Confirm.started -= instance.OnConfirm;
-            @Confirm.performed -= instance.OnConfirm;
-            @Confirm.canceled -= instance.OnConfirm;
         }
 
         /// <summary>
@@ -1130,6 +1302,41 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnOpenBadges(InputAction.CallbackContext context);
         /// <summary>
+        /// Method invoked when associated input action "NavigateLeft" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnNavigateLeft(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "NavigateRight" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnNavigateRight(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Confirm" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnConfirm(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "GoUp" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnGoUp(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "GoDown" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnGoDown(InputAction.CallbackContext context);
+        /// <summary>
         /// Method invoked when associated input action "GoLeft" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
@@ -1143,12 +1350,5 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnGoRight(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Confirm" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnConfirm(InputAction.CallbackContext context);
     }
 }

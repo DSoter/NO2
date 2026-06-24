@@ -38,7 +38,8 @@ public class DiverseMenusManager : MonoBehaviour
     [SerializeField] private string menusSceneName = "MenusAndGameOver";
 
     // InputSystem 
-    private InputActionReference _mapRef, _flowerRef, _badgesRef, _scapeRef, _goLeft, _goRight, _confirm;
+    private InputActionReference _mapRef, _flowerRef, _badgesRef, _scapeRef, _navigateLeft, _navigateRight, _confirm;
+    private InputActionReference _goUp, _goDown, _goLeft, _goRight;
     [Header("Input System")]
     [SerializeField] private InputActionAsset _inputSystemReference;
 
@@ -78,26 +79,28 @@ public class DiverseMenusManager : MonoBehaviour
 
     public void OpenMenus()
     {
-        _isOpen = !_isOpen;
+        if(CanOpenInCurrentScene()) {
+            _isOpen = !_isOpen;
 
-        if (_isOpen)
-        {
-            //if (enterPauseSound != null)
-            //    GameManager.Instance.audioManager.PlaySound(enterPauseSound);
+            if (_isOpen)
+            {
+            
 
-            Time.timeScale = 0f;
-            SceneManager.LoadScene(menusSceneName, LoadSceneMode.Additive);
+                Time.timeScale = 0f;
+                SceneManager.LoadScene(menusSceneName, LoadSceneMode.Additive);
+            }
+            else
+            {
+                //if (exitPauseSound != null)
+                //    GameManager.Instance.audioManager.PlaySound(exitPauseSound);
+                CloseFlowers();
+                Time.timeScale = 1f;
+                SceneManager.UnloadSceneAsync(menusSceneName);
+
+
+            }
         }
-        else
-        {
-            //if (exitPauseSound != null)
-            //    GameManager.Instance.audioManager.PlaySound(exitPauseSound);
-            CloseFlowers();
-            Time.timeScale = 1f;
-            SceneManager.UnloadSceneAsync(menusSceneName);
 
-
-        }
     }
 
     public void ChangeMenus()
@@ -160,17 +163,16 @@ public class DiverseMenusManager : MonoBehaviour
 
     }
 
-    //private bool CanOpenInCurrentScene()
-    //{
-    //    string escenaActiva = SceneManager.GetActiveScene().name;
-    //    // Solo permitimos pausar si NO estamos en menus principales
-    //    Scene scene = SceneManager.GetSceneByName("PauseMenu");
+    private bool CanOpenInCurrentScene()
+    {
+        string escenaActiva = SceneManager.GetActiveScene().name;
+        Scene scene = SceneManager.GetSceneByName("PauseMenu");
 
-    //    // Comprobar si la escena está cargada (incluyendo modo Additive)
-    //    if (scene.isLoaded) { return false; }
+        // Comprobar si la escena está cargada (incluyendo modo Additive)
+        if (scene.isLoaded) { return false; }
 
-    //    return escenaActiva != "MenuPrincipal" && escenaActiva != "Splash";
-    //}
+        return escenaActiva != "MenuPrincipal" && escenaActiva != "Splash";
+    }
 
     public void QuitToMainMenu()
     {
@@ -227,7 +229,7 @@ public class DiverseMenusManager : MonoBehaviour
             ChangeMenus();
         }
     }
-    public void OnLeft(InputAction.CallbackContext context)
+    public void OnNavigateLeft(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
@@ -237,7 +239,7 @@ public class DiverseMenusManager : MonoBehaviour
             }
         }
     }
-    public void OnRight(InputAction.CallbackContext context)
+    public void OnNavigateRight(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
@@ -268,6 +270,97 @@ public class DiverseMenusManager : MonoBehaviour
                         break;
                 }
                     
+            }
+        }
+    }
+
+    public void OnGoUp(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (_isOpen)
+            {
+                switch (_menuType)
+                {
+                    case MenuType.Map:
+                        //ya veremos que se hace
+                        break;
+                    case MenuType.Flowers:
+                        GoUpFlowers();
+                        break;
+                    case MenuType.Badges:
+                        //ya veremos que se hace
+                        break;
+                }
+
+            }
+        }
+    }
+
+    public void OnGoDown(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (_isOpen)
+            {
+                switch (_menuType)
+                {
+                    case MenuType.Map:
+                        //ya veremos que se hace
+                        break;
+                    case MenuType.Flowers:
+                        GoDownFlowers();
+                        break;
+                    case MenuType.Badges:
+                        //ya veremos que se hace
+                        break;
+                }
+
+            }
+        }
+    }
+    public void OnGoLeft(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (_isOpen)
+            {
+                switch (_menuType)
+                {
+                    case MenuType.Map:
+                        //ya veremos que se hace
+                        break;
+                    case MenuType.Flowers:
+                        //ya veremos que se hace
+                        break;
+                    case MenuType.Badges:
+                        //ya veremos que se hace
+                        break;
+                }
+
+            }
+        }
+    }
+
+    public void OnGoRight(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (_isOpen)
+            {
+                switch (_menuType)
+                {
+                    case MenuType.Map:
+                        //ya veremos que se hace
+                        break;
+                    case MenuType.Flowers:
+                        //ya veremos que se hace
+                        break;
+                    case MenuType.Badges:
+                        //ya veremos que se hace
+                        break;
+                }
+
             }
         }
     }
@@ -350,7 +443,28 @@ public class DiverseMenusManager : MonoBehaviour
     private void CloseFlowers()
     {
         ChangeFlowersManager cf = FindAnyObjectByType<ChangeFlowersManager>();
-        cf.DeactivateMenu();
+        if (cf != null)
+        {
+            cf.DeactivateMenu();
+        }
+        
+        
+    }
+    private void GoUpFlowers()
+    {
+        ChangeFlowersManager cf = FindAnyObjectByType<ChangeFlowersManager>();
+        if (cf != null)
+        {
+            cf.GoUp();
+        }
+    }
+    private void GoDownFlowers()
+    {
+        ChangeFlowersManager cf = FindAnyObjectByType<ChangeFlowersManager>();
+        if (cf != null)
+        {
+            cf.GoDown();
+        }
     }
 
     private void InitializePrefsActions()
@@ -369,9 +483,13 @@ public class DiverseMenusManager : MonoBehaviour
         _flowerRef = InputActionReference.Create(UIMap.FindAction("OpenFlowers"));
         _badgesRef = InputActionReference.Create(UIMap.FindAction("OpenBadges"));
         _scapeRef = InputActionReference.Create(UIMap.FindAction("Escape"));
-        _goLeft = InputActionReference.Create(UIMap.FindAction("GoLeft"));
-        _goRight = InputActionReference.Create(UIMap.FindAction("GoRight"));
+        _navigateLeft = InputActionReference.Create(UIMap.FindAction("NavigateLeft"));
+        _navigateRight = InputActionReference.Create(UIMap.FindAction("NavigateRight"));
         _confirm = InputActionReference.Create(UIMap.FindAction("Confirm"));
+        _goUp = InputActionReference.Create(UIMap.FindAction("GoUp"));
+        _goDown = InputActionReference.Create(UIMap.FindAction("GoDown"));
+        _goRight = InputActionReference.Create(UIMap.FindAction("GoRight"));
+        _goLeft = InputActionReference.Create(UIMap.FindAction("GoLeft"));
         EnableActions();
         UIMap.Enable();
     }
@@ -382,10 +500,13 @@ public class DiverseMenusManager : MonoBehaviour
             _mapRef.action.performed -= OnMap;
             _flowerRef.action.performed -= OnFlower;
             _badgesRef.action.performed  -= OnBadge;
-            _goLeft.action.performed -= OnLeft;
-            _goRight.action.performed -= OnRight;
+            _navigateLeft.action.performed -= OnNavigateLeft;
+            _navigateRight.action.performed -= OnNavigateRight;
             _confirm.action.performed -= OnConfirm;
-
+            _goUp.action.performed -= OnGoUp;
+            _goDown.action.performed -= OnGoDown;
+            _goRight.action.performed -= OnGoRight;
+            _goLeft.action.performed -= OnGoLeft;
             //_scapeRef.action.performed -= OnEscape;
 
 
@@ -398,9 +519,13 @@ public class DiverseMenusManager : MonoBehaviour
         _mapRef.action.performed += OnMap;
         _flowerRef.action.performed += OnFlower;
         _badgesRef.action.performed += OnBadge;
-        _goLeft.action.performed += OnLeft;
-        _goRight.action.performed += OnRight;
+        _navigateLeft.action.performed += OnNavigateLeft;
+        _navigateRight.action.performed += OnNavigateRight;
         _confirm.action.performed += OnConfirm;
+        _goUp.action.performed += OnGoUp;
+        _goDown.action.performed += OnGoDown;
+        _goRight.action.performed += OnGoRight;
+        _goLeft.action.performed += OnGoLeft;
 
         //_scapeRef.action.performed += OnEscape;
 

@@ -956,7 +956,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1373187388240057691, guid: e4cb207a5644d1e46b91785d0dd41bfd, type: 3}
       propertyPath: scrollSpeed
-      value: 0.5
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 1415221703143920681, guid: e4cb207a5644d1e46b91785d0dd41bfd, type: 3}
       propertyPath: m_AnchorMax.y

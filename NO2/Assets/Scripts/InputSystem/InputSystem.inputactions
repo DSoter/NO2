@@ -334,7 +334,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "GoLeft",
+                    "name": "NavigateLeft",
                     "type": "Button",
                     "id": "9f05bf65-d696-4a96-825a-438c6b9eb825",
                     "expectedControlType": "",
@@ -343,7 +343,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "GoRight",
+                    "name": "NavigateRight",
                     "type": "Button",
                     "id": "16f23f66-68b7-4099-830b-92166b13d3ac",
                     "expectedControlType": "",
@@ -355,6 +355,42 @@
                     "name": "Confirm",
                     "type": "Button",
                     "id": "5d1ce5fb-8454-48af-87a6-321a4741882b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "GoUp",
+                    "type": "Button",
+                    "id": "91c6fa47-dc32-4fe2-aa19-ce6af096fd2c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "GoDown",
+                    "type": "Button",
+                    "id": "1fc99be0-26b2-498f-85b4-501fbea0ea1c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "GoLeft",
+                    "type": "Button",
+                    "id": "699a3afd-0688-4dc3-8393-bdb87d8fda88",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "GoRight",
+                    "type": "Button",
+                    "id": "f35543e5-4a92-44bb-af1e-1c55c0d67fcf",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -468,7 +504,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "GoLeft",
+                    "action": "NavigateLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -479,7 +515,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "GoLeft",
+                    "action": "NavigateLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -490,7 +526,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "GoRight",
+                    "action": "NavigateRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -501,7 +537,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "GoRight",
+                    "action": "NavigateRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -524,6 +560,94 @@
                     "processors": "",
                     "groups": "",
                     "action": "Confirm",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "289262e8-47a2-4c59-87f1-b5cd5d01d417",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GoUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d3514b6e-fd60-4447-a850-937da1b87e9b",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GoUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e7c40e03-0e4b-4eb3-9bd2-c208c6e0cdde",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GoDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a9468eb8-636a-4ab5-b495-cdd9033c3c00",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GoDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ccac7e30-8e6f-4c27-9d28-71607bc449c2",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GoLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7a9f9936-a617-440b-acf4-61959a0dfd25",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GoLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c9d73491-825d-4cdb-aa14-e131f160dfbe",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GoRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "34a976b1-33ad-400b-9562-bbf9817f6d92",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GoRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: FloresDesbloqueadas
   m_EditorClassIdentifier: Assembly-CSharp::UnlockedFlowers
   unlockedFlowers:
-  - {fileID: 11400000, guid: 60ac8c1bf6427a9419740f1d14774564, type: 2}
   - {fileID: 11400000, guid: fd9f4be6101608f4f8c01e3e92e1d8e5, type: 2}

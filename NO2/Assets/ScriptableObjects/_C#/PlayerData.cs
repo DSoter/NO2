@@ -46,6 +46,10 @@ public class PlayerData : ScriptableObject
     [SerializeField] private float basicAttackDamage;
     [SerializeField] private float chargeAttackDamage;
 
+    [Space(5)]
+    [Header("Flowers")]
+    [SerializeField] private Flower equipedFlower;
+
     // Events
 
     public event Action OnHealthChanged;
@@ -164,6 +168,11 @@ public class PlayerData : ScriptableObject
     public float ChargeAttackDamage
     {
         get { return chargeAttackDamage; }
+    }
+    public Flower EquipedFlower
+    {
+        get { return equipedFlower; }
+        set { equipedFlower = value; }
     }
 
 }

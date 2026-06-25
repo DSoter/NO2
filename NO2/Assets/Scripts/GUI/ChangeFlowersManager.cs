@@ -28,19 +28,31 @@ public class ChangeFlowersManager : MonoBehaviour
     [SerializeField] private GameObject upArrow;
     [SerializeField] private GameObject downArrow;
 
+    [SerializeField] private PlayerData playerData;
+
+    private bool isActive;
     private int idFlor;
 
     private void Awake()
     {
+        isActive = false;
+        equipedFlower = playerData.EquipedFlower;
         Debug.Log("Menu flowers awaken");
         flowers = unlockedFlowers.unlockedFlowers;
         if (flowers != null)
         {
-            if (equipedFlower  == null)
-            {
-                equipedFlower = flowers[0];
+            //if (equipedFlower  == null)
+            //{
+            //    equipedFlower = flowers[0];
+            //}
+            if(flowers.IndexOf(equipedFlower) == -1){
+                Debug.Log("Error, la flor equipada no está desbloqueada");
             }
-            UpdateFlowers(equipedFlower);
+            else
+            {
+                UpdateFlowers(equipedFlower);
+            }
+                
         }
         
     }
@@ -89,7 +101,7 @@ public class ChangeFlowersManager : MonoBehaviour
     }
     public void GoDown()
     {
-
+        if (!isActive) { return; }
         if (flowers == null) {  return; }
         //avanzar y que la current sea la flor siguiente
 
@@ -97,7 +109,7 @@ public class ChangeFlowersManager : MonoBehaviour
     }
     public void GoUp()
     {
-
+        if (!isActive) { return; }
         if (flowers == null) { return; }
 
         UpdateFlowers(downFlower);
@@ -106,6 +118,8 @@ public class ChangeFlowersManager : MonoBehaviour
 
     public void ActivateMenu()
     {
+        isActive = true;
+
         upCircunference.SetActive(true);
         downCircunference.SetActive(true);
         upArrow.SetActive(true);
@@ -114,7 +128,10 @@ public class ChangeFlowersManager : MonoBehaviour
     }
     public void DeactivateMenu()
     {
+        isActive = false;
+
         equipedFlower = currentFlower;
+        playerData.EquipedFlower = equipedFlower;
         upCircunference.SetActive(false);
         downCircunference.SetActive(false);
         upArrow.SetActive(false);

@@ -3019,6 +3019,7 @@ MonoBehaviour:
   downCircunference: {fileID: 783642177}
   upArrow: {fileID: 1591384323}
   downArrow: {fileID: 442254422}
+  playerData: {fileID: 11400000, guid: 707aa1a40a1bb064193fd4f6f25fcc6a, type: 2}
 --- !u!1 &1131210685
 GameObject:
   m_ObjectHideFlags: 0

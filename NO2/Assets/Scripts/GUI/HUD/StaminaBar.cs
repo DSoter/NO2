@@ -10,14 +10,14 @@ public class StaminaBar : MonoBehaviour
 
     private float _startingHeight;
 
-    void Start()
+    private void Awake()
     {
-
         _rectTransform = GetComponent<RectTransform>();
         _staminaMask = transform.GetChild(0).gameObject.GetComponent<Image>();
-
         _startingHeight = _rectTransform.sizeDelta.y;
-
+    }
+    void Start()
+    {
         UpdateMaxStamina();
     }
 

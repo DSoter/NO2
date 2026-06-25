@@ -78,11 +78,9 @@ public class PlayerController : MonoBehaviour
          
 
         InitializePrefsActions();
-        //m_Actions = new InputSystem();
 
-        //PrefsToKeybinds();
-
-        //PrepareActions();
+        Debug.Log($"Action map Player enabled: {_inputSystemReference.FindActionMap("Player").enabled}");
+        Debug.Log($"Move action enabled: {_inputSystemReference.FindActionMap("Player").FindAction("Move").enabled}");
 
         _playerData.Stamina = _playerData.MaxStamina;
     }

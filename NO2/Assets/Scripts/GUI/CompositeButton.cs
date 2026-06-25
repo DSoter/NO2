@@ -1,5 +1,4 @@
 using TMPro;
-using UnityEditor.SpeedTree.Importer;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

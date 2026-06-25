@@ -30,11 +30,14 @@ public class ChangeFlowersManager : MonoBehaviour
 
     [SerializeField] private PlayerData playerData;
 
+
+
     private bool isActive;
     private int idFlor;
 
     private void Awake()
     {
+        unlockedFlowers.Load();
         isActive = false;
         equipedFlower = playerData.EquipedFlower;
         Debug.Log("Menu flowers awaken");
@@ -57,7 +60,14 @@ public class ChangeFlowersManager : MonoBehaviour
         
     }
 
+    void OnGUI()
+    {
+        if (GUI.Button(new Rect(240, 20, 80, 20), "Reset"))
+        {
+           unlockedFlowers.Reset();
+        }
 
+    }
     private void UpdateFlowers(Flower nextCurrentFlower)
     {
         currentFlower = nextCurrentFlower;

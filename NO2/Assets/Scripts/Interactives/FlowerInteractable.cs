@@ -18,6 +18,7 @@ public class FlowerInteractable : Interactable
         else
         { 
             flowersUnlocked.unlockedFlowers.Add(flowerReference);
+            flowersUnlocked.Save();
             Destroy(gameObject);
         }
 

@@ -40,7 +40,6 @@ public class ChangeFlowersManager : MonoBehaviour
         flowerCollection.Load();
         isActive = false;
         equipedFlower = playerData.EquipedFlower;
-        Debug.Log("Menu flowers awaken");
         flowers = flowerCollection.allFlowers;
         if (flowers != null)
         {
@@ -179,12 +178,22 @@ public class ChangeFlowersManager : MonoBehaviour
     {
         isActive = false;
 
-        equipedFlower = currentFlower;
-        playerData.EquipedFlower = equipedFlower;
         upCircunference.SetActive(false);
         downCircunference.SetActive(false);
         upArrow.SetActive(false);
         downArrow.SetActive(false);
+
+        if (flowerCollection.unlockedFlowers[currentFlower])
+        {
+            equipedFlower = currentFlower;
+            playerData.EquipedFlower = equipedFlower;
+        }
+        else
+        {
+            currentFlower = equipedFlower;
+            UpdateFlowers(currentFlower);
+        }
+        
     }
 
 }

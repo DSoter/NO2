@@ -14,7 +14,7 @@ public class MainMenuSceneManager : MonoBehaviour
     public GameObject canvasOptions;
     [SerializeField] private AudioClip theme;
 
-    [SerializeField] private UnlockedFlowers floresDesbloqueadas;
+    [SerializeField] private FlowerCollection coleccionFlores;
 
 
     void Update()
@@ -36,7 +36,7 @@ public class MainMenuSceneManager : MonoBehaviour
 
     public void StartGame()
     {
-        floresDesbloqueadas.Load();
+        coleccionFlores.Load();
         GameManager.Instance.GetComponent<CheckpointManager>().StartScene(nameFirstScene);
     }
 

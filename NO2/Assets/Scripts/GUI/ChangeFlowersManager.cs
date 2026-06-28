@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 public class ChangeFlowersManager : MonoBehaviour
 {
-    [SerializeField] private UnlockedFlowers unlockedFlowers;
+    [SerializeField] private FlowerCollection flowerCollection;
     
     private List<Flower> flowers;
     private Flower equipedFlower;
@@ -30,47 +30,91 @@ public class ChangeFlowersManager : MonoBehaviour
 
     [SerializeField] private PlayerData playerData;
 
+
+
     private bool isActive;
     private int idFlor;
 
     private void Awake()
     {
+        flowerCollection.Load();
         isActive = false;
         equipedFlower = playerData.EquipedFlower;
-        Debug.Log("Menu flowers awaken");
-        flowers = unlockedFlowers.unlockedFlowers;
+        flowers = flowerCollection.allFlowers;
         if (flowers != null)
         {
             //if (equipedFlower  == null)
             //{
             //    equipedFlower = flowers[0];
             //}
-            if(flowers.IndexOf(equipedFlower) == -1){
-                Debug.Log("Error, la flor equipada no está desbloqueada");
-            }
-            else
+            //if(!flowerCollection.unlockedFlowers.GetValueOrDefault(equipedFlower)){
+            //    Debug.Log("Error, la flor equipada no está desbloqueada");
+            //}
+            //else
+            //{
+            //    UpdateFlowers(equipedFlower);
+            //}
+            if (equipedFlower != null)
             {
-                UpdateFlowers(equipedFlower);
+                equipedFlower = flowers[0];
             }
-                
+            UpdateFlowers(equipedFlower);
         }
         
     }
 
+    void OnGUI()
+    {
+        if (GUI.Button(new Rect(240, 20, 80, 20), "Reset"))
+        {
+           flowerCollection.Reset();
+        }
 
+    }
     private void UpdateFlowers(Flower nextCurrentFlower)
     {
         currentFlower = nextCurrentFlower;
         currentFlowerImage.sprite = currentFlower.flowerIcon;
+        if (!flowerCollection.unlockedFlowers[currentFlower])//si no está desbloqueada 
+        {
+            currentFlowerImage.color = Color.gray7;
+            descriptionText.text = "Información sin descubrir";
+            flowerName.text = "Flor ?";
+        }
+        else
+        {
+            currentFlowerImage.color = Color.white;
+            descriptionText.text = nextCurrentFlower.description;
+            flowerName.text = nextCurrentFlower.objectName;
+        }
+
 
         upFlower = ObtainNextFlower(currentFlower);
         upFlowerImage.sprite = upFlower.flowerIcon;
+        if (!flowerCollection.unlockedFlowers[upFlower])//si no está desbloqueada 
+        {
+            upFlowerImage.color = Color.gray7;
+        }
+        else
+        {
+            upFlowerImage.color = Color.white;
+        }
+
 
         downFlower = ObtainAnteriorFlower(currentFlower);
         downFlowerImage.sprite = downFlower.flowerIcon;
 
-        descriptionText.text = nextCurrentFlower.description;
-        flowerName.text = nextCurrentFlower.objectName;
+        if (!flowerCollection.unlockedFlowers[downFlower])//si no está desbloqueada 
+        {
+            downFlowerImage.color = Color.gray7;
+        }
+        else
+        {
+            downFlowerImage.color = Color.white;
+        }
+
+        
+        
     }
 
     private Flower ObtainNextFlower(Flower flower)
@@ -118,6 +162,10 @@ public class ChangeFlowersManager : MonoBehaviour
 
     public void ActivateMenu()
     {
+        if (isActive) {
+            DeactivateMenu();
+            return;
+        }
         isActive = true;
 
         upCircunference.SetActive(true);
@@ -130,12 +178,22 @@ public class ChangeFlowersManager : MonoBehaviour
     {
         isActive = false;
 
-        equipedFlower = currentFlower;
-        playerData.EquipedFlower = equipedFlower;
         upCircunference.SetActive(false);
         downCircunference.SetActive(false);
         upArrow.SetActive(false);
         downArrow.SetActive(false);
+
+        if (flowerCollection.unlockedFlowers[currentFlower])
+        {
+            equipedFlower = currentFlower;
+            playerData.EquipedFlower = equipedFlower;
+        }
+        else
+        {
+            currentFlower = equipedFlower;
+            UpdateFlowers(currentFlower);
+        }
+        
     }
 
 }

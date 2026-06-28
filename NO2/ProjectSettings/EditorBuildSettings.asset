@@ -27,4 +27,4 @@ EditorBuildSettings:
     path: Assets/Scenes/PruebaVictor/SiguienteSiguienteNivel.unity
     guid: a2dcd4e60d19d90468ffcb69a6bdca57
   m_configObjects:
-    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}

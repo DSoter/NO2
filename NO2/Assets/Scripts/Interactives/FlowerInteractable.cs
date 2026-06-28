@@ -1,13 +1,14 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FlowerInteractable : Interactable
 {
-    [SerializeField] private UnlockedFlowers flowersUnlocked;
+    [SerializeField] private FlowerCollection flowerCollection;
     [SerializeField] private Flower flowerReference;
 
     private void Awake()
     {
-        if(flowersUnlocked.unlockedFlowers.IndexOf(flowerReference) != -1)//Está desbloqueada
+        if(flowerCollection.unlockedFlowers[flowerReference])//Está desbloqueada
         {
             gameObject.SetActive(false);
         }
@@ -16,8 +17,9 @@ public class FlowerInteractable : Interactable
     {
         if (gameObject is null) { Debug.Log("No se detecta el game Object"); }
         else
-        { 
-            flowersUnlocked.unlockedFlowers.Add(flowerReference);
+        {
+            flowerCollection.unlockedFlowers[flowerReference] = true;
+            flowerCollection.Save();
             Destroy(gameObject);
         }
 

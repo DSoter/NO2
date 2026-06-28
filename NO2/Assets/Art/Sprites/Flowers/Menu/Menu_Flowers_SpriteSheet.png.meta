@@ -109,12 +109,12 @@ TextureImporter:
       name: Menu_Flowers_SpriteSheet_0
       rect:
         serializedVersion: 2
-        x: 15
-        y: 8
-        width: 19
-        height: 36
+        x: 8
+        y: 9
+        width: 34
+        height: 34
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -131,12 +131,12 @@ TextureImporter:
       name: Menu_Flowers_SpriteSheet_1
       rect:
         serializedVersion: 2
-        x: 67
+        x: 58
         y: 10
-        width: 21
+        width: 34
         height: 34
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -158,7 +158,7 @@ TextureImporter:
         width: 30
         height: 30
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -175,7 +175,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: fa5c499391f1f2042927eeccd15a2145
     internalID: 0
     vertices: []
     indices: 

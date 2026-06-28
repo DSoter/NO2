@@ -42,6 +42,19 @@ public class SceneController : MonoBehaviour
         }
 
     }
+
+    void OnGUI()
+    {
+        if (GUI.Button(new Rect(20, 20, 80, 20), "SpawnPlayer"))
+        {
+            spawnPlayerEditor=true;
+        }
+
+        if (GUI.Button(new Rect(160, 20, 80, 20), "DestroyPlayer"))
+        {
+            Destroy(player);
+        }
+    }
     void Start()
     {
 
@@ -86,6 +99,8 @@ public class SceneController : MonoBehaviour
     }
     public void SpawnPlayer()
     {
+        Debug.Log($"ExitGateDirection: {_checkpointManager.ExitGateDirection}");
+        Debug.Log($"IdSpawn: {_checkpointManager.IdSpawn}");
         if (_checkpointManager.IdSpawn > 0)
         {
             currentSpawnPointId = _checkpointManager.IdSpawn; 

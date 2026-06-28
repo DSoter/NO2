@@ -290,6 +290,7 @@ MonoBehaviour:
   canvasCredits: {fileID: 2141946945}
   canvasOptions: {fileID: 2141946945}
   theme: {fileID: 8300000, guid: 116f3d61bd64421458f89e867bf3381f, type: 3}
+  coleccionFlores: {fileID: 11400000, guid: 8e1da91b1283cf54ebdcdf0b4a85e26a, type: 2}
 --- !u!4 &127887843
 Transform:
   m_ObjectHideFlags: 0

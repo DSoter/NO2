@@ -53,10 +53,7 @@ public class NextSceneTrigguer: MonoBehaviour
 
                 }
 
-            }
-
-
-            
+            }           
         }
     }
 }

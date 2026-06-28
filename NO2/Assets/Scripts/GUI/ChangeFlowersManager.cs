@@ -149,14 +149,14 @@ public class ChangeFlowersManager : MonoBehaviour
         if (flowers == null) {  return; }
         //avanzar y que la current sea la flor siguiente
 
-        UpdateFlowers(upFlower);
+        UpdateFlowers(downFlower);
     }
     public void GoUp()
     {
         if (!isActive) { return; }
         if (flowers == null) { return; }
 
-        UpdateFlowers(downFlower);
+        UpdateFlowers(upFlower);
         //retroceder y que la current sea la flor anterior
     }
 

@@ -261,8 +261,7 @@ public class DiverseMenusManager : MonoBehaviour
                         //ya veremos que se hace
                         break;
                     case MenuType.Flowers:
-                        ChangeFlowersManager cf = FindAnyObjectByType<ChangeFlowersManager>();
-                        cf.ActivateMenu();
+                        OnActivateFlowers();
 
                         break;
                     case MenuType.Badges:
@@ -272,6 +271,11 @@ public class DiverseMenusManager : MonoBehaviour
                     
             }
         }
+    }
+    private void OnActivateFlowers()
+    {
+        ChangeFlowersManager cf = FindAnyObjectByType<ChangeFlowersManager>();
+        cf.ActivateMenu();
     }
 
     public void OnGoUp(InputAction.CallbackContext context)

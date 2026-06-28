@@ -1,4 +1,4 @@
- using NUnit.Framework;
+  using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Runtime.CompilerServices;
@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
     private float _staminaRegenTimer = 0;
     private int _attackCounter = 0;
     private bool _areInputsEnabled = true;
+    private bool _isOnOxigenZone = false;
+
     private bool _isPause => Time.timeScale == 0;
     private bool _isRunning = false;
     private bool canRoll => _state == PlayerState.Move && HasStamina();
@@ -95,6 +97,7 @@ public class PlayerController : MonoBehaviour
         }
 
         HandleAnimatorParams();
+        HandleOxigen();
 
         switch (_state)
         {
@@ -366,7 +369,30 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    
+
+    private void HandleOxigen()
+    {
+        if (_isOnOxigenZone)
+        {
+            _playerData.Oxygen = Mathf.Min(_playerData.MaxOxygen, _playerData.Oxygen + _playerData.OxygenRegenerationSpeed * Time.deltaTime);
+        }
+        else
+        {
+            _playerData.Oxygen = Mathf.Max(0, _playerData.Oxygen - _playerData.OxygenDropingSpeed * Time.deltaTime);
+        }
+    }
+
+    [ContextMenu("EnterOxigenZone")]
+    public void EnterOxigenZone()
+    {
+        _isOnOxigenZone = true;
+    }
+
+    [ContextMenu("ExitOxigenZone")]
+    public void ExitOxigenZone()
+    {
+        _isOnOxigenZone = false;
+    }
 
     void OnDestroy()
     {

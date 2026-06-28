@@ -63,6 +63,9 @@ public class FlowerCollection : ScriptableObject
         PlayerPrefs.SetString(KeySaveKey, "");
         PlayerPrefs.SetString(ValueSaveKey, "");
         PlayerPrefs.Save();
-        unlockedFlowers = new Dictionary<Flower, bool>();
+        foreach (KeyValuePair<Flower, bool> entry in unlockedFlowers)
+        {
+            unlockedFlowers[entry.Key] = false;
+        }
     }
 }

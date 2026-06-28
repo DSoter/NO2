@@ -25,7 +25,8 @@ public class PlayerData : ScriptableObject
     [Header("Oxygen")]
     [SerializeField] private float oxygen;
     [SerializeField] private float maxOxygen;
-    [SerializeField] private float oxigenDropingSpeed;
+    [SerializeField] private float oxygenDropingSpeed;
+    [SerializeField] private float oxygenRegenerationSpeed;
 
     [Space(5)]
     [Header("Speeds")]
@@ -54,6 +55,7 @@ public class PlayerData : ScriptableObject
 
     public event Action OnHealthChanged;
     public event Action OnStaminaChanged;
+    public event Action OnOxygenChanged;
 
     // Read and write properties
     public float Health
@@ -78,7 +80,10 @@ public class PlayerData : ScriptableObject
     public float Oxygen
     {
         get { return oxygen; }
-        set { oxygen = value; }
+        set {
+            oxygen = value; 
+            OnOxygenChanged?.Invoke();
+        }
     }
 
 
@@ -121,9 +126,14 @@ public class PlayerData : ScriptableObject
         get { return weakAttackStaminaCost; }
     }
 
-    public float OxigenDropingSpeed
+    public float OxygenDropingSpeed
     {
-        get { return oxigenDropingSpeed; }
+        get { return oxygenDropingSpeed; }
+    }
+
+    public float OxygenRegenerationSpeed
+    {
+        get { return oxygenRegenerationSpeed; }
     }
 
     public float WalkingSpeed

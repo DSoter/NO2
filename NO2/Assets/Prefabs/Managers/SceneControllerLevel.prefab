@@ -52,6 +52,7 @@ MonoBehaviour:
   theme: {fileID: 8300000, guid: ba4941f9a1f6acc468e852d60851a44f, type: 3}
   deathSound: {fileID: 8300000, guid: 635a0038b9b863f409947d5d641440f1, type: 3}
   transition: {fileID: 6658039799247995217}
+  spawnPlayerEditor: 0
   checkpoints: []
 --- !u!1001 &3113179898495771052
 PrefabInstance:

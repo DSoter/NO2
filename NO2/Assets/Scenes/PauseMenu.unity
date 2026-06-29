@@ -1504,8 +1504,8 @@ MonoBehaviour:
   sfxMixer: {fileID: 24100000, guid: fad348ec9c2f7484f9ecb5e82f1a49e7, type: 2}
   musicSlider: {fileID: 267624976}
   sfxSlider: {fileID: 267624975}
-  soundOn: {fileID: 0}
-  soundOff: {fileID: 0}
+  soundOn: {fileID: 1641312171}
+  soundOff: {fileID: 1641312170}
   actionReference: {fileID: 4014850048532301077, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}
   applyAuxKeybinds:
     m_PersistentCalls:
@@ -1536,6 +1536,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GeneralKeybindsManager
   _inputSystemReference: {fileID: -944628639613478452, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}
   popUp: {fileID: 0}
+--- !u!1 &1641312170 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4022655121387113771, guid: e4cb207a5644d1e46b91785d0dd41bfd, type: 3}
+  m_PrefabInstance: {fileID: 267624973}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1641312171 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2764483415849897817, guid: e4cb207a5644d1e46b91785d0dd41bfd, type: 3}
+  m_PrefabInstance: {fileID: 267624973}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1684827447
 GameObject:
   m_ObjectHideFlags: 0

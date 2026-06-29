@@ -8,6 +8,7 @@ public class FlowerInteractable : Interactable
 
     private void Awake()
     {
+        flowerCollection.Load();
         if(flowerCollection.unlockedFlowers[flowerReference])//Está desbloqueada
         {
             gameObject.SetActive(false);

@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     private Collider2D _collider;
 
     // Local Variables
-    private Vector2 _moveDirection = new Vector2(0,0);
+    private Vector2 _moveDirection = new Vector2(0, 0);
     private Vector2 _lookDirection = new Vector2(1, 0);
     private float _staminaRegenTimer = 0;
     private float _lastOxygenSeconds = 4;
@@ -53,6 +53,12 @@ public class PlayerController : MonoBehaviour
     [Space(5)]
     [Header("Weak Attack")]
     [SerializeField] private WeakAttackController _weakAttack;
+
+    [Space(5)]
+    [Header("Oxygen Alerts")]
+    [SerializeField] private AudioClip _oxygenAlert50;
+    [SerializeField] private AudioClip _oxygenAlert10;
+
 
     // MOVE TO PLAYER DATA (COMPLETAR)
     [Space(5)]
@@ -389,14 +395,12 @@ public class PlayerController : MonoBehaviour
 
             if (percentage < 50 && !_50PercentAlertPlayed)
             {
-                // Play 50% alert COMPLETAR
-                Debug.Log("OXYGEN 50%");
+                GameManager.Instance.GetComponent<AudioManager>().PlaySound(_oxygenAlert50);
                 _50PercentAlertPlayed = true;
             }
             else if(percentage < 10 && !_10PercentAlertPlayed)
             {
-                // Play 10% alert COMPLETAR
-                Debug.Log("OXYGEN 10%");
+                GameManager.Instance.GetComponent<AudioManager>().PlaySound(_oxygenAlert10);
                 _10PercentAlertPlayed = true;
             }
             else if(_playerData.Oxygen <= 0)

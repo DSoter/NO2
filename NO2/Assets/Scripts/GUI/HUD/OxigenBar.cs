@@ -8,9 +8,11 @@ public class OxigenBar : MonoBehaviour
     [SerializeField] private PlayerData _playerData;
     [SerializeField] private Image _fill;
     [SerializeField] private TextMeshProUGUI _percentageTMP;
+    private Animator _percentageAnimator;
 
     private void Start()
     {
+        _percentageAnimator = _percentageTMP.gameObject.GetComponent<Animator>();
         UpdateCurrentOxigen();
     }
 
@@ -27,6 +29,8 @@ public class OxigenBar : MonoBehaviour
     private void UpdateCurrentOxigen()
     {
         int percentage = (int)(_playerData.Oxygen / _playerData.MaxOxygen * 100);
+
+        _percentageAnimator.SetFloat("Percentage", percentage);
 
         _percentageTMP.text = percentage.ToString() + "%";
 

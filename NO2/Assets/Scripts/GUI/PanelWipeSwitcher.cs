@@ -40,7 +40,6 @@ public class PanelWipeSwitcher : MonoBehaviour
         DiverseMenusManager dm = FindAnyObjectByType<DiverseMenusManager>();
         if (dm != null)
         {
-            int id;
             MenuType menuType;
             menuType = dm.GetMenuType();
             switch (menuType)

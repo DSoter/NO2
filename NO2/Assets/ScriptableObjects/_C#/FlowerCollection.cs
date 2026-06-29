@@ -17,7 +17,7 @@ public class FlowerCollection : ScriptableObject
         {
             unlockedFlowers.Add(f, false);
         }
-        Debug.Log(unlockedFlowers);
+        Debug.Log(unlockedFlowers[allFlowers[1]] );
         
     }
 

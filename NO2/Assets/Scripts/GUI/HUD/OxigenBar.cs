@@ -10,9 +10,12 @@ public class OxigenBar : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _percentageTMP;
     private Animator _percentageAnimator;
 
-    private void Start()
+    private void Awake()
     {
         _percentageAnimator = _percentageTMP.gameObject.GetComponent<Animator>();
+    }
+    private void Start()
+    {
         UpdateCurrentOxigen();
     }
 

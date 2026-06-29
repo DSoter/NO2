@@ -145,6 +145,7 @@ public class CheckpointManager : MonoBehaviour
 
     public void RespawnPlayer()
     {
+        Debug.Log(idRespawn);
         StartCoroutine(RespawnCoroutine());
     }
 

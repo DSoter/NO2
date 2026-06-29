@@ -77,8 +77,8 @@ public class ChangeFlowersManager : MonoBehaviour
         currentFlowerImage.sprite = currentFlower.flowerIcon;
         if (!flowerCollection.unlockedFlowers[currentFlower])//si no está desbloqueada 
         {
-            currentFlowerImage.color = Color.gray7;
-            descriptionText.text = "Información sin descubrir";
+            currentFlowerImage.color = Color.gray1;
+            descriptionText.text = "Informacion sin descubrir";
             flowerName.text = "Flor ?";
         }
         else
@@ -93,7 +93,7 @@ public class ChangeFlowersManager : MonoBehaviour
         upFlowerImage.sprite = upFlower.flowerIcon;
         if (!flowerCollection.unlockedFlowers[upFlower])//si no está desbloqueada 
         {
-            upFlowerImage.color = Color.gray7;
+            upFlowerImage.color = Color.gray1;
         }
         else
         {
@@ -106,7 +106,7 @@ public class ChangeFlowersManager : MonoBehaviour
 
         if (!flowerCollection.unlockedFlowers[downFlower])//si no está desbloqueada 
         {
-            downFlowerImage.color = Color.gray7;
+            downFlowerImage.color = Color.gray1;
         }
         else
         {

@@ -163,6 +163,7 @@ public class SceneController : MonoBehaviour
         player = Instantiate<GameObject>(prefabPersonaje);
         _checkpointManager.PlayerReference = player.transform;
         _playerController = player.GetComponent<PlayerController>();
+        _playerController.ResetOxygen();
         player.transform.position = currentSpawnPoint.transform.position;
     }
 

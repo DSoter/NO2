@@ -423,6 +423,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void ResetOxygen()
+    {
+        _playerData.Oxygen = _playerData.MaxOxygen;
+    }
 
     [ContextMenu("EnterOxigenZone")]
     public void EnterOxigenZone()

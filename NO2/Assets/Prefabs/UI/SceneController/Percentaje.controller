@@ -36,7 +36,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 4
-    m_ConditionEvent: Percetage
+    m_ConditionEvent: Percentage
     m_EventTreshold: 10
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4909893496349398055}
@@ -61,7 +61,7 @@ AnimatorController:
   m_Name: Percentaje
   serializedVersion: 6
   m_AnimatorParameters:
-  - m_Name: Percetage
+  - m_Name: Percentage
     m_Type: 1
     m_DefaultFloat: 100
     m_DefaultInt: 0
@@ -117,7 +117,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 3
-    m_ConditionEvent: Percetage
+    m_ConditionEvent: Percentage
     m_EventTreshold: 10
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2440302511834533306}

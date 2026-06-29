@@ -18,9 +18,13 @@ public class PlayerController : MonoBehaviour
     private Collider2D _collider;
 
     // Local Variables
-    private Vector2 _moveDirection = new Vector2(0,0);
+    private Vector2 _moveDirection = new Vector2(0, 0);
     private Vector2 _lookDirection = new Vector2(1, 0);
     private float _staminaRegenTimer = 0;
+    private float _lastOxygenSeconds = 4;
+    private float _lastOxygenTimer = 0;
+    private bool _50PercentAlertPlayed = false;
+    private bool _10PercentAlertPlayed = false;
     private int _attackCounter = 0;
     private bool _areInputsEnabled = true;
     private bool _isOnOxigenZone = false;
@@ -49,6 +53,12 @@ public class PlayerController : MonoBehaviour
     [Space(5)]
     [Header("Weak Attack")]
     [SerializeField] private WeakAttackController _weakAttack;
+
+    [Space(5)]
+    [Header("Oxygen Alerts")]
+    [SerializeField] private AudioClip _oxygenAlert50;
+    [SerializeField] private AudioClip _oxygenAlert10;
+
 
     // MOVE TO PLAYER DATA (COMPLETAR)
     [Space(5)]
@@ -341,9 +351,12 @@ public class PlayerController : MonoBehaviour
 
     public void Death()//and respawn other player or the logic
     {
-        if (deathSound != null)
-            GameManager.Instance.audioManager.PlaySound(deathSound);
-        StartCoroutine(WaitAndKill(deathAnimationSeconds));
+        if (_state != PlayerState.Dead)
+        {
+            if (deathSound != null)
+                GameManager.Instance.audioManager.PlaySound(deathSound);
+            StartCoroutine(WaitAndKill(deathAnimationSeconds));
+        }
     }
     IEnumerator WaitAndKill(float segundos)
     {
@@ -377,13 +390,49 @@ public class PlayerController : MonoBehaviour
         else
         {
             _playerData.Oxygen = Mathf.Max(0, _playerData.Oxygen - _playerData.OxygenDropingSpeed * Time.deltaTime);
+
+            float percentage = _playerData.Oxygen / _playerData.MaxOxygen * 100;
+
+            if (percentage < 50 && !_50PercentAlertPlayed)
+            {
+                GameManager.Instance.GetComponent<AudioManager>().PlaySound(_oxygenAlert50);
+                _50PercentAlertPlayed = true;
+            }
+            else if(percentage < 10 && !_10PercentAlertPlayed)
+            {
+                GameManager.Instance.GetComponent<AudioManager>().PlaySound(_oxygenAlert10);
+                _10PercentAlertPlayed = true;
+            }
+            else if(_playerData.Oxygen <= 0)
+            {
+                HandleLastSeconds();
+            }
         }
     }
+
+    private void HandleLastSeconds()
+    {
+        
+        if(_lastOxygenTimer < _lastOxygenSeconds)
+        {
+            _lastOxygenTimer += Time.deltaTime;
+        }
+        else
+        {
+            Death();
+        }
+    }
+
 
     [ContextMenu("EnterOxigenZone")]
     public void EnterOxigenZone()
     {
+        // Play Oxigen Refilling COMPLETAR
         _isOnOxigenZone = true;
+
+        _lastOxygenTimer = 0;
+        _50PercentAlertPlayed = false;
+        _10PercentAlertPlayed = false;
     }
 
     [ContextMenu("ExitOxigenZone")]

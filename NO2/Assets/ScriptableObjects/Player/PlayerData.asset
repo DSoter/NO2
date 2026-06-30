@@ -25,6 +25,7 @@ MonoBehaviour:
   maxOxygen: 120
   oxygenDropingSpeed: 1
   oxygenRegenerationSpeed: 60
+  lastOxygenSeconds: 4
   walkingSpeed: 3
   runningSpeed: 5
   iniRollingSpeed: 12

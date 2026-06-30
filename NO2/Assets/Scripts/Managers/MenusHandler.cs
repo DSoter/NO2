@@ -59,10 +59,14 @@ public class MenusHandler : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         _gameOverPopUp.Show(
             "Has muerto",
-            onConfirm: () => _checkpointManager.RespawnAfterGameOver()
+            onConfirm: () => ConfirmRespawn()
         );
     }
-
+    private void ConfirmRespawn()
+    {
+        _diverseMenusManager.SetMenuType(DiverseMenusManager.MenuType.Flowers);
+        _checkpointManager.RespawnAfterGameOver();
+    }
     public void OpenFlowerMenu()
     {
         _gameOverCanvas.SetActive(false);

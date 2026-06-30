@@ -91,13 +91,20 @@ public class DiverseMenusManager : MonoBehaviour
             }
             else
             {
-                //if (exitPauseSound != null)
-                //    GameManager.Instance.audioManager.PlaySound(exitPauseSound);
-                CloseFlowers();
-                Time.timeScale = 1f;
-                SceneManager.UnloadSceneAsync(menusSceneName);
+                if(_menuType == MenuType.Gameover)
+                {
+                    Time.timeScale = 1f;
+                    SceneManager.UnloadSceneAsync(menusSceneName);
+                    SceneManager.LoadScene("MenuPrincipal");
+                }
+                else {
+                    //if (exitPauseSound != null)
+                    //    GameManager.Instance.audioManager.PlaySound(exitPauseSound);
+                    CloseFlowers();
+                    Time.timeScale = 1f;
+                    SceneManager.UnloadSceneAsync(menusSceneName);
 
-
+                }
             }
         }
 

@@ -27,6 +27,7 @@ public class PlayerData : ScriptableObject
     [SerializeField] private float maxOxygen;
     [SerializeField] private float oxygenDropingSpeed;
     [SerializeField] private float oxygenRegenerationSpeed;
+    [SerializeField] private float lastOxygenSeconds;
 
     [Space(5)]
     [Header("Speeds")]
@@ -134,6 +135,11 @@ public class PlayerData : ScriptableObject
     public float OxygenRegenerationSpeed
     {
         get { return oxygenRegenerationSpeed; }
+    }
+    public float LastOxygenSeconds
+    {
+        get { return lastOxygenSeconds; }
+        set { lastOxygenSeconds = value; }
     }
 
     public float WalkingSpeed

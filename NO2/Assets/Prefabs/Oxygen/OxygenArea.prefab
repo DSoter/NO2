@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3934381448577092082}
   - component: {fileID: 1259781470417437746}
   - component: {fileID: 7341859080973720632}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: OxygenArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}

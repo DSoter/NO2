@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 05bbf017c39981143a04eee4e78c7852
+guid: 9b3ae81e03f4f2b439f972e4526e3f18
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8922316765084669469
-    second: Oxigen_Tank_0
+      213: 5471404435379135140
+    second: Oxigen_Tank_Mask 1_0
   - first:
-      213: -8043309100298978358
-    second: Oxigen_Tank_1
+      213: 4322388971080668343
+    second: Oxigen_Tank_Mask 1_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -52,8 +52,8 @@ TextureImporter:
   spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 9
-  spritePivot: {x: 0.46052632, y: 0.44871795}
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -103,7 +103,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Oxigen_Tank_0
+      name: Oxigen_Tank_Mask 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -111,21 +111,21 @@ TextureImporter:
         width: 36
         height: 36
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d16526c43df62db70800000000000000
-      internalID: 8922316765084669469
+      spriteID: 4a2254168555eeb40800000000000000
+      internalID: 5471404435379135140
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Oxigen_Tank_1
+      name: Oxigen_Tank_Mask 1_1
       rect:
         serializedVersion: 2
         x: 29
@@ -133,15 +133,15 @@ TextureImporter:
         width: 9
         height: 9
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: acb33021dfc606090800000000000000
-      internalID: -8043309100298978358
+      spriteID: 7b454524ed53cfb30800000000000000
+      internalID: 4322388971080668343
       vertices: []
       indices: 
       edges: []
@@ -151,7 +151,7 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -160,8 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Oxigen_Tank_0: 8922316765084669469
-      Oxigen_Tank_1: -8043309100298978358
+      Oxigen_Tank_Mask 1_0: 5471404435379135140
+      Oxigen_Tank_Mask 1_1: 4322388971080668343
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

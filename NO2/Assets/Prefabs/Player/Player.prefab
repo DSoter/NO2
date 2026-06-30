@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 6281903768332715252}
   - component: {fileID: 1510909487537404138}
   - component: {fileID: 3006558068619297952}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WeakAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -426,7 +426,7 @@ GameObject:
   - component: {fileID: 132464971765904495}
   - component: {fileID: 898727236085585093}
   - component: {fileID: 8272714048974360551}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}

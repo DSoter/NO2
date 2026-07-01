@@ -1,11 +1,6 @@
-  using NUnit.Framework;
-using System;
 using System.Collections;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SocialPlatforms.GameCenter;
-using UnityEngine.UI;
 
 // AYUDA PORFAVOR
 

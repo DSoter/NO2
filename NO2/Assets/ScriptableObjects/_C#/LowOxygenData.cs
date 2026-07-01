@@ -45,11 +45,11 @@ public class LowOxygenData : ScriptableObject
 
     private void UpdateTransparency()
     {
-        int percentage = (int)(_playerData.Oxygen / _playerData.MaxOxygen * 100);
+        float percentage = (_playerData.Oxygen / _playerData.MaxOxygen * 100);
 
-        if (percentage <= 20)
+        if (percentage <= 10)
         {
-            float t = 1f - (percentage / 20f);
+            float t = 1f - (percentage / 10f);
             transparency = Mathf.Lerp(0.05f, 0.55f, t);
         }
         else

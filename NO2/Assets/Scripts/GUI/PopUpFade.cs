@@ -47,7 +47,6 @@ public class PopUpFade : MonoBehaviour
             
             if (messageColorIn.a >= 1)
             {
-                Debug.Log("Terminado de fade in");
                 isFadingIn = false;
 
 
@@ -98,6 +97,32 @@ public class PopUpFade : MonoBehaviour
 
         confirmButton.onClick.AddListener(() => { FadeOut(); });
 
+    }
+    public void ShowWithoutFadeIn(string message, UnityAction onConfirm)
+    {
+        fondoPanel = panel.GetComponent<Image>();
+        textoBoton = confirmButton.GetComponentInChildren<Text>();
+
+        pushedConfirm = onConfirm;
+
+        messageText.text = message;
+
+        Color panelColorIn = fondoPanel.color;
+        panelColorIn.a = 1;
+        fondoPanel.color = panelColorIn;
+
+        Color buttonColorIn = textoBoton.color;
+        buttonColorIn.a = 1;
+        textoBoton.color = buttonColorIn;
+
+        Color messageColorIn = messageText.color;
+        messageColorIn.a = 1;
+        messageText.color = messageColorIn;
+
+        // Limpiar listeners anteriores
+        confirmButton.onClick.RemoveAllListeners();
+
+        confirmButton.onClick.AddListener(() => { FadeOut(); });
     }
 
     public void Hide()

@@ -17,6 +17,8 @@ public class DiverseMenusManager : MonoBehaviour
     private MenuType _menuType;
     private MenuType _futureMenuType;
 
+
+
     public MenuType GetMenuType()
     {
         return _menuType;
@@ -35,6 +37,7 @@ public class DiverseMenusManager : MonoBehaviour
     }
 
 
+
     [SerializeField] private string menusSceneName = "MenusAndGameOver";
 
     // InputSystem 
@@ -47,6 +50,15 @@ public class DiverseMenusManager : MonoBehaviour
     private bool _isOpen;
 
     private bool _wantsToPause;
+
+    private bool gameOverWithoutFadeIn;
+
+    public bool GameOverWithoutFadeIn
+    {
+        get { return gameOverWithoutFadeIn; }
+        set { gameOverWithoutFadeIn = value; }
+    }
+
 
     public bool _WantsToPause
     {

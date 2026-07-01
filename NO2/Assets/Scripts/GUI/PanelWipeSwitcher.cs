@@ -7,6 +7,7 @@ public class PanelWipeSwitcher : MonoBehaviour
 {
     [SerializeField] private GameObject[] panels; 
     [SerializeField] private GameObject[] insidePanels;
+    [SerializeField] private GameObject[] qeBars;
     [SerializeField] private RectTransform wipeCurtain;
     [SerializeField] private float wipeDurationSeconds = 0.4f;
 
@@ -70,13 +71,16 @@ public class PanelWipeSwitcher : MonoBehaviour
             t += Time.unscaledDeltaTime;
             float p = easeCurve.Evaluate(Mathf.Clamp01(t / wipeDurationSeconds));
             insidePanels[currentIndex].transform.localScale = new Vector3(1f - p, 1f, 1f);
+            qeBars[currentIndex].transform.localScale = new Vector3(1f - p, 1f, 1f);
             yield return null;
         }
         insidePanels[currentIndex].transform.localScale = Vector3.zero;
+        qeBars[currentIndex].transform.localScale = Vector3.zero;
         panels[currentIndex].SetActive(false);
 
         // Panel siguiente expande de 0 a 1
         insidePanels[nextIndex].transform.localScale = new Vector3(0f, 1f, 1f);
+        qeBars[nextIndex].transform.localScale = new Vector3(0f, 1f, 1f);
         panels[nextIndex].SetActive(true);
         t = 0f;
         while (t < wipeDurationSeconds)
@@ -84,9 +88,11 @@ public class PanelWipeSwitcher : MonoBehaviour
             t += Time.unscaledDeltaTime;
             float p = easeCurve.Evaluate(Mathf.Clamp01(t / wipeDurationSeconds));
             insidePanels[nextIndex].transform.localScale = new Vector3(p, 1f, 1f);
+            qeBars[nextIndex].transform.localScale = new Vector3(p, 1f, 1f);
             yield return null;
         }
         insidePanels[nextIndex].transform.localScale = Vector3.one;
+        qeBars[nextIndex].transform.localScale = Vector3.one;
 
         currentIndex = nextIndex;
         isTransitioning = false;

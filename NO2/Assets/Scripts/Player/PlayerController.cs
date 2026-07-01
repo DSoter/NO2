@@ -381,6 +381,37 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public void DeathWithoutOxygen()//and respawn other player or the logic
+    {
+        if (_state != PlayerState.Dead)
+        {
+            if (deathSound != null)
+                GameManager.Instance.audioManager.PlaySound(deathSound);
+            StartCoroutine(WaitAndKillWithoutOxygen(deathAnimationSeconds));
+        }
+    }
+    IEnumerator WaitAndKillWithoutOxygen(float segundos)
+    {
+        SetDead(true);
+        _renderer.color = Color.red;
+        CheckpointManager cm = GameManager.Instance.GetComponent<CheckpointManager>();
+
+        cm.CameraLockedPlayer = true;
+
+        yield return new WaitForSeconds(segundos);
+
+        SetDead(false);
+
+        DisposeActions();
+
+
+        cm.PlayerReference = transform;
+        Destroy(gameObject); // Destruir primero
+        cm.CameraLockedPlayer = false;
+        cm.RespawnPlayerAfterNoOxygen(); // Llamar despues, desde un objeto que sobrevive
+
+    }
+
 
     private void HandleOxigen()
     {
@@ -421,6 +452,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             Death();
+            //DeathWithoutOxygen(); Ahora mismo no va
         }
     }
 

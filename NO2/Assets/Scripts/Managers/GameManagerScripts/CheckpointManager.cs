@@ -148,6 +148,11 @@ public class CheckpointManager : MonoBehaviour
         Debug.Log(idRespawn);
         StartCoroutine(RespawnCoroutine());
     }
+    public void RespawnPlayerAfterNoOxygen()
+    {
+        Debug.Log(idRespawn);
+        StartCoroutine(RespawnAfterNoOxygenCoroutine());
+    }
 
     private IEnumerator RespawnCoroutine()
     {
@@ -158,6 +163,16 @@ public class CheckpointManager : MonoBehaviour
         
 
         
+    }
+    private IEnumerator RespawnAfterNoOxygenCoroutine()
+    {
+        yield return null;
+
+        OpenGameOverWithoutFadeIn();
+
+
+
+
     }
 
 
@@ -206,6 +221,16 @@ public class CheckpointManager : MonoBehaviour
         managerPaused = true;
         _menusManager = GameManager.Instance.GetComponent<DiverseMenusManager>();
         _menusManager.SetMenuType(DiverseMenusManager.MenuType.Gameover);
+        _menusManager.OpenMenus();
+    }
+
+    private void OpenGameOverWithoutFadeIn()
+    {
+        managerPaused = true;
+        _menusManager = GameManager.Instance.GetComponent<DiverseMenusManager>();
+        _menusManager.SetMenuType(DiverseMenusManager.MenuType.Gameover);
+        _menusManager.GameOverWithoutFadeIn = true;
+        Debug.Log("Game over without fade in");
         _menusManager.OpenMenus();
     }
 

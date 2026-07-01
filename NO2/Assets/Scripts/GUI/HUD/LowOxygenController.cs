@@ -27,6 +27,7 @@ public class LowOxygenController : MonoBehaviour
             }
             else 
             {
+                loData.TimePassedOn0 = 0;
                 color.a = transparency;
                 image.color = color;
             }
@@ -34,17 +35,18 @@ public class LowOxygenController : MonoBehaviour
         }
         else
         {
-            if (loData.Transparency <= loData.MaxTransparency)
+            if (loData.Transparency < loData.MaxTransparency)
             {
-                isDying = false;
                 loData.TimePassedOn0 = 0;
+                isDying = false;
+                
                 //hacer animación con corutina de ir volviendose clara progresivamente
             }
             else
             {
                 loData.TimePassedOn0 += Time.deltaTime;
                 float t = Mathf.Clamp01(loData.TimePassedOn0 / loData.MaxTimeOn0);
-                color.a = Mathf.Lerp(loData.MaxTransparency, 0.9f, t);
+                color.a = Mathf.Lerp(loData.MaxTransparency, 0.99f, t);
                 image.color = color;
             }
         }

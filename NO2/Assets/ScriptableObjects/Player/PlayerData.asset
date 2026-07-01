@@ -21,7 +21,7 @@ MonoBehaviour:
   runningStaminaCost: 10
   rollingStaminaCost: 10
   weakAttackStaminaCost: 5
-  oxygen: 55.67873
+  oxygen: 0
   maxOxygen: 120
   oxygenDropingSpeed: 1
   oxygenRegenerationSpeed: 60
@@ -35,4 +35,4 @@ MonoBehaviour:
   weakAttackSeconds: 0.5
   basicAttackDamage: 0
   chargeAttackDamage: 0
-  equipedFlower: {fileID: 11400000, guid: fd9f4be6101608f4f8c01e3e92e1d8e5, type: 2}
+  equipedFlower: {fileID: 11400000, guid: 60ac8c1bf6427a9419740f1d14774564, type: 2}

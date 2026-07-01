@@ -40,13 +40,13 @@ public class LowOxygenController : MonoBehaviour
                 loData.TimePassedOn0 = 0;
                 isDying = false;
                 
-                //hacer animación con corutina de ir volviendose clara progresivamente
+                //hacer animaciï¿½n con corutina de ir volviendose clara progresivamente
             }
             else
             {
                 loData.TimePassedOn0 += Time.deltaTime;
                 float t = Mathf.Clamp01(loData.TimePassedOn0 / loData.MaxTimeOn0);
-                color.a = Mathf.Lerp(loData.MaxTransparency, 0.99f, t);
+                color.a = Mathf.Lerp(loData.MaxTransparency, 1.0f, t);
                 image.color = color;
             }
         }

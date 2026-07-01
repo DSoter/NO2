@@ -65,6 +65,10 @@ public class DiverseMenusManager : MonoBehaviour
         get { return _wantsToPause; }
         set { _wantsToPause = value; }
     }
+    public bool _IsOpen
+    {
+        get { return _isOpen; }
+    }
 
     private void Awake()
     {
@@ -96,13 +100,13 @@ public class DiverseMenusManager : MonoBehaviour
 
             if (_isOpen)
             {
-            
 
                 Time.timeScale = 0f;
                 SceneManager.LoadScene(menusSceneName, LoadSceneMode.Additive);
             }
             else
             {
+                
                 if(_menuType == MenuType.Gameover)
                 {
                     Time.timeScale = 1f;

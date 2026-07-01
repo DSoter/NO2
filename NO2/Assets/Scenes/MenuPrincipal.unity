@@ -541,8 +541,8 @@ MonoBehaviour:
   sfxMixer: {fileID: 24100000, guid: fad348ec9c2f7484f9ecb5e82f1a49e7, type: 2}
   musicSlider: {fileID: 213256985}
   sfxSlider: {fileID: 1840611228}
-  soundOn: {fileID: 1827507276}
-  soundOff: {fileID: 2013125527}
+  soundOn: {fileID: 35312879219488129}
+  soundOff: {fileID: 35312879219488128}
   actionReference: {fileID: 4014850048532301077, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}
   applyAuxKeybinds:
     m_PersistentCalls:
@@ -764,11 +764,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
---- !u!1 &1827507276 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2764483415849897817, guid: e4cb207a5644d1e46b91785d0dd41bfd, type: 3}
-  m_PrefabInstance: {fileID: 35312879219488127}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1840611228 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7179792591464108003, guid: e4cb207a5644d1e46b91785d0dd41bfd, type: 3}
@@ -783,11 +778,6 @@ MonoBehaviour:
 --- !u!1 &1917503296 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1175537312631035883, guid: e4cb207a5644d1e46b91785d0dd41bfd, type: 3}
-  m_PrefabInstance: {fileID: 35312879219488127}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2013125527 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4022655121387113771, guid: e4cb207a5644d1e46b91785d0dd41bfd, type: 3}
   m_PrefabInstance: {fileID: 35312879219488127}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2141946945 stripped
@@ -938,6 +928,10 @@ PrefabInstance:
     - target: {fileID: 1169125755544832655, guid: e4cb207a5644d1e46b91785d0dd41bfd, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1175537312631035883, guid: e4cb207a5644d1e46b91785d0dd41bfd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1317575325558646713, guid: e4cb207a5644d1e46b91785d0dd41bfd, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1289,7 +1283,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8793115195288420920, guid: e4cb207a5644d1e46b91785d0dd41bfd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.000061035
+      value: -0.000061035156
       objectReference: {fileID: 0}
     - target: {fileID: 8793115195288420920, guid: e4cb207a5644d1e46b91785d0dd41bfd, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1316,6 +1310,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4cb207a5644d1e46b91785d0dd41bfd, type: 3}
+--- !u!1 &35312879219488128 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6780453101586590184, guid: e4cb207a5644d1e46b91785d0dd41bfd, type: 3}
+  m_PrefabInstance: {fileID: 35312879219488127}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &35312879219488129 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 192080941155671032, guid: e4cb207a5644d1e46b91785d0dd41bfd, type: 3}
+  m_PrefabInstance: {fileID: 35312879219488127}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

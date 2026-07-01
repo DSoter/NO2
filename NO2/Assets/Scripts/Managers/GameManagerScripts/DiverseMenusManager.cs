@@ -17,6 +17,8 @@ public class DiverseMenusManager : MonoBehaviour
     private MenuType _menuType;
     private MenuType _futureMenuType;
 
+
+
     public MenuType GetMenuType()
     {
         return _menuType;
@@ -35,6 +37,7 @@ public class DiverseMenusManager : MonoBehaviour
     }
 
 
+
     [SerializeField] private string menusSceneName = "MenusAndGameOver";
 
     // InputSystem 
@@ -48,10 +51,23 @@ public class DiverseMenusManager : MonoBehaviour
 
     private bool _wantsToPause;
 
+    private bool gameOverWithoutFadeIn;
+
+    public bool GameOverWithoutFadeIn
+    {
+        get { return gameOverWithoutFadeIn; }
+        set { gameOverWithoutFadeIn = value; }
+    }
+
+
     public bool _WantsToPause
     {
         get { return _wantsToPause; }
         set { _wantsToPause = value; }
+    }
+    public bool _IsOpen
+    {
+        get { return _isOpen; }
     }
 
     private void Awake()
@@ -84,20 +100,27 @@ public class DiverseMenusManager : MonoBehaviour
 
             if (_isOpen)
             {
-            
 
                 Time.timeScale = 0f;
                 SceneManager.LoadScene(menusSceneName, LoadSceneMode.Additive);
             }
             else
             {
-                //if (exitPauseSound != null)
-                //    GameManager.Instance.audioManager.PlaySound(exitPauseSound);
-                CloseFlowers();
-                Time.timeScale = 1f;
-                SceneManager.UnloadSceneAsync(menusSceneName);
+                
+                if(_menuType == MenuType.Gameover)
+                {
+                    Time.timeScale = 1f;
+                    SceneManager.UnloadSceneAsync(menusSceneName);
+                    SceneManager.LoadScene("MenuPrincipal");
+                }
+                else {
+                    //if (exitPauseSound != null)
+                    //    GameManager.Instance.audioManager.PlaySound(exitPauseSound);
+                    CloseFlowers();
+                    Time.timeScale = 1f;
+                    SceneManager.UnloadSceneAsync(menusSceneName);
 
-
+                }
             }
         }
 

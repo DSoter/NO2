@@ -13,7 +13,6 @@ public class MenusHandler : MonoBehaviour
     private CheckpointManager _checkpointManager;
     private DiverseMenusManager _diverseMenusManager;
 
-    
 
 
     public void Awake()
@@ -27,7 +26,17 @@ public class MenusHandler : MonoBehaviour
             //Badges 2
             //Flowers 3
             case DiverseMenusManager.MenuType.Gameover:
-                OpenGameOver();
+                Debug.Log("Dentro GameOver");
+                if (_diverseMenusManager.GameOverWithoutFadeIn)
+                {
+                    _diverseMenusManager.GameOverWithoutFadeIn=false;
+                    OpenGameOverWithoutFadeIn();
+                }
+                else 
+                { 
+                    OpenGameOver();
+                }
+                    
                 break;
             case DiverseMenusManager.MenuType.Map:
                 OpenMapMenu();
@@ -59,10 +68,33 @@ public class MenusHandler : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         _gameOverPopUp.Show(
             "Has muerto",
-            onConfirm: () => _checkpointManager.RespawnAfterGameOver()
+            onConfirm: () => ConfirmRespawn()
         );
     }
+    public void OpenGameOverWithoutFadeIn()
+    {
+        //_gameOverCanvas.SetActive(true);
+        _flowerCanvas.SetActive(false);
+        _badgesCanvas.SetActive(false);
+        _mapCanvas.SetActive(false);
 
+        _checkpointManager = GameManager.Instance.GetComponent<CheckpointManager>();
+        _diverseMenusManager = GameManager.Instance.GetComponent<DiverseMenusManager>();
+
+        //_gameOverCanvas.SetActive(true);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        Debug.Log(_gameOverPopUp);
+        _gameOverPopUp.ShowWithoutFadeIn(
+            "Has muerto",
+            onConfirm: () => ConfirmRespawn()
+        );
+    }
+    private void ConfirmRespawn()
+    {
+        _diverseMenusManager.SetMenuType(DiverseMenusManager.MenuType.Flowers);
+        _checkpointManager.RespawnAfterGameOver();
+    }
     public void OpenFlowerMenu()
     {
         _gameOverCanvas.SetActive(false);

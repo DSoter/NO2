@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 _moveDirection = new Vector2(0, 0);
     private Vector2 _lookDirection = new Vector2(1, 0);
     private float _staminaRegenTimer = 0;
-    private float _lastOxygenSeconds = 4;
+    private float _lastOxygenSeconds;
     private float _lastOxygenTimer = 0;
     private bool _50PercentAlertPlayed = false;
     private bool _10PercentAlertPlayed = false;
@@ -106,6 +106,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log($"Move action enabled: {_inputSystemReference.FindActionMap("Player").FindAction("Move").enabled}");
 
         _playerData.Stamina = _playerData.MaxStamina;
+        _lastOxygenSeconds = _playerData.LastOxygenSeconds;
     }
 
     private void Update()
@@ -391,6 +392,37 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public void DeathWithoutOxygen()//and respawn other player or the logic
+    {
+        if (_state != PlayerState.Dead)
+        {
+            if (deathSound != null)
+                GameManager.Instance.audioManager.PlaySound(deathSound);
+            StartCoroutine(WaitAndKillWithoutOxygen(deathAnimationSeconds));
+        }
+    }
+    IEnumerator WaitAndKillWithoutOxygen(float segundos)
+    {
+        SetDead(true);
+        _renderer.color = Color.red;
+        CheckpointManager cm = GameManager.Instance.GetComponent<CheckpointManager>();
+
+        cm.CameraLockedPlayer = true;
+
+        yield return new WaitForSeconds(segundos);
+
+        SetDead(false);
+
+        DisposeActions();
+
+
+        cm.PlayerReference = transform;
+        Destroy(gameObject); // Destruir primero
+        cm.CameraLockedPlayer = false;
+        cm.RespawnPlayerAfterNoOxygen(); // Llamar despues, desde un objeto que sobrevive
+
+    }
+
 
     private void HandleOxigen()
     {
@@ -431,6 +463,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             Death();
+            //DeathWithoutOxygen(); Ahora mismo no va
         }
     }
 

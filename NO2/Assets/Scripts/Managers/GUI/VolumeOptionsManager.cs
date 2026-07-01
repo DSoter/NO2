@@ -83,6 +83,7 @@ public class VolumeOptionsManager : MonoBehaviour
             : -80f;
         masterMixer.SetFloat("MusicVolume", db);
         PlayerPrefs.SetFloat("MusicVolume", value);
+        
     }
     void SetMasterVolume(float value)
     {
@@ -92,15 +93,6 @@ public class VolumeOptionsManager : MonoBehaviour
             : -80f;
         masterMixer.SetFloat("MasterVolume", db);
         PlayerPrefs.SetFloat("MasterVolume", value);
-    }
-    void SetSFXVolume(float value)
-    {
-        // Convierte lineal → logarítmico (así suena natural)
-        float db = value > 0.001f
-            ? Mathf.Log10(value) * 20f
-            : -80f;
-        masterMixer.SetFloat("SFXVolume", db);
-        PlayerPrefs.SetFloat("SFXVolume", value);
         if (value < 0.01)
         {
             soundOn.SetActive(false);
@@ -111,6 +103,16 @@ public class VolumeOptionsManager : MonoBehaviour
             soundOn.SetActive(true);
             soundOff.SetActive(false);
         }
+    }
+    void SetSFXVolume(float value)
+    {
+        // Convierte lineal → logarítmico (así suena natural)
+        float db = value > 0.001f
+            ? Mathf.Log10(value) * 20f
+            : -80f;
+        masterMixer.SetFloat("SFXVolume", db);
+        PlayerPrefs.SetFloat("SFXVolume", value);
+        
     }
 
     void OnEnable()

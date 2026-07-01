@@ -4,7 +4,6 @@ using System.Collections;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SocialPlatforms.GameCenter;
 using UnityEngine.UI;
 
 // AYUDA PORFAVOR
@@ -60,15 +59,6 @@ public class PlayerController : MonoBehaviour
     [Header("Oxygen Alerts")]
     [SerializeField] private AudioClip _oxygenAlert50;
     [SerializeField] private AudioClip _oxygenAlert10;
-
-    [Space(5)]
-    [Header("Center")]
-    [SerializeField] private Transform _center;
-
-    public Transform Center 
-    {
-        get { return _center; }
-    }
 
 
     // MOVE TO PLAYER DATA (COMPLETAR)

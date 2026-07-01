@@ -527,7 +527,6 @@ MonoBehaviour:
   _weakAttack: {fileID: 3006558068619297952}
   _oxygenAlert50: {fileID: 8300000, guid: 2c033969aabb4bd4c91567926048c0e6, type: 3}
   _oxygenAlert10: {fileID: 8300000, guid: c7f1125c2254d6f44be4fdbb6b7613e3, type: 3}
-  _center: {fileID: 5462389359428988880}
   deathAnimationSeconds: 1
   _acceleration: 25
   _attackImpulse: 2

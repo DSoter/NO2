@@ -71,7 +71,7 @@ public class PlayerData : ScriptableObject
     {
         get { return stamina; }
         set
-        {
+        { 
             stamina = value; 
             OnStaminaChanged?.Invoke();
         }
@@ -80,9 +80,8 @@ public class PlayerData : ScriptableObject
     public float Oxygen
     {
         get { return oxygen; }
-        set 
-        {
-            oxygen = Mathf.Clamp(value, 0, maxOxygen);
+        set {
+            oxygen = value; 
             OnOxygenChanged?.Invoke();
         }
     }

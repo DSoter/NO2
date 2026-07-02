@@ -109,8 +109,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1236160753
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 1214327536532187885, guid: a30740e1d7b9b104ea0d5efec511f421, type: 3}
@@ -1196,6 +1196,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RenderMinimap
       objectReference: {fileID: 0}
+    - target: {fileID: 217007838971998997, guid: 7acd3985fdff7074fbf265427b80375f, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 4226192224711373637, guid: 7acd3985fdff7074fbf265427b80375f, type: 3}
       propertyPath: m_Name
       value: CamaraMiniMapa
@@ -1297,6 +1301,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 255655421128169799}
     m_Modifications:
+    - target: {fileID: 217007838971998997, guid: 7acd3985fdff7074fbf265427b80375f, type: 3}
+      propertyPath: m_TagString
+      value: MapCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 3154043627642606522, guid: 7acd3985fdff7074fbf265427b80375f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -40
+      objectReference: {fileID: 0}
     - target: {fileID: 4226192224711373637, guid: 7acd3985fdff7074fbf265427b80375f, type: 3}
       propertyPath: m_Name
       value: PruebaCamaraMapa
@@ -1340,6 +1352,10 @@ PrefabInstance:
     - target: {fileID: 6254005031548688495, guid: 7acd3985fdff7074fbf265427b80375f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8905111870488033900, guid: 7acd3985fdff7074fbf265427b80375f, type: 3}
+      propertyPath: field of view
+      value: 35
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

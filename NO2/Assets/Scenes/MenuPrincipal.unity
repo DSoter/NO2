@@ -648,6 +648,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: StartGame
       objectReference: {fileID: 0}
+    - target: {fileID: 2788814752357517967, guid: 22b6e14101003474495177f3323053f6, type: 3}
+      propertyPath: m_Text
+      value: SALIR
+      objectReference: {fileID: 0}
     - target: {fileID: 3256470011597818947, guid: 22b6e14101003474495177f3323053f6, type: 3}
       propertyPath: m_Pivot.x
       value: 0

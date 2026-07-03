@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f3362b1edb0acd43b8fc21193caaf47, type: 3}
   m_Name: OxygenEffect
   m_EditorClassIdentifier: Assembly-CSharp::OxygenEffect
-  _playerData: {fileID: 0}
-  _oxygenAmount: 0
+  _playerData: {fileID: 11400000, guid: 707aa1a40a1bb064193fd4f6f25fcc6a, type: 2}
+  _oxygenAmount: 5

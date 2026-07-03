@@ -10,6 +10,7 @@ public class SiblingRuleTile : RuleTile
     {
         Sand,
         Grass,
+        Wall,
     }
     public SiblingGroup siblingGroup;
 

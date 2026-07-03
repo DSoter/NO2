@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a635138d779c1847885fb028d7d4d39, type: 3}
+  m_Name: TileSueloDienteLeon 13
+  m_EditorClassIdentifier: Assembly-CSharp::SiblingRuleTile
+  m_DefaultSprite: {fileID: -734473550, guid: 5d6da359bb5e98c48ab791a37f5de7ee, type: 3}
+  m_DefaultGameObject: {fileID: 0}
+  m_DefaultColliderType: 1
+  m_TilingRules: []
+  siblingGroup: 0

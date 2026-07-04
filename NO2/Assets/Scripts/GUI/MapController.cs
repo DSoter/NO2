@@ -13,7 +13,9 @@ public class MapController : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField] private float scrollSensitivity = 1f;
 
     [SerializeField] private float panSensitivity = 0.1f;
+    [SerializeField] private float inertiaDeceleration = 9f;
     private bool isDragging = false;
+    private Vector3 velocity = Vector3.zero;
 
 
     private bool isHovered = false;
@@ -23,6 +25,7 @@ public class MapController : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     void Start()
     {
         targetFov = mapCamera.orthographicSize;
+        velocity = Vector3.zero;
     }
 
     public void OnScroll(PointerEventData eventData)
@@ -38,20 +41,36 @@ public class MapController : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         Vector2 delta = eventData.delta;
         float fovScale = mapCamera.orthographicSize / maxFov;
-        Vector3 move = new Vector3(
+        velocity = new Vector3(
             -delta.x * panSensitivity * fovScale,
             -delta.y * panSensitivity * fovScale,
             0f
         );
 
-        mapCamera.transform.position += move;
+        mapCamera.transform.position += velocity;
     }
 
     void Update()
     {
+        if(mapCamera == null)
+        {
+            return;
+        }
         //mapCamera.fieldOfView = Mathf.Lerp(mapCamera.fieldOfView, targetFov, Time.unscaledDeltaTime * 10f);
         mapCamera.orthographicSize = Mathf.Lerp(mapCamera.orthographicSize, targetFov, Time.unscaledDeltaTime * 10f);
-        
+
+        if (isDragging || velocity == Vector3.zero) {
+            return;
+        }
+
+        mapCamera.transform.position += velocity;
+        velocity = Vector3.Lerp(velocity, Vector3.zero, inertiaDeceleration * Time.unscaledDeltaTime);
+
+        if (velocity.magnitude < 0.001f)
+        {
+            velocity = Vector3.zero;
+        }
+
     }
     private void Awake()
     {

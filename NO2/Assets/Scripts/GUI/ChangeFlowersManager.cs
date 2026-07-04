@@ -174,9 +174,8 @@ public class ChangeFlowersManager : MonoBehaviour
         downCircunference.SetActive(true);
         upArrow.SetActive(true);
         downArrow.SetActive(true);
-        leftArrow.SetActive(true);
-        rightArrow.SetActive(true);
-
+        //leftArrow.SetActive(true);
+        //rightArrow.SetActive(true);
     }
     public void DeactivateMenu()
     {
@@ -186,8 +185,8 @@ public class ChangeFlowersManager : MonoBehaviour
         downCircunference.SetActive(false);
         upArrow.SetActive(false);
         downArrow.SetActive(false);
-        leftArrow.SetActive(false);
-        rightArrow.SetActive(false);
+        //leftArrow.SetActive(false);
+        //rightArrow.SetActive(false);
 
         if (flowerCollection.unlockedFlowers[currentFlower])
         {

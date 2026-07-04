@@ -52,6 +52,7 @@ public class PlayerData : ScriptableObject
     [Header("Flowers")]
     [SerializeField] private Flower equipedFlower;
 
+
     // Events
 
     public event Action OnHealthChanged;

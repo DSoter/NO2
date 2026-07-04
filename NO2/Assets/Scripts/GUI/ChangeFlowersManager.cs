@@ -54,7 +54,7 @@ public class ChangeFlowersManager : MonoBehaviour
             //{
             //    UpdateFlowers(equipedFlower);
             //}
-            if (equipedFlower != null)
+            if (equipedFlower == null)
             {
                 equipedFlower = flowers[0];
             }

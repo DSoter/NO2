@@ -1,14 +1,20 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public class MapController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IScrollHandler
+public class MapController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IScrollHandler, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
     [SerializeField] private Camera mapCamera;
     [SerializeField] private string mapCameraTag = "MapCamera";
-    [SerializeField] private float minFov = 15f;
-    [SerializeField] private float maxFov = 100f;
-    [SerializeField] private float scrollSensitivity = 5f;
+    [SerializeField] private float minFov = 5f;
+    [SerializeField] private float maxFov = 50f;
+
+    [SerializeField] private float scrollSensitivity = 1f;
+
+    [SerializeField] private float panSensitivity = 0.1f;
+    private bool isDragging = false;
+
 
     private bool isHovered = false;
 
@@ -16,7 +22,7 @@ public class MapController : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     void Start()
     {
-        targetFov = mapCamera.fieldOfView;
+        targetFov = mapCamera.orthographicSize;
     }
 
     public void OnScroll(PointerEventData eventData)
@@ -26,10 +32,26 @@ public class MapController : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         float scroll = eventData.scrollDelta.y;
         targetFov = Mathf.Clamp(targetFov - scroll * scrollSensitivity, minFov, maxFov);
     }
+    public void OnDrag(PointerEventData eventData)
+    {
+        if (!isDragging || mapCamera == null) return;
+
+        Vector2 delta = eventData.delta;
+        float fovScale = mapCamera.orthographicSize / maxFov;
+        Vector3 move = new Vector3(
+            -delta.x * panSensitivity * fovScale,
+            -delta.y * panSensitivity * fovScale,
+            0f
+        );
+
+        mapCamera.transform.position += move;
+    }
 
     void Update()
     {
-        mapCamera.fieldOfView = Mathf.Lerp(mapCamera.fieldOfView, targetFov, Time.unscaledDeltaTime * 10f);
+        //mapCamera.fieldOfView = Mathf.Lerp(mapCamera.fieldOfView, targetFov, Time.unscaledDeltaTime * 10f);
+        mapCamera.orthographicSize = Mathf.Lerp(mapCamera.orthographicSize, targetFov, Time.unscaledDeltaTime * 10f);
+        
     }
     private void Awake()
     {
@@ -48,6 +70,24 @@ public class MapController : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public void OnPointerExit(PointerEventData eventData)
     {
         isHovered = false;
+    }
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        Debug.Log("Boton clicado");
+        Debug.Log($"Hovering {isHovered}");
+        if (eventData.button == PointerEventData.InputButton.Left && isHovered)
+        {
+            isDragging = true;
+            Debug.Log($"Dragging {isDragging}");
+        }
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            isDragging = false;
+        }
     }
 
 

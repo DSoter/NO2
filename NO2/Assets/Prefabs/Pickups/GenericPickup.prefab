@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4251212145065097912}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: GenericPickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 2258195147183355014}
   - component: {fileID: 2600382142641731206}
   - component: {fileID: 4605560865490896444}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: PullArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 8994673675894543046}
   - component: {fileID: 2297810451965320638}
   - component: {fileID: 5359956088417735099}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Core
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -207,7 +207,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.25, y: 0.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

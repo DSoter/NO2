@@ -41,7 +41,9 @@ public class VolumeOptionsManager : MonoBehaviour
         sfxSlider.value = savedSFX;
 
         //SetBrightness(savedMasterMusic);
+        SetMasterVolume(savedMasterMusic);
         SetMusicVolume(savedMusic);
+        SetSFXVolume(savedSFX);
 
         // Escuchar cambios en los sliders
         masterSlider.onValueChanged.AddListener(SetMasterVolume);

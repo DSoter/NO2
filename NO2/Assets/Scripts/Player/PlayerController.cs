@@ -354,6 +354,10 @@ public class PlayerController : MonoBehaviour
         if (isDead) {
             _state = PlayerState.Dead;
         }
+        else
+        {
+            _state = PlayerState.Move;
+        }
     }
 
     public void Death()//and respawn other player or the logic
@@ -457,8 +461,8 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            Death();
-            //DeathWithoutOxygen(); Ahora mismo no va
+            //Death();
+            DeathWithoutOxygen(); //Ahora mismo no va
         }
     }
 

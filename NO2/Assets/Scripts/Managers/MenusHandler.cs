@@ -92,6 +92,7 @@ public class MenusHandler : MonoBehaviour
     }
     private void ConfirmRespawn()
     {
+
         _diverseMenusManager.SetMenuType(DiverseMenusManager.MenuType.Flowers);
         _checkpointManager.RespawnAfterGameOver();
     }
@@ -127,7 +128,6 @@ public class MenusHandler : MonoBehaviour
         DiverseMenusManager dm = FindAnyObjectByType<DiverseMenusManager>();
         dm.SlideRight();
     }
-
 
 
 }

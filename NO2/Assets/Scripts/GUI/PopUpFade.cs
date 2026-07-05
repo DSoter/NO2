@@ -35,6 +35,7 @@ public class PopUpFade : MonoBehaviour
             Color panelColorIn = fondoPanel.color;
             panelColorIn.a += Time.deltaTime / animationDurationOnSeconds;
             fondoPanel.color = panelColorIn;
+            
 
             Color buttonColorIn = textoBoton.color;
             buttonColorIn.a += Time.deltaTime / animationDurationOnSeconds;
@@ -63,17 +64,16 @@ public class PopUpFade : MonoBehaviour
         }
         if (isFadingOut)
         {
-            Debug.Log("Is fading out");
+            isFadingIn = false;
             Color panelColorOut = fondoPanel.color;
-            panelColorOut.a -= Time.deltaTime / animationDurationOnSeconds;
+            panelColorOut.a -= Time.unscaledDeltaTime / animationDurationOnSeconds;
             fondoPanel.color = panelColorOut;
-
             Color buttonColorOut = textoBoton.color;
-            buttonColorOut.a -= Time.deltaTime / animationDurationOnSeconds;
+            buttonColorOut.a -= Time.unscaledDeltaTime / animationDurationOnSeconds;
             textoBoton.color = buttonColorOut;
 
             Color messageColorOut = messageText.color;
-            messageColorOut.a -= Time.deltaTime / animationDurationOnSeconds;
+            messageColorOut.a -= Time.unscaledDeltaTime / animationDurationOnSeconds;
             messageText.color = messageColorOut;
             if (messageColorOut.a <=0)
             {
@@ -100,12 +100,16 @@ public class PopUpFade : MonoBehaviour
     }
     public void ShowWithoutFadeIn(string message, UnityAction onConfirm)
     {
+        panel.SetActive(true);
         fondoPanel = panel.GetComponent<Image>();
         textoBoton = confirmButton.GetComponentInChildren<Text>();
+
+        
 
         pushedConfirm = onConfirm;
 
         messageText.text = message;
+
 
         Color panelColorIn = fondoPanel.color;
         panelColorIn.a = 1;
@@ -119,6 +123,8 @@ public class PopUpFade : MonoBehaviour
         messageColorIn.a = 1;
         messageText.color = messageColorIn;
 
+
+        Debug.Log("Color a tope");
         // Limpiar listeners anteriores
         confirmButton.onClick.RemoveAllListeners();
 

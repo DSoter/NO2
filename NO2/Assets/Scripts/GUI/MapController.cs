@@ -17,6 +17,8 @@ public class MapController : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     private bool isDragging = false;
     private Vector3 velocity = Vector3.zero;
 
+    private Vector3 initialPosition = Vector3.zero;
+
 
     private bool isHovered = false;
 
@@ -24,8 +26,13 @@ public class MapController : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     void Start()
     {
+        if(mapCamera == null)
+        {
+            return;
+        }
         targetFov = mapCamera.orthographicSize;
         velocity = Vector3.zero;
+        initialPosition = mapCamera.transform.position;
     }
 
     public void OnScroll(PointerEventData eventData)
@@ -81,6 +88,10 @@ public class MapController : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         }
         
     }
+    private void OnDisable()
+    {
+        ResetPosition();
+    }
     public void OnPointerEnter(PointerEventData eventData)
     {
         isHovered = true;
@@ -129,5 +140,12 @@ public class MapController : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             }
         }
         return null;
+    }
+
+
+
+    public void ResetPosition()
+    {
+        mapCamera.transform.position = initialPosition;
     }
 }

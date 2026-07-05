@@ -33,8 +33,10 @@ public class AudioManager : MonoBehaviour
             isPaused = false;
         }
     }
-    public void PlaySound(AudioClip clip)
+    public void PlaySound(AudioClip clip, float volume = 1, float pitchVariation = 0)
     {
+        sfxSource.volume = volume;
+        sfxSource.pitch = 1 + Random.Range(-pitchVariation, pitchVariation);
         sfxSource.PlayOneShot(clip);
     }
 }

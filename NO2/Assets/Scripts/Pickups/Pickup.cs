@@ -10,6 +10,8 @@ public class Pickup : MonoBehaviour
     [Space(5)]
     [Header("Audio")]
     [SerializeField] private AudioClip _onPickClip;
+    [SerializeField] private float _volume = 1f;
+    [SerializeField] private float _pitchVariation = 0.3f;
 
     [Space(5)]
     [Header("Layer Mask")]
@@ -35,7 +37,7 @@ public class Pickup : MonoBehaviour
     {
         if (((1 << collision.gameObject.layer) & _playerLayer) != 0)
         {
-            GameManager.Instance.audioManager.PlaySound(_onPickClip);
+            GameManager.Instance.audioManager.PlaySound(_onPickClip, _volume, _pitchVariation);
 
             if (_effect != null)
             {

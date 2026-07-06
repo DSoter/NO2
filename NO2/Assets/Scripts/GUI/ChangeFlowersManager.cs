@@ -1,8 +1,10 @@
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
+using static PlayerController;
 
 public class ChangeFlowersManager : MonoBehaviour
 {
@@ -25,6 +27,7 @@ public class ChangeFlowersManager : MonoBehaviour
 
     [SerializeField] private GameObject upCircunference;
     [SerializeField] private GameObject downCircunference;
+    [SerializeField] private GameObject middleCircunference;
     [SerializeField] private GameObject upArrow;
     [SerializeField] private GameObject downArrow;
     [SerializeField] private GameObject leftArrow;
@@ -32,6 +35,12 @@ public class ChangeFlowersManager : MonoBehaviour
 
     [SerializeField] private PlayerData playerData;
 
+    private int slideDirection; //1 si es hacia arriba -1 si es hacia abajo
+    private Animator animatorUp;
+    private Animator animatorDown;
+    private Animator animatorMiddle;
+
+    private bool isAnimating;
 
 
     private bool isActive;
@@ -39,6 +48,17 @@ public class ChangeFlowersManager : MonoBehaviour
 
     private void Awake()
     {
+        animatorUp = upCircunference.GetComponent<Animator>();
+        animatorDown = downCircunference.GetComponent <Animator>();
+        animatorMiddle = middleCircunference.GetComponent<Animator>();
+        slideDirection = 0;
+
+        animatorUp.SetInteger("State", 1);
+        animatorUp.SetTrigger("WithoutTransition");
+
+        animatorDown.SetInteger("State",-1);
+        animatorDown.SetTrigger("WithoutTransition");
+
         flowerCollection.Load();
         isActive = false;
         equipedFlower = playerData.EquipedFlower;
@@ -50,7 +70,7 @@ public class ChangeFlowersManager : MonoBehaviour
             //    equipedFlower = flowers[0];
             //}
             //if(!flowerCollection.unlockedFlowers.GetValueOrDefault(equipedFlower)){
-            //    Debug.Log("Error, la flor equipada no est� desbloqueada");
+            //    Debug.Log("Error, la flor equipada no está desbloqueada");
             //}
             //else
             //{
@@ -75,49 +95,137 @@ public class ChangeFlowersManager : MonoBehaviour
     }
     private void UpdateFlowers(Flower nextCurrentFlower)
     {
-        currentFlower = nextCurrentFlower;
-        currentFlowerImage.sprite = currentFlower.flowerIcon;
-        if (!flowerCollection.unlockedFlowers[currentFlower])//si no est� desbloqueada 
-        {
-            currentFlowerImage.color = Color.black;
-            descriptionText.text = "Informacion sin descubrir";
-            flowerName.text = "Flor ?";
-        }
-        else
-        {
-            currentFlowerImage.color = Color.white;
-            descriptionText.text = nextCurrentFlower.description;
-            flowerName.text = nextCurrentFlower.objectName;
-        }
 
 
-        upFlower = ObtainNextFlower(currentFlower);
-        upFlowerImage.sprite = upFlower.flowerIcon;
-        if (!flowerCollection.unlockedFlowers[upFlower])//si no est� desbloqueada 
+        if (slideDirection != 0)
         {
-            upFlowerImage.color = Color.black;
-        }
-        else
-        {
-            upFlowerImage.color = Color.white;
+            StartCoroutine(WaitOneSec());
+            GameObject goUp = upCircunference;
+            GameObject goMid = middleCircunference;
+            GameObject goDown = downCircunference;
+
+            Animator animUp = upCircunference.GetComponent<Animator>();
+            Animator animMid = middleCircunference.GetComponent<Animator>();
+            Animator animDown = downCircunference.GetComponent<Animator>();
+
+            Image imgUp = upFlowerImage;
+            Image imgMid = currentFlowerImage;
+            Image imgDown = downFlowerImage;
+
+            if (slideDirection == -1) // Direccion -1: middle = up, down = middle, up = down
+            {
+                upCircunference = goDown; animatorUp = animDown; upFlowerImage = imgDown;
+                middleCircunference = goUp; animatorMiddle = animUp; currentFlowerImage = imgUp;
+                downCircunference = goMid; animatorDown = animMid; downFlowerImage = imgMid;
+            }
+            else if (slideDirection == 1) // Direccion 1: los círculos middle = down, up = middle, down = up
+            {
+                upCircunference = goMid; animatorUp = animMid; upFlowerImage = imgMid;
+                middleCircunference = goDown; animatorMiddle = animDown; currentFlowerImage = imgDown;
+                downCircunference = goUp; animatorDown = animUp; downFlowerImage = imgUp;
+            }
+
+            //StartCoroutine(AnimateFlowers(currentFlower));
         }
 
+            currentFlower = nextCurrentFlower;
+            currentFlowerImage.sprite = currentFlower.flowerIcon;
+            if (!flowerCollection.unlockedFlowers[currentFlower])//si no está desbloqueada 
+            {
+                currentFlowerImage.color = Color.black;
+                descriptionText.text = "Informacion sin descubrir";
+                flowerName.text = "Flor ?";
+            }
+            else
+            {
+                currentFlowerImage.color = Color.white;
+                descriptionText.text = nextCurrentFlower.description;
+                flowerName.text = nextCurrentFlower.objectName;
+            }
 
-        downFlower = ObtainAnteriorFlower(currentFlower);
-        downFlowerImage.sprite = downFlower.flowerIcon;
 
-        if (!flowerCollection.unlockedFlowers[downFlower])//si no est� desbloqueada 
-        {
-            downFlowerImage.color = Color.black;
-        }
-        else
-        {
-            downFlowerImage.color = Color.white;
-        }
+            upFlower = ObtainNextFlower(currentFlower);
+            upFlowerImage.sprite = upFlower.flowerIcon;
+            if (!flowerCollection.unlockedFlowers[upFlower])//si no está desbloqueada 
+            {
+                upFlowerImage.color = Color.black;
+            }
+            else
+            {
+                upFlowerImage.color = Color.white;
+            }
 
+
+            downFlower = ObtainAnteriorFlower(currentFlower);
+            downFlowerImage.sprite = downFlower.flowerIcon;
+
+            if (!flowerCollection.unlockedFlowers[downFlower])//si no está desbloqueada 
+            {
+                downFlowerImage.color = Color.black;
+            }
+            else
+            {
+                downFlowerImage.color = Color.white;
+            }
         
-        
+
     }
+    private IEnumerator WaitOneSec()
+    {
+        isAnimating = true;
+        yield return new WaitForSecondsRealtime(1);
+        isAnimating= false;
+    }
+
+    //private IEnumerator AnimateFlowers(Flower nextCurrentFlower)
+    //{
+    //    isAnimating = true;
+    //    yield return new WaitForSecondsRealtime(0.5f); //medio segundo, 300 frames
+
+    //    currentFlower = nextCurrentFlower;
+    //    currentFlowerImage.sprite = currentFlower.flowerIcon;
+    //    if (!flowerCollection.unlockedFlowers[currentFlower])//si no está desbloqueada 
+    //    {
+    //        currentFlowerImage.color = Color.black;
+    //        descriptionText.text = "Informacion sin descubrir";
+    //        flowerName.text = "Flor ?";
+    //    }
+    //    else
+    //    {
+    //        currentFlowerImage.color = Color.white;
+    //        descriptionText.text = nextCurrentFlower.description;
+    //        flowerName.text = nextCurrentFlower.objectName;
+    //    }
+
+
+    //    upFlower = ObtainNextFlower(currentFlower);
+    //    upFlowerImage.sprite = upFlower.flowerIcon;
+    //    if (!flowerCollection.unlockedFlowers[upFlower])//si no está desbloqueada 
+    //    {
+    //        upFlowerImage.color = Color.black;
+    //    }
+    //    else
+    //    {
+    //        upFlowerImage.color = Color.white;
+    //    }
+
+
+    //    downFlower = ObtainAnteriorFlower(currentFlower);
+    //    downFlowerImage.sprite = downFlower.flowerIcon;
+
+    //    if (!flowerCollection.unlockedFlowers[downFlower])//si no está desbloqueada 
+    //    {
+    //        downFlowerImage.color = Color.black;
+    //    }
+    //    else
+    //    {
+    //        downFlowerImage.color = Color.white;
+    //    }
+
+    //    yield return new WaitForSecondsRealtime(0.5f);
+
+    //    isAnimating = false;
+    //}
 
     private Flower ObtainNextFlower(Flower flower)
     {
@@ -145,18 +253,42 @@ public class ChangeFlowersManager : MonoBehaviour
             return flowers[idFlor - 1];
         }
     }
-    public void GoDown()
+
+
+    public void GoUp()
     {
+        if (isAnimating) { return; }
         if (!isActive) { return; }
-        if (flowers == null) {  return; }
+        if (flowers == null) { return; }
         //avanzar y que la current sea la flor siguiente
+
+        slideDirection = 1;
+        animatorUp.SetInteger("State", slideDirection);
+        animatorUp.SetTrigger("HasToChange");
+
+        animatorDown.SetInteger("State", slideDirection);
+        animatorDown.SetTrigger("HasToChange");
+
+        animatorMiddle.SetInteger("State", slideDirection);
+        animatorMiddle.SetTrigger("HasToChange");
 
         UpdateFlowers(downFlower);
     }
-    public void GoUp()
+    public void GoDown()
     {
+        if(isAnimating) { return; }
         if (!isActive) { return; }
         if (flowers == null) { return; }
+
+        slideDirection = -1;
+        animatorUp.SetInteger("State", slideDirection);
+        animatorUp.SetTrigger("HasToChange");
+
+        animatorDown.SetInteger("State", slideDirection);
+        animatorDown.SetTrigger("HasToChange");
+
+        animatorMiddle.SetInteger("State", slideDirection);
+        animatorMiddle.SetTrigger("HasToChange");
 
         UpdateFlowers(upFlower);
         //retroceder y que la current sea la flor anterior
@@ -164,14 +296,22 @@ public class ChangeFlowersManager : MonoBehaviour
 
     public void ActivateMenu()
     {
+        if (isAnimating) { return; }
         if (isActive) {
             DeactivateMenu();
             return;
         }
         isActive = true;
 
+
+        
         upCircunference.SetActive(true);
         downCircunference.SetActive(true);
+        animatorUp.SetInteger("State", 1);
+        animatorUp.SetTrigger("WithoutTransition");
+
+        animatorDown.SetInteger("State", -1);
+        animatorDown.SetTrigger("WithoutTransition");
         upArrow.SetActive(true);
         downArrow.SetActive(true);
         //leftArrow.SetActive(true);
@@ -179,6 +319,7 @@ public class ChangeFlowersManager : MonoBehaviour
     }
     public void DeactivateMenu()
     {
+        if (isAnimating) { return; }
         isActive = false;
 
         upCircunference.SetActive(false);
@@ -192,10 +333,12 @@ public class ChangeFlowersManager : MonoBehaviour
         {
             equipedFlower = currentFlower;
             playerData.EquipedFlower = equipedFlower;
+            slideDirection = 0;
         }
         else
         {
             currentFlower = equipedFlower;
+            slideDirection = 0;
             UpdateFlowers(currentFlower);
         }
         

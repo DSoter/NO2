@@ -35,6 +35,8 @@ public class ChangeFlowersManager : MonoBehaviour
 
     [SerializeField] private PlayerData playerData;
 
+    [SerializeField] private float animationSpeed = 1.0f;
+
     private int slideDirection; //1 si es hacia arriba -1 si es hacia abajo
     private Animator animatorUp;
     private Animator animatorDown;
@@ -48,9 +50,14 @@ public class ChangeFlowersManager : MonoBehaviour
 
     private void Awake()
     {
+        
         animatorUp = upCircunference.GetComponent<Animator>();
         animatorDown = downCircunference.GetComponent <Animator>();
         animatorMiddle = middleCircunference.GetComponent<Animator>();
+
+        animatorDown.speed = animationSpeed;
+        animatorMiddle.speed = animationSpeed;
+        animatorUp.speed = animationSpeed;
         slideDirection = 0;
 
         animatorUp.SetInteger("State", 1);
@@ -83,6 +90,13 @@ public class ChangeFlowersManager : MonoBehaviour
             UpdateFlowers(equipedFlower);
         }
         
+    }
+
+    private void Update()
+    { //alpargata quitar despues de probar
+        animatorDown.speed = animationSpeed;
+        animatorMiddle.speed = animationSpeed;
+        animatorUp.speed = animationSpeed;
     }
 
     void OnGUI()
@@ -128,52 +142,72 @@ public class ChangeFlowersManager : MonoBehaviour
             //StartCoroutine(AnimateFlowers(currentFlower));
         }
 
-            currentFlower = nextCurrentFlower;
-            currentFlowerImage.sprite = currentFlower.flowerIcon;
-            if (!flowerCollection.unlockedFlowers[currentFlower])//si no está desbloqueada 
-            {
-                currentFlowerImage.color = Color.black;
-                descriptionText.text = "Informacion sin descubrir";
-                flowerName.text = "Flor ?";
-            }
-            else
-            {
-                currentFlowerImage.color = Color.white;
-                descriptionText.text = nextCurrentFlower.description;
-                flowerName.text = nextCurrentFlower.objectName;
-            }
+        float clar = 0;
+        Color colAux= Color.white;
+
+        currentFlower = nextCurrentFlower;
+
+        currentFlowerImage.sprite = currentFlower.flowerIcon;
+        if (!flowerCollection.unlockedFlowers[currentFlower])//si no está desbloqueada 
+        {
+            clar = currentFlowerImage.color.a;
+            colAux = new Color(0f, 0f, 0f, clar);
+            currentFlowerImage.color = colAux;
+         
+            descriptionText.text = "Informacion sin descubrir";
+            flowerName.text = "Flor ?";
+        }
+        else
+        {
+
+            clar = currentFlowerImage.color.a;
+            colAux = new Color(1f, 1f, 1f, clar);
+            currentFlowerImage.color = colAux;
+            descriptionText.text = nextCurrentFlower.description;
+            flowerName.text = nextCurrentFlower.objectName;
+        }
 
 
-            upFlower = ObtainNextFlower(currentFlower);
-            upFlowerImage.sprite = upFlower.flowerIcon;
-            if (!flowerCollection.unlockedFlowers[upFlower])//si no está desbloqueada 
-            {
-                upFlowerImage.color = Color.black;
-            }
-            else
-            {
-                upFlowerImage.color = Color.white;
-            }
+        upFlower = ObtainNextFlower(currentFlower);
+        upFlowerImage.sprite = upFlower.flowerIcon;
+        if (!flowerCollection.unlockedFlowers[upFlower])//si no está desbloqueada 
+        {
+
+            clar = upFlowerImage.color.a;
+            colAux = new Color(0f, 0f, 0f, clar);
+            upFlowerImage.color = colAux;
+        }
+        else
+        {
+            clar = upFlowerImage.color.a;
+            colAux = new Color(1f, 1f, 1f, clar);
+            upFlowerImage.color = colAux;
+        }
 
 
-            downFlower = ObtainAnteriorFlower(currentFlower);
-            downFlowerImage.sprite = downFlower.flowerIcon;
+        downFlower = ObtainAnteriorFlower(currentFlower);
+        downFlowerImage.sprite = downFlower.flowerIcon;
 
-            if (!flowerCollection.unlockedFlowers[downFlower])//si no está desbloqueada 
-            {
-                downFlowerImage.color = Color.black;
-            }
-            else
-            {
-                downFlowerImage.color = Color.white;
-            }
+        if (!flowerCollection.unlockedFlowers[downFlower])//si no está desbloqueada 
+        {
+            clar = downFlowerImage.color.a;
+            colAux = new Color(0f, 0f, 0f, clar);
+            downFlowerImage.color = colAux;
+        }
+        else
+        {
+            clar = downFlowerImage.color.a;
+            colAux = new Color(1f, 1f, 1f, clar);
+            downFlowerImage.color = colAux;
+        }
         
 
     }
     private IEnumerator WaitOneSec()
     {
         isAnimating = true;
-        yield return new WaitForSecondsRealtime(1);
+        float seconds = 1.0f/animationSpeed;
+        yield return new WaitForSecondsRealtime(seconds);
         isAnimating= false;
     }
 

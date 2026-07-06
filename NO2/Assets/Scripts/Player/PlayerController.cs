@@ -399,12 +399,15 @@ public class PlayerController : MonoBehaviour
     {
         SetDead(true);
         _renderer.color = Color.red;
+        _renderer.sortingLayerName = "Foreforeground";
+
         CheckpointManager cm = GameManager.Instance.GetComponent<CheckpointManager>();
 
         cm.CameraLockedPlayer = true;
 
         yield return new WaitForSeconds(segundos);
 
+        _renderer.sortingLayerName = "Default";
         SetDead(false);
 
         DisposeActions();
@@ -429,7 +432,10 @@ public class PlayerController : MonoBehaviour
     IEnumerator WaitAndKillWithoutOxygen(float segundos)
     {
         SetDead(true);
+
+
         _renderer.color = Color.red;
+        _renderer.sortingLayerName = "Foreforeground";
         CheckpointManager cm = GameManager.Instance.GetComponent<CheckpointManager>();
 
         cm.CameraLockedPlayer = true;
@@ -437,7 +443,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(segundos);
 
         SetDead(false);
-
+        _renderer.sortingLayerName = "Default";
         DisposeActions();
 
 

@@ -50,6 +50,12 @@ TagManager:
   - name: Foreground
     uniqueID: 1236160753
     locked: 0
+  - name: HudLayer
+    uniqueID: 3545248867
+    locked: 0
+  - name: Foreforeground
+    uniqueID: 2866535481
+    locked: 0
   m_RenderingLayers:
   - Default
   m_MigratedRenderPipelines: []

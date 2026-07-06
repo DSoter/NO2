@@ -238,6 +238,18 @@ PrefabInstance:
       propertyPath: m_ShowMaskGraphic
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2893108637307945823, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2893108637307945823, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2893108637307945823, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -749718429
+      objectReference: {fileID: 0}
     - target: {fileID: 3684134675693612923, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 24.599976
@@ -271,13 +283,33 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 3116053616205824011, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7188841109492350958, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8105924592850811925}
   m_SourcePrefab: {fileID: 100100000, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
 --- !u!224 &4389200808106027507 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1719722492483749983, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
   m_PrefabInstance: {fileID: 3113179898495771052}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5257909105082637890 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7188841109492350958, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
+  m_PrefabInstance: {fileID: 3113179898495771052}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8105924592850811925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5257909105082637890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 698842188d028564b8b2bf6119ae71e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CorrectLayerHud
 --- !u!1001 &3536062958938357157
 PrefabInstance:
   m_ObjectHideFlags: 0

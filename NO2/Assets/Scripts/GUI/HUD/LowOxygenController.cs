@@ -7,6 +7,9 @@ public class LowOxygenController : MonoBehaviour
     [SerializeField] private LowOxygenData loData;
     [SerializeField] private float transparency;
 
+    private Canvas canvas;
+    private Camera principalCam;
+
     private Image image;
     private Color color;
     private bool isDying;
@@ -14,7 +17,13 @@ public class LowOxygenController : MonoBehaviour
     private void Awake()
     {
         image = blackImage.GetComponent<Image>();
-
+        canvas= gameObject.GetComponent<Canvas>();
+        principalCam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+        if(principalCam != null)
+        {
+            canvas.worldCamera = principalCam;
+        }
+        
     }
     private void Update()
     {

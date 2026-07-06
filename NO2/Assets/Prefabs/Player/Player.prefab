@@ -30,6 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2333394262095882152}
+  - {fileID: 6432476687277471607}
   m_Father: {fileID: 255655421128169799}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2210239394038038089
@@ -614,7 +615,6 @@ Transform:
   m_Children:
   - {fileID: 7643340393992931641}
   - {fileID: 5462389359428988880}
-  - {fileID: 6432476687277471607}
   - {fileID: 3676525899069949123}
   - {fileID: 7032798121037580641}
   - {fileID: 8138552920275538869}
@@ -994,7 +994,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1671772909721296464}
-  m_Father: {fileID: 255655421128169799}
+  m_Father: {fileID: 5462389359428988880}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1010,8 +1010,8 @@ Canvas:
   m_GameObject: {fileID: 8302534424319091247}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 2187136104781326016}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -1022,8 +1022,8 @@ Canvas:
   m_UseReflectionProbes: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: -2
+  m_SortingLayerID: -1428431815
+  m_SortingOrder: -32768
   m_TargetDisplay: 0
 --- !u!114 &4551019602719206570
 MonoBehaviour:
@@ -1362,6 +1362,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7acd3985fdff7074fbf265427b80375f, type: 3}
+--- !u!20 &2187136104781326016 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 8905111870488033900, guid: 7acd3985fdff7074fbf265427b80375f, type: 3}
+  m_PrefabInstance: {fileID: 7336105010828254380}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3676525899069949123 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6254005031548688495, guid: 7acd3985fdff7074fbf265427b80375f, type: 3}

@@ -58,6 +58,7 @@ public class PlayerData : ScriptableObject
     public event Action OnHealthChanged;
     public event Action OnStaminaChanged;
     public event Action OnOxygenChanged;
+    public event Action OnOxygenIncreased;
 
     // Read and write properties
     public float Health
@@ -84,8 +85,15 @@ public class PlayerData : ScriptableObject
         get { return oxygen; }
         set 
         {
+            var aux = oxygen;
+
             oxygen = Mathf.Clamp(value, 0, maxOxygen);
             OnOxygenChanged?.Invoke();
+
+            if(value > aux)
+            {
+                OnOxygenIncreased?.Invoke();
+            }
         }
     }
 

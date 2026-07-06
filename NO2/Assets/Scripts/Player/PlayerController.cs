@@ -2,8 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-// AYUDA PORFAVOR
-
 public class PlayerController : MonoBehaviour
 {
 
@@ -102,6 +100,11 @@ public class PlayerController : MonoBehaviour
 
         _playerData.Stamina = _playerData.MaxStamina;
         _lastOxygenSeconds = _playerData.LastOxygenSeconds;
+    }
+
+    private void Start()
+    {
+        _playerData.OnOxygenIncreased += HandleOnOxygenIncreased;
     }
 
     private void Update()
@@ -327,6 +330,29 @@ public class PlayerController : MonoBehaviour
         return new Vector2(Mathf.Cos(rad), Mathf.Sin(rad)).normalized;
     }
 
+
+    private void HandleOnOxygenIncreased()
+    {
+        // Reset the last seconds timer when oxygen is increased
+        _lastOxygenTimer = 0;
+
+        // Reset the alerts only when the oxygen percentage goes above the thresholds
+        float percentage = _playerData.Oxygen / _playerData.MaxOxygen * 100;
+
+        Debug.Log(percentage);
+
+        if (percentage > 50)
+        {
+            Debug.Log("Reseting 50% & 10% Alerts");
+            _50PercentAlertPlayed = false;
+            _10PercentAlertPlayed = false;
+        }
+        else if(percentage > 10)
+        {
+            Debug.Log("Reseting 10% Alert");
+            _10PercentAlertPlayed = false;
+        }
+    }
     private void HandleAnimatorParams()
     {
         _animator.SetFloat("xDir", _lookDirection.x);
@@ -478,8 +504,6 @@ public class PlayerController : MonoBehaviour
         _isOnOxigenZone = true;
 
         _lastOxygenTimer = 0;
-        _50PercentAlertPlayed = false;
-        _10PercentAlertPlayed = false;
     }
 
     [ContextMenu("ExitOxigenZone")]

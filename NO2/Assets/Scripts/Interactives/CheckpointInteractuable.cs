@@ -47,7 +47,7 @@ public class CheckpointInteractuable : Interactable
                 player.SetState(PlayerController.PlayerState.Rest);
                 if(sistemaParts != null)
                 {
-                    sistemaParts.Emit(24);
+                    sistemaParts.Emit(48);
                 }
             }
         }

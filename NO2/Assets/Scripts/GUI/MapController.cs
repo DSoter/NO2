@@ -146,6 +146,10 @@ public class MapController : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void ResetPosition()
     {
-        mapCamera.transform.position = initialPosition;
+        if(mapCamera!= null)
+        {
+            mapCamera.transform.position = initialPosition;
+        }
+        
     }
 }

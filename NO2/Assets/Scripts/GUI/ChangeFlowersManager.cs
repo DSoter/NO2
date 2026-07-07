@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static PlayerController;
 
@@ -48,6 +49,8 @@ public class ChangeFlowersManager : MonoBehaviour
     private bool isActive;
     private int idFlor;
 
+    private PlayerController.PlayerState playerState;
+
     private void Awake()
     {
         
@@ -89,7 +92,16 @@ public class ChangeFlowersManager : MonoBehaviour
             }
             UpdateFlowers(equipedFlower);
         }
-        
+
+
+        CheckpointManager cm = GameManager.Instance.GetComponent<CheckpointManager>();
+
+        if (cm != null)
+        {
+            PlayerController player = cm.PlayerReference.gameObject.GetComponent<PlayerController>();
+            playerState = player.GetState();
+        }
+
     }
 
     private void Update()
@@ -330,6 +342,7 @@ public class ChangeFlowersManager : MonoBehaviour
 
     public void ActivateMenu()
     {
+        if(playerState != PlayerState.Rest) { return; }
         if (isAnimating) { return; }
         if (isActive) {
             DeactivateMenu();

@@ -78,11 +78,16 @@ public class PlayerController : MonoBehaviour
         Roll,
         Dead,
         WeakAttack,
+        Rest
     }
 
     public PlayerState GetState()
     {
         return _state;
+    }
+    public void SetState(PlayerState state)
+    {
+        _state = state;
     }
 
 
@@ -135,6 +140,9 @@ public class PlayerController : MonoBehaviour
             case PlayerState.Dead:
 
                 break;
+            case PlayerState.Rest:
+
+                break;
 
         }
 
@@ -165,6 +173,9 @@ public class PlayerController : MonoBehaviour
                 break;
             case PlayerState.Dead:
 
+                _rigidbody.linearVelocity = Vector2.zero;
+                break;
+            case PlayerState.Rest:
                 _rigidbody.linearVelocity = Vector2.zero;
                 break;
         }

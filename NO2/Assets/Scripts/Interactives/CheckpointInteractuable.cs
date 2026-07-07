@@ -5,10 +5,20 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class CheckpointInteractuable : Interactable
 {
+    private ParticleSystem sistemaParts;
+
+    protected override void Start()
+    {
+        base.Start();
+        if (transform.GetChild(0) != null) { 
+            sistemaParts = transform.GetChild(0).gameObject.GetComponent<ParticleSystem>();
+        }
+    }
     public override void Interact()
     {
         CheckpointManager cm = GameManager.Instance.GetComponent<CheckpointManager>();
 
+        
         SceneController sc = FindAnyObjectByType<SceneController>();
         if (cm != null)
         {
@@ -20,6 +30,33 @@ public class CheckpointInteractuable : Interactable
             //esto es pa reproducir sonido
             //sc.ReproducirCheckPoint(); 
             Debug.Log("Checkpoint alcanzado: " + gameObject.name);
+
+            PlayerController player = cm.PlayerReference.gameObject.GetComponent<PlayerController>();
+            Debug.Log(player.GetState());
+            if (player.GetState() == PlayerController.PlayerState.Rest)
+            {
+
+                //Se levanta
+                _playerController.ChangeDisplayText("Descansar");
+                player.SetState(PlayerController.PlayerState.Move);
+            }
+            else
+            {
+                //Se sienta
+                _playerController.ChangeDisplayText("Levantarse");
+                player.SetState(PlayerController.PlayerState.Rest);
+                if(sistemaParts != null)
+                {
+                    sistemaParts.Emit(24);
+                }
+            }
         }
+        
     }
+    protected override void UniqueEnter()
+    {
+        base.UniqueEnter();
+        _playerController.ChangeDisplayText("Descansar");
+    }
+
 }

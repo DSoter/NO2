@@ -4,7 +4,8 @@ using UnityEngine;
 public abstract class Interactable : MonoBehaviour
 {
     protected InteractManager _playerController;
-    protected void Start()
+    protected string defaultText = "Interactuar";
+    protected virtual void Start()
     {
         _playerController = FindAnyObjectByType<InteractManager>();
     }
@@ -22,8 +23,7 @@ public abstract class Interactable : MonoBehaviour
 
             if (_playerController.interactables.Count == 1)
             {
-                _playerController.SetPuedeInteractuar(true);
-                _playerController.interactableObject = this;
+                UniqueEnter();
             }
 
         }
@@ -35,13 +35,24 @@ public abstract class Interactable : MonoBehaviour
             _playerController.interactables.Remove(this);
             if (_playerController.interactables.Count == 0)
             {
-                _playerController.SetPuedeInteractuar(false);
-                _playerController.interactableObject = null;
+                UniqueExit();
             }
             else {
                 _playerController.interactableObject = _playerController.interactables[0];
             }
         }
+    }
+    protected virtual void UniqueEnter()
+    {
+        _playerController.SetPuedeInteractuar(true);
+        _playerController.interactableObject = this;
+    }
+
+    protected virtual void UniqueExit()
+    {
+        _playerController.SetPuedeInteractuar(false);
+        _playerController.interactableObject = null;
+        _playerController.ChangeDisplayText(defaultText);
     }
     public abstract void Interact();
 }

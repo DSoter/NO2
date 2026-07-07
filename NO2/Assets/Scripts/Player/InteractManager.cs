@@ -72,7 +72,7 @@ public class InteractManager : MonoBehaviour
     {
         if (context.performed)
         {
-            if (_puedeInteractuar && _playerController.GetState() == PlayerController.PlayerState.Move) { 
+            if (_puedeInteractuar && (_playerController.GetState() == PlayerController.PlayerState.Move || _playerController.GetState() == PlayerController.PlayerState.Rest)){ 
                 interactableObject.Interact();
             }
         }
@@ -111,6 +111,12 @@ public class InteractManager : MonoBehaviour
          actionReference.action.bindings[0].effectivePath,
          InputControlPath.HumanReadableStringOptions.OmitDevice
      );
+    }
+
+    public void ChangeDisplayText( string text)
+    {
+
+        _textoUI.GetComponent<TextMeshProUGUI>().text = text;
     }
 
 

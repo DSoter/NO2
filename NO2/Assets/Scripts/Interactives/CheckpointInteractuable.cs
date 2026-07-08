@@ -22,17 +22,7 @@ public class CheckpointInteractuable : Interactable
         SceneController sc = FindAnyObjectByType<SceneController>();
         if (cm != null)
         {
-            sc.UpdateSpawnPointAfterDeath(transform);
-            SpawnId si = GetComponent<SpawnId>();
-            int id = si.IdSpawn;
-            cm.IdRespawn = id;
-            cm.SceneWhereRespawn = SceneManager.GetActiveScene().name;
-            //esto es pa reproducir sonido
-            //sc.ReproducirCheckPoint(); 
-            Debug.Log("Checkpoint alcanzado: " + gameObject.name);
-
             PlayerController player = cm.PlayerReference.gameObject.GetComponent<PlayerController>();
-            Debug.Log(player.GetState());
             if (player.GetState() == PlayerController.PlayerState.Rest)
             {
 
@@ -49,6 +39,15 @@ public class CheckpointInteractuable : Interactable
                 {
                     sistemaParts.Emit(48);
                 }
+                sc.UpdateSpawnPointAfterDeath(transform);
+                SpawnId si = GetComponent<SpawnId>();
+                int id = si.IdSpawn;
+                cm.IdRespawn = id;
+                cm.SceneWhereRespawn = SceneManager.GetActiveScene().name;
+                //esto es pa reproducir sonido
+                //sc.ReproducirCheckPoint(); 
+                Debug.Log("Checkpoint alcanzado: " + gameObject.name);
+
             }
         }
         

@@ -87,7 +87,17 @@ public class MapController : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         float maxSizeByHeight = (yMax - yMin) / 2f;
         float maxSizeByWidth = (xMax - xMin) / 2f / mapCamera.aspect;
 
-        mapCamera.orthographicSize = Mathf.Min(mapCamera.orthographicSize, Mathf.Min(maxSizeByHeight, maxSizeByWidth));
+        if (mapCamera.orthographicSize > maxSizeByHeight)
+        {
+            mapCamera.orthographicSize = Mathf.Lerp(mapCamera.orthographicSize, maxSizeByHeight, Time.unscaledDeltaTime * 10f);
+            targetFov = mapCamera.orthographicSize;
+        }
+        if (mapCamera.orthographicSize > maxSizeByWidth)
+        {
+            mapCamera.orthographicSize = Mathf.Lerp(mapCamera.orthographicSize, maxSizeByWidth, Time.unscaledDeltaTime * 10f);
+            targetFov = mapCamera.orthographicSize;
+        }
+        //mapCamera.orthographicSize = Mathf.Min(mapCamera.orthographicSize, Mathf.Min(maxSizeByHeight, maxSizeByWidth));
 
         if (isDragging || velocity == Vector3.zero) {
             return;
@@ -224,6 +234,11 @@ public class MapController : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
             xAct = Mathf.Clamp(xAct, xLimInf, xLimSup);
             yAct = Mathf.Clamp(yAct, yLimInf, yLimSup);
+            
+            xAct = Mathf.Lerp(mapCamera.transform.position.x, xAct, Time.unscaledDeltaTime * 3);
+            yAct = Mathf.Lerp(mapCamera.transform.position.y, yAct, Time.unscaledDeltaTime * 3);
+
+
             mapCamera.transform.position = new Vector3(xAct, yAct, mapCamera.transform.position.z);
         }
     }

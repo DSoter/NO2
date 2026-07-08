@@ -12,6 +12,13 @@ public class YSort : MonoBehaviour
 
     private void LateUpdate()
     {
-        _renderer.sortingOrder =  Mathf.RoundToInt(-transform.position.y * 100);
+        _renderer.sortingOrder = Mathf.RoundToInt(-transform.position.y * 100);
+    }
+
+    [ContextMenu("Sort In Editor")]
+    private void SortInEditor()
+    {
+        var renderer = GetComponent<SpriteRenderer>();
+        renderer.sortingOrder = Mathf.RoundToInt(-transform.position.y * 100);
     }
 }

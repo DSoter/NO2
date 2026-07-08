@@ -226,12 +226,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Pickup
   _pickupPullArea: {fileID: 4605560865490896444}
   _onPickClip: {fileID: 8300000, guid: fbd79948bcca7d04d98ddf054c944f70, type: 3}
+  _volume: 1
+  _pitchVariation: 0.3
   _playerLayer:
     serializedVersion: 2
     m_Bits: 8
   _iniPullSpeed: -2
   _pullAcceleration: 8
   _effect: {fileID: 0}
+  _startingTime: 3
 --- !u!58 &2297810451965320638
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -26,5 +26,14 @@ public class WeakAttackController : MonoBehaviour
         _renderer.flipY = shouldFlip;
         _animator.SetTrigger("Play");
     }
-        
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.TryGetComponent<IHitable>(out var hitable))
+        {
+            var direction = (collision.transform.position - transform.position).normalized;
+            hitable.Hit(direction, 1f, AttackStrength.Weak);
+        }
+    }
+
 }

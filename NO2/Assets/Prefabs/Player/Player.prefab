@@ -350,6 +350,7 @@ GameObject:
   - component: {fileID: 6281903768332715252}
   - component: {fileID: 1510909487537404138}
   - component: {fileID: 3006558068619297952}
+  - component: {fileID: 7944651771693726206}
   m_Layer: 6
   m_Name: WeakAttack
   m_TagString: Untagged
@@ -502,6 +503,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0db8dbdcf787e8249b1f625be2d3141d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!114 &7944651771693726206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5613454988008061927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b603c64911084b140aae8078bcfa8eaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::YSort
 --- !u!1 &6002981583683089717
 GameObject:
   m_ObjectHideFlags: 0

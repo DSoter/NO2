@@ -27,10 +27,12 @@ public class Pickup : MonoBehaviour
     [SerializeField] private PickupEffect _effect;
 
     protected Rigidbody2D _rigidbody;
+    protected Collider2D _collider;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _collider = GetComponent<Collider2D>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -167,9 +167,10 @@ MonoBehaviour:
   _content:
   - {fileID: 4435767342414228798, guid: 16e7345272885af408f3c264add47d47, type: 3}
   - {fileID: 4435767342414228798, guid: 16e7345272885af408f3c264add47d47, type: 3}
-  - {fileID: 4435767342414228798, guid: 16e7345272885af408f3c264add47d47, type: 3}
   - {fileID: 1235764300591374923, guid: 1dc1dd2819237a144a367bafbb37d9c1, type: 3}
-  - {fileID: 1235764300591374923, guid: 1dc1dd2819237a144a367bafbb37d9c1, type: 3}
+  _maxAngleDegrees: 30
+  _minForce: 2
+  _maxForce: 6
   _onDestructClip: {fileID: 8300000, guid: e29d7c8f7c1ef694286939dafed3689c, type: 3}
   _volume: 1
   _pitchVariation: 0.3

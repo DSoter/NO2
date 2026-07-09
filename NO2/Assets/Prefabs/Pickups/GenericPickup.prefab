@@ -73,7 +73,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2072964917398052876}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -114,10 +114,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9f20ab7e1dd6834e8b29d6655733a08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  _coreTransform: {fileID: 1480514340504822343}
   _collider: {fileID: 2600382142641731206}
   _playerLayer:
     serializedVersion: 2
     m_Bits: 8
+  _inactiveSeconds: 1
 --- !u!1 &7695303743320795936
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,7 +236,6 @@ MonoBehaviour:
   _iniPullSpeed: -2
   _pullAcceleration: 8
   _effect: {fileID: 0}
-  _startingTime: 3
 --- !u!58 &2297810451965320638
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -284,7 +285,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 0
+  m_LinearDamping: 2
   m_AngularDamping: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}

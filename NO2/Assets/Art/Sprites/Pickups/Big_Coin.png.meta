@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: 8dc2f3a8f70eaf84b9ff80b817a4d2a9
+guid: da6d4c7ccfe1e724eb931b938c080f36
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7293712158265714317
-    second: Small_Coin_0
+      213: 8432613276684046754
+    second: Big_Coin_0
   - first:
-      213: 1591653123995176142
-    second: Small_Coin_1
+      213: 3968437938581059569
+    second: Big_Coin_1
   - first:
-      213: -768893793669138862
-    second: Small_Coin_2
+      213: 4139404466153429543
+    second: Big_Coin_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -106,7 +106,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Small_Coin_0
+      name: Big_Coin_0
       rect:
         serializedVersion: 2
         x: 0
@@ -121,14 +121,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 379df909f6787ca90800000000000000
-      internalID: -7293712158265714317
+      spriteID: 2a1def4e819a60570800000000000000
+      internalID: 8432613276684046754
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Small_Coin_1
+      name: Big_Coin_1
       rect:
         serializedVersion: 2
         x: 8
@@ -143,14 +143,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ecc8f555510b61610800000000000000
-      internalID: 1591653123995176142
+      spriteID: 1f7be4a8749b21730800000000000000
+      internalID: 3968437938581059569
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Small_Coin_2
+      name: Big_Coin_2
       rect:
         serializedVersion: 2
         x: 16
@@ -163,16 +163,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: fc47225dddbe68249b16a32ec849cae5
-      internalID: -1025541377
+      spriteID: 72a9db23e6e127930800000000000000
+      internalID: 4139404466153429543
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Small_Coin_3
+      name: Big_Coin_3
       rect:
         serializedVersion: 2
         x: 24
@@ -187,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d05ebc8395e25d4d843050641226394
-      internalID: -768893793669138862
+      spriteID: 1afd9b7e0eda6a54cbd85fd7dedf5cea
+      internalID: 1396695740
       vertices: []
       indices: 
       edges: []
@@ -197,7 +197,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 43c8c66d79ef3fa45b7f67def4651cca
+    spriteID: b0b51737d1cb0bc468b1726fe5105f2e
     internalID: 0
     vertices: []
     indices: 
@@ -207,12 +207,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":8.0,"y":8.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":1,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":8.0,"y":8.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Small_Coin_0: -7293712158265714317
-      Small_Coin_1: 1591653123995176142
-      Small_Coin_2: -1025541377
-      Small_Coin_3: -768893793669138862
+      Big_Coin_0: 8432613276684046754
+      Big_Coin_1: 3968437938581059569
+      Big_Coin_2: 4139404466153429543
+      Big_Coin_3: 1396695740
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

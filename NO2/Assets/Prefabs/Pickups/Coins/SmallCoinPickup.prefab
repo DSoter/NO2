@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1480514340504822343, guid: f7e8d9d2a9166fd4baecfa4fee0ad8fe, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1659119150051315413, guid: f7e8d9d2a9166fd4baecfa4fee0ad8fe, type: 3}
       propertyPath: m_Name
       value: SmallCoinPickup
@@ -80,23 +84,23 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7695303743320795936, guid: f7e8d9d2a9166fd4baecfa4fee0ad8fe, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 1659119150051315413, guid: f7e8d9d2a9166fd4baecfa4fee0ad8fe, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1716302463487325759}
+      addedObject: {fileID: 1269453357129663361}
   m_SourcePrefab: {fileID: 100100000, guid: f7e8d9d2a9166fd4baecfa4fee0ad8fe, type: 3}
---- !u!1 &4630359081836939467 stripped
+--- !u!1 &4435767342414228798 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 7695303743320795936, guid: f7e8d9d2a9166fd4baecfa4fee0ad8fe, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1659119150051315413, guid: f7e8d9d2a9166fd4baecfa4fee0ad8fe, type: 3}
   m_PrefabInstance: {fileID: 3065089834201359339}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &1716302463487325759
+--- !u!95 &1269453357129663361
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4630359081836939467}
+  m_GameObject: {fileID: 4435767342414228798}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 69927ed4beaa18e4496a9da61fdb4f52, type: 2}

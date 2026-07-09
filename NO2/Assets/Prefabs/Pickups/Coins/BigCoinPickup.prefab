@@ -53,17 +53,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8324242662050370371, guid: f7e8d9d2a9166fd4baecfa4fee0ad8fe, type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8324242662050370371, guid: f7e8d9d2a9166fd4baecfa4fee0ad8fe, type: 3}
-      propertyPath: m_Color.g
-      value: 0.85149336
-      objectReference: {fileID: 0}
-    - target: {fileID: 8324242662050370371, guid: f7e8d9d2a9166fd4baecfa4fee0ad8fe, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 8432613276684046754, guid: da6d4c7ccfe1e724eb931b938c080f36, type: 3}
     - target: {fileID: 8994673675894543046, guid: f7e8d9d2a9166fd4baecfa4fee0ad8fe, type: 3}
       propertyPath: _effect
       value: 
@@ -75,5 +67,35 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1659119150051315413, guid: f7e8d9d2a9166fd4baecfa4fee0ad8fe, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3157004071039931756}
   m_SourcePrefab: {fileID: 100100000, guid: f7e8d9d2a9166fd4baecfa4fee0ad8fe, type: 3}
+--- !u!1 &1573407195479064595 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1659119150051315413, guid: f7e8d9d2a9166fd4baecfa4fee0ad8fe, type: 3}
+  m_PrefabInstance: {fileID: 203714841167892166}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &3157004071039931756
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573407195479064595}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d4718d46332b02f4598079a106957816, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

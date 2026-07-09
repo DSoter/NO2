@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: 8dc2f3a8f70eaf84b9ff80b817a4d2a9
+guid: 7fcefca8d6bb18f4d98265ae40af8b3a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7293712158265714317
-    second: Small_Coin_0
+      213: -4025743065406592359
+    second: Medium_Coin_0
   - first:
-      213: 1591653123995176142
-    second: Small_Coin_1
+      213: -7126929371171351880
+    second: Medium_Coin_1
   - first:
-      213: -768893793669138862
-    second: Small_Coin_2
+      213: 7579696375526674905
+    second: Medium_Coin_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -106,7 +106,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Small_Coin_0
+      name: Medium_Coin_0
       rect:
         serializedVersion: 2
         x: 0
@@ -121,14 +121,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 379df909f6787ca90800000000000000
-      internalID: -7293712158265714317
+      spriteID: 99aa275e200b128c0800000000000000
+      internalID: -4025743065406592359
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Small_Coin_1
+      name: Medium_Coin_1
       rect:
         serializedVersion: 2
         x: 8
@@ -143,14 +143,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ecc8f555510b61610800000000000000
-      internalID: 1591653123995176142
+      spriteID: 8b2980c3f7f081d90800000000000000
+      internalID: -7126929371171351880
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Small_Coin_2
+      name: Medium_Coin_2
       rect:
         serializedVersion: 2
         x: 16
@@ -163,16 +163,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: fc47225dddbe68249b16a32ec849cae5
-      internalID: -1025541377
+      spriteID: 9d15590d1bd703960800000000000000
+      internalID: 7579696375526674905
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Small_Coin_3
+      name: Medium_Coin_3
       rect:
         serializedVersion: 2
         x: 24
@@ -187,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d05ebc8395e25d4d843050641226394
-      internalID: -768893793669138862
+      spriteID: 8bd8f92d660d967449fb4799757121a9
+      internalID: -1733069219
       vertices: []
       indices: 
       edges: []
@@ -197,7 +197,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 43c8c66d79ef3fa45b7f67def4651cca
+    spriteID: fcb3ed45996643347bdf93909523a4e8
     internalID: 0
     vertices: []
     indices: 
@@ -207,12 +207,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":8.0,"y":8.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":1,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":8.0,"y":8.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Small_Coin_0: -7293712158265714317
-      Small_Coin_1: 1591653123995176142
-      Small_Coin_2: -1025541377
-      Small_Coin_3: -768893793669138862
+      Medium_Coin_0: -4025743065406592359
+      Medium_Coin_1: -7126929371171351880
+      Medium_Coin_2: 7579696375526674905
+      Medium_Coin_3: -1733069219
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

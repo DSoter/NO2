@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -58,6 +59,8 @@ public class PlayerController : MonoBehaviour
     [Header("Center")]
     [SerializeField] private Transform _center;
 
+    public event Action onClick;
+
     public Transform Center 
     {
         get { return _center; }
@@ -88,6 +91,10 @@ public class PlayerController : MonoBehaviour
     public void SetState(PlayerState state)
     {
         _state = state;
+    }
+    public PlayerData _PlayerData
+    {
+        get { return _playerData; }
     }
 
 
@@ -282,6 +289,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed && canAttack && _areInputsEnabled && !_isPause)
         {
+            onClick?.Invoke();
             StartCoroutine(WeakAttackCoroutine());
         }
     }

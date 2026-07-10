@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -52,6 +53,12 @@ public class DiverseMenusManager : MonoBehaviour
     private bool _wantsToPause;
 
     private bool gameOverWithoutFadeIn;
+
+
+
+    public event Action onConfirm;
+
+
 
     public bool GameOverWithoutFadeIn
     {
@@ -274,8 +281,10 @@ public class DiverseMenusManager : MonoBehaviour
     }
     public void OnConfirm(InputAction.CallbackContext context)
     {
+
         if (context.performed)
         {
+            onConfirm?.Invoke();
             if (_isOpen)
             {
                 switch (_menuType) 

@@ -5,5 +5,8 @@ using UnityEngine;
 public class ColectionOfDialogs : ScriptableObject
 {
     [SerializeField] List<DialogTextData> listOfDialogs;
-    public List<DialogTextData> ListOfDialogs { get; private set; }
+    public List<DialogTextData> ListOfDialogs
+    {
+        get { return listOfDialogs; }
+    }
 }

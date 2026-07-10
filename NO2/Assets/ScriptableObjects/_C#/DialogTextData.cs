@@ -2,11 +2,30 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[Serializable]
+public class DialogLine
+{
+    public string conditionKey; //Referencia para la funcion desde un diccionario
+    public string text;
+}
+
+[Serializable]
+public class DialogSequence
+{
+    public List<DialogLine> lines;
+}
+
 [CreateAssetMenu(fileName = "DialogTextData", menuName = "Scriptable Objects/DialogTextData")]
 public class DialogTextData : ScriptableObject
 {
-    [SerializeField] List<List<(Func<bool>,string)>> ListOfTexts;
-    [SerializeField] List<List<(Func<bool>, string)>> repetitionTexts;
+    [SerializeField] private List<DialogSequence> listOfTexts;
+    [SerializeField] private List<DialogSequence> repetitionTexts;
+
+    public List<DialogSequence> ListOfTexts => listOfTexts;
+    public List<DialogSequence> RepetitionTexts => repetitionTexts;
+}
+
 
     //¿Como funciona este data?
     //Es una lista anidada que tiene todos los dialogos de una instancia de personaje
@@ -18,8 +37,9 @@ public class DialogTextData : ScriptableObject
     //se escogerá aleatoriamente un dialogo de la lista repetitionTexts
 
     //Dentro de una lista de strings, cada string ocupa un cuadro de dialogo entero. 
-    //Hablas con el personaje y se muestra list[0], le das a botón de confirmar entonce se muestra list[1]
+    //Hablas con el personaje y se muestra list[0].item2, le das a botón de confirmar entonce se muestra list[1].item2
 
 
-    //Se podría hacer que según si has hecho algo tengan un dialogo adicional, vease tienes una flor desbloqueada
-}
+    //En cada tupla el item1 es una función ubicada en otro script, antes de mostrar el item2 de esa posicion se debe de comprobar si la funcion devuelve true,
+    //si lo devuelve se muestra, si no se pasa al siguiente y se vuelve a comprobar
+

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: abac426d31e79fd428c472630b2ac137
+guid: b8ede000892de494fafcc525e324d9d6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5274569665022297475
-    second: theo_0
+      213: 840448015878314499
+    second: Marcosw_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,13 +46,13 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 240
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 27, y: 24, z: 32, w: 24}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -100,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: theo_0
+      name: Marcosw_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 241
-        height: 390
+        width: 907
+        height: 495
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d7a7b45e5d6fcc6b0800000000000000
-      internalID: -5274569665022297475
+      spriteID: 30adb9e740fd9ab00800000000000000
+      internalID: 840448015878314499
       vertices: []
       indices: 
       edges: []
@@ -125,8 +125,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
-    internalID: 0
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      theo_0: -5274569665022297475
+      Marcosw_0: 840448015878314499
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

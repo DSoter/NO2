@@ -7,7 +7,6 @@ public abstract class Interactable : MonoBehaviour
     protected string defaultText = "Interactuar";
     protected virtual void Start()
     {
-        _playerController = FindAnyObjectByType<InteractManager>();
     }
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {

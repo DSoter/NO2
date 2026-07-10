@@ -34,7 +34,7 @@ public class CharacterInteractable : Interactable
             { "anyFlowerUnlocked",   () => acd.FlowerIsUnlocked()},
             { "anyFlowerUnlockedThenDestroy",   () => acd.FlowerIsUnlockedThenDestroy()},
             {"anyFlowerUnlockedAndNotTheoFirstDialogFinished", () => acd.FlowerIsUnlocked() && !acd.FirstTheoDialogIsFinished() },
-            {"anyFlowerUnlockedThenTheoFirstDialogFinished", () =>  !acd.FirstTheoDialogIsFinished() & acd.FlowerIsUnlockedThenFinishTheoFirstDialog()  },
+            {"anyFlowerUnlockedThenTheoFirstDialogFinished", () =>  !acd.FirstTheoDialogIsFinished() && acd.FlowerIsUnlockedThenFinishTheoFirstDialog()  },
             {"anyFlowerUnlockedAndTheoFirstDialogFinished", () => acd.FlowerIsUnlocked() && acd.FirstTheoDialogIsFinished() },
             {"anyFlowerUnlockedThenTheoSecondDialogFinished", () => acd.FlowerIsUnlockedThenFinishTheoSecondDialog() },
             {"anyFlowerUnlockedAndTheoSecondDialogFinished", () => acd.FlowerIsUnlocked() && acd.SecondTheoDialogIsFinished() },

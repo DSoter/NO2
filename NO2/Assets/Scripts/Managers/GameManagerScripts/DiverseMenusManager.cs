@@ -54,6 +54,8 @@ public class DiverseMenusManager : MonoBehaviour
 
     private bool gameOverWithoutFadeIn;
 
+    private bool dialogIsOpen;
+
 
 
     public event Action onConfirm;
@@ -77,6 +79,10 @@ public class DiverseMenusManager : MonoBehaviour
         get { return _isOpen; }
     }
 
+    public bool DialogIsOpen
+    {
+        set {  dialogIsOpen = value; }
+    }
     private void Awake()
     {
         InitializePrefsActions();
@@ -195,9 +201,12 @@ public class DiverseMenusManager : MonoBehaviour
 
     private bool CanOpenInCurrentScene()
     {
+
+        if (dialogIsOpen) { return false; }
+
         string escenaActiva = SceneManager.GetActiveScene().name;
         Scene scene = SceneManager.GetSceneByName("PauseMenu");
-
+        
         // Comprobar si la escena está cargada (incluyendo modo Additive)
         if (scene.isLoaded) { return false; }
 

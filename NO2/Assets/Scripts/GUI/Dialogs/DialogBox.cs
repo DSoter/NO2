@@ -32,6 +32,7 @@ public class DialogBox : MonoBehaviour
 
     public void StartDialog(List<DialogLine> lines, CharacterInteractable actualCharacter)
     {
+        GameManager.Instance.GetComponent<DiverseMenusManager>().DialogIsOpen = true;
         Time.timeScale = 0;
         characterReference = actualCharacter;
         currentLines = lines;
@@ -77,14 +78,14 @@ public class DialogBox : MonoBehaviour
 
     private void OnEnable()
     {
-        GameManager.Instance.GetComponent<DiverseMenusManager>().onConfirm += Confirm;
+        //GameManager.Instance.GetComponent<DiverseMenusManager>().onConfirm += Confirm;
         EnableActions();
 
     }
 
     private void OnDisable()
     {
-        GameManager.Instance.GetComponent<DiverseMenusManager>().onConfirm -= Confirm;
+        //GameManager.Instance.GetComponent<DiverseMenusManager>().onConfirm -= Confirm;
         DisposeActions();
     }
 
@@ -184,6 +185,8 @@ public class DialogBox : MonoBehaviour
     {
         Time.timeScale = 1;
         characterReference.DialogIsOpen = false;
+        characterReference.DialogIsRecentlyOpen = true;
+        GameManager.Instance.GetComponent<DiverseMenusManager>().DialogIsOpen = false;
         isOpen = false;
         isTyping = false;
         dialogPanel.SetActive(false);

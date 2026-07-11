@@ -15,12 +15,18 @@ public class CharacterInteractable : Interactable
     private int timesTalked;
     private DialogBox dialogBox;
     private bool dialogIsOpen;
+    private bool dialogIsRecentlyOpen;
 
     public bool DialogIsOpen
     {
         get{ return dialogIsOpen; }
         set{ dialogIsOpen = value; }
 
+    }
+    public bool DialogIsRecentlyOpen
+    {
+        get { return dialogIsRecentlyOpen; }
+        set { dialogIsRecentlyOpen = value; }
     }
 
     private Dictionary<string, Func<bool>> conditions;
@@ -63,6 +69,11 @@ public class CharacterInteractable : Interactable
     }
     public override void Interact()
     {
+        if (dialogIsRecentlyOpen)
+        {
+            dialogIsRecentlyOpen = false;
+            return;
+        }
         if(dialogIsOpen) return;
         dialogIsOpen= true;
         StartDialog();

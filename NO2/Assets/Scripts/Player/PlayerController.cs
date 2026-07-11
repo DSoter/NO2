@@ -31,11 +31,7 @@ public class PlayerController : MonoBehaviour
     private bool canAttack => _state == PlayerState.Move && HasStamina();
     private PlayerState _state = PlayerState.Move;
 
-    // InputSystem 
-    private InputActionReference _moveRef, _runRef, _rollRef, _weakAttackRef, _strongAttackRef;
-    [Header("Input System")]
-    [SerializeField] private InputActionAsset _inputSystemReference;
-
+    private InputManager _inputManager;
 
 
     // References
@@ -59,7 +55,7 @@ public class PlayerController : MonoBehaviour
     [Header("Center")]
     [SerializeField] private Transform _center;
 
-    public event Action onClick;
+
 
     public Transform Center 
     {
@@ -103,12 +99,9 @@ public class PlayerController : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _renderer = GetComponent<SpriteRenderer>();
-         
+        
+        _inputManager = GameManager.Instance.gameObject.GetComponent<InputManager>();
 
-        InitializePrefsActions();
-
-        Debug.Log($"Action map Player enabled: {_inputSystemReference.FindActionMap("Player").enabled}");
-        Debug.Log($"Move action enabled: {_inputSystemReference.FindActionMap("Player").FindAction("Move").enabled}");
 
         _playerData.Stamina = _playerData.MaxStamina;
         _lastOxygenSeconds = _playerData.LastOxygenSeconds;
@@ -148,7 +141,7 @@ public class PlayerController : MonoBehaviour
 
                 break;
             case PlayerState.Rest:
-
+                HandleHealthRegeneration();
                 break;
 
         }
@@ -232,38 +225,52 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void OnMove(InputAction.CallbackContext context)
+    private void HandleHealthRegeneration()
     {
-        if (context.performed && _areInputsEnabled)
+        bool shouldRegenerate = _state == PlayerState.Rest;//ahora mismo no hace falta porque el handle health está dentro del estado rest
+
+        if (shouldRegenerate)
         {
-            _moveDirection = context.ReadValue<Vector2>();
+            _playerData.Health = Mathf.Min(_playerData.MaxHealth, _playerData.Health + _playerData.HealthRegenerationSpeed * Time.deltaTime);
         }
-        if (context.canceled && _areInputsEnabled)
+    }
+
+    public void MovePerformed()
+    {
+        if (_areInputsEnabled)
+        {
+            _moveDirection = _inputManager._MoveDirection;
+        }
+    }
+    public void MoveCancelled()
+    {
+        if (_areInputsEnabled)
         {
             _moveDirection = Vector2.zero;
         }
-
     }
 
-    public void OnRun(InputAction.CallbackContext context)
+    public void RunPerformed()
     {
-
-        
-        if (context.performed && _areInputsEnabled)
+        if (_areInputsEnabled)
         {
             _isRunning = true;
         }
 
-        if (context.canceled && _areInputsEnabled)
+    }
+    public void RunCancelled()
+    {
+        if (_areInputsEnabled)
         {
-            _isRunning = false;
+            _isRunning=false;
         }
     }
-   
 
-    public void OnRoll(InputAction.CallbackContext context)
+
+
+    public void Roll()
     {
-        if (context.started && canRoll && _areInputsEnabled && !_isPause)
+        if (canRoll && _areInputsEnabled && !_isPause)
         {
             StartCoroutine(RollCoroutine());
         }
@@ -285,11 +292,11 @@ public class PlayerController : MonoBehaviour
         _state = PlayerState.Move;
     }
 
-    private void OnWeakAttack(InputAction.CallbackContext context)
+    private void WeakAttack()
     {
-        if (context.performed && canAttack && _areInputsEnabled && !_isPause)
+        Debug.Log("weak atack clicked");
+        if (canAttack && _areInputsEnabled && !_isPause)
         {
-            onClick?.Invoke();
             StartCoroutine(WeakAttackCoroutine());
         }
     }
@@ -543,6 +550,7 @@ public class PlayerController : MonoBehaviour
     }
     void OnEnable()
     {
+        if (_inputManager == null) return;
         EnableActions();
     }
     void OnDisable()
@@ -552,53 +560,26 @@ public class PlayerController : MonoBehaviour
 
  
 
-    private void InitializePrefsActions()
-    {
-
-
-        string json = PlayerPrefs.GetString("rebinds", "");
-        if (!string.IsNullOrEmpty(json))
-        {
-            _inputSystemReference.LoadBindingOverridesFromJson(json);
-        }
-
-        InputActionMap playerMap = _inputSystemReference.FindActionMap("Player");
-
-        _moveRef = InputActionReference.Create(playerMap.FindAction("Move"));
-        _runRef = InputActionReference.Create(playerMap.FindAction("Run"));
-        _rollRef = InputActionReference.Create(playerMap.FindAction("Roll"));
-        
-        _weakAttackRef = InputActionReference.Create(playerMap.FindAction("WeakAttack"));
-        _strongAttackRef = InputActionReference.Create(playerMap.FindAction("StrongAttack"));
-
-        EnableActions();
-        playerMap.Enable();
-    }
 
     private void DisposeActions()
     {
-        if (_moveRef != null)
-        {
-            _moveRef.action.performed -= OnMove;
-            _moveRef.action.canceled -= OnMove;
-            _runRef.action.performed -= OnRun;
-            _runRef.action.canceled -= OnRun;
-            _rollRef.action.started -= OnRoll;
-            _weakAttackRef.action.performed -= OnWeakAttack;
-            //_strongAttackRef.action.performed -= OnStrongAttack;
-            _inputSystemReference.FindActionMap("Player").Disable();
-        }
+        if (_inputManager == null) return;
+        _inputManager.onMovePerformed -= MovePerformed;
+        _inputManager.onMoveCancelled -= MoveCancelled;
+        _inputManager.onRunPerformed -= RunPerformed;
+        _inputManager.onRunCancelled -= RunCancelled;
+        _inputManager.onRoll -= Roll;
+        _inputManager.onWeakAttack -= WeakAttack;  
     }
 
     private void EnableActions()
     {
-        _moveRef.action.performed += OnMove;
-        _moveRef.action.canceled += OnMove;
-        _runRef.action.performed += OnRun;
-        _runRef.action.canceled += OnRun;
-        _rollRef.action.started += OnRoll;
-        _weakAttackRef.action.performed += OnWeakAttack;
-        //strongAttackRef.action.performed += OnStrongAttack;
+        _inputManager.onMovePerformed += MovePerformed;
+        _inputManager.onMoveCancelled += MoveCancelled;
+        _inputManager.onRunPerformed += RunPerformed;
+        _inputManager.onRunCancelled += RunCancelled;
+        _inputManager.onRoll += Roll;
+        _inputManager.onWeakAttack += WeakAttack;
     }
 
     public void ExitScene(Vector2 exitDirection, float animationDurationSeconds)

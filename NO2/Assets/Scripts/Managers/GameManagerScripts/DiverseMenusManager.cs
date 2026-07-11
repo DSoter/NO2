@@ -41,11 +41,7 @@ public class DiverseMenusManager : MonoBehaviour
 
     [SerializeField] private string menusSceneName = "MenusAndGameOver";
 
-    // InputSystem 
-    private InputActionReference _mapRef, _flowerRef, _badgesRef, _scapeRef, _navigateLeft, _navigateRight, _confirm;
-    private InputActionReference _goUp, _goDown, _goLeft, _goRight;
-    [Header("Input System")]
-    [SerializeField] private InputActionAsset _inputSystemReference;
+    private InputManager inputManager;
 
     private bool _wantsToOpen;
     private bool _isOpen;
@@ -56,9 +52,6 @@ public class DiverseMenusManager : MonoBehaviour
 
     private bool dialogIsOpen;
 
-
-
-    public event Action onConfirm;
 
 
 
@@ -85,7 +78,7 @@ public class DiverseMenusManager : MonoBehaviour
     }
     private void Awake()
     {
-        InitializePrefsActions();
+        inputManager = GameManager.Instance.gameObject.GetComponent<InputManager>();
     }
 
     private void Update()
@@ -243,75 +236,59 @@ public class DiverseMenusManager : MonoBehaviour
 
 
     //Alpargata hacer que si está en el mapa y se pulsa flores 
-    public void OnMap(InputAction.CallbackContext context)
+    public void OnMap()
     {
-        if (context.performed)
-        {
-            _futureMenuType = MenuType.Map;
-            ChangeMenus();
-        }
+        _futureMenuType = MenuType.Map;
+        ChangeMenus();
+
     }
     
-    public void OnFlower(InputAction.CallbackContext context)
+    public void OnFlower()
     {
-        if (context.performed)
+        _futureMenuType = MenuType.Flowers;
+        ChangeMenus();
+        
+    }
+    public void OnBadge()
+    {
+        _futureMenuType = MenuType.Badges;
+        ChangeMenus();
+    }
+    public void OnNavigateLeft()
+    {
+        if (_isOpen)
         {
-            _futureMenuType = MenuType.Flowers;
-            ChangeMenus();
+            SlideLeft();                
         }
     }
-    public void OnBadge(InputAction.CallbackContext context)
+    public void OnNavigateRight()
     {
-        if (context.performed)
+        if (_isOpen)
         {
-            _futureMenuType = MenuType.Badges;
-            ChangeMenus();
+            SlideRight();
         }
+ 
     }
-    public void OnNavigateLeft(InputAction.CallbackContext context)
+    public void OnConfirm()
     {
-        if (context.performed)
+        if (_isOpen)
         {
-            if (_isOpen)
+            switch (_menuType) 
             {
-                SlideLeft();                
-            }
-        }
-    }
-    public void OnNavigateRight(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            if (_isOpen)
-            {
-                SlideRight();
-            }
-        }
-    }
-    public void OnConfirm(InputAction.CallbackContext context)
-    {
+                case MenuType.Map:
+                    //ya veremos que se hace
+                    break;
+                case MenuType.Flowers:
+                    OnActivateFlowers();
 
-        if (context.performed)
-        {
-            onConfirm?.Invoke();
-            if (_isOpen)
-            {
-                switch (_menuType) 
-                {
-                    case MenuType.Map:
-                        //ya veremos que se hace
-                        break;
-                    case MenuType.Flowers:
-                        OnActivateFlowers();
-
-                        break;
-                    case MenuType.Badges:
-                        //ya veremos que se hace
-                        break;
-                }
+                    break;
+                case MenuType.Badges:
+                    //ya veremos que se hace
+                    break;
+            }
                     
-            }
         }
+        
     }
     private void OnActivateFlowers()
     {
@@ -319,94 +296,84 @@ public class DiverseMenusManager : MonoBehaviour
         cf.ActivateMenu();
     }
 
-    public void OnGoUp(InputAction.CallbackContext context)
+    public void OnGoUp()
     {
-        if (context.performed)
+        if (_isOpen)
         {
-            if (_isOpen)
+            switch (_menuType)
             {
-                switch (_menuType)
-                {
-                    case MenuType.Map:
-                        //ya veremos que se hace
-                        break;
-                    case MenuType.Flowers:
-                        GoUpFlowers();
-                        break;
-                    case MenuType.Badges:
-                        //ya veremos que se hace
-                        break;
-                }
-
+                case MenuType.Map:
+                    //ya veremos que se hace
+                    break;
+                case MenuType.Flowers:
+                    GoUpFlowers();
+                    break;
+                case MenuType.Badges:
+                    //ya veremos que se hace
+                    break;
             }
+
         }
     }
 
-    public void OnGoDown(InputAction.CallbackContext context)
+    public void OnGoDown()
     {
-        if (context.performed)
+        if (_isOpen)
         {
-            if (_isOpen)
+            switch (_menuType)
             {
-                switch (_menuType)
-                {
-                    case MenuType.Map:
-                        //ya veremos que se hace
-                        break;
-                    case MenuType.Flowers:
-                        GoDownFlowers();
-                        break;
-                    case MenuType.Badges:
-                        //ya veremos que se hace
-                        break;
-                }
-
+                case MenuType.Map:
+                    //ya veremos que se hace
+                    break;
+                case MenuType.Flowers:
+                    GoDownFlowers();
+                    break;
+                case MenuType.Badges:
+                    //ya veremos que se hace
+                    break;
             }
+
         }
+        
     }
-    public void OnGoLeft(InputAction.CallbackContext context)
+    public void OnGoLeft()
     {
-        if (context.performed)
+        if (_isOpen)
         {
-            if (_isOpen)
+            switch (_menuType)
             {
-                switch (_menuType)
-                {
-                    case MenuType.Map:
-                        //ya veremos que se hace
-                        break;
-                    case MenuType.Flowers:
-                        //ya veremos que se hace
-                        break;
-                    case MenuType.Badges:
-                        //ya veremos que se hace
-                        break;
-                }
-
+                case MenuType.Map:
+                    //ya veremos que se hace
+                    break;
+                case MenuType.Flowers:
+                    //ya veremos que se hace
+                    break;
+                case MenuType.Badges:
+                    //ya veremos que se hace
+                    break;
             }
+
         }
+        
     }
 
-    public void OnGoRight(InputAction.CallbackContext context)
+    public void OnGoRight()
     {
-        if (context.performed)
+        if (_isOpen)
         {
-            if (_isOpen)
+            switch (_menuType)
             {
-                switch (_menuType)
-                {
-                    case MenuType.Map:
-                        //ya veremos que se hace
-                        break;
-                    case MenuType.Flowers:
-                        //ya veremos que se hace
-                        break;
-                    case MenuType.Badges:
-                        //ya veremos que se hace
-                        break;
-                }
-
+                case MenuType.Map:
+                    //ya veremos que se hace
+                    break;
+                case MenuType.Flowers:
+                    //ya veremos que se hace
+                    break;
+                case MenuType.Badges:
+                    //ya veremos que se hace
+                    break;
             }
+
         }
     }
 
@@ -512,67 +479,32 @@ public class DiverseMenusManager : MonoBehaviour
         }
     }
 
-    private void InitializePrefsActions()
-    {
-
-
-        string json = PlayerPrefs.GetString("rebinds", "");
-        if (!string.IsNullOrEmpty(json))
-        {
-            _inputSystemReference.LoadBindingOverridesFromJson(json);
-        }
-
-        InputActionMap UIMap = _inputSystemReference.FindActionMap("UI");
-
-        _mapRef = InputActionReference.Create(UIMap.FindAction("OpenMap"));
-        _flowerRef = InputActionReference.Create(UIMap.FindAction("OpenFlowers"));
-        _badgesRef = InputActionReference.Create(UIMap.FindAction("OpenBadges"));
-        _scapeRef = InputActionReference.Create(UIMap.FindAction("Escape"));
-        _navigateLeft = InputActionReference.Create(UIMap.FindAction("NavigateLeft"));
-        _navigateRight = InputActionReference.Create(UIMap.FindAction("NavigateRight"));
-        _confirm = InputActionReference.Create(UIMap.FindAction("Confirm"));
-        _goUp = InputActionReference.Create(UIMap.FindAction("GoUp"));
-        _goDown = InputActionReference.Create(UIMap.FindAction("GoDown"));
-        _goRight = InputActionReference.Create(UIMap.FindAction("GoRight"));
-        _goLeft = InputActionReference.Create(UIMap.FindAction("GoLeft"));
-        EnableActions();
-        UIMap.Enable();
-    }
     private void DisposeActions()
     {
-        if (_mapRef != null)
-        {
-            _mapRef.action.performed -= OnMap;
-            _flowerRef.action.performed -= OnFlower;
-            _badgesRef.action.performed  -= OnBadge;
-            _navigateLeft.action.performed -= OnNavigateLeft;
-            _navigateRight.action.performed -= OnNavigateRight;
-            _confirm.action.performed -= OnConfirm;
-            _goUp.action.performed -= OnGoUp;
-            _goDown.action.performed -= OnGoDown;
-            _goRight.action.performed -= OnGoRight;
-            _goLeft.action.performed -= OnGoLeft;
-            //_scapeRef.action.performed -= OnEscape;
-
-
-            _inputSystemReference.FindActionMap("Player").Disable();
-        }
+            inputManager.onMap -= OnMap;
+            inputManager.onFlower -= OnFlower;
+            inputManager.onBadge  -= OnBadge;
+            inputManager.onNavigateLeft -= OnNavigateLeft;
+            inputManager.onNavigateRight -= OnNavigateRight;
+            inputManager.onConfirm -= OnConfirm;
+            inputManager.onGoUp -= OnGoUp;
+            inputManager.onGoDown -= OnGoDown;
+            inputManager.onGoRight -= OnGoRight;
+            inputManager.onGoLeft -= OnGoLeft;
     }
 
     private void EnableActions()
     {
-        _mapRef.action.performed += OnMap;
-        _flowerRef.action.performed += OnFlower;
-        _badgesRef.action.performed += OnBadge;
-        _navigateLeft.action.performed += OnNavigateLeft;
-        _navigateRight.action.performed += OnNavigateRight;
-        _confirm.action.performed += OnConfirm;
-        _goUp.action.performed += OnGoUp;
-        _goDown.action.performed += OnGoDown;
-        _goRight.action.performed += OnGoRight;
-        _goLeft.action.performed += OnGoLeft;
-
-        //_scapeRef.action.performed += OnEscape;
+        inputManager.onMap += OnMap;
+        inputManager.onFlower += OnFlower;
+        inputManager.onBadge += OnBadge;
+        inputManager.onNavigateLeft += OnNavigateLeft;
+        inputManager.onNavigateRight += OnNavigateRight;
+        inputManager.onConfirm += OnConfirm;
+        inputManager.onGoUp += OnGoUp;
+        inputManager.onGoDown += OnGoDown;
+        inputManager.onGoRight += OnGoRight;
+        inputManager.onGoLeft += OnGoLeft;
 
 
 

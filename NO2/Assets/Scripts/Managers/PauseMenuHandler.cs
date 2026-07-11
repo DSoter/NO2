@@ -11,9 +11,7 @@ public class PauseMenuHandler : MonoBehaviour
 	[SerializeField] private string pauseSceneName = "PauseMenu";
 	[SerializeField] private AudioClip enterPauseSound, exitPauseSound;
 
-    // InputSystem 
-    private InputSystem m_Actions;
-    private InputSystem.UIActions m_UI;
+	private InputManager inputManager;
 
 	private bool _wantsToPause;
     public bool isPaused { get; private set; }
@@ -22,14 +20,19 @@ public class PauseMenuHandler : MonoBehaviour
 	{
 		if (Instance == null) { Instance = this; DontDestroyOnLoad(gameObject); }
 		else { Destroy(gameObject); }
-        m_Actions = new InputSystem();
-        m_UI = m_Actions.UI;
-
-        m_UI.Escape.performed += OnEscape;
+		
+		
+    }
+    private void Start()
+    {
+        inputManager = GameManager.Instance.gameObject.gameObject.GetComponent<InputManager>();
+        inputManager.onEscape += OnEscape;
     }
 
-	void Update()
+    void Update()
 	{
+      
+ 
 		if (_wantsToPause)
 		{
 			_wantsToPause = false;
@@ -55,18 +58,6 @@ public class PauseMenuHandler : MonoBehaviour
 
         return escenaActiva != "MenuPrincipal" && escenaActiva != "Splash" && escenaActiva != "MenusAndGameOver" ;
 	}
-
-	bool CanRestartCurrentScene()
-	{
-		return !isPaused && CanPauseInCurrentScene();
-	}
-
-	//void RestartCurrentScene()
-	//{
-	//	Time.timeScale = 1f;
-	//	Scene escenaActiva = SceneManager.GetActiveScene();
-	//	SceneManager.LoadScene(escenaActiva.name);
-	//}
 
 	public void TogglePause()
 	{
@@ -98,29 +89,12 @@ public class PauseMenuHandler : MonoBehaviour
 		SceneManager.LoadScene("MenuPrincipal");
 	}
 
-    public void OnEscape(InputAction.CallbackContext context)
+    public void OnEscape()
     {
-        if (context.performed)
-        {
-            _wantsToPause = true;
-            DiverseMenusManager _menuManager = GameManager.Instance.GetComponent<DiverseMenusManager>();
-			_menuManager._WantsToPause = true;
-        }
+        Debug.Log("OnEscape llegó a PauseMenuHandler");
+        _wantsToPause = true;
+        DiverseMenusManager _menuManager = GameManager.Instance.GetComponent<DiverseMenusManager>();
+		_menuManager._WantsToPause = true;
+        
     }
-
-    void OnDestroy()
-    {
-        m_Actions.Dispose();
-    }
-	void OnEnable()
-	{
-		m_UI.Enable();
-	}
-	//void OnDisable()
-	//{
-	//	m_UI.Disable();
-	//}
-
-	
-
 }

@@ -6299,6 +6299,7 @@ MonoBehaviour:
   dialogText: {fileID: 5208446558343180469}
   continueIndicator: {fileID: 1572802346036320817}
   charDelay: 0.03
+  _inputSystemReference: {fileID: -944628639613478452, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}
 --- !u!1 &6411394988309552641
 GameObject:
   m_ObjectHideFlags: 0

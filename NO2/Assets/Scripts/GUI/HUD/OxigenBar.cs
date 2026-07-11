@@ -6,9 +6,13 @@ using UnityEngine.UI;
 
 public class OxigenBar : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] private PlayerData _playerData;
     [SerializeField] private Image _fill;
     [SerializeField] private TextMeshProUGUI _percentageTMP;
+
+    [Space(5)]
+    [Header("Settings")]
     [SerializeField] private float _updateSpeed = 1f;
     [SerializeField] private float _snapDifference = 0.5f;
 

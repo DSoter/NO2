@@ -39,15 +39,13 @@ public class InputManager : MonoBehaviour
     }
     private void Update()
     {
-        if (!_moveRef.action.enabled)
-            Debug.LogError("¡Move action se ha desactivado! " + Time.frameCount);
-        if (_scapeRef != null && !_scapeRef.action.enabled)
-            Debug.LogError($"¡Escape action desactivada! Frame {Time.frameCount}");
+        if (_rollRef != null && !_rollRef.action.enabled)
+            Debug.LogError($"¡Roll action desactivada! Frame {Time.frameCount}");
     }
 
     private void OnMove(InputAction.CallbackContext context)
     {
-        Debug.Log("OnMove fired"); // antes de cualquier if
+
         if (context.performed)
         {
             _moveDirection = context.ReadValue<Vector2>();
@@ -81,8 +79,9 @@ public class InputManager : MonoBehaviour
     }
     private void OnRoll(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.started)
         {
+            Debug.Log("ROll executed");
             onRoll?.Invoke();
         }
     }
@@ -287,7 +286,7 @@ public class InputManager : MonoBehaviour
         _goLeft.action.performed += OnGoLeft;
         _scapeRef.action.performed += OnEscape;
 
-        Debug.Log($"Acciones suscritas. Move enabled: {_moveRef.action.enabled}");
+        Debug.Log($"Acciones suscritas. Roll enabled: {_rollRef.action.enabled}");
     }
 
 

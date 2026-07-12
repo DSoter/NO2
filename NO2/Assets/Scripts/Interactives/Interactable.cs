@@ -38,6 +38,7 @@ public abstract class Interactable : MonoBehaviour
             }
             else {
                 _playerController.interactableObject = _playerController.interactables[0];
+                _playerController.interactableObject.GetComponent<Interactable>().UpdateDisplayText();
             }
         }
     }
@@ -51,6 +52,10 @@ public abstract class Interactable : MonoBehaviour
     {
         _playerController.SetPuedeInteractuar(false);
         _playerController.interactableObject = null;
+        _playerController.ChangeDisplayText(defaultText);
+    }
+    protected virtual void UpdateDisplayText()
+    {
         _playerController.ChangeDisplayText(defaultText);
     }
     public abstract void Interact();

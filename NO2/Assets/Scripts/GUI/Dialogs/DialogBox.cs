@@ -30,7 +30,6 @@ public class DialogBox : MonoBehaviour
     public void StartDialog(List<DialogLine> lines, CharacterInteractable actualCharacter)
     {
         GameManager.Instance.GetComponent<DiverseMenusManager>().DialogIsOpen = true;
-        Time.timeScale = 0;
         characterReference = actualCharacter;
         currentLines = lines;
         currentLineIndex = 0;
@@ -99,7 +98,7 @@ public class DialogBox : MonoBehaviour
         foreach (char c in text)
         {
             dialogText.text += c;
-            yield return new WaitForSecondsRealtime(charDelay);
+            yield return new WaitForSeconds(charDelay);
         }
 
         isTyping = false;
@@ -119,7 +118,6 @@ public class DialogBox : MonoBehaviour
 
     private void CloseDialog()
     {
-        Time.timeScale = 1;
         characterReference.DialogIsOpen = false;
         characterReference.DialogIsRecentlyOpen = true;
         GameManager.Instance.GetComponent<DiverseMenusManager>().DialogIsOpen = false;

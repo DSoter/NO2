@@ -58,4 +58,10 @@ public class CheckpointInteractuable : Interactable
         _playerController.ChangeDisplayText("Descansar");
     }
 
+    protected override void UpdateDisplayText()
+    {
+        base.UpdateDisplayText();
+        _playerController.ChangeDisplayText("Descansar");
+    }
+
 }

@@ -95,6 +95,7 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _renderer = GetComponent<SpriteRenderer>();
@@ -104,6 +105,8 @@ public class PlayerController : MonoBehaviour
 
         _playerData.Stamina = _playerData.MaxStamina;
         _oxygenData.LastOxygenSeconds = _playerData.LastOxygenSeconds;
+
+        RefillHealthPotions();
     }
 
     private void Start()

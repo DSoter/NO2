@@ -19,13 +19,10 @@ public class DialogBox : MonoBehaviour
     private Coroutine typingCoroutine;
     private CharacterInteractable characterReference;
 
-    private InputActionReference _interactRef;
-    [Header("Input System")]
-    [SerializeField] private InputActionAsset _inputSystemReference;
 
     private void Awake()
     {
-        InitializePrefsActions();
+        GameManager.Instance.gameObject.GetComponent<InputManager>().onInteract += Confirm;
         dialogPanel.SetActive(false);
         continueIndicator.SetActive(false);
     }
@@ -57,69 +54,8 @@ public class DialogBox : MonoBehaviour
             AdvanceLine();
         }
     }
-    public void OnConfirm(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            if (!isOpen) return;
-
-            if (isTyping)
-            {
-                // Si está escribiendo, completa el texto instantáneamente
-                CompleteLine();
-            }
-            else
-            {
-                // Si ya terminó de escribir, avanza a la siguiente línea
-                AdvanceLine();
-            }
-        }
-    }
-
-    private void OnEnable()
-    {
-        //GameManager.Instance.GetComponent<DiverseMenusManager>().onConfirm += Confirm;
-        EnableActions();
-
-    }
-
-    private void OnDisable()
-    {
-        //GameManager.Instance.GetComponent<DiverseMenusManager>().onConfirm -= Confirm;
-        DisposeActions();
-    }
-
-    private void InitializePrefsActions()
-    {
 
 
-        string json = PlayerPrefs.GetString("rebinds", "");
-        if (!string.IsNullOrEmpty(json))
-        {
-            _inputSystemReference.LoadBindingOverridesFromJson(json);
-        }
-
-        InputActionMap playerMap = _inputSystemReference.FindActionMap("Player");
-
-        _interactRef = InputActionReference.Create(playerMap.FindAction("Interact"));
-
-        EnableActions();
-        playerMap.Enable();
-    }
-
-    private void DisposeActions()
-    {
-        if (_interactRef != null)
-        {
-            _interactRef.action.performed -= OnConfirm;
-            _inputSystemReference.FindActionMap("Player").Disable();
-        }
-    }
-
-    private void EnableActions()
-    {
-        _interactRef.action.performed += OnConfirm;
-    }
 
     private void AdvanceLine()
     {

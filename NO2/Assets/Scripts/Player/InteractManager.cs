@@ -15,9 +15,6 @@ public class InteractManager : MonoBehaviour
     [HideInInspector] public List<Interactable> interactables;
     private bool _puedeInteractuar;
 
-    // InputSystem 
-    private InputSystem m_Actions;
-    private InputSystem.PlayerActions m_Player;
 
     //UIEmergente
     private GameObject _canvas;
@@ -27,15 +24,16 @@ public class InteractManager : MonoBehaviour
     [SerializeField] private Sprite _keySprite;
 
 
-    [SerializeField] private InputActionReference actionReference;
+    private InputManager inputManager;
     //player controller
     private PlayerController _playerController;
 
     private string _cachedBindingText;
     private void Awake()
     {
-        actionReference.action.performed += OnInteract;
-        actionReference.action.canceled += OnInteract;       
+
+        inputManager = GameManager.Instance.gameObject.GetComponent<InputManager>();
+        inputManager.onInteract += OnInteract; 
         
         
 
@@ -68,17 +66,10 @@ public class InteractManager : MonoBehaviour
         }
     }
 
-    public void OnInteract(InputAction.CallbackContext context)
+    public void OnInteract()
     {
-        if (context.performed)
-        {
-            if (_puedeInteractuar && (_playerController.GetState() == PlayerController.PlayerState.Move || _playerController.GetState() == PlayerController.PlayerState.Rest)){ 
-                interactableObject.Interact();
-            }
-        }
-        if (context.canceled)
-        {
-
+        if (_puedeInteractuar && (_playerController.GetState() == PlayerController.PlayerState.Move || _playerController.GetState() == PlayerController.PlayerState.Rest)){ 
+            interactableObject.Interact();
         }
     }
     public void SetPuedeInteractuar(bool interact)
@@ -91,24 +82,15 @@ public class InteractManager : MonoBehaviour
     }
 
 
-    void OnEnable()
-    {
-        actionReference.action.Enable();
-    }
-    void OnDisable()
-    {
-        actionReference.action.Disable();
-    }
     void OnDestroy()
     {
-        actionReference.action.performed -= OnInteract;
-        actionReference.action.canceled -= OnInteract;
+        inputManager.onInteract -= OnInteract;
     }
 
     public void RefreshInteractBinding()
     {
         _cachedBindingText = InputControlPath.ToHumanReadableString(
-         actionReference.action.bindings[0].effectivePath,
+         inputManager._InteractRef.action.bindings[0].effectivePath,
          InputControlPath.HumanReadableStringOptions.OmitDevice
      );
     }
@@ -118,11 +100,5 @@ public class InteractManager : MonoBehaviour
 
         _textoUI.GetComponent<TextMeshProUGUI>().text = text;
     }
-
-
- 
-
-    
-
 }
 

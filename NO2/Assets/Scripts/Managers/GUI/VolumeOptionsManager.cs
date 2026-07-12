@@ -15,8 +15,8 @@ public class VolumeOptionsManager : MonoBehaviour
     public Slider sfxSlider;
     public GameObject soundOn;
     public GameObject soundOff;
-    [SerializeField] private InputActionReference actionReference;
     [SerializeField] private UnityEvent applyAuxKeybinds;
+    private InputManager inputManager;
     private bool _wantsToExit;
 
 
@@ -31,9 +31,9 @@ public class VolumeOptionsManager : MonoBehaviour
         float savedMusic = PlayerPrefs.GetFloat("MusicVolume", 0.7f);
         float savedSFX = PlayerPrefs.GetFloat("SFXVolume", 0.7f);
 
+        inputManager = GameManager.Instance.gameObject.GetComponent<InputManager>();
 
-        actionReference.action.performed += OnEscape;
-        actionReference.action.canceled += OnEscape;
+        inputManager.onEscape += OnEscape;
 
 
         masterSlider.value = savedMasterMusic;
@@ -117,26 +117,10 @@ public class VolumeOptionsManager : MonoBehaviour
         
     }
 
-    void OnEnable()
-    {
-        actionReference.action.Enable();
-    }
-    void OnDisable()
-    {
-        actionReference.action.Disable();
-    }
-    void OnDestroy()
-    {
-        actionReference.action.performed -= OnEscape;
-        actionReference.action.canceled -= OnEscape;
-    }
 
-    public void OnEscape(InputAction.CallbackContext context)
+    public void OnEscape()
     {
-        if (context.performed)
-        {
-            _wantsToExit = true;
-        }
+        _wantsToExit = true;
     }
 
 }

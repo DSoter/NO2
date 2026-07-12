@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private bool _10PercentAlertPlayed = false;
     private int _attackCounter = 0;
     private bool _areInputsEnabled = true;
+    private bool _dialogIsOpen = false;
     private bool _isOnOxigenZone = false;
 
     private bool _isPause => Time.timeScale == 0;
@@ -237,7 +238,7 @@ public class PlayerController : MonoBehaviour
 
     public void MovePerformed()
     {
-        if (_areInputsEnabled)
+        if (_areInputsEnabled && !_dialogIsOpen)
         {
             _moveDirection = _inputManager._MoveDirection;
         }
@@ -252,7 +253,7 @@ public class PlayerController : MonoBehaviour
 
     public void RunPerformed()
     {
-        if (_areInputsEnabled)
+        if (_areInputsEnabled && !_dialogIsOpen)
         {
             _isRunning = true;
         }
@@ -270,7 +271,8 @@ public class PlayerController : MonoBehaviour
 
     public void Roll()
     {
-        if (canRoll && _areInputsEnabled && !_isPause)
+        Debug.Log("Roll perrformed");
+        if (canRoll && _areInputsEnabled && !_isPause && !_dialogIsOpen)
         {
             StartCoroutine(RollCoroutine());
         }
@@ -294,8 +296,7 @@ public class PlayerController : MonoBehaviour
 
     private void WeakAttack()
     {
-        Debug.Log("weak atack clicked");
-        if (canAttack && _areInputsEnabled && !_isPause)
+        if (canAttack && _areInputsEnabled && !_isPause && !_dialogIsOpen)
         {
             StartCoroutine(WeakAttackCoroutine());
         }
@@ -544,6 +545,15 @@ public class PlayerController : MonoBehaviour
         _isOnOxigenZone = false;
     }
 
+
+    private void UpdateDialogIsOpen()
+    {
+        _dialogIsOpen = GameManager.Instance.GetComponent<DiverseMenusManager>().DialogIsOpen;
+        if (_dialogIsOpen)
+        {
+            _moveDirection = Vector2.zero;
+        }
+    }
     void OnDestroy()
     {
         DisposeActions();
@@ -569,7 +579,8 @@ public class PlayerController : MonoBehaviour
         _inputManager.onRunPerformed -= RunPerformed;
         _inputManager.onRunCancelled -= RunCancelled;
         _inputManager.onRoll -= Roll;
-        _inputManager.onWeakAttack -= WeakAttack;  
+        _inputManager.onWeakAttack -= WeakAttack;
+        GameManager.Instance.GetComponent<DiverseMenusManager>().dialogOpened -= UpdateDialogIsOpen;
     }
 
     private void EnableActions()
@@ -580,6 +591,7 @@ public class PlayerController : MonoBehaviour
         _inputManager.onRunCancelled += RunCancelled;
         _inputManager.onRoll += Roll;
         _inputManager.onWeakAttack += WeakAttack;
+        GameManager.Instance.GetComponent<DiverseMenusManager>().dialogOpened += UpdateDialogIsOpen;
     }
 
     public void ExitScene(Vector2 exitDirection, float animationDurationSeconds)
@@ -614,4 +626,6 @@ public class PlayerController : MonoBehaviour
         _areInputsEnabled = true;
 
     }
+
+
 }

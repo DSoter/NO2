@@ -85,6 +85,11 @@ public class CharacterInteractable : Interactable
         base.UniqueEnter();
         _playerController.ChangeDisplayText("Hablar");
     }
+    protected override void UpdateDisplayText()
+    {
+        base.UpdateDisplayText();
+        _playerController.ChangeDisplayText("Hablar");
+    }
     private void StartDialog()
     {
         if(timesTalked < normalTexts.Count){

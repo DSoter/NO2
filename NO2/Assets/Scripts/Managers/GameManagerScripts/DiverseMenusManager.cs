@@ -52,6 +52,7 @@ public class DiverseMenusManager : MonoBehaviour
 
     private bool dialogIsOpen;
 
+    public Action dialogOpened;
 
 
 
@@ -74,7 +75,11 @@ public class DiverseMenusManager : MonoBehaviour
 
     public bool DialogIsOpen
     {
-        set {  dialogIsOpen = value; }
+        get { return dialogIsOpen; }
+        set {
+            dialogIsOpen = value;
+            dialogOpened?.Invoke();
+        }
     }
     private void Awake()
     {

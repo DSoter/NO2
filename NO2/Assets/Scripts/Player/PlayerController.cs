@@ -17,10 +17,6 @@ public class PlayerController : MonoBehaviour
     private Vector2 _moveDirection = new Vector2(0, 0);
     private Vector2 _lookDirection = new Vector2(1, 0);
     private float _staminaRegenTimer = 0;
-    private float _lastOxygenSeconds;
-    private float _lastOxygenTimer = 0;
-    private bool _50PercentAlertPlayed = false;
-    private bool _10PercentAlertPlayed = false;
     private int _attackCounter = 0;
     private bool _areInputsEnabled = true;
     private bool _isOnOxigenZone = false;
@@ -39,8 +35,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip deathSound;
 
     [Space(5)]
-    [Header("Player data")]
+    [Header("Scriptable Objects")]
     [SerializeField] private PlayerData _playerData;
+    [SerializeField] private OxygenData _oxygenData;
 
     [Space(5)]
     [Header("Weak Attack")]
@@ -104,7 +101,7 @@ public class PlayerController : MonoBehaviour
 
 
         _playerData.Stamina = _playerData.MaxStamina;
-        _lastOxygenSeconds = _playerData.LastOxygenSeconds;
+        _oxygenData.LastOxygenSeconds = _playerData.LastOxygenSeconds;
     }
 
     private void Start()
@@ -360,7 +357,7 @@ public class PlayerController : MonoBehaviour
     private void HandleOnOxygenIncreased()
     {
         // Reset the last seconds timer when oxygen is increased
-        _lastOxygenTimer = 0;
+        _oxygenData.LastOxygenTimer = 0;
 
         // Reset the alerts only when the oxygen percentage goes above the thresholds
         float percentage = _playerData.Oxygen / _playerData.MaxOxygen * 100;
@@ -370,13 +367,13 @@ public class PlayerController : MonoBehaviour
         if (percentage > 50)
         {
             Debug.Log("Reseting 50% & 10% Alerts");
-            _50PercentAlertPlayed = false;
-            _10PercentAlertPlayed = false;
+            _oxygenData.HalfOxygenAlertPlayed = false;
+            _oxygenData.LowOxygenAlertPlayed = false;
         }
         else if(percentage > 10)
         {
             Debug.Log("Reseting 10% Alert");
-            _10PercentAlertPlayed = false;
+            _oxygenData.LowOxygenAlertPlayed = false;
         }
     }
     private void HandleAnimatorParams()
@@ -493,15 +490,15 @@ public class PlayerController : MonoBehaviour
 
             float percentage = _playerData.Oxygen / _playerData.MaxOxygen * 100;
 
-            if (percentage < 50 && !_50PercentAlertPlayed)
+            if (percentage < 50 && !_oxygenData.HalfOxygenAlertPlayed)
             {
                 GameManager.Instance.GetComponent<AudioManager>().PlaySound(_oxygenAlert50);
-                _50PercentAlertPlayed = true;
+                _oxygenData.HalfOxygenAlertPlayed = true;
             }
-            else if(percentage < 10 && !_10PercentAlertPlayed)
+            else if(percentage < 10 && !_oxygenData.LowOxygenAlertPlayed)
             {
                 GameManager.Instance.GetComponent<AudioManager>().PlaySound(_oxygenAlert10);
-                _10PercentAlertPlayed = true;
+                _oxygenData.LowOxygenAlertPlayed = true;
             }
             else if(_playerData.Oxygen <= 0)
             {
@@ -513,9 +510,9 @@ public class PlayerController : MonoBehaviour
     private void HandleLastSeconds()
     {
         
-        if(_lastOxygenTimer < _lastOxygenSeconds)
+        if(_oxygenData.LastOxygenTimer < _oxygenData.LastOxygenSeconds)
         {
-            _lastOxygenTimer += Time.deltaTime;
+            _oxygenData.LastOxygenTimer += Time.deltaTime;
         }
         else
         {
@@ -535,7 +532,7 @@ public class PlayerController : MonoBehaviour
         // Play Oxigen Refilling COMPLETAR
         _isOnOxigenZone = true;
 
-        _lastOxygenTimer = 0;
+        _oxygenData.LastOxygenTimer = 0;
     }
 
     [ContextMenu("ExitOxigenZone")]

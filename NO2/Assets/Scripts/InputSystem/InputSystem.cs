@@ -145,6 +145,15 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Heal"",
+                    ""type"": ""Button"",
+                    ""id"": ""021273b5-9d73-419b-877a-e879c9d2e174"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -365,6 +374,28 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""StrongAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cba02dc1-f569-4ea6-b428-2c52b7702489"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Heal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0d529a56-d130-42dd-8a79-bab06ff34578"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Heal"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -770,6 +801,7 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_WeakAttack = m_Player.FindAction("WeakAttack", throwIfNotFound: true);
         m_Player_StrongAttack = m_Player.FindAction("StrongAttack", throwIfNotFound: true);
+        m_Player_Heal = m_Player.FindAction("Heal", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Escape = m_UI.FindAction("Escape", throwIfNotFound: true);
@@ -872,6 +904,7 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_WeakAttack;
     private readonly InputAction m_Player_StrongAttack;
+    private readonly InputAction m_Player_Heal;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -907,6 +940,10 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/StrongAttack".
         /// </summary>
         public InputAction @StrongAttack => m_Wrapper.m_Player_StrongAttack;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Heal".
+        /// </summary>
+        public InputAction @Heal => m_Wrapper.m_Player_Heal;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -951,6 +988,9 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
             @StrongAttack.started += instance.OnStrongAttack;
             @StrongAttack.performed += instance.OnStrongAttack;
             @StrongAttack.canceled += instance.OnStrongAttack;
+            @Heal.started += instance.OnHeal;
+            @Heal.performed += instance.OnHeal;
+            @Heal.canceled += instance.OnHeal;
         }
 
         /// <summary>
@@ -980,6 +1020,9 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
             @StrongAttack.started -= instance.OnStrongAttack;
             @StrongAttack.performed -= instance.OnStrongAttack;
             @StrongAttack.canceled -= instance.OnStrongAttack;
+            @Heal.started -= instance.OnHeal;
+            @Heal.performed -= instance.OnHeal;
+            @Heal.canceled -= instance.OnHeal;
         }
 
         /// <summary>
@@ -1290,6 +1333,13 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnStrongAttack(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Heal" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnHeal(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

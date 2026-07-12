@@ -314,6 +314,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: HudCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8746751055168075790, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 8.700012
+      objectReference: {fileID: 0}
+    - target: {fileID: 8746751055168075790, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -44.100006
+      objectReference: {fileID: 0}
     - target: {fileID: 8815076119853397724, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -22.400024
@@ -327,12 +335,57 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7188841109492350958, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8105924592850811925}
+    - targetCorrespondingSourceObject: {fileID: 7569784841379320390, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5586565158437622986}
   m_SourcePrefab: {fileID: 100100000, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
+--- !u!114 &480602015628630646 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3287430241900542938, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
+  m_PrefabInstance: {fileID: 3113179898495771052}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!114 &743032719147347244 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2412791190232435840, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
+  m_PrefabInstance: {fileID: 3113179898495771052}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!224 &4389200808106027507 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1719722492483749983, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
   m_PrefabInstance: {fileID: 3113179898495771052}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4771981256209937386 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7569784841379320390, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
+  m_PrefabInstance: {fileID: 3113179898495771052}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5586565158437622986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4771981256209937386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 921419d34349de743be0914232002a05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealPotionsHud
+  healData: {fileID: 11400000, guid: ccc02f2f8da643c4db2030f236d9a261, type: 2}
+  textRemainingPotions: {fileID: 743032719147347244}
+  textMaxPotions: {fileID: 480602015628630646}
 --- !u!1 &5257909105082637890 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7188841109492350958, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}

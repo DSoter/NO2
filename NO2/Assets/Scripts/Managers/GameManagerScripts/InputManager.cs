@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class InputManager : MonoBehaviour
 {
 
-    private InputActionReference _moveRef, _interactRef, _runRef, _rollRef, _weakAttackRef, _strongAttackRef;
+    private InputActionReference _moveRef, _interactRef, _runRef, _rollRef, _weakAttackRef, _strongAttackRef, _healRef;
     private InputActionReference _mapRef, _flowerRef, _badgesRef, _scapeRef, _navigateLeft, _navigateRight, _confirm, _leftClick;
     private InputActionReference _goUp, _goDown, _goLeft, _goRight;
 
@@ -21,7 +21,7 @@ public class InputManager : MonoBehaviour
     [SerializeField] private InputActionAsset _inputSystemReference;
 
 
-    public event Action onMovePerformed, onMoveCancelled, onInteract, onRunPerformed, onRunCancelled, onRoll, onWeakAttack, onStrongAttack;
+    public event Action onMovePerformed, onMoveCancelled, onInteract, onRunPerformed, onRunCancelled, onRoll, onWeakAttack, onStrongAttack, onHeal;
     public event Action onMap, onFlower, onBadge, onEscape, onNavigateLeft, onNavigateRight, onConfirm, onLeftClick;
     public event Action onGoUp, onGoDown, onGoLeft, onGoRight;
 
@@ -91,10 +91,22 @@ public class InputManager : MonoBehaviour
         
         if (context.performed)
         {
-            Debug.Log("funciona llamada");
             onWeakAttack?.Invoke();
         }
     }
+    private void OnHeal(InputAction.CallbackContext context)
+    {
+
+        if (context.performed)
+        {
+            onHeal?.Invoke();
+        }
+    }
+
+
+
+    //UI
+
     private void OnMap(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -217,7 +229,9 @@ public class InputManager : MonoBehaviour
         _weakAttackRef = InputActionReference.Create(playerMap.FindAction("WeakAttack"));
         _strongAttackRef = InputActionReference.Create(playerMap.FindAction("StrongAttack"));
 
-        
+        _healRef = InputActionReference.Create(playerMap.FindAction("Heal"));
+
+
 
         InputActionMap UIMap = _inputSystemReference.FindActionMap("UI");
 
@@ -253,6 +267,7 @@ public class InputManager : MonoBehaviour
             _rollRef.action.started -= OnRoll;
             _weakAttackRef.action.performed -= OnWeakAttack;
             _interactRef.action.performed -= OnInteract;
+            _healRef.action.performed -= OnHeal;
             _mapRef.action.performed -= OnMap;
             _flowerRef.action.performed -= OnFlower;
             _badgesRef.action.performed -= OnBadge;
@@ -282,6 +297,7 @@ public class InputManager : MonoBehaviour
         _rollRef.action.started += OnRoll;
         _weakAttackRef.action.performed += OnWeakAttack;
         _interactRef.action.performed += OnInteract;
+        _healRef.action.performed += OnHeal;
         //strongAttackRef.action.performed += OnStrongAttack;
         _mapRef.action.performed += OnMap;
         _flowerRef.action.performed += OnFlower;

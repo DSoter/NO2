@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     [Header("Scriptable Objects")]
     [SerializeField] private PlayerData _playerData;
     [SerializeField] private OxygenData _oxygenData;
+    [SerializeField] private HealData _healData;
 
     [Space(5)]
     [Header("Weak Attack")]
@@ -139,6 +140,7 @@ public class PlayerController : MonoBehaviour
 
                 break;
             case PlayerState.Rest:
+                RefillHealthPotions();
                 HandleHealthRegeneration();
                 HandleStaminaRegeneration();
                 _isRunning = false;
@@ -233,6 +235,10 @@ public class PlayerController : MonoBehaviour
         {
             _playerData.Health = Mathf.Min(_playerData.MaxHealth, _playerData.Health + _playerData.HealthRegenerationSpeed * Time.deltaTime);
         }
+    }
+    private void RefillHealthPotions()
+    {
+        _healData.RemainingUses = _healData.MaxUses;
     }
 
     public void MovePerformed()
@@ -544,6 +550,26 @@ public class PlayerController : MonoBehaviour
         _isOnOxigenZone = false;
     }
 
+    public void TryToHeal()
+    {
+        if(_playerData.Health == _playerData.MaxHealth)
+        {
+            Debug.Log("Full vida, no se puede curar");
+            return;
+        }
+        if(_healData.RemainingUses > 0)
+        {
+            _healData.RemainingUses--;
+            
+            _playerData.Health = Mathf.Min(_playerData.Health+_healData.HealAmount, _playerData.MaxHealth);
+        }
+        else
+        {
+            Debug.Log("No quedan usos de pociones");
+        }
+    }
+
+
 
     private void UpdateDialogIsOpen()
     {
@@ -579,6 +605,7 @@ public class PlayerController : MonoBehaviour
         _inputManager.onRunCancelled -= RunCancelled;
         _inputManager.onRoll -= Roll;
         _inputManager.onWeakAttack -= WeakAttack;
+        _inputManager.onHeal -= TryToHeal;
         GameManager.Instance.GetComponent<DiverseMenusManager>().dialogOpened -= UpdateDialogIsOpen;
     }
 
@@ -590,6 +617,7 @@ public class PlayerController : MonoBehaviour
         _inputManager.onRunCancelled += RunCancelled;
         _inputManager.onRoll += Roll;
         _inputManager.onWeakAttack += WeakAttack;
+        _inputManager.onHeal += TryToHeal;
         GameManager.Instance.GetComponent<DiverseMenusManager>().dialogOpened += UpdateDialogIsOpen;
     }
 

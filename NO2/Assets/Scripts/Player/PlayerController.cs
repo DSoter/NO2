@@ -143,6 +143,8 @@ public class PlayerController : MonoBehaviour
                 break;
             case PlayerState.Rest:
                 HandleHealthRegeneration();
+                HandleStaminaRegeneration();
+                _isRunning = false;
                 break;
 
         }

@@ -481,6 +481,15 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LeftClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""47bfc01d-5bc5-43bd-b89b-897b29b54223"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -736,6 +745,17 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""action"": ""GoRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4b293536-2a2a-4867-995a-6ca69b354260"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -764,6 +784,7 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
         m_UI_GoDown = m_UI.FindAction("GoDown", throwIfNotFound: true);
         m_UI_GoLeft = m_UI.FindAction("GoLeft", throwIfNotFound: true);
         m_UI_GoRight = m_UI.FindAction("GoRight", throwIfNotFound: true);
+        m_UI_LeftClick = m_UI.FindAction("LeftClick", throwIfNotFound: true);
     }
 
     ~@InputSystem()
@@ -1008,6 +1029,7 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_GoDown;
     private readonly InputAction m_UI_GoLeft;
     private readonly InputAction m_UI_GoRight;
+    private readonly InputAction m_UI_LeftClick;
     /// <summary>
     /// Provides access to input actions defined in input action map "UI".
     /// </summary>
@@ -1067,6 +1089,10 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "UI/GoRight".
         /// </summary>
         public InputAction @GoRight => m_Wrapper.m_UI_GoRight;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/LeftClick".
+        /// </summary>
+        public InputAction @LeftClick => m_Wrapper.m_UI_LeftClick;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1129,6 +1155,9 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
             @GoRight.started += instance.OnGoRight;
             @GoRight.performed += instance.OnGoRight;
             @GoRight.canceled += instance.OnGoRight;
+            @LeftClick.started += instance.OnLeftClick;
+            @LeftClick.performed += instance.OnLeftClick;
+            @LeftClick.canceled += instance.OnLeftClick;
         }
 
         /// <summary>
@@ -1176,6 +1205,9 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
             @GoRight.started -= instance.OnGoRight;
             @GoRight.performed -= instance.OnGoRight;
             @GoRight.canceled -= instance.OnGoRight;
+            @LeftClick.started -= instance.OnLeftClick;
+            @LeftClick.performed -= instance.OnLeftClick;
+            @LeftClick.canceled -= instance.OnLeftClick;
         }
 
         /// <summary>
@@ -1350,5 +1382,12 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnGoRight(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "LeftClick" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLeftClick(InputAction.CallbackContext context);
     }
 }

@@ -22,7 +22,8 @@ public class DialogBox : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.Instance.gameObject.GetComponent<InputManager>().onInteract += Confirm;
+        GameManager.Instance.gameObject.GetComponent<InputManager>().onInteract += ConfirmWithInteractButton;
+        GameManager.Instance.gameObject.GetComponent<InputManager>().onLeftClick += Confirm;
         dialogPanel.SetActive(false);
         continueIndicator.SetActive(false);
     }
@@ -38,20 +39,35 @@ public class DialogBox : MonoBehaviour
         ShowNextValidLine();
     }
 
+    public void ConfirmWithInteractButton()
+    {
+        if (!isOpen) return;
+
+        if (isTyping)
+        {
+            CompleteLine();
+        }
+        else
+        {
+            AdvanceLine();
+            characterReference.DialogIsRecentlyOpen = true; //si el utlimo dialogo se ha saltado con la E no se pulsa automaticamente al hablar con un personaje
+        }
+
+    }
     public void Confirm()
     {
         if (!isOpen) return;
 
         if (isTyping)
         {
-            // Si está escribiendo, completa el texto instantáneamente
             CompleteLine();
         }
         else
         {
-            // Si ya terminó de escribir, avanza a la siguiente línea
             AdvanceLine();
+            characterReference.DialogIsRecentlyOpen = false;
         }
+
     }
 
 
@@ -119,7 +135,6 @@ public class DialogBox : MonoBehaviour
     private void CloseDialog()
     {
         characterReference.DialogIsOpen = false;
-        characterReference.DialogIsRecentlyOpen = true;
         GameManager.Instance.GetComponent<DiverseMenusManager>().DialogIsOpen = false;
         isOpen = false;
         isTyping = false;

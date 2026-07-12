@@ -9,7 +9,7 @@ public class InputManager : MonoBehaviour
 {
 
     private InputActionReference _moveRef, _interactRef, _runRef, _rollRef, _weakAttackRef, _strongAttackRef;
-    private InputActionReference _mapRef, _flowerRef, _badgesRef, _scapeRef, _navigateLeft, _navigateRight, _confirm;
+    private InputActionReference _mapRef, _flowerRef, _badgesRef, _scapeRef, _navigateLeft, _navigateRight, _confirm, _leftClick;
     private InputActionReference _goUp, _goDown, _goLeft, _goRight;
 
     public InputActionReference _InteractRef
@@ -22,7 +22,7 @@ public class InputManager : MonoBehaviour
 
 
     public event Action onMovePerformed, onMoveCancelled, onInteract, onRunPerformed, onRunCancelled, onRoll, onWeakAttack, onStrongAttack;
-    public event Action onMap, onFlower, onBadge, onEscape, onNavigateLeft, onNavigateRight, onConfirm;
+    public event Action onMap, onFlower, onBadge, onEscape, onNavigateLeft, onNavigateRight, onConfirm, onLeftClick;
     public event Action onGoUp, onGoDown, onGoLeft, onGoRight;
 
     private Vector2 _moveDirection;
@@ -146,6 +146,13 @@ public class InputManager : MonoBehaviour
             onConfirm?.Invoke();
         }
     }
+    private void OnLeftClick(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            onLeftClick?.Invoke();
+        }
+    }
 
     private void OnGoUp(InputAction.CallbackContext context)
     {
@@ -221,6 +228,7 @@ public class InputManager : MonoBehaviour
         _navigateLeft = InputActionReference.Create(UIMap.FindAction("NavigateLeft"));
         _navigateRight = InputActionReference.Create(UIMap.FindAction("NavigateRight"));
         _confirm = InputActionReference.Create(UIMap.FindAction("Confirm"));
+        _leftClick = InputActionReference.Create(UIMap.FindAction("LeftClick"));
         _goUp = InputActionReference.Create(UIMap.FindAction("GoUp"));
         _goDown = InputActionReference.Create(UIMap.FindAction("GoDown"));
         _goRight = InputActionReference.Create(UIMap.FindAction("GoRight"));
@@ -251,6 +259,7 @@ public class InputManager : MonoBehaviour
             _navigateLeft.action.performed -= OnNavigateLeft;
             _navigateRight.action.performed -= OnNavigateRight;
             _confirm.action.performed -= OnConfirm;
+            _leftClick.action.performed -= OnLeftClick;
             _goUp.action.performed -= OnGoUp;
             _goDown.action.performed -= OnGoDown;
             _goRight.action.performed -= OnGoRight;
@@ -280,13 +289,13 @@ public class InputManager : MonoBehaviour
         _navigateLeft.action.performed += OnNavigateLeft;
         _navigateRight.action.performed += OnNavigateRight;
         _confirm.action.performed += OnConfirm;
+        _leftClick.action.performed += OnLeftClick;
         _goUp.action.performed += OnGoUp;
         _goDown.action.performed += OnGoDown;
         _goRight.action.performed += OnGoRight;
         _goLeft.action.performed += OnGoLeft;
         _scapeRef.action.performed += OnEscape;
 
-        Debug.Log($"Acciones suscritas. Roll enabled: {_rollRef.action.enabled}");
     }
 
 

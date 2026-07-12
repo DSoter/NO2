@@ -5610,6 +5610,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBar
   _playerData: {fileID: 11400000, guid: 707aa1a40a1bb064193fd4f6f25fcc6a, type: 2}
+  _updateSpeed: 10
+  _snapDifference: 0.01
 --- !u!1 &4660940900698418692
 GameObject:
   m_ObjectHideFlags: 0
@@ -5703,6 +5705,7 @@ MonoBehaviour:
   _fill: {fileID: 5499766225544738433}
   _percentageTMP: {fileID: 3424408307548531844}
   _updateSpeed: 2
+  _snapDifference: 0.5
 --- !u!1 &5113467372418164124
 GameObject:
   m_ObjectHideFlags: 0
@@ -5793,6 +5796,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StaminaBar
   _playerData: {fileID: 11400000, guid: 707aa1a40a1bb064193fd4f6f25fcc6a, type: 2}
+  _updateSpeed: 10
+  _snapDifference: 0.01
 --- !u!1 &5218029426245051596
 GameObject:
   m_ObjectHideFlags: 0

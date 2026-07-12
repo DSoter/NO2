@@ -1,14 +1,22 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class StaminaBar : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] private PlayerData _playerData;
+
+    [Space(5)]
+    [Header("Settings")]
+    [SerializeField] private float _updateSpeed = 5f;
+    [SerializeField] private float _snapDifference = 0.005f;
 
     private RectTransform _rectTransform;
     private Image _staminaMask;
 
     private float _startingHeight;
+    private float _shownFill;
 
     private void Awake()
     {
@@ -19,6 +27,8 @@ public class StaminaBar : MonoBehaviour
     void Start()
     {
         UpdateMaxStamina();
+        _shownFill = _playerData.Stamina / _playerData.MaxStamina;
+        _staminaMask.fillAmount = _shownFill;
     }
 
     private void OnEnable()
@@ -38,6 +48,23 @@ public class StaminaBar : MonoBehaviour
 
     public void UpdateCurrentStamina()
     {
-        _staminaMask.fillAmount = _playerData.Stamina / _playerData.MaxStamina;
+        StopAllCoroutines();
+        StartCoroutine(AnimateToTarget(_playerData.Stamina / _playerData.MaxStamina));
+    }
+
+    private IEnumerator AnimateToTarget(float targetFill)
+    {
+        while (!Mathf.Approximately(_shownFill, targetFill))
+        {
+            _shownFill = Mathf.Lerp(_shownFill, targetFill, _updateSpeed * Time.deltaTime);
+
+            if (Mathf.Abs(_shownFill - targetFill) < 0.001f)
+            {
+                _shownFill = targetFill;
+            }
+
+            _staminaMask.fillAmount = _shownFill;
+            yield return null;
+        }
     }
 }

@@ -22,7 +22,7 @@ MonoBehaviour:
   runningStaminaCost: 10
   rollingStaminaCost: 10
   weakAttackStaminaCost: 5
-  oxygen: 22.992458
+  oxygen: 46.378418
   maxOxygen: 120
   oxygenDropingSpeed: 1
   oxygenRegenerationSpeed: 60

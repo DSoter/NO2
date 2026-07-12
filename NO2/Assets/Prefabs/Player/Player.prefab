@@ -706,6 +706,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   deathSound: {fileID: 8300000, guid: 635a0038b9b863f409947d5d641440f1, type: 3}
   _playerData: {fileID: 11400000, guid: 707aa1a40a1bb064193fd4f6f25fcc6a, type: 2}
+  _oxygenData: {fileID: 11400000, guid: b15507aeddc94724cac4078700f00819, type: 2}
   _weakAttack: {fileID: 3006558068619297952}
   _oxygenAlert50: {fileID: 8300000, guid: 2c033969aabb4bd4c91567926048c0e6, type: 3}
   _oxygenAlert10: {fileID: 8300000, guid: c7f1125c2254d6f44be4fdbb6b7613e3, type: 3}
@@ -801,7 +802,6 @@ MonoBehaviour:
   interactableObject: {fileID: 0}
   interactables: []
   _keySprite: {fileID: -536044497137714808, guid: 47a8837c209a6814e92cd74b8bbee0cd, type: 3}
-  actionReference: {fileID: 5641551158608982305, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}
 --- !u!114 &898727236085585093
 MonoBehaviour:
   m_ObjectHideFlags: 0

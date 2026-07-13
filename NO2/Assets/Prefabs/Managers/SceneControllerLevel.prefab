@@ -53,8 +53,10 @@ MonoBehaviour:
   theme: {fileID: 8300000, guid: ba4941f9a1f6acc468e852d60851a44f, type: 3}
   deathSound: {fileID: 8300000, guid: 635a0038b9b863f409947d5d641440f1, type: 3}
   transition: {fileID: 6658039799247995217}
+  firstSceneName: PruebaTileMap
   spawnPlayerEditor: 0
   checkpoints: []
+  healData: {fileID: 11400000, guid: ccc02f2f8da643c4db2030f236d9a261, type: 2}
 --- !u!1 &8170045265782028333
 GameObject:
   m_ObjectHideFlags: 0

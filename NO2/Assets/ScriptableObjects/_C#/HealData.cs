@@ -9,6 +9,9 @@ public class HealData : ScriptableObject
 
     [SerializeField] private int healAmount;
 
+    [SerializeField] private float actualCooldownSeconds;
+    [SerializeFIeld] private float cooldownSeconds;
+
     public Action healUsesChanged;
 
     public int RemainingUses
@@ -30,4 +33,15 @@ public class HealData : ScriptableObject
         get { return healAmount; }
         set {  healAmount = value;}
     }
+    public float CooldownSeconds
+    {
+        get { return cooldownSeconds; }
+        set { cooldownSeconds = value; }
+    }
+    public float ActualCooldownSeconds
+    {
+        get { return actualCooldownSeconds; }
+        set { ActualCooldownSeconds = value; }
+    }
+
 }

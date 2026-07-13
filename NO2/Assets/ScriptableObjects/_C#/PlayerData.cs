@@ -11,6 +11,7 @@ public class PlayerData : ScriptableObject
     [SerializeField] private float health;
     [SerializeField] private float maxHealth;
     [SerializeField] private float healthRegenerationSpeed;
+    [SerializeField] private float healthDropingSpeed;
 
     [Space(5)]
     [Header("Stamina")]
@@ -66,7 +67,7 @@ public class PlayerData : ScriptableObject
     {
         get { return health; }
         set {
-            health = value;
+            health = Mathf.Clamp(value, 0, maxHealth);
             OnHealthChanged?.Invoke();
         }
     }
@@ -76,7 +77,7 @@ public class PlayerData : ScriptableObject
         get { return stamina; }
         set
         {
-            stamina = value; 
+            stamina = Mathf.Clamp(value, 0, maxStamina);
             OnStaminaChanged?.Invoke();
         }
     }
@@ -128,6 +129,10 @@ public class PlayerData : ScriptableObject
     public float HealthRegenerationSpeed
     {
         get { return healthRegenerationSpeed; }
+    }
+    public float HealthDropingSpeed
+    {
+        get { return healthDropingSpeed; }
     }
     public float RunningStaminaCost
     {

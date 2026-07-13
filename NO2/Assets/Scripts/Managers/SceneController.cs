@@ -20,6 +20,8 @@ public class SceneController : MonoBehaviour
     [Header("Transition")]
     [SerializeField] private TransitionController transition;
 
+    [SerializeField] private string firstSceneName;
+
     [SerializeField] private bool spawnPlayerEditor;
 
     //Cosas jugador
@@ -29,6 +31,10 @@ public class SceneController : MonoBehaviour
     private CheckpointManager _checkpointManager;
 
     public List<Transform> checkpoints;
+
+    [Header("Scriptable Objects")]
+    [SerializeField] private PlayerData playerData;
+    [SerializeField] private HealData healData;
     private void Awake()
     {
         
@@ -99,6 +105,8 @@ public class SceneController : MonoBehaviour
     }
     public void SpawnPlayer()
     {
+        ResetPotionCooldown();
+
         Debug.Log($"ExitGateDirection: {_checkpointManager.ExitGateDirection}");
         Debug.Log($"IdSpawn: {_checkpointManager.IdSpawn}");
         if (_checkpointManager.IdSpawn > 0)
@@ -130,6 +138,10 @@ public class SceneController : MonoBehaviour
 
     public void RespawnPlayer()
     {
+        RefillHealthPotions();
+        ResetPotionCooldown()
+
+        playerData.Health = playerData.MaxHealth;
 
         _checkpointManager.IdSpawn = -1;
         currentSpawnPoint = checkpoints[currentSpawnPointId];
@@ -167,6 +179,14 @@ public class SceneController : MonoBehaviour
         player.transform.position = currentSpawnPoint.transform.position;
     }
 
+    private void RefillHealthPotions()
+    {
+        _healData.RemainingUses = _healData.MaxUses;
+    }
+    private void ResetPotionCooldown()
+    {
+        _healData.ActualCooldownSeeconds = 0;
+    }
     private bool CheckIsActiveScene(string scene)
     {
         return (SceneManager.GetActiveScene().name.Equals(scene));

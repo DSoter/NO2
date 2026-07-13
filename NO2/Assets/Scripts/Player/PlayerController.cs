@@ -21,6 +21,9 @@ public class PlayerController : MonoBehaviour
     private bool _areInputsEnabled = true;
     private bool _dialogIsOpen = false;
     private bool _isOnOxigenZone = false;
+    private bool _isOnDamageZone = false;
+    private float _actualCooldownPotion = 0;
+
 
     private bool _isPause => Time.timeScale == 0;
     private bool _isRunning = false;
@@ -106,7 +109,7 @@ public class PlayerController : MonoBehaviour
         _playerData.Stamina = _playerData.MaxStamina;
         _oxygenData.LastOxygenSeconds = _playerData.LastOxygenSeconds;
 
-        RefillHealthPotions();
+x
     }
 
     private void Start()
@@ -124,6 +127,7 @@ public class PlayerController : MonoBehaviour
 
         HandleAnimatorParams();
         HandleOxigen();
+        HandleCooldownPotion();
 
         switch (_state)
         {
@@ -144,7 +148,6 @@ public class PlayerController : MonoBehaviour
 
                 break;
             case PlayerState.Rest:
-                RefillHealthPotions();
                 HandleHealthRegeneration();
                 HandleStaminaRegeneration();
                 _isRunning = false;
@@ -240,10 +243,13 @@ public class PlayerController : MonoBehaviour
             _playerData.Health = Mathf.Min(_playerData.MaxHealth, _playerData.Health + _playerData.HealthRegenerationSpeed * Time.deltaTime);
         }
     }
-    private void RefillHealthPotions()
+
+    private void HandleCooldownPotion()
     {
-        _healData.RemainingUses = _healData.MaxUses;
+        _healData.ActualCooldownSeconds += Time.deltaTime;
+        _healData.ActualCooldownSeconds = Mathf.Max(_healData.ActualCooldownSeconds, _healData.CooldownSeconds);
     }
+    
 
     public void MovePerformed()
     {
@@ -408,7 +414,7 @@ public class PlayerController : MonoBehaviour
     private void ConsumeStamina(float amount)
     {
         _staminaRegenTimer = 0;
-        _playerData.Stamina = Mathf.Max(0, _playerData.Stamina - amount);
+        _playerData.Stamina = _playerData.Stamina - amount;
     }
 
     public void SetDead(bool isDead)
@@ -553,9 +559,33 @@ public class PlayerController : MonoBehaviour
     {
         _isOnOxigenZone = false;
     }
+    public void EnterDamageZone()
+    {
+        _isOnDamageZone = true;
+    }
+
+
+    public void ExitDamageZone()
+    {
+        _isOnDamageZone = false;
+    }
+
+    private void HandleHealthStatus()//gestionar posibles fectos de estado y daño por segundo
+    {
+        if (_isOnDamageZone)
+        {
+            _playerData.Health = _playerData.Health - _playerData.HealthDropingSpeed * Time.deltaTime;
+        }
+        if (_playerData.Health <= 0)
+        {
+            Death();
+        }
+    }
 
     public void TryToHeal()
     {
+        if(_state != PlayerState.Move) { return; }
+        if(_healData.ActualCooldownSeconds < _healData.CooldownSeconds) { return; }
         if(_playerData.Health == _playerData.MaxHealth)
         {
             Debug.Log("Full vida, no se puede curar");
@@ -565,7 +595,7 @@ public class PlayerController : MonoBehaviour
         {
             _healData.RemainingUses--;
             
-            _playerData.Health = Mathf.Min(_playerData.Health+_healData.HealAmount, _playerData.MaxHealth);
+            _playerData.Health += _healData.HealAmount;
         }
         else
         {
@@ -579,7 +609,7 @@ public class PlayerController : MonoBehaviour
     {
         _dialogIsOpen = GameManager.Instance.GetComponent<DiverseMenusManager>().DialogIsOpen;
         if (_dialogIsOpen)
-        {
+       {
             _moveDirection = Vector2.zero;
         }
     }

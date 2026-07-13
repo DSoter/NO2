@@ -17,13 +17,6 @@ public class MainMenuSceneManager : MonoBehaviour
     [SerializeField] private FlowerCollection coleccionFlores;
 
 
-    void Update()
-    {
-        if (canvasCredits.activeSelf || canvasOptions.activeSelf)
-        {
-            
-        }
-    }
 
     void Start()
     {

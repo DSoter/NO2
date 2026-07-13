@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class CheckpointInteractuable : Interactable
 {
     private ParticleSystem sistemaParts;
+    [SerializeField] private HealData _healData; 
 
     protected override void Start()
     {
@@ -35,18 +36,25 @@ public class CheckpointInteractuable : Interactable
                 //Se sienta
                 _playerController.ChangeDisplayText("Levantarse");
                 player.SetState(PlayerController.PlayerState.Rest);
+
+                //Particulas visuales
                 if(sistemaParts != null)
                 {
                     sistemaParts.Emit(48);
                 }
+
+                //reeespawn logic
                 sc.UpdateSpawnPointAfterDeath(transform);
                 SpawnId si = GetComponent<SpawnId>();
                 int id = si.IdSpawn;
                 cm.IdRespawn = id;
                 cm.SceneWhereRespawn = SceneManager.GetActiveScene().name;
-                //esto es pa reproducir sonido
-                //sc.ReproducirCheckPoint(); 
                 Debug.Log("Checkpoint alcanzado: " + gameObject.name);
+
+                //refill potions
+                RefillHealthPotions();
+
+
 
             }
         }
@@ -62,6 +70,11 @@ public class CheckpointInteractuable : Interactable
     {
         base.UpdateDisplayText();
         _playerController.ChangeDisplayText("Descansar");
+    }
+
+    private void RefillHealthPotions()
+    {
+        _healData.RemainingUses = _healData.MaxUses;
     }
 
 }

@@ -291,6 +291,8 @@ MonoBehaviour:
   canvasOptions: {fileID: 2141946945}
   theme: {fileID: 8300000, guid: 116f3d61bd64421458f89e867bf3381f, type: 3}
   coleccionFlores: {fileID: 11400000, guid: 8e1da91b1283cf54ebdcdf0b4a85e26a, type: 2}
+  healData: {fileID: 11400000, guid: ccc02f2f8da643c4db2030f236d9a261, type: 2}
+  playerData: {fileID: 11400000, guid: 707aa1a40a1bb064193fd4f6f25fcc6a, type: 2}
 --- !u!4 &127887843
 Transform:
   m_ObjectHideFlags: 0
@@ -418,7 +420,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DiverseMenusManager
   menusSceneName: MenusAndGameOver
-  _inputSystemReference: {fileID: -944628639613478452, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}
 --- !u!1 &878234614 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 82826277271245917, guid: e4cb207a5644d1e46b91785d0dd41bfd, type: 3}
@@ -543,7 +544,6 @@ MonoBehaviour:
   sfxSlider: {fileID: 1840611228}
   soundOn: {fileID: 35312879219488129}
   soundOff: {fileID: 35312879219488128}
-  actionReference: {fileID: 4014850048532301077, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}
   applyAuxKeybinds:
     m_PersistentCalls:
       m_Calls:

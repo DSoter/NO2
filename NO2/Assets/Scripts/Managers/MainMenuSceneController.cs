@@ -16,6 +16,9 @@ public class MainMenuSceneManager : MonoBehaviour
 
     [SerializeField] private FlowerCollection coleccionFlores;
 
+    [SerializeField] private HealData healData;
+    [SerializeField] private PlayerData playerData;
+
 
 
     void Start()
@@ -29,10 +32,19 @@ public class MainMenuSceneManager : MonoBehaviour
 
     public void StartGame()
     {
+        InitializePlayerValues();
         coleccionFlores.Load();
         GameManager.Instance.GetComponent<CheckpointManager>().StartScene(nameFirstScene);
     }
+    private void InitializePlayerValues()
+    {
 
+        healData.RemainingUses = healData.MaxUses;
+        playerData.Health = playerData.MaxHealth;
+        playerData.Oxygen = playerData.MaxOxygen;
+        playerData.Stamina = playerData.MaxStamina;
+
+    }
     public void QuitGame()
     {
 #if UNITY_EDITOR

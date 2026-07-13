@@ -139,7 +139,7 @@ public class SceneController : MonoBehaviour
     public void RespawnPlayer()
     {
         RefillHealthPotions();
-        ResetPotionCooldown()
+        ResetPotionCooldown();
 
         playerData.Health = playerData.MaxHealth;
 
@@ -181,12 +181,13 @@ public class SceneController : MonoBehaviour
 
     private void RefillHealthPotions()
     {
-        _healData.RemainingUses = _healData.MaxUses;
+        healData.RemainingUses = healData.MaxUses;
     }
     private void ResetPotionCooldown()
     {
-        _healData.ActualCooldownSeeconds = 0;
+        healData.ActualCooldownSeconds = 0;
     }
+
     private bool CheckIsActiveScene(string scene)
     {
         return (SceneManager.GetActiveScene().name.Equals(scene));

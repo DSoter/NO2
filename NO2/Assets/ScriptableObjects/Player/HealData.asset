@@ -15,3 +15,5 @@ MonoBehaviour:
   maxUses: 7
   remainingUses: 2
   healAmount: 20
+  actualCooldownSeconds: 0
+  cooldownSeconds: 2

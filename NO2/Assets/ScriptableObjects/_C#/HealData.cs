@@ -10,7 +10,7 @@ public class HealData : ScriptableObject
     [SerializeField] private int healAmount;
 
     [SerializeField] private float actualCooldownSeconds;
-    [SerializeFIeld] private float cooldownSeconds;
+    [SerializeField] private float cooldownSeconds;
 
     public Action healUsesChanged;
 
@@ -20,7 +20,7 @@ public class HealData : ScriptableObject
         set
         { 
             remainingUses = value;
-            healUsesChanged.Invoke();
+            healUsesChanged?.Invoke();
         }
     }
     public int MaxUses
@@ -41,7 +41,7 @@ public class HealData : ScriptableObject
     public float ActualCooldownSeconds
     {
         get { return actualCooldownSeconds; }
-        set { ActualCooldownSeconds = value; }
+        set { actualCooldownSeconds = value; }
     }
 
 }

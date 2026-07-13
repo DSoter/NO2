@@ -56,6 +56,7 @@ MonoBehaviour:
   firstSceneName: PruebaTileMap
   spawnPlayerEditor: 0
   checkpoints: []
+  playerData: {fileID: 11400000, guid: 707aa1a40a1bb064193fd4f6f25fcc6a, type: 2}
   healData: {fileID: 11400000, guid: ccc02f2f8da643c4db2030f236d9a261, type: 2}
 --- !u!1 &8170045265782028333
 GameObject:

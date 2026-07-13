@@ -5113,6 +5113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf9185fa52da5ff468edddfe0247484a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CheckpointInteractuable
+  _healData: {fileID: 11400000, guid: ccc02f2f8da643c4db2030f236d9a261, type: 2}
 --- !u!114 &5608422688076337642
 MonoBehaviour:
   m_ObjectHideFlags: 0

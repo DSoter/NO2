@@ -22,7 +22,6 @@ public class PlayerController : MonoBehaviour
     private bool _dialogIsOpen = false;
     private bool _isOnOxigenZone = false;
     private bool _isOnDamageZone = false;
-    private float _actualCooldownPotion = 0;
 
 
     private bool _isPause => Time.timeScale == 0;
@@ -109,7 +108,6 @@ public class PlayerController : MonoBehaviour
         _playerData.Stamina = _playerData.MaxStamina;
         _oxygenData.LastOxygenSeconds = _playerData.LastOxygenSeconds;
 
-x
     }
 
     private void Start()
@@ -128,6 +126,7 @@ x
         HandleAnimatorParams();
         HandleOxigen();
         HandleCooldownPotion();
+        
 
         switch (_state)
         {
@@ -136,6 +135,8 @@ x
                 UpdateLookDirection();
                 HandleStaminaRegeneration();
 
+                HandleHealthStatus();
+
                 break;
             case PlayerState.Roll:
 
@@ -143,6 +144,7 @@ x
                 break;
             case PlayerState.WeakAttack:
 
+                HandleHealthStatus();
                 break;
             case PlayerState.Dead:
 
@@ -150,6 +152,8 @@ x
             case PlayerState.Rest:
                 HandleHealthRegeneration();
                 HandleStaminaRegeneration();
+
+                HandleHealthStatus();
                 _isRunning = false;
                 break;
 
@@ -247,7 +251,7 @@ x
     private void HandleCooldownPotion()
     {
         _healData.ActualCooldownSeconds += Time.deltaTime;
-        _healData.ActualCooldownSeconds = Mathf.Max(_healData.ActualCooldownSeconds, _healData.CooldownSeconds);
+        _healData.ActualCooldownSeconds = Mathf.Min(_healData.ActualCooldownSeconds, _healData.CooldownSeconds);
     }
     
 
@@ -501,11 +505,11 @@ x
     {
         if (_isOnOxigenZone)
         {
-            _playerData.Oxygen = Mathf.Min(_playerData.MaxOxygen, _playerData.Oxygen + _playerData.OxygenRegenerationSpeed * Time.deltaTime);
+            _playerData.Oxygen = _playerData.Oxygen + _playerData.OxygenRegenerationSpeed * Time.deltaTime;
         }
         else
         {
-            _playerData.Oxygen = Mathf.Max(0, _playerData.Oxygen - _playerData.OxygenDropingSpeed * Time.deltaTime);
+            _playerData.Oxygen = _playerData.Oxygen - _playerData.OxygenDropingSpeed * Time.deltaTime;
 
             float percentage = _playerData.Oxygen / _playerData.MaxOxygen * 100;
 
@@ -596,6 +600,7 @@ x
             _healData.RemainingUses--;
             
             _playerData.Health += _healData.HealAmount;
+            _healData.ActualCooldownSeconds = 0;
         }
         else
         {
@@ -609,7 +614,7 @@ x
     {
         _dialogIsOpen = GameManager.Instance.GetComponent<DiverseMenusManager>().DialogIsOpen;
         if (_dialogIsOpen)
-       {
+        {
             _moveDirection = Vector2.zero;
         }
     }

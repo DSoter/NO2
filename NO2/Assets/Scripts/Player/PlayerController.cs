@@ -112,6 +112,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         _playerData.OnOxygenIncreased += HandleOnOxygenIncreased;
+        _oxygenData.LastOxygenTimer = 0;
     }
 
     private void Update()

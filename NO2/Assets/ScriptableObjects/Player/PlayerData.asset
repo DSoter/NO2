@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
   health: 60
   maxHealth: 60
-  healthRegenerationSpeed: 10
+  healthRegenerationSpeed: 40
   stamina: 50
   maxStamina: 50
   secondsUntilStaminaRegeneration: 1.25
@@ -22,7 +22,7 @@ MonoBehaviour:
   runningStaminaCost: 10
   rollingStaminaCost: 10
   weakAttackStaminaCost: 5
-  oxygen: 114.73635
+  oxygen: 120
   maxOxygen: 120
   oxygenDropingSpeed: 1
   oxygenRegenerationSpeed: 60

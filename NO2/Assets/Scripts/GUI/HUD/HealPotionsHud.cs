@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealPotionsHud : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class HealPotionsHud : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI textRemainingPotions;
     [SerializeField] TextMeshProUGUI textMaxPotions;
+    [SerializeField] Image mask;
 
     private void Start()
     {
@@ -23,7 +25,12 @@ public class HealPotionsHud : MonoBehaviour
     {
         textRemainingPotions.text = healData.RemainingUses + "";
     }
-    
+   
+    private void UpdateMaskFill()
+    {
+
+    }
+
 
 
 }

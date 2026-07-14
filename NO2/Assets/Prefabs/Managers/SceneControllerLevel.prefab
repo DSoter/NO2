@@ -157,6 +157,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5231077451128330398}
     m_Modifications:
+    - target: {fileID: 581417639393376547, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
+      propertyPath: m_Name
+      value: BlackMask
+      objectReference: {fileID: 0}
     - target: {fileID: 1719722492483749983, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
       propertyPath: m_Pivot.x
       value: 0

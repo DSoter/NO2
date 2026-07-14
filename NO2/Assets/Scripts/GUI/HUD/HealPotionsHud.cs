@@ -15,10 +15,12 @@ public class HealPotionsHud : MonoBehaviour
         textRemainingPotions.text = healData.MaxUses + "";
         textRemainingPotions.text = healData.RemainingUses + "";
         healData.healUsesChanged += UpdateCurrentUses;
+        healData.actualCooldownChanged += UpdateMaskFill;
     }
     void OnDestroy()
     {
         healData.healUsesChanged -= UpdateCurrentUses;
+        healData.actualCooldownChanged -= UpdateMaskFill;
     }
 
     private void UpdateCurrentUses()
@@ -28,7 +30,11 @@ public class HealPotionsHud : MonoBehaviour
    
     private void UpdateMaskFill()
     {
-
+        if (mask != null)
+        {
+            mask.fillAmount = Mathf.Lerp(1, 0, healData.ActualCooldownSeconds / healData.CooldownSeconds);
+        }
+        
     }
 
 

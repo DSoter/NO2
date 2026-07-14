@@ -265,6 +265,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -22.400024
       objectReference: {fileID: 0}
+    - target: {fileID: 4284149109157144467, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4660940900698418692, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -368,6 +372,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!114 &1171048556008834623 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4284149109157144467, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
+  m_PrefabInstance: {fileID: 3113179898495771052}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!224 &4389200808106027507 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1719722492483749983, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
@@ -393,6 +408,7 @@ MonoBehaviour:
   healData: {fileID: 11400000, guid: ccc02f2f8da643c4db2030f236d9a261, type: 2}
   textRemainingPotions: {fileID: 743032719147347244}
   textMaxPotions: {fileID: 480602015628630646}
+  mask: {fileID: 1171048556008834623}
 --- !u!1 &5257909105082637890 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7188841109492350958, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}

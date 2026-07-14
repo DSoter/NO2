@@ -14,6 +14,7 @@ public class HealData : ScriptableObject
 
     public Action healUsesChanged;
 
+    public Action actualCooldownChanged;
     public int RemainingUses
     {
         get { return remainingUses; }
@@ -41,7 +42,10 @@ public class HealData : ScriptableObject
     public float ActualCooldownSeconds
     {
         get { return actualCooldownSeconds; }
-        set { actualCooldownSeconds = value; }
+        set {
+                actualCooldownSeconds = value; 
+                actualCooldownChanged?.Invoke();
+        }
     }
 
 }

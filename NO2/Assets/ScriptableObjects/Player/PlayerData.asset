@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6ba87a4b3f8a146b4139e434e936c4, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
-  health: 60
+  health: 27.504803
   maxHealth: 60
-  healthRegenerationSpeed: 20
+  healthRegenerationSpeed: 40
   healthDropingSpeed: 20
   stamina: 50
   maxStamina: 50

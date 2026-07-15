@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour
     private bool _areInputsEnabled = true;
     private bool _dialogIsOpen = false;
     private bool _isOnOxigenZone = false;
-    private bool _isOnDamageZone = false;
 
 
     private bool _isPause => Time.timeScale == 0;
@@ -563,23 +562,9 @@ public class PlayerController : MonoBehaviour
     {
         _isOnOxigenZone = false;
     }
-    public void EnterDamageZone()
-    {
-        _isOnDamageZone = true;
-    }
-
-
-    public void ExitDamageZone()
-    {
-        _isOnDamageZone = false;
-    }
 
     private void HandleHealthStatus()//gestionar posibles fectos de estado y daño por segundo
     {
-        if (_isOnDamageZone)
-        {
-            _playerData.Health = _playerData.Health - _playerData.HealthDropingSpeed * Time.deltaTime;
-        }
         if (_playerData.Health <= 0)
         {
             Death();

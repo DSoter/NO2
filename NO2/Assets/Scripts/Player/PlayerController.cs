@@ -163,6 +163,8 @@ public class PlayerController : MonoBehaviour
                 if(_chargeTime >= _minCharge && _chargeReleased)
                 {
                     _animator.SetTrigger("StrongAttack");
+                    _strongAttack.TargetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
                     _state = PlayerState.StrongAttack;
                     _chargeReleased = false;
                     _chargeTime = 0f;

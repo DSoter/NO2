@@ -12,6 +12,13 @@ public class StrongAttackController : MonoBehaviour
 
     private bool _lock = false;
 
+    private Vector3 _targetPos;
+
+    public Vector3 TargetPos
+    {
+        set { _targetPos = value; }
+    }
+
     void Start()
     {
         _centerTransform = transform.parent.transform;
@@ -32,12 +39,8 @@ public class StrongAttackController : MonoBehaviour
     {
         _lock = true;
 
-        // Get the mouse position in world space
-        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = 0;
-
         // Set the rotation of the attack based on the mouse position 
-        var angle = Vector2.SignedAngle(mousePos - transform.position, transform.position + new Vector3(1, 0, 0) - transform.position);
+        var angle = Vector2.SignedAngle(_targetPos - transform.position, transform.position + new Vector3(1, 0, 0) - transform.position);
         _centerTransform.rotation = Quaternion.Euler(0, 0, -angle);
 
         transform.rotation = Quaternion.Euler(0, 0, -_centerTransform.rotation.z);

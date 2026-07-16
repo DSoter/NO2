@@ -5,11 +5,13 @@ public class WeakAttackController : MonoBehaviour
 {
     private SpriteRenderer _renderer;
     private Animator _animator;
+    private Transform _centerTransform;
 
     void Start()
     {
         _renderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
+        _centerTransform = transform.parent.transform;
     }
 
     // Update is called once per frame
@@ -21,7 +23,7 @@ public class WeakAttackController : MonoBehaviour
 
         // Set the rotation of the attack based on the mouse position 
         var angle = Vector2.SignedAngle(mousePos - transform.position, transform.position + new Vector3(1, 0, 0) - transform.position);
-        transform.rotation = Quaternion.Euler(0, 0, -angle);
+        _centerTransform.rotation = Quaternion.Euler(0, 0, -angle);
 
         _renderer.flipY = shouldFlip;
         _animator.SetTrigger("Play");

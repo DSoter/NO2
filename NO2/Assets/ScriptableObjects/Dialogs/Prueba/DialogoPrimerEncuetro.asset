@@ -20,6 +20,12 @@ MonoBehaviour:
       text: Soy rigoberto, un placer
     - conditionKey: 
       text: Soy un explorador y me dedico a llegar a sitios exoticos
+    - conditionKey: 
+      text: "prueba para ver si las palabras que saltan de una linea a otra se ven
+        bien de primeras o si pegan un salto mientras se est\xE1n generando rompiendo
+        la inmersion del jugador. Efectivamente, que duro, se podr\xEDa cambiar la
+        transparencia de las letras en vez de colocarlas en tiempo real para q eso
+        no pase."
   - lines:
     - conditionKey: 
       text: Estoy buscando flores raras

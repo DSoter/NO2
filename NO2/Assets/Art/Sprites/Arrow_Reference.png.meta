@@ -65,6 +65,21 @@ TextureImporter:
   - first:
       213: -6098014987111603193
     second: Arrow_Reference_20
+  - first:
+      213: -6551410755685156237
+    second: Arrow_Reference_21
+  - first:
+      213: 1004343956857953673
+    second: Arrow_Reference_22
+  - first:
+      213: -2839140354024187630
+    second: Arrow_Reference_23
+  - first:
+      213: -3365529499071870899
+    second: Arrow_Reference_24
+  - first:
+      213: -1519017340754491847
+    second: Arrow_Reference_25
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -621,11 +636,121 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Arrow_Reference_21
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 0
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37a76b9e0a6b415a0800000000000000
+      internalID: -6551410755685156237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arrow_Reference_22
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 0
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98d14dce18520fd00800000000000000
+      internalID: 1004343956857953673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arrow_Reference_23
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 0
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21959e2f3e85998d0800000000000000
+      internalID: -2839140354024187630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arrow_Reference_24
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4809be70cc3b41d0800000000000000
+      internalID: -3365529499071870899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arrow_Reference_25
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 0
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9368ba4d6cd5beae0800000000000000
+      internalID: -1519017340754491847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 8363725f83882ac49aeef821ed26cbb9
+    spriteID: 08003b8421df8e64bb952fa60bacb624
     internalID: 0
     vertices: []
     indices: 
@@ -651,6 +776,11 @@ TextureImporter:
       Arrow_Reference_19: 8030278844549964727
       Arrow_Reference_2: 8989637009834903179
       Arrow_Reference_20: -6098014987111603193
+      Arrow_Reference_21: -6551410755685156237
+      Arrow_Reference_22: 1004343956857953673
+      Arrow_Reference_23: -2839140354024187630
+      Arrow_Reference_24: -3365529499071870899
+      Arrow_Reference_25: -1519017340754491847
       Arrow_Reference_3: -7951496680307906280
       Arrow_Reference_4: -5633102520847184291
       Arrow_Reference_5: -570729596092195596

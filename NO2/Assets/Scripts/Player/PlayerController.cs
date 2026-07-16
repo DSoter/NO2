@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -21,16 +22,20 @@ public class PlayerController : MonoBehaviour
     private bool _areInputsEnabled = true;
     private bool _dialogIsOpen = false;
     private bool _isOnOxigenZone = false;
+    private float _chargeTime = 0f;
+    private float _minCharge = 0.5f;
+    private float _maxCharge = 1.5f;
+    private bool _chargeReleased = false;
 
 
     private bool _isPause => Time.timeScale == 0;
     private bool _isRunning = false;
     private bool canRoll => _state == PlayerState.Move && HasStamina();
     private bool canAttack => _state == PlayerState.Move && HasStamina();
-    private PlayerState _state = PlayerState.Move;
 
     private InputManager _inputManager;
 
+    [SerializeField] private PlayerState _state = PlayerState.Move;
 
     // References
     [Header("Sonidos")]
@@ -43,8 +48,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private HealData _healData;
 
     [Space(5)]
-    [Header("Weak Attack")]
+    [Header("Attacks")]
     [SerializeField] private WeakAttackController _weakAttack;
+    [SerializeField] private StrongAttackController _strongAttack;
+
 
     [Space(5)]
     [Header("Oxygen Alerts")]
@@ -77,6 +84,8 @@ public class PlayerController : MonoBehaviour
         Roll,
         Dead,
         WeakAttack,
+        Charging,
+        StrongAttack,
         Rest
     }
 
@@ -145,6 +154,24 @@ public class PlayerController : MonoBehaviour
 
                 HandleHealthStatus();
                 break;
+            case PlayerState.Charging:
+
+                UpdateLookDirectionWithMouse();
+
+                 _chargeTime += Time.deltaTime;
+
+                if(_chargeTime >= _minCharge && _chargeReleased)
+                {
+                    _animator.SetTrigger("StrongAttack");
+                    _state = PlayerState.StrongAttack;
+                    _chargeReleased = false;
+                    _chargeTime = 0f;
+                }
+                
+                break;
+            case PlayerState.StrongAttack:
+
+                break;
             case PlayerState.Dead:
 
                 break;
@@ -181,6 +208,9 @@ public class PlayerController : MonoBehaviour
 
                 break;
             case PlayerState.WeakAttack:
+
+                break;
+            case PlayerState.Charging:
 
                 break;
             case PlayerState.Dead:
@@ -325,10 +355,7 @@ public class PlayerController : MonoBehaviour
         _state = PlayerState.WeakAttack;
 
         // Calculate the attack direction based on the mouse position
-        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = 0;
-
-        _lookDirection = (mousePos - transform.position).normalized;
+        UpdateLookDirectionWithMouse();
 
         // Apply small force with the attack direction
         _rigidbody.linearVelocity = Vector2.zero;
@@ -337,7 +364,6 @@ public class PlayerController : MonoBehaviour
         // Set the attack direction in the animator
         _animator.SetFloat("xDir", _lookDirection.x);
         _animator.SetFloat("yDir", _lookDirection.y);
-        _renderer.flipX = (_lookDirection.x < 0);
 
         // Play attack animation
         bool isAttackFlipped = (_attackCounter % 2) == 1;
@@ -354,6 +380,21 @@ public class PlayerController : MonoBehaviour
         _state = PlayerState.Move;
     }
 
+    private void OnStrongAttackPerformed()
+    {
+        if (_state == PlayerState.Move)
+        {
+            _state = PlayerState.Charging;
+        }
+    }
+
+    private void OnStrongAttackCancelled()
+    {
+        if (_state == PlayerState.Charging)
+        {
+            _chargeReleased = true;
+        }
+    }
 
     private void UpdateLookDirection()
     {
@@ -365,9 +406,20 @@ public class PlayerController : MonoBehaviour
         _renderer.flipX = (_lookDirection.x < 0);
     }
 
+    private void UpdateLookDirectionWithMouse()
+    {
+        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0;
+
+        _lookDirection = (mousePos - transform.position).normalized;
+
+        _renderer.flipX = (_lookDirection.x < 0);
+    }
+
     private Vector2 SnapToEightDirections(Vector2 direction)
     {
         direction.Normalize();
+
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         float snapped = Mathf.Round(angle / 45f) * 45f;
         float rad = snapped * Mathf.Deg2Rad;
@@ -407,6 +459,7 @@ public class PlayerController : MonoBehaviour
         _animator.SetBool("isRunning", _state == PlayerState.Move && _moveDirection != Vector2.zero && _isRunning && HasStamina());
         _animator.SetBool("isRolling", _state == PlayerState.Roll);
         _animator.SetBool("isWeakAttacking", _state == PlayerState.WeakAttack);
+        _animator.SetFloat("ChargeTime", _chargeTime);
     }
 
     private bool HasStamina()
@@ -593,7 +646,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
+    public void PlayStrongAttack()
+    {
+        _strongAttack.Play();
+        _state = PlayerState.Move;
+    }
 
     private void UpdateDialogIsOpen()
     {
@@ -603,6 +660,8 @@ public class PlayerController : MonoBehaviour
             _moveDirection = Vector2.zero;
         }
     }
+
+
     void OnDestroy()
     {
         DisposeActions();
@@ -629,6 +688,8 @@ public class PlayerController : MonoBehaviour
         _inputManager.onRunCancelled -= RunCancelled;
         _inputManager.onRoll -= Roll;
         _inputManager.onWeakAttack -= WeakAttack;
+        _inputManager.onStrongAttackPerformed -= OnStrongAttackPerformed;
+        _inputManager.onStrongAttackCancelled -= OnStrongAttackCancelled;
         _inputManager.onHeal -= TryToHeal;
         GameManager.Instance.GetComponent<DiverseMenusManager>().dialogOpened -= UpdateDialogIsOpen;
     }
@@ -641,6 +702,8 @@ public class PlayerController : MonoBehaviour
         _inputManager.onRunCancelled += RunCancelled;
         _inputManager.onRoll += Roll;
         _inputManager.onWeakAttack += WeakAttack;
+        _inputManager.onStrongAttackPerformed += OnStrongAttackPerformed;
+        _inputManager.onStrongAttackCancelled += OnStrongAttackCancelled;
         _inputManager.onHeal += TryToHeal;
         GameManager.Instance.GetComponent<DiverseMenusManager>().dialogOpened += UpdateDialogIsOpen;
     }

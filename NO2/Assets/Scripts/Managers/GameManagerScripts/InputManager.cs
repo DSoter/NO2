@@ -21,7 +21,8 @@ public class InputManager : MonoBehaviour
     [SerializeField] private InputActionAsset _inputSystemReference;
 
 
-    public event Action onMovePerformed, onMoveCancelled, onInteract, onRunPerformed, onRunCancelled, onRoll, onWeakAttack, onStrongAttack, onHeal;
+    public event Action onMovePerformed, onMoveCancelled, onInteract, onRunPerformed, onRunCancelled, onRoll, onWeakAttack, onHeal;
+    public event Action onStrongAttackPerformed, onStrongAttackCancelled;
     public event Action onMap, onFlower, onBadge, onEscape, onNavigateLeft, onNavigateRight, onConfirm, onLeftClick;
     public event Action onGoUp, onGoDown, onGoLeft, onGoRight;
 
@@ -92,6 +93,18 @@ public class InputManager : MonoBehaviour
         if (context.performed)
         {
             onWeakAttack?.Invoke();
+        }
+    }
+
+    private void OnStrongAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            onStrongAttackPerformed.Invoke();
+        }
+        if (context.canceled)
+        {
+            onStrongAttackCancelled?.Invoke();
         }
     }
     private void OnHeal(InputAction.CallbackContext context)
@@ -280,7 +293,7 @@ public class InputManager : MonoBehaviour
             _goRight.action.performed -= OnGoRight;
             _goLeft.action.performed -= OnGoLeft;
             _scapeRef.action.performed -= OnEscape;
-            //_strongAttackRef.action.performed -= OnStrongAttack;
+            _strongAttackRef.action.performed -= OnStrongAttack;
 
             //_inputSystemReference.FindActionMap("Player").Disable();
 
@@ -298,7 +311,8 @@ public class InputManager : MonoBehaviour
         _weakAttackRef.action.performed += OnWeakAttack;
         _interactRef.action.performed += OnInteract;
         _healRef.action.performed += OnHeal;
-        //strongAttackRef.action.performed += OnStrongAttack;
+        _strongAttackRef.action.performed += OnStrongAttack;
+        _strongAttackRef.action.canceled += OnStrongAttack;
         _mapRef.action.performed += OnMap;
         _flowerRef.action.performed += OnFlower;
         _badgesRef.action.performed += OnBadge;

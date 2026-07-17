@@ -17,8 +17,8 @@ public class FlowerCollection : ScriptableObject
         {
             unlockedFlowers.Add(f, false);
         }
-        Debug.Log(unlockedFlowers[allFlowers[1]] );
         
+
     }
 
     public void Save()
@@ -46,7 +46,6 @@ public class FlowerCollection : ScriptableObject
         string[] keys = savedKeys.Split(',');
         string[] values = savedValues.Split(',');
 
-        unlockedFlowers = new Dictionary<Flower, bool>();
         for (int i = 0; i < keys.Length; i++)
         {
             Flower found = Resources.Load<Flower>("ScriptableObjects/Flores/" + keys[i]);

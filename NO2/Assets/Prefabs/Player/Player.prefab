@@ -503,6 +503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0db8dbdcf787e8249b1f625be2d3141d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  _playerData: {fileID: 11400000, guid: 707aa1a40a1bb064193fd4f6f25fcc6a, type: 2}
 --- !u!114 &7944651771693726206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -923,6 +924,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 012bebc86d2259145864f84e4c519995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StrongAttack
+  _playerData: {fileID: 11400000, guid: 707aa1a40a1bb064193fd4f6f25fcc6a, type: 2}
   _groundCrack: {fileID: 268487802507052225, guid: dbf50c5edfcc9b44fad7827cf849ef9d, type: 3}
   _smashClip: {fileID: 8300000, guid: 47c7e1781c1c7d3478375c7fd992d518, type: 3}
   _volume: 1

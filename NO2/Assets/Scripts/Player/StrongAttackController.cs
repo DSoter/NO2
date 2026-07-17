@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class StrongAttackController : MonoBehaviour
 {
+    [Header("PlayerData")]
+    [SerializeField] private PlayerData _playerData;
+
+    [Space(5)]
     [Header("Ground Effect")]
     [SerializeField] private GameObject _groundCrack;
 
@@ -25,6 +29,13 @@ public class StrongAttackController : MonoBehaviour
     public Vector3 TargetPos
     {
         set { _targetPos = value; }
+    }
+
+    private float _damage;
+
+    public float Damage
+    {
+        set { _damage = value; }
     }
 
     void Start()
@@ -65,6 +76,15 @@ public class StrongAttackController : MonoBehaviour
         GameManager.Instance.audioManager.PlaySound(_smashClip,_volume,_pitchVar);
 
         _lock = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent<IHitable>(out var hitable))
+        {
+            var direction = (collision.transform.position - transform.position).normalized;
+            hitable.Hit(direction, _damage, AttackStrength.Strong);
+        }
     }
 
 }

@@ -23,8 +23,6 @@ public class PlayerController : MonoBehaviour
     private bool _dialogIsOpen = false;
     private bool _isOnOxigenZone = false;
     private float _chargeTime = 0f;
-    private float _minCharge = 0.5f;
-    private float _maxCharge = 1.5f;
     private bool _chargeReleased = false;
 
 
@@ -35,7 +33,7 @@ public class PlayerController : MonoBehaviour
 
     private InputManager _inputManager;
 
-    [SerializeField] private PlayerState _state = PlayerState.Move;
+    private PlayerState _state = PlayerState.Move;
 
     // References
     [Header("Sonidos")]
@@ -77,6 +75,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _acceleration = 25f;
 
     [SerializeField] private float _attackImpulse = 1f;
+
+    [Space(5)]
+    [Header("Charge Settings")]
+    [SerializeField] private float _minCharge = 0.5f;
+    [SerializeField] private float _maxCharge = 1.5f;
 
     public enum PlayerState
     {
@@ -158,12 +161,11 @@ public class PlayerController : MonoBehaviour
 
                 UpdateLookDirectionWithMouse();
 
-                 _chargeTime += Time.deltaTime;
+                 _chargeTime = Mathf.Min(_chargeTime + Time.deltaTime, _maxCharge);
 
                 if(_chargeTime >= _minCharge && _chargeReleased)
                 {
                     _animator.SetTrigger("StrongAttack");
-                    _strongAttack.TargetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
                     _state = PlayerState.StrongAttack;
                     _chargeReleased = false;
@@ -645,7 +647,15 @@ public class PlayerController : MonoBehaviour
 
     public void PlayStrongAttack()
     {
+        ConsumeStamina(_playerData.StrongAttackStaminaCost);
+
+        float aux = Mathf.InverseLerp(_minCharge, _maxCharge, _chargeTime);
+        _strongAttack.Damage = Mathf.Lerp(_playerData.MinStrongAttackDamage, _playerData.MaxStrongAttackDamage, aux);
+
+        _strongAttack.TargetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
         _strongAttack.Play();
+
         _state = PlayerState.Move;
     }
 

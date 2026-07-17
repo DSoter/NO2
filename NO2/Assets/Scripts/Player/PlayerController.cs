@@ -332,6 +332,8 @@ public class PlayerController : MonoBehaviour
         _state = PlayerState.Roll;
 
         UpdateLookDirection();
+        _lookDirection = SnapToEightDirections(_lookDirection);
+
         ConsumeStamina(_playerData.RollingStaminaCost);
 
         SetVelocityInstant(_playerData.IniRollingSpeed * _lookDirection);
@@ -375,8 +377,6 @@ public class PlayerController : MonoBehaviour
         ConsumeStamina(_playerData.WeakAttackStaminaCost);
 
         yield return new WaitForSeconds(_playerData.WeakAttackSeconds);
-
-        _lookDirection = SnapToEightDirections(_lookDirection);
 
         _state = PlayerState.Move;
     }

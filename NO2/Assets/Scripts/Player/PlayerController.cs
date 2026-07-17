@@ -321,7 +321,6 @@ public class PlayerController : MonoBehaviour
 
     public void Roll()
     {
-        Debug.Log("Roll perrformed");
         if (canRoll && _areInputsEnabled && !_isPause && !_dialogIsOpen)
         {
             StartCoroutine(RollCoroutine());
@@ -438,17 +437,13 @@ public class PlayerController : MonoBehaviour
         // Reset the alerts only when the oxygen percentage goes above the thresholds
         float percentage = _playerData.Oxygen / _playerData.MaxOxygen * 100;
 
-        Debug.Log(percentage);
-
         if (percentage > 50)
         {
-            Debug.Log("Reseting 50% & 10% Alerts");
             _oxygenData.HalfOxygenAlertPlayed = false;
             _oxygenData.LowOxygenAlertPlayed = false;
         }
         else if(percentage > 10)
         {
-            Debug.Log("Reseting 10% Alert");
             _oxygenData.LowOxygenAlertPlayed = false;
         }
     }

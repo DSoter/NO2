@@ -22,6 +22,7 @@ public class PlayerData : ScriptableObject
     [SerializeField] private float runningStaminaCost;
     [SerializeField] private float rollingStaminaCost;
     [SerializeField] private float weakAttackStaminaCost;
+    [SerializeField] private float strongAttackStaminaCost;
 
     [Space(5)]
     [Header("Oxygen")]
@@ -47,8 +48,9 @@ public class PlayerData : ScriptableObject
 
     [Space(5)]
     [Header("Damages")]
-    [SerializeField] private float basicAttackDamage;
-    [SerializeField] private float chargeAttackDamage;
+    [SerializeField] private float weakAttackDamage;
+    [SerializeField] private float minStrongAttackDamage;
+    [SerializeField] private float maxStrongAttackDamage;
 
     [Space(5)]
     [Header("Flowers")]
@@ -147,6 +149,11 @@ public class PlayerData : ScriptableObject
         get { return weakAttackStaminaCost; }
     }
 
+    public float StrongAttackStaminaCost
+    {
+        get { return strongAttackStaminaCost; }
+    }
+
     public float OxygenDropingSpeed
     {
         get { return oxygenDropingSpeed; }
@@ -196,15 +203,20 @@ public class PlayerData : ScriptableObject
         get { return weakAttackSeconds; }
     }
 
-    public float BasicAttackDamage
+    public float WeakAttackDamage
     {
-        get { return basicAttackDamage; }
+        get { return weakAttackDamage; }
     }
 
-    public float ChargeAttackDamage
+    public float MinStrongAttackDamage
     {
-        get { return chargeAttackDamage; }
+        get { return minStrongAttackDamage; }
     }
+    public float MaxStrongAttackDamage
+    {
+        get { return maxStrongAttackDamage; }
+    }
+
     public Flower EquipedFlower
     {
         get { return equipedFlower; }

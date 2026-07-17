@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class WeakAttackController : MonoBehaviour
 {
+    [SerializeField] private PlayerData _playerData;
+
     private SpriteRenderer _renderer;
     private Animator _animator;
     private Transform _centerTransform;
@@ -34,7 +36,7 @@ public class WeakAttackController : MonoBehaviour
         if(collision.TryGetComponent<IHitable>(out var hitable))
         {
             var direction = (collision.transform.position - transform.position).normalized;
-            hitable.Hit(direction, 1f, AttackStrength.Weak);
+            hitable.Hit(direction, _playerData.WeakAttackDamage, AttackStrength.Weak);
         }
     }
 

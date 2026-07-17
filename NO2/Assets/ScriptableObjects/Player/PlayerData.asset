@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6ba87a4b3f8a146b4139e434e936c4, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
-  health: 27.504803
+  health: 60
   maxHealth: 60
   healthRegenerationSpeed: 40
   healthDropingSpeed: 20
@@ -23,7 +23,8 @@ MonoBehaviour:
   runningStaminaCost: 10
   rollingStaminaCost: 10
   weakAttackStaminaCost: 5
-  oxygen: 120
+  strongAttackStaminaCost: 15
+  oxygen: 116.05287
   maxOxygen: 120
   oxygenDropingSpeed: 1
   oxygenRegenerationSpeed: 60
@@ -35,6 +36,7 @@ MonoBehaviour:
   iniRollingSeconds: 0.4
   endRollingSeconds: 0.3
   weakAttackSeconds: 0.5
-  basicAttackDamage: 0
-  chargeAttackDamage: 0
+  weakAttackDamage: 5
+  minStrongAttackDamage: 10
+  maxStrongAttackDamage: 20
   equipedFlower: {fileID: 11400000, guid: fd9f4be6101608f4f8c01e3e92e1d8e5, type: 2}

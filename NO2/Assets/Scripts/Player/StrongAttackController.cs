@@ -1,10 +1,22 @@
 using System.Collections;
+using TMPro;
 using Unity.Cinemachine;
 using UnityEngine;
 
 public class StrongAttackController : MonoBehaviour
 {
+    [Header("PlayerData")]
+    [SerializeField] private PlayerData _playerData;
+
+    [Space(5)]
+    [Header("Ground Effect")]
     [SerializeField] private GameObject _groundCrack;
+
+    [Space(5)]
+    [Header("Audio")]
+    [SerializeField] private AudioClip _smashClip;
+    [SerializeField] [Range(0,1)] private float _volume;
+    [SerializeField] private float _pitchVar;
 
     private Transform _centerTransform;
     private Collider2D _collider;
@@ -17,6 +29,13 @@ public class StrongAttackController : MonoBehaviour
     public Vector3 TargetPos
     {
         set { _targetPos = value; }
+    }
+
+    private float _damage;
+
+    public float Damage
+    {
+        set { _damage = value; }
     }
 
     void Start()
@@ -40,7 +59,7 @@ public class StrongAttackController : MonoBehaviour
         _lock = true;
 
         // Set the rotation of the attack based on the mouse position 
-        var angle = Vector2.SignedAngle(_targetPos - transform.position, transform.position + new Vector3(1, 0, 0) - transform.position);
+        var angle = Vector2.SignedAngle(_targetPos - _centerTransform.position, _centerTransform.position + new Vector3(1, 0, 0) - _centerTransform.position);
         _centerTransform.rotation = Quaternion.Euler(0, 0, -angle);
 
         transform.rotation = Quaternion.Euler(0, 0, -_centerTransform.rotation.z);
@@ -52,9 +71,20 @@ public class StrongAttackController : MonoBehaviour
 
         _collider.enabled = true;
         yield return new WaitForFixedUpdate();
+
         _collider.enabled = false;
+        GameManager.Instance.audioManager.PlaySound(_smashClip,_volume,_pitchVar);
 
         _lock = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent<IHitable>(out var hitable))
+        {
+            var direction = (collision.transform.position - transform.position).normalized;
+            hitable.Hit(direction, _damage, AttackStrength.Strong);
+        }
     }
 
 }

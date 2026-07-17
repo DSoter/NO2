@@ -7,7 +7,6 @@ public class GenericDelegateTrigger : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         _fogTrigger?.OnChildTriggerEnter2D(other);
-        Destroy(gameObject);
     }
 
 }

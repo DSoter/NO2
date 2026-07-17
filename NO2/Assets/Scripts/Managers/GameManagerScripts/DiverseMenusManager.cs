@@ -311,7 +311,7 @@ public class DiverseMenusManager : MonoBehaviour
                     //ya veremos que se hace
                     break;
                 case MenuType.Flowers:
-                    GoUpFlowers();
+                    GoDownFlowers();
                     break;
                 case MenuType.Badges:
                     //ya veremos que se hace
@@ -331,7 +331,7 @@ public class DiverseMenusManager : MonoBehaviour
                     //ya veremos que se hace
                     break;
                 case MenuType.Flowers:
-                    GoDownFlowers();
+                    GoUpFlowers();
                     break;
                 case MenuType.Badges:
                     //ya veremos que se hace

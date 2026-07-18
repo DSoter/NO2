@@ -17,6 +17,8 @@ public class WeakDestructible : MonoBehaviour, IHitable
 
     public void Hit(Vector2 direction, float damage, AttackStrength strength)
     {
+        Debug.Log(damage);
+
         GameManager.Instance.audioManager.PlaySound(_onDestructClip, _volume, _pitchVariation);
         SpawnContent(direction);
 

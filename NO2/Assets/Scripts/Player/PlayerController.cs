@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     private bool _isRunning = false;
     private bool canRoll => _state == PlayerState.Move && HasStamina();
     private bool canAttack => _state == PlayerState.Move && HasStamina();
+    private bool canCharge => _state == PlayerState.Move && HasStamina();
 
     private InputManager _inputManager;
 
@@ -166,6 +167,8 @@ public class PlayerController : MonoBehaviour
                 if(_chargeTime >= _minCharge && _chargeReleased)
                 {
                     _animator.SetTrigger("StrongAttack");
+
+                    StartCoroutine(StrongAttackCoroutine());
 
                     _state = PlayerState.StrongAttack;
                     _chargeReleased = false;
@@ -385,7 +388,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnStrongAttackPerformed()
     {
-        if (_state == PlayerState.Move)
+        if (canCharge)
         {
             _state = PlayerState.Charging;
         }
@@ -645,15 +648,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void PlayStrongAttack()
+    private IEnumerator StrongAttackCoroutine()
     {
-        ConsumeStamina(_playerData.StrongAttackStaminaCost);
-
         float aux = Mathf.InverseLerp(_minCharge, _maxCharge, _chargeTime);
         _strongAttack.Damage = Mathf.Lerp(_playerData.MinStrongAttackDamage, _playerData.MaxStrongAttackDamage, aux);
 
         _strongAttack.TargetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
+        yield return new WaitForSeconds(0.2f);
+
+        ConsumeStamina(_playerData.StrongAttackStaminaCost);
         _strongAttack.Play();
 
         _state = PlayerState.Move;

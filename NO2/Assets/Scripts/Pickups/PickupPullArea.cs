@@ -29,7 +29,6 @@ public class PickupPullArea : MonoBehaviour
     {
         if (((1 << collision.gameObject.layer) & _playerLayer) != 0)
         {
-            Debug.Log("Player Entered Pull Area");
             OnPlayerEnteredPullArea?.Invoke(collision.GetComponent<PlayerController>().Center);
             gameObject.SetActive(false);
         }

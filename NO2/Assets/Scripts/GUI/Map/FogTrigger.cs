@@ -3,16 +3,22 @@ using UnityEngine;
 
 public class FogTrigger : MonoBehaviour
 {
+    private FogData fogData;
     [SerializeField] private GameObject fogImage;
     [SerializeField] private GameObject fogCollider;
 
+
+    private void Awake()
+    {
+        fogData = GetComponentInParent<FogManager>().FogData;
+    }
     public void OnChildTriggerEnter2D(Collider2D collision)
     {
 
         if (collision.CompareTag("Player"))
         {
-
-            Destroy(fogCollider);
+            Vector2Int gridPos = fogData.WorldToGrid(transform.position);
+            fogData.SetActive(gridPos, false);
             StartCoroutine(ShrinkAndDestroy());
 
         }
@@ -26,7 +32,7 @@ public class FogTrigger : MonoBehaviour
         while (t < 1f)
         {
             t += Time.deltaTime;
-            Vector3 newVector = Vector3.Lerp(initialScale, Vector3.zero, t);
+            Vector3 newVector = Vector3.Lerp(initialScale, initialScale/5, t);
             transform.localScale = new Vector3 (newVector.x, newVector.y, 1);
             yield return null;
         }

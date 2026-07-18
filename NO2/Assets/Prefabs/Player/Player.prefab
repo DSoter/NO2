@@ -59,7 +59,7 @@ Transform:
   m_GameObject: {fileID: 2210239394038038089}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.45, z: -11}
+  m_LocalPosition: {x: 0, y: -0.08, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1.0731394}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -114,7 +114,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 1214327536532187885, guid: a30740e1d7b9b104ea0d5efec511f421, type: 3}
+  m_Sprite: {fileID: 8164210385872607898, guid: 77d60040a28ac3d4492d9d5cb2672195, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -706,7 +706,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49258779a67641f4c93f829ec488d361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  _state: 0
   deathSound: {fileID: 8300000, guid: 635a0038b9b863f409947d5d641440f1, type: 3}
   _playerData: {fileID: 11400000, guid: 707aa1a40a1bb064193fd4f6f25fcc6a, type: 2}
   _oxygenData: {fileID: 11400000, guid: b15507aeddc94724cac4078700f00819, type: 2}
@@ -719,6 +718,8 @@ MonoBehaviour:
   deathAnimationSeconds: 1
   _acceleration: 25
   _attackImpulse: 2
+  _minCharge: 0.5
+  _maxCharge: 1.5
 --- !u!50 &1363480059194287446
 Rigidbody2D:
   serializedVersion: 5
@@ -1358,6 +1359,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
+    - target: {fileID: 3154043627642606522, guid: 7acd3985fdff7074fbf265427b80375f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -40
+      objectReference: {fileID: 0}
     - target: {fileID: 4226192224711373637, guid: 7acd3985fdff7074fbf265427b80375f, type: 3}
       propertyPath: m_Name
       value: CamaraMiniMapa
@@ -1414,6 +1419,10 @@ PrefabInstance:
       propertyPath: m_TargetTexture
       value: 
       objectReference: {fileID: 8400000, guid: dc8430ab665de3442bcfc7bf13d75a62, type: 2}
+    - target: {fileID: 8905111870488033900, guid: 7acd3985fdff7074fbf265427b80375f, type: 3}
+      propertyPath: orthographic size
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7044530409577160243, guid: 7acd3985fdff7074fbf265427b80375f, type: 3}
     m_RemovedGameObjects: []

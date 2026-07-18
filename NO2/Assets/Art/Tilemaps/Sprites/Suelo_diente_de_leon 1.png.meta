@@ -1,0 +1,807 @@
+fileFormatVersion: 2
+guid: fc3e4486da13eaf419f3f50a352670d7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4218389582215151967
+    second: Suelo_diente_de_leon 1_0
+  - first:
+      213: 8257563978044133595
+    second: Suelo_diente_de_leon 1_1
+  - first:
+      213: -5690035748299123265
+    second: Suelo_diente_de_leon 1_2
+  - first:
+      213: -2578430161745772497
+    second: Suelo_diente_de_leon 1_3
+  - first:
+      213: 8255690039067534969
+    second: Suelo_diente_de_leon 1_4
+  - first:
+      213: -7339137888905345268
+    second: Suelo_diente_de_leon 1_5
+  - first:
+      213: 8926448042734488658
+    second: Suelo_diente_de_leon 1_6
+  - first:
+      213: 5010145134349724566
+    second: Suelo_diente_de_leon 1_7
+  - first:
+      213: 2085873552414349149
+    second: Suelo_diente_de_leon 1_8
+  - first:
+      213: -3541401797313124102
+    second: Suelo_diente_de_leon 1_9
+  - first:
+      213: -4817058812678396848
+    second: Suelo_diente_de_leon 1_10
+  - first:
+      213: 8206714075009168405
+    second: Suelo_diente_de_leon 1_11
+  - first:
+      213: -5829344990607439927
+    second: Suelo_diente_de_leon 1_12
+  - first:
+      213: -4023421629580344648
+    second: Suelo_diente_de_leon 1_13
+  - first:
+      213: 4460252599347407867
+    second: Suelo_diente_de_leon 1_14
+  - first:
+      213: -4276182674040620015
+    second: Suelo_diente_de_leon 1_15
+  - first:
+      213: -1104256345526939591
+    second: Suelo_diente_de_leon 1_16
+  - first:
+      213: 4470110345261426040
+    second: Suelo_diente_de_leon 1_17
+  - first:
+      213: -6416804229126009159
+    second: Suelo_diente_de_leon 1_18
+  - first:
+      213: -5395049677171632023
+    second: Suelo_diente_de_leon 1_19
+  - first:
+      213: 3975706826633615523
+    second: Suelo_diente_de_leon 1_20
+  - first:
+      213: -6990214567133461718
+    second: Suelo_diente_de_leon 1_21
+  - first:
+      213: 2446324050756938139
+    second: Suelo_diente_de_leon 1_22
+  - first:
+      213: -475989771759920459
+    second: Suelo_diente_de_leon 1_23
+  - first:
+      213: 4433582776984217088
+    second: Suelo_diente_de_leon 1_24
+  - first:
+      213: 5836611871919064564
+    second: Suelo_diente_de_leon 1_25
+  - first:
+      213: -6184403627497384687
+    second: Suelo_diente_de_leon 1_26
+  - first:
+      213: 4054513239668314730
+    second: Suelo_diente_de_leon 1_27
+  - first:
+      213: 5576001785147248317
+    second: Suelo_diente_de_leon 1_28
+  - first:
+      213: -1072690105124583590
+    second: Suelo_diente_de_leon 1_29
+  - first:
+      213: 2788839779177652941
+    second: Suelo_diente_de_leon 1_30
+  - first:
+      213: -6608516719572959381
+    second: Suelo_diente_de_leon 1_31
+  - first:
+      213: 3939351462339967316
+    second: Suelo_diente_de_leon 1_32
+  - first:
+      213: -8957918696797799891
+    second: Suelo_diente_de_leon 1_33
+  - first:
+      213: -940066940431095532
+    second: Suelo_diente_de_leon 1_34
+  - first:
+      213: -8492465182185727274
+    second: Suelo_diente_de_leon 1_35
+  - first:
+      213: -7710794329742187272
+    second: Suelo_diente_de_leon 1_36
+  - first:
+      213: 8496653620154774508
+    second: Suelo_diente_de_leon 1_37
+  - first:
+      213: 4766809970287949326
+    second: Suelo_diente_de_leon 1_38
+  - first:
+      213: 3369218026407520370
+    second: Suelo_diente_de_leon 1_39
+  - first:
+      213: 6674526280857124195
+    second: Suelo_diente_de_leon 1_40
+  - first:
+      213: -3869883590411225932
+    second: Suelo_diente_de_leon 1_41
+  - first:
+      213: 2849979145866600801
+    second: Suelo_diente_de_leon 1_42
+  - first:
+      213: 2000289373902174500
+    second: Suelo_diente_de_leon 1_43
+  - first:
+      213: 7140570608666257695
+    second: Suelo_diente_de_leon 1_44
+  - first:
+      213: -1551569224248424330
+    second: Suelo_diente_de_leon 1_45
+  - first:
+      213: 3493092691947862029
+    second: Suelo_diente_de_leon 1_46
+  - first:
+      213: 4542372285441231162
+    second: Suelo_diente_de_leon 1_47
+  - first:
+      213: 8203741470895438056
+    second: Suelo_diente_de_leon 1_48
+  - first:
+      213: -8483894632414606220
+    second: Suelo_diente_de_leon 1_49
+  - first:
+      213: -7313104902390623497
+    second: Suelo_diente_de_leon 1_50
+  - first:
+      213: -7723185144729981217
+    second: Suelo_diente_de_leon 1_51
+  - first:
+      213: 3392082826507313013
+    second: Suelo_diente_de_leon 1_52
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 160
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Suelo_diente_de_leon 1_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 640
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ae7bd366054575c0800000000000000
+      internalID: -4218389582215151967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suelo_diente_de_leon 1_1
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 640
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd0d16500b2c89270800000000000000
+      internalID: 8257563978044133595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suelo_diente_de_leon 1_2
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 640
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb55b5f42aee801b0800000000000000
+      internalID: -5690035748299123265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suelo_diente_de_leon 1_3
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 640
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f208df2dd63973cd0800000000000000
+      internalID: -2578430161745772497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suelo_diente_de_leon 1_4
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 640
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 976e95a995a129270800000000000000
+      internalID: 8255690039067534969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suelo_diente_de_leon 1_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 480
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c07cf2679f4262a90800000000000000
+      internalID: -7339137888905345268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suelo_diente_de_leon 1_6
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 480
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25c8b25533d11eb70800000000000000
+      internalID: 8926448042734488658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suelo_diente_de_leon 1_7
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 480
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69b211e647c978540800000000000000
+      internalID: 5010145134349724566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suelo_diente_de_leon 1_8
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 480
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d571a0ac1f282fc10800000000000000
+      internalID: 2085873552414349149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suelo_diente_de_leon 1_9
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 480
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af8a83814d96adec0800000000000000
+      internalID: -3541401797313124102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suelo_diente_de_leon 1_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 320
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 054a320288e562db0800000000000000
+      internalID: -4817058812678396848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suelo_diente_de_leon 1_11
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 320
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 514be1e58fa14e170800000000000000
+      internalID: 8206714075009168405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suelo_diente_de_leon 1_12
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 320
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c704a1cd910a1fa0800000000000000
+      internalID: -5829344990607439927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suelo_diente_de_leon 1_13
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 320
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b28d3b485fe928c0800000000000000
+      internalID: -4023421629580344648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suelo_diente_de_leon 1_14
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 320
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bfb6d909b1006ed30800000000000000
+      internalID: 4460252599347407867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suelo_diente_de_leon 1_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 160
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11cf02f9382f7a4c0800000000000000
+      internalID: -4276182674040620015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suelo_diente_de_leon 1_16
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 160
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93055ef44b4eca0f0800000000000000
+      internalID: -1104256345526939591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suelo_diente_de_leon 1_17
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 160
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8752b14eca5090e30800000000000000
+      internalID: 4470110345261426040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suelo_diente_de_leon 1_18
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 160
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9be48b12d8ee2f6a0800000000000000
+      internalID: -6416804229126009159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suelo_diente_de_leon 1_19
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 160
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 968599e17eee025b0800000000000000
+      internalID: -5395049677171632023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suelo_diente_de_leon 1_20
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a8979c6b4c8c2730800000000000000
+      internalID: 3975706826633615523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suelo_diente_de_leon 1_21
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 0
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a23cf3e03e4cdfe90800000000000000
+      internalID: -6990214567133461718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suelo_diente_de_leon 1_22
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b99acd253c613f120800000000000000
+      internalID: 2446324050756938139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: c474e19334dfeb74ab6941131931ac5b
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":160.0,"y":160.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Suelo_diente_de_leon 1_0: -4218389582215151967
+      Suelo_diente_de_leon 1_1: 8257563978044133595
+      Suelo_diente_de_leon 1_10: -4817058812678396848
+      Suelo_diente_de_leon 1_11: 8206714075009168405
+      Suelo_diente_de_leon 1_12: -5829344990607439927
+      Suelo_diente_de_leon 1_13: -4023421629580344648
+      Suelo_diente_de_leon 1_14: 4460252599347407867
+      Suelo_diente_de_leon 1_15: -4276182674040620015
+      Suelo_diente_de_leon 1_16: -1104256345526939591
+      Suelo_diente_de_leon 1_17: 4470110345261426040
+      Suelo_diente_de_leon 1_18: -6416804229126009159
+      Suelo_diente_de_leon 1_19: -5395049677171632023
+      Suelo_diente_de_leon 1_2: -5690035748299123265
+      Suelo_diente_de_leon 1_20: 3975706826633615523
+      Suelo_diente_de_leon 1_21: -6990214567133461718
+      Suelo_diente_de_leon 1_22: 2446324050756938139
+      Suelo_diente_de_leon 1_3: -2578430161745772497
+      Suelo_diente_de_leon 1_4: 8255690039067534969
+      Suelo_diente_de_leon 1_5: -7339137888905345268
+      Suelo_diente_de_leon 1_6: 8926448042734488658
+      Suelo_diente_de_leon 1_7: 5010145134349724566
+      Suelo_diente_de_leon 1_8: 2085873552414349149
+      Suelo_diente_de_leon 1_9: -3541401797313124102
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

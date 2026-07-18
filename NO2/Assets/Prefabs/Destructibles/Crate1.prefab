@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2381791839820122145}
   - component: {fileID: 4105346210740380887}
   m_Layer: 10
-  m_Name: CrateDestructible
+  m_Name: Crate1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

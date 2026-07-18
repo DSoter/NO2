@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
 
-
     // Gameobject Componentes
     private Rigidbody2D _rigidbody;
     private Animator _animator;
@@ -25,11 +24,11 @@ public class PlayerController : MonoBehaviour
     private float _chargeTime = 0f;
     private bool _chargeReleased = false;
 
-
     private bool _isPause => Time.timeScale == 0;
     private bool _isRunning = false;
     private bool canRoll => _state == PlayerState.Move && HasStamina();
     private bool canAttack => _state == PlayerState.Move && HasStamina();
+    private bool canCharge => _state == PlayerState.Move && HasStamina();
 
     private InputManager _inputManager;
 
@@ -50,7 +49,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private WeakAttackController _weakAttack;
     [SerializeField] private StrongAttackController _strongAttack;
 
-
     [Space(5)]
     [Header("Oxygen Alerts")]
     [SerializeField] private AudioClip _oxygenAlert50;
@@ -60,26 +58,27 @@ public class PlayerController : MonoBehaviour
     [Header("Center")]
     [SerializeField] private Transform _center;
 
-
-
-    public Transform Center 
-    {
-        get { return _center; }
-    }
-
-
     // MOVE TO PLAYER DATA (COMPLETAR)
     [Space(5)]
     [Header("Animation durations")]
     [SerializeField] private float deathAnimationSeconds = 2f;
     [SerializeField] private float _acceleration = 25f;
-
     [SerializeField] private float _attackImpulse = 1f;
 
     [Space(5)]
     [Header("Charge Settings")]
     [SerializeField] private float _minCharge = 0.5f;
     [SerializeField] private float _maxCharge = 1.5f;
+
+    public Transform Center
+    {
+        get { return _center; }
+    }
+
+    public PlayerData _PlayerData
+    {
+        get { return _playerData; }
+    }
 
     public enum PlayerState
     {
@@ -96,29 +95,27 @@ public class PlayerController : MonoBehaviour
     {
         return _state;
     }
+
     public void SetState(PlayerState state)
     {
         _state = state;
     }
-    public PlayerData _PlayerData
-    {
-        get { return _playerData; }
-    }
 
+
+    // -------------------------------------------------------------------------
+    // Unity Lifecycle
+    // -------------------------------------------------------------------------
 
     void Awake()
     {
-
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _renderer = GetComponent<SpriteRenderer>();
-        
-        _inputManager = GameManager.Instance.gameObject.GetComponent<InputManager>();
 
+        _inputManager = GameManager.Instance.gameObject.GetComponent<InputManager>();
 
         _playerData.Stamina = _playerData.MaxStamina;
         _oxygenData.LastOxygenSeconds = _playerData.LastOxygenSeconds;
-
     }
 
     private void Start()
@@ -137,7 +134,6 @@ public class PlayerController : MonoBehaviour
         HandleAnimatorParams();
         HandleOxigen();
         HandleCooldownPotion();
-        
 
         switch (_state)
         {
@@ -151,7 +147,6 @@ public class PlayerController : MonoBehaviour
                 break;
             case PlayerState.Roll:
 
-
                 break;
             case PlayerState.WeakAttack:
 
@@ -161,17 +156,19 @@ public class PlayerController : MonoBehaviour
 
                 UpdateLookDirectionWithMouse();
 
-                 _chargeTime = Mathf.Min(_chargeTime + Time.deltaTime, _maxCharge);
+                _chargeTime = Mathf.Min(_chargeTime + Time.deltaTime, _maxCharge);
 
-                if(_chargeTime >= _minCharge && _chargeReleased)
+                if (_chargeTime >= _minCharge && _chargeReleased)
                 {
                     _animator.SetTrigger("StrongAttack");
+
+                    StartCoroutine(StrongAttackCoroutine());
 
                     _state = PlayerState.StrongAttack;
                     _chargeReleased = false;
                     _chargeTime = 0f;
                 }
-                
+
                 break;
             case PlayerState.StrongAttack:
 
@@ -186,14 +183,11 @@ public class PlayerController : MonoBehaviour
                 HandleHealthStatus();
                 _isRunning = false;
                 break;
-
         }
-
     }
 
     private void FixedUpdate()
     {
-
         switch (_state)
         {
             case PlayerState.Move:
@@ -227,16 +221,35 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Run() 
+    void OnDestroy()
+    {
+        DisposeActions();
+    }
+
+    void OnEnable()
+    {
+        if (_inputManager == null) return;
+        EnableActions();
+    }
+
+    void OnDisable()
+    {
+        DisposeActions();
+    }
+
+
+    // -------------------------------------------------------------------------
+    // Movement
+    // -------------------------------------------------------------------------
+
+    private void Run()
     {
         if (_moveDirection.magnitude > 0)
         {
             ConsumeStamina(_playerData.RunningStaminaCost * Time.deltaTime);
-
         }
 
         ApplyMovementForce(_playerData.RunningSpeed);
-
     }
 
     private void Walk()
@@ -251,157 +264,16 @@ public class PlayerController : MonoBehaviour
 
         _rigidbody.AddForce(velocityChange * _acceleration, ForceMode2D.Force);
     }
+
     private void SetVelocityInstant(Vector2 targetVelocity)
     {
         Vector2 velocityChange = targetVelocity - _rigidbody.linearVelocity;
         _rigidbody.AddForce(velocityChange, ForceMode2D.Impulse);
     }
 
-    private void HandleStaminaRegeneration()
-    {
-        bool shouldRegenerate = _staminaRegenTimer >= _playerData.SecondsUntilStaminaRegeneration && (!_isRunning || _moveDirection.magnitude == 0);
-
-        if (shouldRegenerate)
-        {
-            _playerData.Stamina = Mathf.Min(_playerData.MaxStamina, _playerData.Stamina + _playerData.StaminaRegenerationSpeed * Time.deltaTime);
-        }
-        else 
-        {
-            _staminaRegenTimer += Time.deltaTime;
-        }
-    }
-
-    private void HandleHealthRegeneration()
-    {
-        bool shouldRegenerate = _state == PlayerState.Rest;//ahora mismo no hace falta porque el handle health está dentro del estado rest
-
-        if (shouldRegenerate)
-        {
-            _playerData.Health = Mathf.Min(_playerData.MaxHealth, _playerData.Health + _playerData.HealthRegenerationSpeed * Time.deltaTime);
-        }
-    }
-
-    private void HandleCooldownPotion()
-    {
-        _healData.ActualCooldownSeconds += Time.deltaTime;
-        _healData.ActualCooldownSeconds = Mathf.Min(_healData.ActualCooldownSeconds, _healData.CooldownSeconds);
-    }
-    
-
-    public void MovePerformed()
-    {
-        if (_areInputsEnabled && !_dialogIsOpen)
-        {
-            _moveDirection = _inputManager._MoveDirection;
-        }
-    }
-    public void MoveCancelled()
-    {
-        if (_areInputsEnabled)
-        {
-            _moveDirection = Vector2.zero;
-        }
-    }
-
-    public void RunPerformed()
-    {
-        if (_areInputsEnabled && !_dialogIsOpen)
-        {
-            _isRunning = true;
-        }
-
-    }
-    public void RunCancelled()
-    {
-        if (_areInputsEnabled)
-        {
-            _isRunning=false;
-        }
-    }
-
-
-
-    public void Roll()
-    {
-        if (canRoll && _areInputsEnabled && !_isPause && !_dialogIsOpen)
-        {
-            StartCoroutine(RollCoroutine());
-        }
-    }
-
-    private IEnumerator RollCoroutine()
-    {
-        _state = PlayerState.Roll;
-
-        UpdateLookDirection();
-        _lookDirection = SnapToEightDirections(_lookDirection);
-
-        ConsumeStamina(_playerData.RollingStaminaCost);
-
-        SetVelocityInstant(_playerData.IniRollingSpeed * _lookDirection);
-        yield return new WaitForSeconds(_playerData.IniRollingSeconds);
-
-        SetVelocityInstant(_playerData.EndRollingSpeed * _lookDirection);
-        yield return new WaitForSeconds(_playerData.EndRollingSeconds);
-
-        _state = PlayerState.Move;
-    }
-
-    private void WeakAttack()
-    {
-        if (canAttack && _areInputsEnabled && !_isPause && !_dialogIsOpen)
-        {
-            StartCoroutine(WeakAttackCoroutine());
-        }
-    }
-
-    private IEnumerator WeakAttackCoroutine()
-    {
-        _state = PlayerState.WeakAttack;
-
-        // Calculate the attack direction based on the mouse position
-        UpdateLookDirectionWithMouse();
-
-        // Apply small force with the attack direction
-        _rigidbody.linearVelocity = Vector2.zero;
-        _rigidbody.AddForce(_lookDirection * _attackImpulse, ForceMode2D.Impulse);
-
-        // Set the attack direction in the animator
-        _animator.SetFloat("xDir", _lookDirection.x);
-        _animator.SetFloat("yDir", _lookDirection.y);
-
-        // Play attack animation
-        bool isAttackFlipped = (_attackCounter % 2) == 1;
-        _weakAttack.Play(isAttackFlipped);
-        _attackCounter++;
-
-        //Consume stamina
-        ConsumeStamina(_playerData.WeakAttackStaminaCost);
-
-        yield return new WaitForSeconds(_playerData.WeakAttackSeconds);
-
-        _state = PlayerState.Move;
-    }
-
-    private void OnStrongAttackPerformed()
-    {
-        if (_state == PlayerState.Move)
-        {
-            _state = PlayerState.Charging;
-        }
-    }
-
-    private void OnStrongAttackCancelled()
-    {
-        if (_state == PlayerState.Charging)
-        {
-            _chargeReleased = true;
-        }
-    }
-
     private void UpdateLookDirection()
     {
-        if(_moveDirection.magnitude > 0)
+        if (_moveDirection.magnitude > 0)
         {
             _lookDirection = _moveDirection.normalized;
         }
@@ -431,35 +303,112 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    private void HandleOnOxygenIncreased()
+    // -------------------------------------------------------------------------
+    // Combat
+    // -------------------------------------------------------------------------
+
+    private void WeakAttack()
     {
-        // Reset the last seconds timer when oxygen is increased
-        _oxygenData.LastOxygenTimer = 0;
-
-        // Reset the alerts only when the oxygen percentage goes above the thresholds
-        float percentage = _playerData.Oxygen / _playerData.MaxOxygen * 100;
-
-        if (percentage > 50)
+        if (canAttack && _areInputsEnabled && !_isPause && !_dialogIsOpen)
         {
-            _oxygenData.HalfOxygenAlertPlayed = false;
-            _oxygenData.LowOxygenAlertPlayed = false;
-        }
-        else if(percentage > 10)
-        {
-            _oxygenData.LowOxygenAlertPlayed = false;
+            StartCoroutine(WeakAttackCoroutine());
         }
     }
-    private void HandleAnimatorParams()
+
+    private IEnumerator WeakAttackCoroutine()
     {
+        _state = PlayerState.WeakAttack;
+
+        // Calculate the attack direction based on the mouse position
+        UpdateLookDirectionWithMouse();
+
+        // Apply small force with the attack direction
+        _rigidbody.linearVelocity = Vector2.zero;
+        _rigidbody.AddForce(_lookDirection * _attackImpulse, ForceMode2D.Impulse);
+
+        // Set the attack direction in the animator
         _animator.SetFloat("xDir", _lookDirection.x);
         _animator.SetFloat("yDir", _lookDirection.y);
-        _animator.SetBool("isIdle", _state == PlayerState.Move && _moveDirection == Vector2.zero);
-        _animator.SetBool("isWalking", _state == PlayerState.Move && _moveDirection != Vector2.zero && (!_isRunning || _isRunning && !HasStamina()));
-        _animator.SetBool("isRunning", _state == PlayerState.Move && _moveDirection != Vector2.zero && _isRunning && HasStamina());
-        _animator.SetBool("isRolling", _state == PlayerState.Roll);
-        _animator.SetBool("isWeakAttacking", _state == PlayerState.WeakAttack);
-        _animator.SetFloat("ChargeTime", _chargeTime);
+
+        // Play attack animation
+        bool isAttackFlipped = (_attackCounter % 2) == 1;
+        _weakAttack.Play(isAttackFlipped);
+        _attackCounter++;
+
+        // Consume stamina
+        ConsumeStamina(_playerData.WeakAttackStaminaCost);
+
+        yield return new WaitForSeconds(_playerData.WeakAttackSeconds);
+
+        _state = PlayerState.Move;
     }
+
+    private void OnStrongAttackPerformed()
+    {
+        if (canCharge)
+        {
+            _state = PlayerState.Charging;
+        }
+    }
+
+    private void OnStrongAttackCancelled()
+    {
+        if (_state == PlayerState.Charging)
+        {
+            _chargeReleased = true;
+        }
+    }
+
+    private IEnumerator StrongAttackCoroutine()
+    {
+        float aux = Mathf.InverseLerp(_minCharge, _maxCharge, _chargeTime);
+        _strongAttack.Damage = Mathf.Lerp(_playerData.MinStrongAttackDamage, _playerData.MaxStrongAttackDamage, aux);
+
+        _strongAttack.TargetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        yield return new WaitForSeconds(0.2f);
+
+        ConsumeStamina(_playerData.StrongAttackStaminaCost);
+        _strongAttack.Play();
+
+        _state = PlayerState.Move;
+    }
+
+
+    // -------------------------------------------------------------------------
+    // Roll
+    // -------------------------------------------------------------------------
+
+    public void Roll()
+    {
+        if (canRoll && _areInputsEnabled && !_isPause && !_dialogIsOpen)
+        {
+            StartCoroutine(RollCoroutine());
+        }
+    }
+
+    private IEnumerator RollCoroutine()
+    {
+        _state = PlayerState.Roll;
+
+        UpdateLookDirection();
+        _lookDirection = SnapToEightDirections(_lookDirection);
+
+        ConsumeStamina(_playerData.RollingStaminaCost);
+
+        SetVelocityInstant(_playerData.IniRollingSpeed * _lookDirection);
+        yield return new WaitForSeconds(_playerData.IniRollingSeconds);
+
+        SetVelocityInstant(_playerData.EndRollingSpeed * _lookDirection);
+        yield return new WaitForSeconds(_playerData.EndRollingSeconds);
+
+        _state = PlayerState.Move;
+    }
+
+
+    // -------------------------------------------------------------------------
+    // Stamina
+    // -------------------------------------------------------------------------
 
     private bool HasStamina()
     {
@@ -472,85 +421,75 @@ public class PlayerController : MonoBehaviour
         _playerData.Stamina = _playerData.Stamina - amount;
     }
 
-    public void SetDead(bool isDead)
+    private void HandleStaminaRegeneration()
     {
-        if (isDead) {
-            _state = PlayerState.Dead;
+        bool shouldRegenerate = _staminaRegenTimer >= _playerData.SecondsUntilStaminaRegeneration && (!_isRunning || _moveDirection.magnitude == 0);
+
+        if (shouldRegenerate)
+        {
+            _playerData.Stamina = Mathf.Min(_playerData.MaxStamina, _playerData.Stamina + _playerData.StaminaRegenerationSpeed * Time.deltaTime);
         }
         else
         {
-            _state = PlayerState.Move;
+            _staminaRegenTimer += Time.deltaTime;
         }
     }
 
-    public void Death()//and respawn other player or the logic
+
+    // -------------------------------------------------------------------------
+    // Health
+    // -------------------------------------------------------------------------
+
+    private void HandleHealthStatus() //gestionar posibles fectos de estado y daño por segundo
     {
-        if (_state != PlayerState.Dead)
+        if (_playerData.Health <= 0)
         {
-            if (deathSound != null)
-                GameManager.Instance.audioManager.PlaySound(deathSound);
-            StartCoroutine(WaitAndKill(deathAnimationSeconds));
+            Death();
         }
     }
-    IEnumerator WaitAndKill(float segundos)
+
+    private void HandleHealthRegeneration()
     {
-        SetDead(true);
-        _renderer.color = Color.red;
-        _renderer.sortingLayerName = "Foreforeground";
+        bool shouldRegenerate = _state == PlayerState.Rest; //ahora mismo no hace falta porque el handle health está dentro del estado rest
 
-        CheckpointManager cm = GameManager.Instance.GetComponent<CheckpointManager>();
-
-        cm.CameraLockedPlayer = true;
-
-        yield return new WaitForSeconds(segundos);
-
-        _renderer.sortingLayerName = "Default";
-        SetDead(false);
-
-        DisposeActions();
-
-        
-        cm.PlayerReference = transform;
-        Destroy(gameObject); // Destruir primero
-        cm.CameraLockedPlayer = false;
-        cm.RespawnPlayer(); // Llamar despues, desde un objeto que sobrevive
-
-    }
-
-    public void DeathWithoutOxygen()//and respawn other player or the logic
-    {
-        if (_state != PlayerState.Dead)
+        if (shouldRegenerate)
         {
-            if (deathSound != null)
-                GameManager.Instance.audioManager.PlaySound(deathSound);
-            StartCoroutine(WaitAndKillWithoutOxygen(deathAnimationSeconds));
+            _playerData.Health = Mathf.Min(_playerData.MaxHealth, _playerData.Health + _playerData.HealthRegenerationSpeed * Time.deltaTime);
         }
     }
-    IEnumerator WaitAndKillWithoutOxygen(float segundos)
+
+    public void TryToHeal()
     {
-        SetDead(true);
+        if (_state != PlayerState.Move) { return; }
+        if (_healData.ActualCooldownSeconds < _healData.CooldownSeconds) { return; }
+        if (_playerData.Health == _playerData.MaxHealth)
+        {
+            Debug.Log("Full vida, no se puede curar");
+            return;
+        }
+        if (_healData.RemainingUses > 0)
+        {
+            _healData.RemainingUses--;
 
-
-        _renderer.color = Color.red;
-        _renderer.sortingLayerName = "Foreforeground";
-        CheckpointManager cm = GameManager.Instance.GetComponent<CheckpointManager>();
-
-        cm.CameraLockedPlayer = true;
-
-        yield return new WaitForSeconds(segundos);
-
-        SetDead(false);
-        _renderer.sortingLayerName = "Default";
-        DisposeActions();
-
-
-        cm.PlayerReference = transform;
-        Destroy(gameObject); // Destruir primero
-        cm.CameraLockedPlayer = false;
-        cm.RespawnPlayerAfterNoOxygen(); // Llamar despues, desde un objeto que sobrevive
-
+            _playerData.Health += _healData.HealAmount;
+            _healData.ActualCooldownSeconds = 0;
+        }
+        else
+        {
+            Debug.Log("No quedan usos de pociones");
+        }
     }
 
+    private void HandleCooldownPotion()
+    {
+        _healData.ActualCooldownSeconds += Time.deltaTime;
+        _healData.ActualCooldownSeconds = Mathf.Min(_healData.ActualCooldownSeconds, _healData.CooldownSeconds);
+    }
+
+
+    // -------------------------------------------------------------------------
+    // Oxygen
+    // -------------------------------------------------------------------------
 
     private void HandleOxigen()
     {
@@ -569,12 +508,12 @@ public class PlayerController : MonoBehaviour
                 GameManager.Instance.GetComponent<AudioManager>().PlaySound(_oxygenAlert50);
                 _oxygenData.HalfOxygenAlertPlayed = true;
             }
-            else if(percentage < 10 && !_oxygenData.LowOxygenAlertPlayed)
+            else if (percentage < 10 && !_oxygenData.LowOxygenAlertPlayed)
             {
                 GameManager.Instance.GetComponent<AudioManager>().PlaySound(_oxygenAlert10);
                 _oxygenData.LowOxygenAlertPlayed = true;
             }
-            else if(_playerData.Oxygen <= 0)
+            else if (_playerData.Oxygen <= 0)
             {
                 HandleLastSeconds();
             }
@@ -583,8 +522,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleLastSeconds()
     {
-        
-        if(_oxygenData.LastOxygenTimer < _oxygenData.LastOxygenSeconds)
+        if (_oxygenData.LastOxygenTimer < _oxygenData.LastOxygenSeconds)
         {
             _oxygenData.LastOxygenTimer += Time.deltaTime;
         }
@@ -592,6 +530,25 @@ public class PlayerController : MonoBehaviour
         {
             //Death();
             DeathWithoutOxygen(); //Ahora mismo no va
+        }
+    }
+
+    private void HandleOnOxygenIncreased()
+    {
+        // Reset the last seconds timer when oxygen is increased
+        _oxygenData.LastOxygenTimer = 0;
+
+        // Reset the alerts only when the oxygen percentage goes above the thresholds
+        float percentage = _playerData.Oxygen / _playerData.MaxOxygen * 100;
+
+        if (percentage > 50)
+        {
+            _oxygenData.HalfOxygenAlertPlayed = false;
+            _oxygenData.LowOxygenAlertPlayed = false;
+        }
+        else if (percentage > 10)
+        {
+            _oxygenData.LowOxygenAlertPlayed = false;
         }
     }
 
@@ -615,49 +572,145 @@ public class PlayerController : MonoBehaviour
         _isOnOxigenZone = false;
     }
 
-    private void HandleHealthStatus()//gestionar posibles fectos de estado y daño por segundo
-    {
-        if (_playerData.Health <= 0)
-        {
-            Death();
-        }
-    }
 
-    public void TryToHeal()
+    // -------------------------------------------------------------------------
+    // Death
+    // -------------------------------------------------------------------------
+
+    public void SetDead(bool isDead)
     {
-        if(_state != PlayerState.Move) { return; }
-        if(_healData.ActualCooldownSeconds < _healData.CooldownSeconds) { return; }
-        if(_playerData.Health == _playerData.MaxHealth)
+        if (isDead)
         {
-            Debug.Log("Full vida, no se puede curar");
-            return;
-        }
-        if(_healData.RemainingUses > 0)
-        {
-            _healData.RemainingUses--;
-            
-            _playerData.Health += _healData.HealAmount;
-            _healData.ActualCooldownSeconds = 0;
+            _state = PlayerState.Dead;
         }
         else
         {
-            Debug.Log("No quedan usos de pociones");
+            _state = PlayerState.Move;
         }
     }
 
-    public void PlayStrongAttack()
+    public void Death() //and respawn other player or the logic
     {
-        ConsumeStamina(_playerData.StrongAttackStaminaCost);
+        if (_state != PlayerState.Dead)
+        {
+            if (deathSound != null)
+                GameManager.Instance.audioManager.PlaySound(deathSound);
+            StartCoroutine(WaitAndKill(deathAnimationSeconds));
+        }
+    }
 
-        float aux = Mathf.InverseLerp(_minCharge, _maxCharge, _chargeTime);
-        _strongAttack.Damage = Mathf.Lerp(_playerData.MinStrongAttackDamage, _playerData.MaxStrongAttackDamage, aux);
+    private IEnumerator WaitAndKill(float segundos)
+    {
+        SetDead(true);
+        _renderer.color = Color.red;
+        _renderer.sortingLayerName = "Foreforeground";
 
-        _strongAttack.TargetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        CheckpointManager cm = GameManager.Instance.GetComponent<CheckpointManager>();
 
-        _strongAttack.Play();
+        cm.CameraLockedPlayer = true;
+
+        yield return new WaitForSeconds(segundos);
+
+        _renderer.sortingLayerName = "Default";
+        SetDead(false);
+
+        DisposeActions();
+
+        cm.PlayerReference = transform;
+        Destroy(gameObject); // Destruir primero
+        cm.CameraLockedPlayer = false;
+        cm.RespawnPlayer(); // Llamar despues, desde un objeto que sobrevive
+    }
+
+    public void DeathWithoutOxygen() //and respawn other player or the logic
+    {
+        if (_state != PlayerState.Dead)
+        {
+            if (deathSound != null)
+                GameManager.Instance.audioManager.PlaySound(deathSound);
+            StartCoroutine(WaitAndKillWithoutOxygen(deathAnimationSeconds));
+        }
+    }
+
+    private IEnumerator WaitAndKillWithoutOxygen(float segundos)
+    {
+        SetDead(true);
+
+        _renderer.color = Color.red;
+        _renderer.sortingLayerName = "Foreforeground";
+        CheckpointManager cm = GameManager.Instance.GetComponent<CheckpointManager>();
+
+        cm.CameraLockedPlayer = true;
+
+        yield return new WaitForSeconds(segundos);
+
+        SetDead(false);
+        _renderer.sortingLayerName = "Default";
+        DisposeActions();
+
+        cm.PlayerReference = transform;
+        Destroy(gameObject); // Destruir primero
+        cm.CameraLockedPlayer = false;
+        cm.RespawnPlayerAfterNoOxygen(); // Llamar despues, desde un objeto que sobrevive
+    }
+
+
+    // -------------------------------------------------------------------------
+    // Scene Transitions
+    // -------------------------------------------------------------------------
+
+    public void ExitScene(Vector2 exitDirection, float animationDurationSeconds)
+    {
+        StartCoroutine(ExitSceneCoroutine(exitDirection, animationDurationSeconds));
+    }
+
+    private IEnumerator ExitSceneCoroutine(Vector2 exitDirection, float animationDurationSeconds)
+    {
+        Debug.Log(exitDirection);
 
         _state = PlayerState.Move;
+        _isRunning = false;
+
+        if (_collider != null)
+        {
+            _collider.enabled = false;
+        }
+
+        _areInputsEnabled = false;
+
+        _moveDirection = exitDirection.normalized;
+        yield return new WaitForSeconds(animationDurationSeconds);
+        _moveDirection = Vector2.zero;
+
+        if (_collider != null)
+        {
+            _collider.enabled = true;
+        }
+
+        _areInputsEnabled = true;
     }
+
+
+    // -------------------------------------------------------------------------
+    // Animator
+    // -------------------------------------------------------------------------
+
+    private void HandleAnimatorParams()
+    {
+        _animator.SetFloat("xDir", _lookDirection.x);
+        _animator.SetFloat("yDir", _lookDirection.y);
+        _animator.SetBool("isIdle", _state == PlayerState.Move && _moveDirection == Vector2.zero);
+        _animator.SetBool("isWalking", _state == PlayerState.Move && _moveDirection != Vector2.zero && (!_isRunning || _isRunning && !HasStamina()));
+        _animator.SetBool("isRunning", _state == PlayerState.Move && _moveDirection != Vector2.zero && _isRunning && HasStamina());
+        _animator.SetBool("isRolling", _state == PlayerState.Roll);
+        _animator.SetBool("isWeakAttacking", _state == PlayerState.WeakAttack);
+        _animator.SetFloat("ChargeTime", _chargeTime);
+    }
+
+
+    // -------------------------------------------------------------------------
+    // Dialog
+    // -------------------------------------------------------------------------
 
     private void UpdateDialogIsOpen()
     {
@@ -669,22 +722,41 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    void OnDestroy()
+    // -------------------------------------------------------------------------
+    // Input
+    // -------------------------------------------------------------------------
+
+    public void MovePerformed()
     {
-        DisposeActions();
-    }
-    void OnEnable()
-    {
-        if (_inputManager == null) return;
-        EnableActions();
-    }
-    void OnDisable()
-    {
-        DisposeActions();
+        if (_areInputsEnabled && !_dialogIsOpen)
+        {
+            _moveDirection = _inputManager._MoveDirection;
+        }
     }
 
- 
+    public void MoveCancelled()
+    {
+        if (_areInputsEnabled)
+        {
+            _moveDirection = Vector2.zero;
+        }
+    }
 
+    public void RunPerformed()
+    {
+        if (_areInputsEnabled && !_dialogIsOpen)
+        {
+            _isRunning = true;
+        }
+    }
+
+    public void RunCancelled()
+    {
+        if (_areInputsEnabled)
+        {
+            _isRunning = false;
+        }
+    }
 
     private void DisposeActions()
     {
@@ -714,39 +786,4 @@ public class PlayerController : MonoBehaviour
         _inputManager.onHeal += TryToHeal;
         GameManager.Instance.GetComponent<DiverseMenusManager>().dialogOpened += UpdateDialogIsOpen;
     }
-
-    public void ExitScene(Vector2 exitDirection, float animationDurationSeconds)
-    {
-        
-        StartCoroutine(ExitSceneCoroutine(exitDirection, animationDurationSeconds));
-    }
-
-    private IEnumerator ExitSceneCoroutine(Vector2 exitDirection, float animationDurationSeconds)
-    {
-        Debug.Log(exitDirection);
-        
-        _state = PlayerState.Move;
-        _isRunning = false;
-
-        if(_collider != null)
-        {
-            _collider.enabled = false;
-        }
-        
-        _areInputsEnabled = false;
-
-        _moveDirection = exitDirection.normalized;
-        yield return new WaitForSeconds(animationDurationSeconds);
-        _moveDirection = Vector2.zero;
-
-        if (_collider != null)
-        {
-            _collider.enabled = true;
-        }
-
-        _areInputsEnabled = true;
-
-    }
-
-
 }

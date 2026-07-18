@@ -22,8 +22,6 @@ public class StrongAttackController : MonoBehaviour
     private Collider2D _collider;
     private CinemachineImpulseSource _impulseSource;
 
-    private bool _lock = false;
-
     private Vector3 _targetPos;
 
     public Vector3 TargetPos
@@ -48,15 +46,11 @@ public class StrongAttackController : MonoBehaviour
     [ContextMenu("Play")]
     public void Play()
     {
-        if (!_lock)
-        {
             StartCoroutine(OnPlayCoroutine());
-        }
     }
 
     private IEnumerator OnPlayCoroutine()
     {
-        _lock = true;
 
         // Set the rotation of the attack based on the mouse position 
         var angle = Vector2.SignedAngle(_targetPos - _centerTransform.position, _centerTransform.position + new Vector3(1, 0, 0) - _centerTransform.position);
@@ -75,7 +69,6 @@ public class StrongAttackController : MonoBehaviour
         _collider.enabled = false;
         GameManager.Instance.audioManager.PlaySound(_smashClip,_volume,_pitchVar);
 
-        _lock = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

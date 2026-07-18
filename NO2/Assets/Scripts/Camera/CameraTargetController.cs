@@ -57,11 +57,7 @@ public class CameraTargetController : MonoBehaviour
     {
         cm = GameManager.Instance.GetComponent<CheckpointManager>();
         player = cm.PlayerReference;
-        if (player == null)
-        {
-            Debug.Log("No se ha encontrado referencia al jugador");
-        }
-        else
+        if (player != null)
         {
             Vector3 mouseScreen = Input.mousePosition;
             mouseScreen.z = -cam.transform.position.z;

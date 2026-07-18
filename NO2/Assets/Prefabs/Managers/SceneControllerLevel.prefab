@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5231077451128330398}
   - component: {fileID: 536073209556393770}
+  - component: {fileID: 2846324210977533273}
   m_Layer: 0
   m_Name: SceneControllerLevel
   m_TagString: Untagged
@@ -58,6 +59,19 @@ MonoBehaviour:
   checkpoints: []
   playerData: {fileID: 11400000, guid: 707aa1a40a1bb064193fd4f6f25fcc6a, type: 2}
   healData: {fileID: 11400000, guid: ccc02f2f8da643c4db2030f236d9a261, type: 2}
+--- !u!114 &2846324210977533273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702480794591735834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bbce0e5ca5f0f042a5fdbb756bd281f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TilemapToScriptable
+  sceneMapData: {fileID: 0}
 --- !u!1 &8170045265782028333
 GameObject:
   m_ObjectHideFlags: 0

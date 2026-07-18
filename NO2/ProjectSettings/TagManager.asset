@@ -8,6 +8,7 @@ TagManager:
   - SpawnPoint
   - MapCamera
   - MainTileMap
+  - WallsTileMap
   layers:
   - Default
   - TransparentFX

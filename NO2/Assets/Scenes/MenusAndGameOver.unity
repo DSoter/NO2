@@ -920,6 +920,78 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 90062876}
   m_CullTransparentMesh: 1
+--- !u!1 &127572603
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 127572604}
+  - component: {fileID: 127572606}
+  - component: {fileID: 127572605}
+  m_Layer: 5
+  m_Name: MapTexture
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &127572604
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127572603}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 837443878}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.009759903, y: 0.11950874}
+  m_SizeDelta: {x: 1450.2, y: 810.12}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &127572605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127572603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!222 &127572606
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127572603}
+  m_CullTransparentMesh: 1
 --- !u!1 &137262378
 GameObject:
   m_ObjectHideFlags: 0
@@ -2954,6 +3026,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 836148045}
   m_CullTransparentMesh: 1
+--- !u!1 &837443877
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 837443878}
+  - component: {fileID: 837443879}
+  m_Layer: 5
+  m_Name: Mask
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &837443878
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837443877}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 127572604}
+  m_Father: {fileID: 1456942546}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.0053711, y: -0.059509}
+  m_SizeDelta: {x: 1450.2, y: 810.12}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &837443879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837443877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Mask
+  m_ShowMaskGraphic: 1
 --- !u!1 &839440350
 GameObject:
   m_ObjectHideFlags: 0
@@ -4822,6 +4944,7 @@ GameObject:
   - component: {fileID: 1456942546}
   - component: {fileID: 1456942548}
   - component: {fileID: 1456942547}
+  - component: {fileID: 1456942549}
   m_Layer: 5
   m_Name: PanelRenderMap
   m_TagString: Untagged
@@ -4842,6 +4965,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1459987038}
+  - {fileID: 837443878}
   m_Father: {fileID: 354372281}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4887,6 +5011,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1456942545}
   m_CullTransparentMesh: 1
+--- !u!114 &1456942549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456942545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1cb3cdd5b3fa0b49aacb12623d343da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MapRenderer
+  mapData: {fileID: 11400000, guid: d3c0ec49d37ef354892ba4b98074bfed, type: 2}
+  mapImage: {fileID: 127572605}
+  mapContainer: {fileID: 127572604}
+  npcSprite: {fileID: -5274569665022297475, guid: abac426d31e79fd428c472630b2ac137, type: 3}
+  flowerSprite: {fileID: 7398593923441958080, guid: a827c50f92c1f5041a6bc36f1e31fa07, type: 3}
+  campfireSprite: {fileID: -1653951772147818831, guid: a89fdc1f66f2e584bb83a4f4cc0b9781, type: 3}
+  iconSize: 16
+  floorColor: {r: 0.9996939, g: 1, b: 0, a: 1}
+  wallColor: {r: 1, g: 0, b: 0, a: 1}
+  emptyColor: {r: 0, g: 0, b: 0, a: 0}
+  scrollSensitivity: 0.1
+  minScale: 0.5
+  maxScale: 5
+  panSensitivity: 1
+  inertiaDeceleration: 5
+  pixelsPerTile: 16
 --- !u!1 &1459987037
 GameObject:
   m_ObjectHideFlags: 0
@@ -4905,7 +5057,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1459987038
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4976,7 +5128,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapController
   mapCamera: {fileID: 0}
-  mapCameraTag: MapCamera
   minFov: 5
   maxFov: 50
   scrollSensitivity: 1

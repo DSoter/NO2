@@ -39,17 +39,17 @@ public class FogManager : MonoBehaviour
         int cols = Mathf.RoundToInt((maxX - minX) / separation) + 1;
         int rows = Mathf.RoundToInt((maxY - minY) / separation) + 1;
         
-        // Solo se necesita hacer la primera vez por cada fogData
-        fogData.MinX = minX;
-        fogData.MinY = minY;
-        fogData.Separation = separation;
-        fogData.Cols = cols;
-        fogData.Rows = rows;
-        fogData.Active = new bool[rows, cols];
+        //// Solo se necesita hacer la primera vez por cada fogData
+        //fogData.MinX = minX;
+        //fogData.MinY = minY;
+        //fogData.Separation = separation;
+        //fogData.Cols = cols;
+        //fogData.Rows = rows;
+        //fogData.Active = new bool[rows, cols];
 
-        for (int row = 0; row < rows; row++)
-            for (int col = 0; col < cols; col++)
-                fogData.Active[row, col] = true;
+        //for (int row = 0; row < rows; row++)
+        //    for (int col = 0; col < cols; col++)
+        //        fogData.Active[row, col] = true;
 
         for (int row = 0; row < fogData.Rows; row++)
         {

@@ -18,6 +18,7 @@ public class FogTrigger : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             Vector2Int gridPos = fogData.WorldToGrid(transform.position);
+            Debug.Log("Niebla cruzada");
             fogData.SetActive(gridPos, false);
             StartCoroutine(ShrinkAndDestroy());
 

@@ -63,38 +63,43 @@ public class FogData : ScriptableObject
     public void Save()
     {
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
-        for (int row = 0; row < Rows; row++)
-            for (int col = 0; col < Cols; col++)
+        for (int row = 0; row < rows; row++)
+            for (int col = 0; col < cols; col++)
                 sb.Append(Active[row, col] ? '1' : '0');
 
         PlayerPrefs.SetString(SaveKey, sb.ToString());
-        PlayerPrefs.SetInt(SaveKey + "_rows", Rows);
-        PlayerPrefs.SetInt(SaveKey + "_cols", Cols);
+        PlayerPrefs.SetInt(SaveKey + "_rows", rows);
+        PlayerPrefs.SetInt(SaveKey + "_cols", cols);
         PlayerPrefs.Save();
     }
 
     public bool Load()
     {
+        Debug.Log($"Buscando key: {SaveKey}");
         string saved = PlayerPrefs.GetString(SaveKey, "");
+        Debug.Log($"Valor encontrado: {saved}");
+
+
         if (string.IsNullOrEmpty(saved)) return false;
 
-        Rows = PlayerPrefs.GetInt(SaveKey + "_rows", Rows);
-        Cols = PlayerPrefs.GetInt(SaveKey + "_cols", Cols);
-        Active = new bool[Rows, Cols];
+        Rows = PlayerPrefs.GetInt(SaveKey + "_rows", rows);
+        Cols = PlayerPrefs.GetInt(SaveKey + "_cols", cols);
+        Active = new bool[rows, cols];
 
         int i = 0;
-        for (int row = 0; row < Rows; row++)
-            for (int col = 0; col < Cols; col++)
+        for (int row = 0; row < rows; row++)
+            for (int col = 0; col < cols; col++)
                 Active[row, col] = saved[i++] == '1';
 
         return true;
     }
 
+    [ContextMenu("Reset")]
     public void Reset()
     {
-        Active = new bool[Rows, Cols];
-        for (int row = 0; row < Rows; row++)
-            for (int col = 0; col < Cols; col++)
+        Active = new bool[rows, cols];
+        for (int row = 0; row < rows; row++)
+            for (int col = 0; col < cols; col++)
                 Active[row, col] = true;
         Save();
     }

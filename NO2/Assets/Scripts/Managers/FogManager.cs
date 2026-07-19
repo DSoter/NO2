@@ -29,7 +29,13 @@ public class FogManager : MonoBehaviour
             DestroyImmediate(transform.GetChild(i).gameObject);
         }
         if (!fogData.Load())
+        {
+            Debug.Log("Niebla no ccargada");
             fogData.Reset();
+        }
+        Debug.Log($"Active es null: {fogData.Active == null}");
+        Debug.Log($"Rows: {fogData.Rows} Cols: {fogData.Cols}");
+
 
         float minX = Mathf.Min(topLeft.position.x, bottomLeft.position.x);
         float maxX = Mathf.Max(topRight.position.x, bottomRight.position.x);
@@ -38,11 +44,11 @@ public class FogManager : MonoBehaviour
 
         int cols = Mathf.RoundToInt((maxX - minX) / separation) + 1;
         int rows = Mathf.RoundToInt((maxY - minY) / separation) + 1;
-        
+
         //// Solo se necesita hacer la primera vez por cada fogData
-        //fogData.MinX = minX;
-        //fogData.MinY = minY;
-        //fogData.Separation = separation;
+        fogData.MinX = minX;
+        fogData.MinY = minY;
+        fogData.Separation = separation;
         //fogData.Cols = cols;
         //fogData.Rows = rows;
         //fogData.Active = new bool[rows, cols];
@@ -50,7 +56,15 @@ public class FogManager : MonoBehaviour
         //for (int row = 0; row < rows; row++)
         //    for (int col = 0; col < cols; col++)
         //        fogData.Active[row, col] = true;
+        int trues = 0;
+        int falses = 0;
+        for (int row = 0; row < fogData.Rows; row++)
+            for (int col = 0; col < fogData.Cols; col++)
+                if (fogData.Active[row, col]) trues++; else falses++;
 
+        Debug.Log($"Activas: {trues} Inactivas: {falses}");
+        Debug.Log($"MinX: {fogData.MinX} MinY: {fogData.MinY} Separation: {fogData.Separation}");
+        int instanciadas = 0;
         for (int row = 0; row < fogData.Rows; row++)
         {
             for (int col = 0; col < fogData.Cols; col++)
@@ -62,8 +76,10 @@ public class FogManager : MonoBehaviour
 
                 GameObject fog = Instantiate(fogPrefab, new Vector3(x, y, 0f), Quaternion.identity, transform);
                 fog.transform.localScale = new Vector3(fogScale, fogScale, 1f);
+                instanciadas++; 
             }
         }
+        Debug.Log($"Instanciadas: {instanciadas}");
     }
 
     private void Awake()

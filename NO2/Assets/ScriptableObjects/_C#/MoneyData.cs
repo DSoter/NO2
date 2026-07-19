@@ -15,7 +15,7 @@ public class MoneyData : ScriptableObject
         {
             money = Mathf.Clamp(value, 0, maxAmount);
             OnMoneyChanged?.Invoke();
-            Debug.Log(money);
+            
         }
     }
 

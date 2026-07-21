@@ -12,8 +12,8 @@ public class CheckpointManager : MonoBehaviour
     private string nextScene;
     private bool hasToSpawnPlayer;
     private bool hasToSpawnPlayerAfterDeath;
+    private TilemapToScriptable tilemapToScriptable;
 
-    
     private Transform playerReference;
 
     private Vector2 enterGateDirection;
@@ -65,6 +65,13 @@ public class CheckpointManager : MonoBehaviour
     {
         get { return playerReference; }
         set { playerReference = value; }
+    }
+    
+
+    public TilemapToScriptable TilemapToScriptable
+    {
+        get { return tilemapToScriptable; }
+        set { tilemapToScriptable = value; }
     }
     public Vector2 ExitGateDirection
     {

@@ -53,7 +53,6 @@ public class ChangeFlowersManager : MonoBehaviour
 
     private void Awake()
     {
-        
         animatorUp = upCircunference.GetComponent<Animator>();
         animatorDown = downCircunference.GetComponent <Animator>();
         animatorMiddle = middleCircunference.GetComponent<Animator>();

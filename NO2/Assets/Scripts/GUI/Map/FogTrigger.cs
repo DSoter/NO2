@@ -4,6 +4,8 @@ using UnityEngine;
 public class FogTrigger : MonoBehaviour
 {
     private FogData fogData;
+    private SceneMapData sceneMapData;
+    [SerializeField] private TilemapToScriptable tilemapToScriptable;
     [SerializeField] private GameObject fogImage;
     [SerializeField] private GameObject fogCollider;
 
@@ -11,6 +13,8 @@ public class FogTrigger : MonoBehaviour
     private void Awake()
     {
         fogData = GetComponentInParent<FogManager>().FogData;
+        sceneMapData = GetComponentInParent<FogManager>().SceneMapData;
+        tilemapToScriptable = GetComponentInParent<FogManager>().TilemapToScriptable;
     }
     public void OnChildTriggerEnter2D(Collider2D collision)
     {
@@ -20,6 +24,8 @@ public class FogTrigger : MonoBehaviour
             Vector2Int gridPos = fogData.WorldToGrid(transform.position);
             Debug.Log("Niebla cruzada");
             fogData.SetActive(gridPos, false);
+
+            RevealMapCells();
             StartCoroutine(ShrinkAndDestroy());
 
         }
@@ -39,5 +45,47 @@ public class FogTrigger : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+    private void RevealMapCells()
+    {
+        if (sceneMapData?.IsVisibleMatrix == null)
+        {
+            Debug.Log("Matriz de visibilidad nula");
+            return;
+        }
+            
+
+        int rows = sceneMapData.IsVisibleMatrix.GetLength(0);
+        int cols = sceneMapData.IsVisibleMatrix.GetLength(1);
+
+        float radioMundo = fogData.Separation;
+        int radioEnCeldas = Mathf.CeilToInt(radioMundo);
+        Vector2Int center = tilemapToScriptable.WorldToGrid(transform.position);
+
+        for (int r = -radioEnCeldas; r <= radioEnCeldas; r++)
+        {
+            for (int c = -radioEnCeldas; c <= radioEnCeldas; c++)
+            {
+                int mapRow = center.y + r;
+                int mapCol = center.x + c;
+
+                if (mapRow < 0 || mapRow >= rows || mapCol < 0 || mapCol >= cols)
+                    continue;
+
+                Vector3 cellWorld = tilemapToScriptable.GridToWorld(new Vector2Int(mapCol, mapRow));
+                if (Vector2.Distance(transform.position, cellWorld) > radioMundo)
+                    continue;
+
+                if(sceneMapData.fogCoverCount != null)
+                {
+                    sceneMapData.FogCoverCount[mapRow, mapCol] =
+                    Mathf.Max(0, sceneMapData.FogCoverCount[mapRow, mapCol] - 1);
+
+                    if (sceneMapData.FogCoverCount[mapRow, mapCol] == 0)
+                        sceneMapData.IsVisibleMatrix[mapRow, mapCol] = true;
+                }
+                
+            }
+        }
     }
 }

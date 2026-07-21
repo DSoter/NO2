@@ -64,6 +64,7 @@ public class SceneController : MonoBehaviour
     void Start()
     {
 
+
         checkpoints = new List<Transform>();
         GameObject[] arrayAux = GameObject.FindGameObjectsWithTag("SpawnPoint");
         List<SpawnId> list = new List<SpawnId>();
@@ -81,7 +82,10 @@ public class SceneController : MonoBehaviour
         }
         currentSpawnPointId = checkpoints.IndexOf(currentSpawnPoint);
         if (currentSpawnPointId < 0 || currentSpawnPointId>checkpoints.Count) { currentSpawnPointId = checkpoints.IndexOf(currentSpawnPoint); }
+
         _checkpointManager = GameManager.Instance.GetComponent<CheckpointManager>();
+
+        _checkpointManager.TilemapToScriptable = gameObject.GetComponent<TilemapToScriptable>();
 
 
         if (_checkpointManager.HasToSpawnPlayer)

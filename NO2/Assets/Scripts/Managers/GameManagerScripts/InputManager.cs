@@ -259,8 +259,6 @@ public class InputManager : MonoBehaviour
         _goLeft = InputActionReference.Create(UIMap.FindAction("GoLeft"));
         UIMap.Enable();
         playerMap.Enable();
-        Debug.Log($"Player map enabled: {playerMap.enabled}");
-        Debug.Log($"UI map enabled: {UIMap.enabled}");
 
         EnableActions();
 

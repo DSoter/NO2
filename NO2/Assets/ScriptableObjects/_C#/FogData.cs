@@ -75,9 +75,7 @@ public class FogData : ScriptableObject
 
     public bool Load()
     {
-        Debug.Log($"Buscando key: {SaveKey}");
         string saved = PlayerPrefs.GetString(SaveKey, "");
-        Debug.Log($"Valor encontrado: {saved}");
 
 
         if (string.IsNullOrEmpty(saved)) return false;
@@ -94,12 +92,12 @@ public class FogData : ScriptableObject
         return true;
     }
 
-    [ContextMenu("Reset")]
+    
     public void Reset()
     {
-        Active = new bool[rows, cols];
-        for (int row = 0; row < rows; row++)
-            for (int col = 0; col < cols; col++)
+        Active = new bool[Rows, Cols];
+        for (int row = 0; row < Rows; row++)
+            for (int col = 0; col < Cols; col++)
                 Active[row, col] = true;
         Save();
     }

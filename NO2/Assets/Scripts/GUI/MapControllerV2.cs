@@ -1,3 +1,4 @@
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -9,7 +10,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     [Header("Referencias")]
     [SerializeField] private SceneMapData mapData;
     [SerializeField] private RawImage mapImage;      // capa del mapa
-    //[SerializeField] private RawImage fogImage;      // capa de niebla
+    [SerializeField] private RawImage fogImage;      // capa de niebla
     [SerializeField] private RectTransform mapContainer; // el rect que se mueve y escala
 
     [Header("Iconos")]
@@ -32,8 +33,13 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     [SerializeField] private float inertiaDeceleration = 5f;
     [SerializeField] private int pixelsPerTile = 16;
 
+    [Header("Jugador")]
+    [SerializeField] private Image playerIcon;
+    [SerializeField] private Sprite playerSprite;
+    [SerializeField] private TilemapToScriptable tilemapToScriptable;
+
     private Texture2D _mapTexture;
-    //private Texture2D _fogTexture;
+    private Texture2D _fogTexture;
     private float _targetScale = 1f;
     private Vector3 _velocity;
     private bool _isDragging;
@@ -45,7 +51,50 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         //GenerateFogTexture();
         _targetScale = mapContainer.localScale.x;
     }
+    private void OnEnable()
+    {
+        UpdatePlayerIcon();
+    }
 
+    public void UpdatePlayerIcon()
+    {
+
+        if (playerIcon == null || playerSprite == null) return;
+
+        CheckpointManager cm = GameManager.Instance.GetComponent<CheckpointManager>();
+        Transform playerTransform = cm.PlayerReference;
+        TilemapToScriptable tilemapToScriptable = cm.TilemapToScriptable;
+
+        if (playerTransform == null || tilemapToScriptable == null) return;
+
+
+        playerIcon.sprite = playerSprite;
+        playerIcon.gameObject.SetActive(true);
+
+        // Convertir posición mundo a celda del mapa
+        Vector2Int gridPos = tilemapToScriptable.WorldToGrid(playerTransform.position);
+
+        int rows = mapData.MapMatrix.GetLength(0);
+        int cols = mapData.MapMatrix.GetLength(1);
+
+        int texWidth = cols * pixelsPerTile;
+        int texHeight = rows * pixelsPerTile;
+
+        // Posición en píxeles dentro de la textura
+        float pixelX = gridPos.x * pixelsPerTile + pixelsPerTile / 2f;
+        float pixelY = gridPos.y * pixelsPerTile + pixelsPerTile / 2f;
+
+        // Convertir a posición normalizada (0-1)
+        float normX = pixelX / texWidth;
+        float normY = pixelY / texHeight;
+
+        // Convertir a posición local dentro del mapContainer
+        RectTransform mapRect = mapImage.rectTransform;
+        float localX = (normX - 0.5f) * mapRect.rect.width;
+        float localY = (normY - 0.5f) * mapRect.rect.height;
+
+        playerIcon.rectTransform.localPosition = new Vector3(localX, localY, 0f);
+    }
     public void GenerateMapTexture()
     {
         
@@ -85,42 +134,51 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         mapImage.texture = _mapTexture;
     }
 
-    //public void UpdateFogTexture()
-    //{
-    //    bool[,] visible = mapData.IsVisibleMatrix;
-    //    if (visible == null || _fogTexture == null) return;
+    public void UpdateFogTexture()
+    {
+        bool[,] visible = mapData.IsVisibleMatrix;
+        if (visible == null || _fogTexture == null) return;
 
-    //    int rows = visible.GetLength(0);
-    //    int cols = visible.GetLength(1);
+        int rows = visible.GetLength(0);
+        int cols = visible.GetLength(1);
 
-    //    for (int row = 0; row < rows; row++)
-    //    {
-    //        for (int col = 0; col < cols; col++)
-    //        {
-    //            Color fogColor = visible[row, col] ? Color.clear : Color.black;
-    //            FillTile(_fogTexture, col, rows - 1 - row, fogColor);
-    //        }
-    //    }
 
-    //    _fogTexture.Apply();
-    //}
+        int ciertas= 0;
+        int falsas = 0;
+        for (int row = 0; row < rows; row++)
+        {
+            for (int col = 0; col < cols; col++)
+            {
+                if (visible[row, col]) ciertas++; else falsas++;
+                Color fogColor = visible[row, col] ? Color.clear : Color.black;
+                FillTile(_fogTexture, col, row, fogColor);
+            }
+        }
+        Debug.Log($"Visibles: {ciertas} No visibles: {falsas}");
 
-    //private void GenerateFogTexture()
-    //{
-    //    bool[,] visible = mapData.IsVisibleMatrix;
-    //    if (visible == null) return;
+        _fogTexture.Apply();
+    }
 
-    //    int rows = visible.GetLength(0);
-    //    int cols = visible.GetLength(1);
-    //    int texWidth = cols * pixelsPerTile;
-    //    int texHeight = rows * pixelsPerTile;
+    private void GenerateFogTexture()
+    {
+        bool[,] visible = mapData.IsVisibleMatrix;
+        if (visible == null)
+        {
+            Debug.Log("IsVisibleMatrix es null");
+            return;
+        }
 
-    //    _fogTexture = new Texture2D(texWidth, texHeight, TextureFormat.RGBA32, false);
-    //    _fogTexture.filterMode = FilterMode.Point;
+        int rows = visible.GetLength(0);
+        int cols = visible.GetLength(1);
+        int texWidth = cols * pixelsPerTile;
+        int texHeight = rows * pixelsPerTile;
 
-    //    UpdateFogTexture();
-    //    fogImage.texture = _fogTexture;
-    //}
+        _fogTexture = new Texture2D(texWidth, texHeight, TextureFormat.RGBA32, false);
+        _fogTexture.filterMode = FilterMode.Point;
+
+        UpdateFogTexture();
+        fogImage.texture = _fogTexture;
+    }
 
     private void FillTile(Texture2D tex, int col, int row, Color color)
     {

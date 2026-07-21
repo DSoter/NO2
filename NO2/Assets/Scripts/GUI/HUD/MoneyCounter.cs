@@ -28,7 +28,7 @@ public class MoneyCounter : MonoBehaviour
     private void UpdateCurrentMoney()
     {
         int numberCoins = _moneyData.Money;
-        Debug.Log(_moneyData.Money);
+
         //switch (numberCoins)
         //{
         //    case < 10:

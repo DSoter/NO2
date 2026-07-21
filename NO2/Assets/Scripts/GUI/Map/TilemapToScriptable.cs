@@ -17,7 +17,7 @@ public class TilemapToScriptable : MonoBehaviour
     private int widthWalls;
     private int heightWalls;
 
-    private void Start()
+    private void Awake()
     {
         InitializeMap();
     }
@@ -30,11 +30,25 @@ public class TilemapToScriptable : MonoBehaviour
         AddCampfiresToTileMap();
         AddFlowersToTileMap();
         AddNpcsToTileMap();
+        sceneMapData.SaveMapOnly();
+    }
+
+    [ContextMenu("SaveMap")]
+    public void SaveMap()
+    {
+        InitializeMap();
+        sceneMapData.Save();
+    }
+    [ContextMenu("Reset map")]
+    public void ResetMap()
+    {
+        sceneMapData.Reset();
     }
         
 
     public Vector2Int WorldToGrid(Vector3 worldPosition)
     {
+
         Vector3Int tilemapCell = wallsTileMap.WorldToCell(worldPosition);
         boundsWalls = wallsTileMap.cellBounds;
 
@@ -42,6 +56,13 @@ public class TilemapToScriptable : MonoBehaviour
         int row = tilemapCell.y - boundsWalls.yMin;
 
         return new Vector2Int(col, row);
+    }
+
+    public Vector3 GridToWorld(Vector2Int gridPos)
+    {
+        int tilemapX = boundsWalls.xMin + gridPos.x;
+        int tilemapY = boundsWalls.yMin + gridPos.y;
+        return wallsTileMap.CellToWorld(new Vector3Int(tilemapX, tilemapY, 0));
     }
 
     public void AddFlowersToTileMap()
@@ -88,8 +109,9 @@ public class TilemapToScriptable : MonoBehaviour
         heightWalls = boundsWalls.size.y;
         Debug.Log($"Floor bounds: xMin={boundsWalls.xMin} yMin={boundsWalls.yMin} width={widthWalls} height={heightWalls}");
 
+        sceneMapData.Load();
         sceneMapData.MapMatrix = new SceneMapData.MapTile[heightWalls, widthWalls];
-
+        int numberOfFloors = 0;
         for (int row = 0; row < heightWalls; row++)
         {
             for (int col = 0; col < widthWalls; col++)
@@ -99,9 +121,11 @@ public class TilemapToScriptable : MonoBehaviour
                 if(floorTileMap.HasTile(new Vector3Int(tilemapX, tilemapY, 0)))
                 {
                     sceneMapData.MapMatrix[row, col] = SceneMapData.MapTile.Floor;
+                    numberOfFloors++;
                 }                 
             }
         }
+        Debug.Log($"Number of floors {numberOfFloors}");
     }
     [ContextMenu("Load Walls")]
     public void LoadWallsTilemap()
@@ -117,6 +141,7 @@ public class TilemapToScriptable : MonoBehaviour
         heightWalls = boundsWalls.size.y;
         Debug.Log($"Walls bounds: xMin={boundsWalls.xMin} yMin={boundsWalls.yMin} width={widthWalls} height={heightWalls}");
 
+        int numberOfWalls = 0;
 
         for (int row = 0; row < heightWalls; row++)
         {
@@ -127,9 +152,11 @@ public class TilemapToScriptable : MonoBehaviour
                 if (wallsTileMap.HasTile(new Vector3Int(tilemapX, tilemapY, 0)))
                 {
                     sceneMapData.MapMatrix[row, col] = SceneMapData.MapTile.Wall;
+                    numberOfWalls++;
                 }
             }
         }
+        Debug.Log($"Number of Walls {numberOfWalls}");
     }
 
 }

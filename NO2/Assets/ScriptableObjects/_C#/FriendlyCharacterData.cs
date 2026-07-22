@@ -4,6 +4,7 @@ using UnityEngine;
 public class FriendlyCharacterData : ScriptableObject
 {
     [SerializeField] private Sprite characterPortrait;
+    [SerializeField] private string characterName;
     [SerializeField] private  ColectionOfDialogs characterDialogs;
 
     public ColectionOfDialogs CharacterDialogs { 
@@ -14,5 +15,10 @@ public class FriendlyCharacterData : ScriptableObject
     {
         get { return characterPortrait; }
         set { characterPortrait = value; }
+    }
+    public string CharacterName
+    {
+        get { return characterName; }
+        set { characterName = value; }
     }
 }

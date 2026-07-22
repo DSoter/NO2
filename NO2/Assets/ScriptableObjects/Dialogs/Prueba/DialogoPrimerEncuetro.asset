@@ -15,20 +15,20 @@ MonoBehaviour:
   listOfTexts:
   - lines:
     - conditionKey: 
-      text: Hola, encantado de verte
+      text: Hola, encantado de /verte/
     - conditionKey: 
-      text: Soy rigoberto, un placer
+      text: Soy #rigoberto#, un placer
     - conditionKey: 
       text: Soy un explorador y me dedico a llegar a sitios exoticos
     - conditionKey: 
-      text: "prueba para ver si las palabras que saltan de una linea a otra se ven
-        bien de primeras o si pegan un salto mientras se est\xE1n generando rompiendo
+      text: "*prueba* para ver si las palabras que saltan de una linea a otra se
+        ven bien de primeras o si pegan un salto mientras se est\xE1n generando rompiendo
         la inmersion del jugador. Efectivamente, que duro, se podr\xEDa cambiar la
         transparencia de las letras en vez de colocarlas en tiempo real para q eso
         no pase."
   - lines:
     - conditionKey: 
-      text: Estoy buscando flores raras
+      text: Estoy buscando _flores_ raras
     - conditionKey: 
       text: Te permiten obtener poderes de la naturaleza
     - conditionKey: 
@@ -36,7 +36,7 @@ MonoBehaviour:
   repetitionTexts:
   - lines:
     - conditionKey: anyFlowerUnlockedAndTheoFirstDialogFinished
-      text: Buena suerte en tu viaje
+      text: '#Buena _suerte_# en tu $viaje$.'
     - conditionKey: anyFlowerUnlockedAndNotTheoFirstDialogFinished
       text: OSTIAS TO GUAPO
     - conditionKey: noneFlowerUnlocked

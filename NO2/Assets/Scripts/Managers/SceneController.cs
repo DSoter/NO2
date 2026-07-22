@@ -111,8 +111,6 @@ public class SceneController : MonoBehaviour
     {
         ResetPotionCooldown();
 
-        Debug.Log($"ExitGateDirection: {_checkpointManager.ExitGateDirection}");
-        Debug.Log($"IdSpawn: {_checkpointManager.IdSpawn}");
         if (_checkpointManager.IdSpawn > 0)
         {
             currentSpawnPointId = _checkpointManager.IdSpawn; 

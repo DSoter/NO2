@@ -28,6 +28,11 @@ public class CharacterInteractable : Interactable
         get { return dialogIsRecentlyOpen; }
         set { dialogIsRecentlyOpen = value; }
     }
+    public FriendlyCharacterData CharacterData
+    {
+        get { return characterData; }
+        set { characterData = value; }
+    }
 
     private Dictionary<string, Func<bool>> conditions;
         

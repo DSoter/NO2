@@ -5911,7 +5911,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBar
   _playerData: {fileID: 11400000, guid: 707aa1a40a1bb064193fd4f6f25fcc6a, type: 2}
-  _updateSpeed: 5
+  _updateSpeed: 15
   _snapDifference: 0.01
 --- !u!1 &4660940900698418692
 GameObject:

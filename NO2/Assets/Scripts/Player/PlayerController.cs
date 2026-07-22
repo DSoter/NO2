@@ -345,7 +345,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnStrongAttackPerformed()
     {
-        if (canCharge)
+        if (canCharge && !_isPause)
         {
             _state = PlayerState.Charging;
         }

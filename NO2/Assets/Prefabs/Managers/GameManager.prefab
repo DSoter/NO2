@@ -53,8 +53,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
   musicSource: {fileID: 1075975825043648962}
-  _sfxPoolSize: 10
-  _sfxMixerGroup: {fileID: -7520132942090517634, guid: f1bfdd064f4bc6b4aa0edfba122e967a, type: 2}
+  _sfxPrefab: {fileID: 1008806716475539513, guid: 51e0b0031ac11c148aece84bd8795366, type: 3}
+  _defaultCapacity: 10
+  _maxSize: 20
 --- !u!114 &6034420583255633428
 MonoBehaviour:
   m_ObjectHideFlags: 0

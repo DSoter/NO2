@@ -1,34 +1,36 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.Audio;
+using UnityEngine.Pool;
 
 public class AudioManager : MonoBehaviour
 {
-    private bool isPaused;
+    [Header("Music")]
     [SerializeField] private AudioSource musicSource;
 
+    [Space(5)]
     [Header("SFX Pool")]
-    [SerializeField] private int _sfxPoolSize = 10;
-    [SerializeField] private AudioMixerGroup _sfxMixerGroup;
+    [SerializeField] private ObjectPool<AudioSource> _sfxPool;
+    [SerializeField] private AudioSource _sfxPrefab;
+    [SerializeField] private int _defaultCapacity = 10;
+    [SerializeField] private int _maxSize = 20;
 
-    private AudioSource[] _sfxSources;
-    private int _nextSfxIndex = 0;
+    private bool isPaused;
 
     private void Awake()
     {
-        _sfxSources = new AudioSource[_sfxPoolSize];
-
-        for (int i = 0; i < _sfxPoolSize; i++)
-        {
-            GameObject sfxObject = new GameObject($"SFX_Source_{i}");
-            sfxObject.transform.SetParent(transform);
-
-            AudioSource source = sfxObject.AddComponent<AudioSource>();
-            source.playOnAwake = false;
-            source.outputAudioMixerGroup = _sfxMixerGroup;
-
-            _sfxSources[i] = source;
-        }
+        _sfxPool = new ObjectPool<AudioSource>(
+            createFunc: () => Instantiate(_sfxPrefab),
+            actionOnGet: (source) => source.gameObject.SetActive(true),
+            actionOnRelease: (source) => source.gameObject.SetActive(false),
+            actionOnDestroy: (source) => Destroy(source.gameObject),
+            defaultCapacity: _defaultCapacity,
+            maxSize: _maxSize
+            );
     }
+
+    // ----------------------------------------------------
+    // MUSIC
+    // ----------------------------------------------------
 
     public void PlayMusic(AudioClip clip)
     {
@@ -62,14 +64,36 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlaySound(AudioClip clip, float volume = 1, float pitchVariation = 0)
+    // ----------------------------------------------------
+    // SFX
+    // ----------------------------------------------------
+
+    public void PlaySound(AudioClip clip, float volume = 1, float pitchVariation = 0, Vector3? position = null)
     {
-        AudioSource source = _sfxSources[_nextSfxIndex];
-        _nextSfxIndex = (_nextSfxIndex + 1) % _sfxSources.Length;
+        AudioSource source = _sfxPool.Get();
+
+        if (position is not null)
+        {
+            source.spatialBlend = 1; // sonido 3D
+            source.transform.position = position.Value;
+        }
+        else
+        {
+            source.spatialBlend = 0; // sonido 2D
+            source.transform.position = Vector3.zero;
+        }
 
         source.clip = clip;
         source.volume = volume;
         source.pitch = 1 + Random.Range(-pitchVariation, pitchVariation);
         source.Play();
+
+        StartCoroutine(ReleaseWhenFinished(source, clip.length));
+    }
+
+    private IEnumerator ReleaseWhenFinished(AudioSource source, float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        _sfxPool.Release(source);
     }
 }

@@ -23,6 +23,9 @@ public class CheckpointInteractuable : Interactable
         SceneController sc = FindAnyObjectByType<SceneController>();
         if (cm != null)
         {
+            cm.ResetAllRestRespawns();
+
+
             PlayerController player = cm.PlayerReference.gameObject.GetComponent<PlayerController>();
             if (player.GetState() == PlayerController.PlayerState.Rest)
             {

@@ -48,13 +48,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6182571106600752587, guid: 03e63f18a1ea35f4383a3e8fa7d78306, type: 3}
+      propertyPath: guid
+      value: bb39d3a3-4586-4b9d-a952-c7c17193f759
+      objectReference: {fileID: 0}
     - target: {fileID: 6434108626781780358, guid: 03e63f18a1ea35f4383a3e8fa7d78306, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -6034346704468134786, guid: 4185a569edaf03b448686e2f614ff549, type: 3}
     - target: {fileID: 7712892219432782146, guid: 03e63f18a1ea35f4383a3e8fa7d78306, type: 3}
       propertyPath: m_Name
-      value: CrateDestructible2
+      value: Crate2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -5217,6 +5217,7 @@ MonoBehaviour:
   npcSprite: {fileID: -417260794, guid: 2749dd64e4c117e42bd766b6dc8f340b, type: 3}
   flowerSprite: {fileID: -2082329878, guid: 77d60040a28ac3d4492d9d5cb2672195, type: 3}
   campfireSprite: {fileID: 794380995, guid: 77d60040a28ac3d4492d9d5cb2672195, type: 3}
+  gateSprite: {fileID: -935713919, guid: 2749dd64e4c117e42bd766b6dc8f340b, type: 3}
   iconSize: 16
   iconTileSize: 3
   floorColor: {r: 0.9996939, g: 1, b: 0, a: 1}

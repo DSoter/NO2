@@ -1,6 +1,7 @@
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static SceneMapData;
 
@@ -17,6 +18,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     [SerializeField] private Sprite npcSprite;
     [SerializeField] private Sprite flowerSprite;
     [SerializeField] private Sprite campfireSprite;
+    [SerializeField] private Sprite gateSprite;
     [SerializeField] private int iconSize = 16;
     [SerializeField] private int iconTileSize = 3; 
 
@@ -44,6 +46,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     private Vector3 _velocity;
     private bool _isDragging;
     private bool _isHovered;
+    private string sceneControllerTag = "SceneController";
 
     private void Start()
     {
@@ -97,10 +100,27 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     }
     public void GenerateMapTexture()
     {
+        UpdateMapData();
         
 
         MapTile[,] matrix = mapData.MapMatrix;
         if (matrix == null) return;
+
+
+        //Se deberá guardar una textura por escena
+        //string path = GetMapTexturePath();
+
+        //if (System.IO.File.Exists(path))
+        //{
+        //    // Cargar desde disco
+        //    byte[] bytes = System.IO.File.ReadAllBytes(path);
+        //    _mapTexture = new Texture2D(2, 2, TextureFormat.RGBA32, false);
+        //    _mapTexture.filterMode = FilterMode.Point;
+        //    _mapTexture.LoadImage(bytes);
+        //    mapImage.texture = _mapTexture;
+        //    return;
+        //}
+
 
         Debug.Log($"Rows: {matrix.GetLength(0)} Cols: {matrix.GetLength(1)}");
         int rows = matrix.GetLength(0);
@@ -133,6 +153,13 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         _mapTexture.Apply();
         mapImage.texture = _mapTexture;
     }
+    private string GetMapTexturePath()
+    {
+        return System.IO.Path.Combine(
+            Application.persistentDataPath,
+            mapData.name + "_mapTexture.png"
+        );
+    }
 
     public void UpdateFogTexture()
     {
@@ -158,7 +185,29 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
 
         _fogTexture.Apply();
     }
+    private void UpdateMapData()
+    {
 
+        Scene additiveScene = gameObject.scene; // la escena donde vive este script
+
+        for (int i = 0; i < SceneManager.sceneCount; i++)
+        {
+            Scene scene = SceneManager.GetSceneAt(i);
+            if (scene == additiveScene) continue; // saltamos la aditiva
+
+            foreach (GameObject root in scene.GetRootGameObjects())
+            {
+                TilemapToScriptable tts = root.GetComponentInChildren<TilemapToScriptable>();
+                if (tts != null && tts.CompareTag(sceneControllerTag))
+                {
+                    //Debug.Log("Se va a actualizar el mapa");
+                    //tts.SaveMap();
+                    mapData = tts.SceneMapData;
+                }
+            }
+        }
+
+}
     private void GenerateFogTexture()
     {
         bool[,] visible = mapData.IsVisibleMatrix;
@@ -240,6 +289,8 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
             case SceneMapData.MapTile.Npc: return npcSprite;
             case SceneMapData.MapTile.Flower: return flowerSprite;
             case SceneMapData.MapTile.Campfire: return campfireSprite;
+            case SceneMapData.MapTile.Gate: return gateSprite;
+
             default: return null;
         }
     }

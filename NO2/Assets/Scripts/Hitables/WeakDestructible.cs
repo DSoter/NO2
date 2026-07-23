@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 
+
+
 public class WeakDestructible : MonoBehaviour, IHitable
 {
     [Header("Content")]
@@ -9,11 +11,13 @@ public class WeakDestructible : MonoBehaviour, IHitable
     [SerializeField] private float _minForce = 2f;
     [SerializeField] private float _maxForce = 6f;
 
+
     [Space(5)]
     [Header("Audio")]
     [SerializeField] private AudioClip _onDestructClip;
     [SerializeField] [Range(0,1)] private float _volume = 1f;
     [SerializeField] private float _pitchVariation = 0.3f;
+    
 
     public void Hit(Vector2 direction, float damage, AttackStrength strength)
     {
@@ -21,6 +25,13 @@ public class WeakDestructible : MonoBehaviour, IHitable
 
         GameManager.Instance.audioManager.PlaySound(_onDestructClip, _volume, _pitchVariation);
         SpawnContent(direction);
+
+        PersistentRespawnObject pro = gameObject.GetComponent<PersistentRespawnObject>();
+        if (pro != null)
+        {
+            gameObject.GetComponent<PersistentRespawnObject>().RegisterDestroy();
+        }
+        
 
         gameObject.SetActive(false);
     }
@@ -53,4 +64,6 @@ public class WeakDestructible : MonoBehaviour, IHitable
 
         return noisyDirection * UnityEngine.Random.Range(minForce, maxForce);
     }
+
+    
 }

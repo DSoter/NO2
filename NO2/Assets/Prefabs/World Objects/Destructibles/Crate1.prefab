@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6345491074485053970}
   - component: {fileID: 2381791839820122145}
   - component: {fileID: 4105346210740380887}
+  - component: {fileID: 6182571106600752587}
   m_Layer: 10
   m_Name: Crate1
   m_TagString: Untagged
@@ -175,3 +176,18 @@ MonoBehaviour:
   _onDestructClip: {fileID: 8300000, guid: e29d7c8f7c1ef694286939dafed3689c, type: 3}
   _volume: 1
   _pitchVariation: 0.3
+--- !u!114 &6182571106600752587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7712892219432782146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ecb66432b0e33468960a743ba61dd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PersistentRespawnObject
+  respawnAfterRest: 1
+  neverRespawn: 0
+  guid: 008f5dc8-b98c-4d8f-8be9-970c53a7c74a

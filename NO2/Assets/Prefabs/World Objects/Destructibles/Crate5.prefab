@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &9120849518386998974
+--- !u!1001 &2221513871207071926
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1194639179073545131, guid: 03e63f18a1ea35f4383a3e8fa7d78306, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 10.794348
       objectReference: {fileID: 0}
     - target: {fileID: 1194639179073545131, guid: 03e63f18a1ea35f4383a3e8fa7d78306, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -7.2597823
       objectReference: {fileID: 0}
     - target: {fileID: 1194639179073545131, guid: 03e63f18a1ea35f4383a3e8fa7d78306, type: 3}
       propertyPath: m_LocalPosition.z
@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6182571106600752587, guid: 03e63f18a1ea35f4383a3e8fa7d78306, type: 3}
       propertyPath: neverRespawn
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6182571106600752587, guid: 03e63f18a1ea35f4383a3e8fa7d78306, type: 3}
       propertyPath: respawnAfterRest
@@ -66,29 +66,30 @@ PrefabInstance:
       objectReference: {fileID: -1163504838602118676, guid: 4185a569edaf03b448686e2f614ff549, type: 3}
     - target: {fileID: 7712892219432782146, guid: 03e63f18a1ea35f4383a3e8fa7d78306, type: 3}
       propertyPath: m_Name
-      value: Crate3
+      value: Crate3 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
+    - {fileID: 6182571106600752587, guid: 03e63f18a1ea35f4383a3e8fa7d78306, type: 3}
     - {fileID: 6345491074485053970, guid: 03e63f18a1ea35f4383a3e8fa7d78306, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7712892219432782146, guid: 03e63f18a1ea35f4383a3e8fa7d78306, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 9075786872335700068}
+      addedObject: {fileID: 4625686599903825447}
   m_SourcePrefab: {fileID: 100100000, guid: 03e63f18a1ea35f4383a3e8fa7d78306, type: 3}
---- !u!1 &1556687239404431356 stripped
+--- !u!1 &8493179232632752628 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7712892219432782146, guid: 03e63f18a1ea35f4383a3e8fa7d78306, type: 3}
-  m_PrefabInstance: {fileID: 9120849518386998974}
+  m_PrefabInstance: {fileID: 2221513871207071926}
   m_PrefabAsset: {fileID: 0}
---- !u!60 &9075786872335700068
+--- !u!60 &4625686599903825447
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1556687239404431356}
+  m_GameObject: {fileID: 8493179232632752628}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1

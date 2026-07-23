@@ -17,9 +17,14 @@ public class TilemapToScriptable : MonoBehaviour
     private int widthWalls;
     private int heightWalls;
 
+    public SceneMapData SceneMapData
+    {
+        get { return sceneMapData; }
+    }
+
     private void Awake()
     {
-        InitializeMap();
+        //InitializeMap();
     }
 
     [ContextMenu("InitializeMap")]
@@ -30,6 +35,8 @@ public class TilemapToScriptable : MonoBehaviour
         AddCampfiresToTileMap();
         AddFlowersToTileMap();
         AddNpcsToTileMap();
+        AddGatesToTileMap();
+        
         sceneMapData.SaveMapOnly();
     }
 
@@ -93,6 +100,16 @@ public class TilemapToScriptable : MonoBehaviour
             Transform t = flower.transform;
             Vector2Int gridPos = WorldToGrid(t.position);
             sceneMapData.MapMatrix[gridPos.y, gridPos.x] = SceneMapData.MapTile.Campfire;
+        }
+    }
+    public void AddGatesToTileMap()
+    {
+        NextSceneTrigguer[] flowers = FindObjectsByType<NextSceneTrigguer>();
+        foreach (NextSceneTrigguer flower in flowers)
+        {
+            Transform t = flower.transform;
+            Vector2Int gridPos = WorldToGrid(t.position);
+            sceneMapData.MapMatrix[gridPos.y, gridPos.x] = SceneMapData.MapTile.Gate;
         }
     }
 

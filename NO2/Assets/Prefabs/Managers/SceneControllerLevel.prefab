@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 5231077451128330398}
   - component: {fileID: 536073209556393770}
   - component: {fileID: 2846324210977533273}
+  - component: {fileID: 2659214008414649289}
   m_Layer: 0
   m_Name: SceneControllerLevel
-  m_TagString: Untagged
+  m_TagString: SceneController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72,6 +73,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TilemapToScriptable
   sceneMapData: {fileID: 0}
+--- !u!114 &2659214008414649289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702480794591735834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52c0d4344f6539d4f92db0ba8e71d996, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RespawnObjectsManager
+  objectsOnScene: {fileID: 0}
 --- !u!1 &8170045265782028333
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,7 +383,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6902873448760933548, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.0000029802
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6902873448760933548, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
       propertyPath: m_AnchoredPosition.y

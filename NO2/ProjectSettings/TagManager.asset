@@ -9,6 +9,7 @@ TagManager:
   - MapCamera
   - MainTileMap
   - WallsTileMap
+  - SceneController
   layers:
   - Default
   - TransparentFX

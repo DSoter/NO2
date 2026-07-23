@@ -10,7 +10,9 @@ public class SceneMapData : ScriptableObject
         Wall,
         Npc,
         Flower,
-        Campfire
+        Campfire,
+        Gate,
+
     }
     private MapTile[,] mapMatrix;
     private bool[,] isVisibleMatrix;
@@ -152,7 +154,6 @@ public class SceneMapData : ScriptableObject
         //    for (int col = 0; col < cols; col++)
         //        FogCoverCount[row, col] = int.Parse(fogValues[i++]);
 
-        Debug.Log("Load completado correctamente");
         return true;
     }
 

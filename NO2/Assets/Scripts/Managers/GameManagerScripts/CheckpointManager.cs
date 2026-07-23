@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -26,6 +28,8 @@ public class CheckpointManager : MonoBehaviour
     private bool managerPaused;
 
     private bool cameraLockedPlayer;
+
+    private Dictionary<string, bool> scenesHasToRespawn = new Dictionary<string, bool>();
 
     public string SceneWhereRespawn
     {
@@ -93,6 +97,12 @@ public class CheckpointManager : MonoBehaviour
     {
         get { return  cameraLockedPlayer; }
         set { cameraLockedPlayer = value; }
+    }
+
+    public Dictionary<string, bool> ScenesHasToRespawn
+    {
+        get { return scenesHasToRespawn; }
+        set {  scenesHasToRespawn = value;}
     }
 
 
@@ -247,13 +257,37 @@ public class CheckpointManager : MonoBehaviour
     }
     private bool ExistsSceneController()
     {
-        sc = FindAnyObjectByType<SceneController>();
+        //sc = FindAnyObjectByType<SceneController>();
+        sc = GameObject.FindGameObjectWithTag("SceneController").GetComponent<SceneController>();
         if (sc == null)
         {
             Debug.LogError("SceneController no encontrado");
             return false;
         }
         return true;
+    }
+
+    public void ResetAllRestRespawns()
+    {
+        Debug.Log(scenesHasToRespawn["PruebaTileMap"]);
+        scenesHasToRespawn["PruebaTileMap"] = true;
+        if (scenesHasToRespawn == null)
+        {
+            scenesHasToRespawn = new Dictionary<string, bool>();
+        }
+
+        List<string> keys = new List<string>(scenesHasToRespawn.Keys);
+        foreach (string name in keys)
+        {
+             scenesHasToRespawn[name] = true;
+
+        }
+        //foreach(string name in scenesHasToRespawn.Keys)
+        //{
+        //    scenesHasToRespawn[name] = true;
+        //}
+        RespawnObjectsManager rom = GameObject.FindGameObjectWithTag("SceneController").GetComponent<RespawnObjectsManager>();
+        rom.UpdateRest();
     }
 
 }

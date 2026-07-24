@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cefcbd99b00b4c14eab78afd4ec1278b, type: 3}
+  m_Name: PruebaGrande
+  m_EditorClassIdentifier: Assembly-CSharp::Badge
+  badgeName: Orcish  Bowmasters
+  achievement: {fileID: 0}
+  description: Prueba Insignia grande
+  icon: {fileID: 21300000, guid: 5015c7bec0af2be47ab9fd19f6707ceb, type: 3}
+  slotsSize: 3
+  effect:
+    m_PersistentCalls:
+      m_Calls: []

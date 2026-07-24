@@ -97,6 +97,11 @@ public class FogManager : MonoBehaviour
                     Vector2Int center = tilemapToScriptable.WorldToGrid(new Vector3(x, y, 0f));
                     float radioMundo = fogScale * fogData.Separation;
                     int radioEnCeldas = Mathf.CeilToInt(radioMundo);
+
+                    if(sceneMapData.IsVisibleMatrix == null)
+                    {
+                        InitializeVisibilityMatrix();
+                    }
                     int mapRows = sceneMapData.IsVisibleMatrix.GetLength(0);
                     int mapCols = sceneMapData.IsVisibleMatrix.GetLength(1);
 

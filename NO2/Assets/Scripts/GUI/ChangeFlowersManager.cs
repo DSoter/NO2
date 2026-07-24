@@ -74,17 +74,6 @@ public class ChangeFlowersManager : MonoBehaviour
         flowers = flowerCollection.allFlowers;
         if (flowers != null)
         {
-            //if (equipedFlower  == null)
-            //{
-            //    equipedFlower = flowers[0];
-            //}
-            //if(!flowerCollection.unlockedFlowers.GetValueOrDefault(equipedFlower)){
-            //    Debug.Log("Error, la flor equipada no está desbloqueada");
-            //}
-            //else
-            //{
-            //    UpdateFlowers(equipedFlower);
-            //}
             if (equipedFlower == null)
             {
                 equipedFlower = flowers[0];
@@ -222,55 +211,6 @@ public class ChangeFlowersManager : MonoBehaviour
         isAnimating= false;
     }
 
-    //private IEnumerator AnimateFlowers(Flower nextCurrentFlower)
-    //{
-    //    isAnimating = true;
-    //    yield return new WaitForSecondsRealtime(0.5f); //medio segundo, 300 frames
-
-    //    currentFlower = nextCurrentFlower;
-    //    currentFlowerImage.sprite = currentFlower.flowerIcon;
-    //    if (!flowerCollection.unlockedFlowers[currentFlower])//si no está desbloqueada 
-    //    {
-    //        currentFlowerImage.color = Color.black;
-    //        descriptionText.text = "Informacion sin descubrir";
-    //        flowerName.text = "Flor ?";
-    //    }
-    //    else
-    //    {
-    //        currentFlowerImage.color = Color.white;
-    //        descriptionText.text = nextCurrentFlower.description;
-    //        flowerName.text = nextCurrentFlower.objectName;
-    //    }
-
-
-    //    upFlower = ObtainNextFlower(currentFlower);
-    //    upFlowerImage.sprite = upFlower.flowerIcon;
-    //    if (!flowerCollection.unlockedFlowers[upFlower])//si no está desbloqueada 
-    //    {
-    //        upFlowerImage.color = Color.black;
-    //    }
-    //    else
-    //    {
-    //        upFlowerImage.color = Color.white;
-    //    }
-
-
-    //    downFlower = ObtainAnteriorFlower(currentFlower);
-    //    downFlowerImage.sprite = downFlower.flowerIcon;
-
-    //    if (!flowerCollection.unlockedFlowers[downFlower])//si no está desbloqueada 
-    //    {
-    //        downFlowerImage.color = Color.black;
-    //    }
-    //    else
-    //    {
-    //        downFlowerImage.color = Color.white;
-    //    }
-
-    //    yield return new WaitForSecondsRealtime(0.5f);
-
-    //    isAnimating = false;
-    //}
 
     private Flower ObtainNextFlower(Flower flower)
     {

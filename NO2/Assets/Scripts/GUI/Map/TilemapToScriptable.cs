@@ -56,6 +56,12 @@ public class TilemapToScriptable : MonoBehaviour
     public Vector2Int WorldToGrid(Vector3 worldPosition)
     {
 
+        if(wallsTileMap == null)
+        {
+            wallsTileMap = GameObject.FindGameObjectWithTag(wallsTileMapTag).GetComponent<Tilemap>();
+            floorTileMap = GameObject.FindGameObjectWithTag(floorTileMapTag).GetComponent<Tilemap>();
+        }
+
         Vector3Int tilemapCell = wallsTileMap.WorldToCell(worldPosition);
         boundsWalls = wallsTileMap.cellBounds;
 
@@ -67,6 +73,11 @@ public class TilemapToScriptable : MonoBehaviour
 
     public Vector3 GridToWorld(Vector2Int gridPos)
     {
+        if (wallsTileMap == null)
+        {
+            wallsTileMap = GameObject.FindGameObjectWithTag(wallsTileMapTag).GetComponent<Tilemap>();
+            floorTileMap = GameObject.FindGameObjectWithTag(floorTileMapTag).GetComponent<Tilemap>();
+        }
         int tilemapX = boundsWalls.xMin + gridPos.x;
         int tilemapY = boundsWalls.yMin + gridPos.y;
         return wallsTileMap.CellToWorld(new Vector3Int(tilemapX, tilemapY, 0));

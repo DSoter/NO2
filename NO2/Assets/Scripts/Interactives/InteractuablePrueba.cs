@@ -7,7 +7,6 @@ public class InteractuablePrueba : Interactable
     public override void Interact()
     {
         if(gameObject is null) { Debug.Log("No se detecta el game Object"); }
-        else { Destroy(gameObject); }
-            
+        else { Destroy(gameObject); } 
     }
 }

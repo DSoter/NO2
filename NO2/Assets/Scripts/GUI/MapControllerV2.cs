@@ -1,3 +1,4 @@
+using System.IO;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -53,10 +54,12 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         GenerateMapTexture();
         //GenerateFogTexture();
         _targetScale = mapContainer.localScale.x;
+
+        UpdatePlayerIcon();
     }
     private void OnEnable()
     {
-        UpdatePlayerIcon();
+        
     }
 
     public void UpdatePlayerIcon()
@@ -101,25 +104,27 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     public void GenerateMapTexture()
     {
         UpdateMapData();
-        
+
+        //Se guarda una textura por escena
+        string path = GetMapTexturePath();
+
+        if (System.IO.File.Exists(path))
+        {
+            // Cargar desde disco
+            byte[] bytes = System.IO.File.ReadAllBytes(path);
+            _mapTexture = new Texture2D(2, 2, TextureFormat.RGBA32, false);
+            _mapTexture.filterMode = FilterMode.Point;
+            _mapTexture.LoadImage(bytes);
+            mapImage.texture = _mapTexture;
+            return;
+        }
+
 
         MapTile[,] matrix = mapData.MapMatrix;
         if (matrix == null) return;
 
 
-        //Se deberá guardar una textura por escena
-        //string path = GetMapTexturePath();
-
-        //if (System.IO.File.Exists(path))
-        //{
-        //    // Cargar desde disco
-        //    byte[] bytes = System.IO.File.ReadAllBytes(path);
-        //    _mapTexture = new Texture2D(2, 2, TextureFormat.RGBA32, false);
-        //    _mapTexture.filterMode = FilterMode.Point;
-        //    _mapTexture.LoadImage(bytes);
-        //    mapImage.texture = _mapTexture;
-        //    return;
-        //}
+        
 
 
         Debug.Log($"Rows: {matrix.GetLength(0)} Cols: {matrix.GetLength(1)}");
@@ -152,6 +157,9 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
 
         _mapTexture.Apply();
         mapImage.texture = _mapTexture;
+
+        System.IO.File.WriteAllBytes(path, _mapTexture.EncodeToPNG());
+        Debug.Log($"Textura guardada en {path}");
     }
     private string GetMapTexturePath()
     {
@@ -159,6 +167,16 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
             Application.persistentDataPath,
             mapData.name + "_mapTexture.png"
         );
+    }
+    [ContextMenu("Clear Map Texture Cache")]
+    public void ClearMapTextureCache()
+    {
+        string path = GetMapTexturePath();
+        if (System.IO.File.Exists(path))
+        {
+            System.IO.File.Delete(path);
+            Debug.Log("Caché de textura eliminada");
+        }
     }
 
     public void UpdateFogTexture()
@@ -201,7 +219,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
                 if (tts != null && tts.CompareTag(sceneControllerTag))
                 {
                     //Debug.Log("Se va a actualizar el mapa");
-                    //tts.SaveMap();
+                    tts.SaveMap();
                     mapData = tts.SceneMapData;
                 }
             }

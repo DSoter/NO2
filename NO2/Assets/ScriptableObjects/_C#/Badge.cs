@@ -4,10 +4,11 @@ using UnityEngine.Events;
 [CreateAssetMenu(fileName = "Badge", menuName = "Scriptable Objects/Badge")]
 public class Badge : ScriptableObject
 {
-    public string objectName;
-    public Logro achievementRelated;
+    public string badgeName;
+    public Achievement achievement;
     public string description;
-    public string size;
+    public Sprite icon;
+    [Range(1, 4)] public int slotsSize = 1;
     public UnityEvent effect;
     
 }

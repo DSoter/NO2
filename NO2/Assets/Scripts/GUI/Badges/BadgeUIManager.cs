@@ -54,15 +54,16 @@ public class BadgeUIManager : MonoBehaviour
 
     public void RefreshUI()
     {
+        foreach (Transform child in equipPanel)
+        {
+            BadgeIcon icon = child.GetComponent<BadgeIcon>();
+            if (icon != null && icon.IsEquipped)
+                Destroy(child.gameObject);
+        }
+
         foreach (BadgeIcon icon in _collectionIcons)
             if (icon != null) Destroy(icon.gameObject);
         _collectionIcons.Clear();
-
-        foreach (BadgeSlot slot in slots)
-        {
-            foreach (Transform child in slot.transform)
-                Destroy(child.gameObject);
-        }
 
         Badge[] equipped = equippedBadges.Slots;
         HashSet<Badge> alreadyPlaced = new HashSet<Badge>();

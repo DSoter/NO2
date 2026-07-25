@@ -52,14 +52,14 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     private void Start()
     {
         GenerateMapTexture();
-        //GenerateFogTexture();
+        
         _targetScale = mapContainer.localScale.x;
 
         UpdatePlayerIcon();
     }
     private void OnEnable()
     {
-        
+        GenerateFogTexture();
     }
 
     public void UpdatePlayerIcon()
@@ -188,18 +188,21 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         int cols = visible.GetLength(1);
 
 
-        int ciertas= 0;
-        int falsas = 0;
+        int trues = 0, falses = 0;
+        for (int row = 0; row < rows; row++)
+            for (int col = 0; col < cols; col++)
+                if (visible[row, col]) trues++; else falses++;
+
+        Debug.Log($"UpdateFogTexture — Visibles: {trues} No visibles: {falses}");
+
         for (int row = 0; row < rows; row++)
         {
             for (int col = 0; col < cols; col++)
             {
-                if (visible[row, col]) ciertas++; else falsas++;
                 Color fogColor = visible[row, col] ? Color.clear : Color.black;
                 FillTile(_fogTexture, col, row, fogColor);
             }
         }
-        Debug.Log($"Visibles: {ciertas} No visibles: {falsas}");
 
         _fogTexture.Apply();
     }
@@ -228,13 +231,19 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
 }
     private void GenerateFogTexture()
     {
+        mapData.Save();
+        if(mapData == null)
+        {
+            Debug.LogError("mapData es null");
+            return;
+        }
         bool[,] visible = mapData.IsVisibleMatrix;
         if (visible == null)
         {
-            Debug.Log("IsVisibleMatrix es null");
+            Debug.LogError("IsVisibleMatrix es null — FogManager no ha inicializado las matrices todavía");
             return;
         }
-
+        Debug.Log($"Rows: {visible.GetLength(0)} Cols: {visible.GetLength(1)}");
         int rows = visible.GetLength(0);
         int cols = visible.GetLength(1);
         int texWidth = cols * pixelsPerTile;

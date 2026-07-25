@@ -43,6 +43,22 @@ public class BadgeCollection : ScriptableObject
         unlockedBadges[badge] = true;
         Save();
     }
+    public void Lock(Badge badge)
+    {
+        if (unlockedBadges == null)
+        {
+            unlockedBadges = new Dictionary<Badge, bool>();
+            foreach (Badge b in allBadges)
+            {
+                unlockedBadges.Add(b, false);
+            }
+        }
+        Debug.Log("Se ha bloqueado la insignia: ");
+        Debug.Log(badge.name);
+        unlockedBadges[badge] = false;
+        Save();
+    }
+
 
     public void Save()
     {

@@ -1,3 +1,4 @@
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI.Table;
 
@@ -151,21 +152,23 @@ public class FogManager : MonoBehaviour
             for (int col = 0; col < cols; col++)
                 sceneMapData.IsVisibleMatrix[row, col] = true;
 
-        float radioMundo = fogScale * fogData.Separation;
-
+        float radioMundo = fogScale;
+        int ciertas =0;
+        int falsas = 0;
+        int radioEnCeldas = Mathf.CeilToInt(radioMundo);
         // Marcar no visibles según nieblas activas
         for (int fogRow = 0; fogRow < fogData.Rows; fogRow++)
         {
             for (int fogCol = 0; fogCol < fogData.Cols; fogCol++)
             {
-                if (!fogData.Active[fogRow, fogCol]) continue;
 
+                if (!fogData.Active[fogRow, fogCol]) continue;
+                ciertas++;
                 float fogX = fogData.MinX + fogCol * fogData.Separation;
                 float fogY = fogData.MinY + fogRow * fogData.Separation;
                 Vector3 fogWorldPos = new Vector3(fogX, fogY, 0f);
 
                 Vector2Int center = tilemapToScriptable.WorldToGrid(fogWorldPos);
-                int radioEnCeldas = Mathf.CeilToInt(radioMundo);
                 int rows2 = sceneMapData.IsVisibleMatrix.GetLength(0);
                 int cols2 = sceneMapData.IsVisibleMatrix.GetLength(1);
 
@@ -184,23 +187,49 @@ public class FogManager : MonoBehaviour
                         {
                             sceneMapData.FogCoverCount[mapRow, mapCol]++;
                             sceneMapData.IsVisibleMatrix[mapRow, mapCol] = false;
+                            falsas++;
+                            ciertas--;
                         }
                     }
                 }
             }
         }
+        int trues2 = 0, falses2 = 0;
+        for (int row = 0; row < sceneMapData.IsVisibleMatrix.GetLength(0); row++)
+            for (int col = 0; col < sceneMapData.IsVisibleMatrix.GetLength(1); col++)
+                if (sceneMapData.IsVisibleMatrix[row, col]) trues2++; else falses2++;
+
+
+        
 
         sceneMapData.Save();
     }
     public void InitializeVisibilityMatrix()
     {
-
-        if (!sceneMapData.Load())
+        bool loaded = sceneMapData.Load();
+        Debug.Log($"SceneMapData.Load() devuelve: {loaded}");
+        if (!loaded)
         {
-            Debug.Log("SceneMapData no cargado, inicializando desde cero");
+            Debug.Log("Inicializando visibilidad desde cero");
+            tilemapToScriptable.InitializeMap();
             InitializeFromScratch();
+            return;
         }
-        //InitializeFromScratch();
+        if (sceneMapData.IsVisibleMatrix == null)
+        {
+            Debug.LogError("IsVisibleMatrix es null tras Load()");
+            InitializeFromScratch();
+            return;
+        }
+
+        int rows = sceneMapData.IsVisibleMatrix.GetLength(0);
+        int cols = sceneMapData.IsVisibleMatrix.GetLength(1);
+        int trues = 0, falses = 0;
+        for (int row = 0; row < rows; row++)
+            for (int col = 0; col < cols; col++)
+                if (sceneMapData.IsVisibleMatrix[row, col]) trues++; else falses++;
+
+        Debug.Log($"Tras Load — Visibles: {trues} No visibles: {falses}");
     }
 
     private void Awake()
@@ -217,5 +246,15 @@ public class FogManager : MonoBehaviour
     private void ResetFog()
     {
         fogData.Reset();
+    }
+    [ContextMenu("Reset And Reinitialize Visibility")]
+    public void ResetAndReinitialize()
+    {
+        sceneMapData.Reset();
+
+        tilemapToScriptable.InitializeMap();
+
+        InitializeFromScratch();
+        Debug.Log("Visibilidad reinicializada");
     }
 }

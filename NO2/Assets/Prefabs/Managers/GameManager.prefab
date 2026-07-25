@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7521091902895558689}
   - component: {fileID: 7038373842693858928}
   - component: {fileID: 8700301992882023543}
+  - component: {fileID: 1189158600535525632}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -136,6 +137,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputManager
   _inputSystemReference: {fileID: -944628639613478452, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}
+--- !u!114 &1189158600535525632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410176089906247750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcd2c4be16ff27440be1cf368a216eec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AchievementManager
+  badgeCollection: {fileID: 11400000, guid: 40b829128fc4ee841bf6273a1be7eefa, type: 2}
 --- !u!1 &516718627763750330
 GameObject:
   m_ObjectHideFlags: 0

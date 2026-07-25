@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Achievement", menuName = "Scriptable Objects/Achievement")]
 public class Achievement : ScriptableObject
 {
-    public string achievementId;
+    public string achievementName;
     [TextArea] public string description;
     public bool isCounter;
     public int targetCount;
@@ -13,9 +13,10 @@ public class Achievement : ScriptableObject
     private bool isCompleted;
 
     public event Action OnCompleted;
+    public event Action OnReset;
 
-    private string SaveKeyCompleted => achievementId + "_completed";
-    private string SaveKeyCount => achievementId + "_count";
+    private string SaveKeyCompleted => achievementName + "_completed";
+    private string SaveKeyCount => achievementName + "_count";
 
     public bool IsCompleted => isCompleted;
     public int CurrentCount => currentCount;
@@ -35,12 +36,12 @@ public class Achievement : ScriptableObject
 
     public void Reset()
     {
+        OnReset?.Invoke();
         isCompleted = false;
         currentCount = 0;
         Save();
     }
 
-    // Para logros de un solo evento
     public void Complete()
     {
         if (isCompleted) return;
@@ -49,7 +50,6 @@ public class Achievement : ScriptableObject
         OnCompleted?.Invoke();
     }
 
-    // Para logros de contador
     public void Increment(int amount = 1)
     {
         if (isCompleted) return;

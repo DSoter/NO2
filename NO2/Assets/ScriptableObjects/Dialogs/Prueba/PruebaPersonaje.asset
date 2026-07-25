@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15adb7bec02e19d4093880a4c692b914, type: 3}
   m_Name: PruebaPersonaje
   m_EditorClassIdentifier: Assembly-CSharp::FriendlyCharacterData
-  characterPortrait: {fileID: 21300000, guid: da76135153ad44649808516125d5bfbd, type: 3}
+  characterPortrait: {fileID: -4015601187818815978, guid: bcd7438487d4d124286aa543e52797cd, type: 3}
   characterName: Theo
   characterDialogs: {fileID: 11400000, guid: 314dbdb4c42db474b844164061a27346, type: 2}

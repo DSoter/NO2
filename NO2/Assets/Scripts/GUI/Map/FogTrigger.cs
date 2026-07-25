@@ -62,6 +62,8 @@ public class FogTrigger : MonoBehaviour
         int radioEnCeldas = Mathf.CeilToInt(radioMundo);
         Vector2Int center = tilemapToScriptable.WorldToGrid(transform.position);
 
+        int celdasReveladas = 0;
+
         for (int r = -radioEnCeldas; r <= radioEnCeldas; r++)
         {
             for (int c = -radioEnCeldas; c <= radioEnCeldas; c++)
@@ -76,15 +78,19 @@ public class FogTrigger : MonoBehaviour
                 if (Vector2.Distance(transform.position, cellWorld) > radioMundo)
                     continue;
 
-                if(sceneMapData.fogCoverCount != null)
-                {
-                    sceneMapData.FogCoverCount[mapRow, mapCol] =
+                int countBefore = sceneMapData.FogCoverCount[mapRow, mapCol];
+                sceneMapData.FogCoverCount[mapRow, mapCol] =
                     Mathf.Max(0, sceneMapData.FogCoverCount[mapRow, mapCol] - 1);
 
-                    if (sceneMapData.FogCoverCount[mapRow, mapCol] == 0)
-                        sceneMapData.IsVisibleMatrix[mapRow, mapCol] = true;
+               
+
+                if (sceneMapData.FogCoverCount[mapRow, mapCol] == 0)
+                {
+                    sceneMapData.IsVisibleMatrix[mapRow, mapCol] = true;
+                    celdasReveladas++;
                 }
-                
+                Debug.Log($"Celda [{mapRow},{mapCol}] — FogCount antes: {countBefore} después: {sceneMapData.FogCoverCount[mapRow, mapCol]} visible: {sceneMapData.IsVisibleMatrix[mapRow, mapCol]}");
+                Debug.Log($"Celdas reveladas: {celdasReveladas}");
             }
         }
     }

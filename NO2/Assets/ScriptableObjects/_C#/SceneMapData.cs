@@ -48,7 +48,6 @@ public class SceneMapData : ScriptableObject
 
     public void Save()
     {
-        Debug.Log("Guardando");
         int rows = mapMatrix.GetLength(0);
         int cols = mapMatrix.GetLength(1);
 
@@ -133,14 +132,14 @@ public class SceneMapData : ScriptableObject
         int visibles = 0;
         int noVisibles = 0;
 
-        //i = 0;
-        //for (int row = 0; row < rows; row++)
-        //    for (int col = 0; col < cols; col++)
-        //    {
-        //        isVisibleMatrix[row, col] = savedVisible[i++] == '1';
-        //        if (isVisibleMatrix[row, col]) visibles++; else noVisibles++;
-        //    }
-        //Debug.Log($"Visibles cargados: {visibles} No visibles: {noVisibles}");
+        i = 0;
+        for (int row = 0; row < rows; row++)
+            for (int col = 0; col < cols; col++)
+            {
+                isVisibleMatrix[row, col] = savedVisible[i++] == '1';
+                if (isVisibleMatrix[row, col]) visibles++; else noVisibles++;
+            }
+        Debug.Log($"Visibles cargados: {visibles} No visibles: {noVisibles}");
 
         // Cargar FogCoverCount
         string savedFog = PlayerPrefs.GetString(SaveKey + "_fog", "");
@@ -148,11 +147,13 @@ public class SceneMapData : ScriptableObject
         FogCoverCount = new int[rows, cols];
 
 
-        //string[] fogValues = savedFog.Split(',');
-        //i = 0;
-        //for (int row = 0; row < rows; row++)
-        //    for (int col = 0; col < cols; col++)
-        //        FogCoverCount[row, col] = int.Parse(fogValues[i++]);
+        string[] fogValues = savedFog.Split(',');
+        i = 0;
+        for (int row = 0; row < rows; row++)
+            for (int col = 0; col < cols; col++)
+                FogCoverCount[row, col] = int.Parse(fogValues[i++]);
+
+
 
         return true;
     }
@@ -165,6 +166,8 @@ public class SceneMapData : ScriptableObject
         PlayerPrefs.DeleteKey(SaveKey + "_rows");
         PlayerPrefs.DeleteKey(SaveKey + "_cols");
         PlayerPrefs.Save();
-        Save();
+        mapMatrix = null;
+        isVisibleMatrix = null;
+        fogCoverCount = null;
     }
 }

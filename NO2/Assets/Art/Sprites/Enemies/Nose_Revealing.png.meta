@@ -137,8 +137,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 253b2e9204d0f7a4ebd4c24cb69f7124
-      internalID: -935710137
+      spriteID: c4d6b7bc95f15ab46bf63e284886af8b
+      internalID: -1947161713
       vertices: []
       indices: 
       edges: []
@@ -159,8 +159,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2206b18d5696c4848bcff968d9ddf6f5
-      internalID: -451164558
+      spriteID: 06af0ce1834e8cc448c126fd221dd09e
+      internalID: 1393923438
       vertices: []
       indices: 
       edges: []
@@ -169,7 +169,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: c7acb4d37029b474c8580a1e8ec4edda
+    spriteID: 69219547060c78d4aafe3bcc7d136ab2
     internalID: 0
     vertices: []
     indices: 
@@ -182,8 +182,8 @@ TextureImporter:
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":34.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":1,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Nose_Revealing_0: -807688678064572321
-      Nose_Revealing_1: -935710137
-      Nose_Revealing_2: -451164558
+      Nose_Revealing_1: -1947161713
+      Nose_Revealing_2: 1393923438
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

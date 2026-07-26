@@ -137,8 +137,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d09be3a87cc82d47a0377385c576430
-      internalID: 2096781418
+      spriteID: 4a9ae934fe072c44587df46191c974ba
+      internalID: 1026042923
       vertices: []
       indices: 
       edges: []
@@ -147,7 +147,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: f32ca7eed655dd04fbb3844dee88fe33
+    spriteID: 20f38435fb834e848aebdd3e1585ff7f
     internalID: 0
     vertices: []
     indices: 
@@ -160,7 +160,7 @@ TextureImporter:
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":34.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":1,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Nose_Revealed_0: 8764730240188759296
-      Nose_Revealed_1: 2096781418
+      Nose_Revealed_1: 1026042923
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

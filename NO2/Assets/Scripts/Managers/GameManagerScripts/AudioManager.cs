@@ -19,7 +19,7 @@ public class AudioManager : MonoBehaviour
     private void Awake()
     {
         _sfxPool = new ObjectPool<AudioSource>(
-            createFunc: () => Instantiate(_sfxPrefab),
+            createFunc: CreateFunc,
             actionOnGet: (source) => source.gameObject.SetActive(true),
             actionOnRelease: (source) => source.gameObject.SetActive(false),
             actionOnDestroy: (source) => Destroy(source.gameObject),
@@ -89,6 +89,13 @@ public class AudioManager : MonoBehaviour
         source.Play();
 
         StartCoroutine(ReleaseWhenFinished(source, clip.length));
+    }
+
+    private AudioSource CreateFunc()
+    {
+        var sfxAudioSource = Instantiate(_sfxPrefab);
+        sfxAudioSource.transform.parent = transform;
+        return sfxAudioSource;
     }
 
     private IEnumerator ReleaseWhenFinished(AudioSource source, float duration)

@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class FogTrigger : MonoBehaviour
 {
-    private FogData fogData;
-    private SceneMapData sceneMapData;
+    [SerializeField] private FogData fogData;
+    [SerializeField] private SceneMapData sceneMapData;
     [SerializeField] private TilemapToScriptable tilemapToScriptable;
     [SerializeField] private GameObject fogImage;
     [SerializeField] private GameObject fogCollider;
@@ -21,8 +21,8 @@ public class FogTrigger : MonoBehaviour
 
         if (collision.CompareTag("Player"))
         {
+
             Vector2Int gridPos = fogData.WorldToGrid(transform.position);
-            Debug.Log("Niebla cruzada");
             fogData.SetActive(gridPos, false);
 
             RevealMapCells();
@@ -53,7 +53,13 @@ public class FogTrigger : MonoBehaviour
             Debug.Log("Matriz de visibilidad nula");
             return;
         }
-            
+
+        Debug.Log($"IsVisibleMatrix size: {sceneMapData.IsVisibleMatrix.GetLength(0)}x{sceneMapData.IsVisibleMatrix.GetLength(1)}");
+        Debug.Log($"FogCoverCount size: {sceneMapData.FogCoverCount.GetLength(0)}x{sceneMapData.FogCoverCount.GetLength(1)}");
+
+
+
+        
 
         int rows = sceneMapData.IsVisibleMatrix.GetLength(0);
         int cols = sceneMapData.IsVisibleMatrix.GetLength(1);
@@ -61,6 +67,7 @@ public class FogTrigger : MonoBehaviour
         float radioMundo = fogData.Separation;
         int radioEnCeldas = Mathf.CeilToInt(radioMundo);
         Vector2Int center = tilemapToScriptable.WorldToGrid(transform.position);
+        Debug.Log($"Center: {center}");
 
         int celdasReveladas = 0;
 
@@ -91,7 +98,15 @@ public class FogTrigger : MonoBehaviour
                 }
                 Debug.Log($"Celda [{mapRow},{mapCol}] — FogCount antes: {countBefore} después: {sceneMapData.FogCoverCount[mapRow, mapCol]} visible: {sceneMapData.IsVisibleMatrix[mapRow, mapCol]}");
                 Debug.Log($"Celdas reveladas: {celdasReveladas}");
+
+                
+                    
             }
+        }
+        if (celdasReveladas > 0)
+        {
+            sceneMapData.FogTextureHasToUpdate = true;
+
         }
     }
 }

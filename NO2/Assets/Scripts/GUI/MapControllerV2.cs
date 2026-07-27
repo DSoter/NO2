@@ -14,6 +14,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     [SerializeField] private RawImage mapImage;      // capa del mapa
     [SerializeField] private RawImage fogImage;      // capa de niebla
     [SerializeField] private RectTransform mapContainer; // el rect que se mueve y escala
+    private SceneMapData _lastMapData;
 
     [Header("Iconos")]
     [SerializeField] private Sprite npcSprite;
@@ -51,15 +52,23 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
 
     private void Start()
     {
-        GenerateMapTexture();
-        
-        _targetScale = mapContainer.localScale.x;
+       
 
-        UpdatePlayerIcon();
+        
     }
     private void OnEnable()
     {
+        mapData.Save();
+        //mapData.Save();
+        //GenerateMapTexture();
+
+        //Esto igual da problemas pq antes no se quedaba guardado el mapData
+        GenerateMapTexture(); 
+        mapData.Save();
+
+        _targetScale = mapContainer.localScale.x;
         GenerateFogTexture();
+        UpdatePlayerIcon();
     }
 
     public void UpdatePlayerIcon()
@@ -103,7 +112,15 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     }
     public void GenerateMapTexture()
     {
+        SceneMapData previousMapData = _lastMapData;
         UpdateMapData();
+
+        if (_lastMapData != mapData)
+        {
+            _lastMapData = mapData;
+            //GenerateFogTexture();
+        }
+
 
         //Se guarda una textura por escena
         string path = GetMapTexturePath();
@@ -205,6 +222,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         }
 
         _fogTexture.Apply();
+        
     }
     private void UpdateMapData()
     {
@@ -221,7 +239,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
                 TilemapToScriptable tts = root.GetComponentInChildren<TilemapToScriptable>();
                 if (tts != null && tts.CompareTag(sceneControllerTag))
                 {
-                    //Debug.Log("Se va a actualizar el mapa");
+                    Debug.Log($"UpdateMapData — SceneMapData encontrado: {tts.SceneMapData.name}");
                     tts.SaveMap();
                     mapData = tts.SceneMapData;
                 }
@@ -229,31 +247,71 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         }
 
 }
+    private string GetFogTexturePath()
+    {
+        return System.IO.Path.Combine(
+            Application.persistentDataPath,
+            mapData.name + "_fogTexture.png"
+        );
+    }
+
     private void GenerateFogTexture()
     {
-        mapData.Save();
-        if(mapData == null)
-        {
-            Debug.LogError("mapData es null");
-            return;
-        }
-        bool[,] visible = mapData.IsVisibleMatrix;
-        if (visible == null)
-        {
-            Debug.LogError("IsVisibleMatrix es null — FogManager no ha inicializado las matrices todavía");
-            return;
-        }
-        Debug.Log($"Rows: {visible.GetLength(0)} Cols: {visible.GetLength(1)}");
-        int rows = visible.GetLength(0);
-        int cols = visible.GetLength(1);
-        int texWidth = cols * pixelsPerTile;
-        int texHeight = rows * pixelsPerTile;
 
-        _fogTexture = new Texture2D(texWidth, texHeight, TextureFormat.RGBA32, false);
+        UpdateMapData();
+
+
+        if (_fogTexture != null)
+        {
+            Destroy(_fogTexture);
+            _fogTexture = null;
+        }
+        if (mapData?.IsVisibleMatrix == null)
+        {
+            Debug.LogError("IsVisibleMatrix es null");
+            return;
+        }
+        
+
+        string path = GetFogTexturePath();
+
+        if (!mapData.FogTextureHasToUpdate && System.IO.File.Exists(path))
+        {
+            Debug.Log("Cargando desde disco");
+            // Cargar desde disco
+            byte[] bytes = System.IO.File.ReadAllBytes(path);
+            _fogTexture = new Texture2D(2, 2, TextureFormat.RGBA32, false);
+            _fogTexture.filterMode = FilterMode.Point;
+            _fogTexture.LoadImage(bytes);
+            fogImage.texture = _fogTexture;
+            return;
+        }
+
+        // Regenerar
+        int rows = mapData.IsVisibleMatrix.GetLength(0);
+        int cols = mapData.IsVisibleMatrix.GetLength(1);
+
+        _fogTexture = new Texture2D(cols * pixelsPerTile, rows * pixelsPerTile, TextureFormat.RGBA32, false);
         _fogTexture.filterMode = FilterMode.Point;
 
-        UpdateFogTexture();
-        fogImage.texture = _fogTexture;
+        // Rellenar manualmente en lugar de llamar a UpdateFogTexture
+        bool[,] visible = mapData.IsVisibleMatrix;
+        for (int row = 0; row < rows; row++)
+            for (int col = 0; col < cols; col++)
+            {
+                Color fogColor = visible[row, col] ? Color.clear : Color.black;
+                FillTile(_fogTexture, col, row, fogColor);
+            }
+
+        _fogTexture.Apply();
+        fogImage.texture = _fogTexture; // asignar
+
+        //UpdateFogTexture();
+
+        // Guardar en disco y marcar como limpia
+        System.IO.File.WriteAllBytes(path, _fogTexture.EncodeToPNG());
+        mapData.FogTextureHasToUpdate = false;
+        Debug.Log("FogTexture guardada");
     }
 
     private void FillTile(Texture2D tex, int col, int row, Color color)

@@ -36,11 +36,6 @@ public class InputManager : MonoBehaviour
     {
         InitializePrefsActions();
     }
-    private void Update()
-    {
-        if (_rollRef != null && !_rollRef.action.enabled)
-            Debug.LogError($"¡Roll action desactivada! Frame {Time.frameCount}");
-    }
 
     private void OnMove(InputAction.CallbackContext context)
     {
@@ -61,7 +56,6 @@ public class InputManager : MonoBehaviour
     {
         if (context.performed)
         {
-            Debug.Log("funciona llamada");
             onInteract?.Invoke();
         }
     }
@@ -140,7 +134,7 @@ public class InputManager : MonoBehaviour
     }
     private void OnEscape(InputAction.CallbackContext context)
     {
-        Debug.Log("OnEscape fired en InputManager");
+
         if (context.performed)
         {
             Debug.Log($"onEscape suscriptores: {onEscape?.GetInvocationList().Length ?? 0}");

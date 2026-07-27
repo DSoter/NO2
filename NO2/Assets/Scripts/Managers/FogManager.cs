@@ -1,4 +1,5 @@
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
+using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI.Table;
 
@@ -51,6 +52,7 @@ public class FogManager : MonoBehaviour
         }
 
 
+
         float minX = Mathf.Min(topLeft.position.x, bottomLeft.position.x);
         float maxX = Mathf.Max(topRight.position.x, bottomRight.position.x);
         float minY = Mathf.Min(bottomLeft.position.y, bottomRight.position.y);
@@ -83,6 +85,12 @@ public class FogManager : MonoBehaviour
 
         Debug.Log($"Nieblas Activas: {trues} Inactivas: {falses}");
         Debug.Log($"MinX: {fogData.MinX} MinY: {fogData.MinY} Separation: {fogData.Separation}");
+
+        if (sceneMapData.IsVisibleMatrix == null)
+        {
+            InitializeVisibilityMatrix();
+        }
+
         int instanciadas = 0;
         for (int row = 0; row < fogData.Rows; row++)
         {
@@ -99,10 +107,7 @@ public class FogManager : MonoBehaviour
                     float radioMundo = fogScale * fogData.Separation;
                     int radioEnCeldas = Mathf.CeilToInt(radioMundo);
 
-                    if(sceneMapData.IsVisibleMatrix == null)
-                    {
-                        InitializeVisibilityMatrix();
-                    }
+                    
                     int mapRows = sceneMapData.IsVisibleMatrix.GetLength(0);
                     int mapCols = sceneMapData.IsVisibleMatrix.GetLength(1);
 
@@ -200,7 +205,8 @@ public class FogManager : MonoBehaviour
                 if (sceneMapData.IsVisibleMatrix[row, col]) trues2++; else falses2++;
 
 
-        
+        sceneMapData.FogTextureHasToUpdate = true;
+
 
         sceneMapData.Save();
     }
@@ -221,6 +227,13 @@ public class FogManager : MonoBehaviour
             InitializeFromScratch();
             return;
         }
+        //if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "PruebaSiguienteNivel")
+        //{
+        //    Debug.Log("Inicializando visibilidad desde cer al ser pruebaSiguiente nivel");
+        //    tilemapToScriptable.InitializeMap();
+        //    InitializeFromScratch();
+        //    return;
+        //}
 
         int rows = sceneMapData.IsVisibleMatrix.GetLength(0);
         int cols = sceneMapData.IsVisibleMatrix.GetLength(1);

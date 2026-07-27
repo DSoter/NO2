@@ -25,7 +25,7 @@ public class InteractManager : MonoBehaviour
 
 
     private InputManager inputManager;
-    //player controller
+    private DiverseMenusManager diverseMenusManager;
     private PlayerController _playerController;
 
     private string _cachedBindingText;
@@ -33,6 +33,8 @@ public class InteractManager : MonoBehaviour
     {
 
         inputManager = GameManager.Instance.gameObject.GetComponent<InputManager>();
+        diverseMenusManager = GameManager.Instance.gameObject.GetComponent<DiverseMenusManager>();
+
         inputManager.onInteract += OnInteract; 
         
         
@@ -68,7 +70,8 @@ public class InteractManager : MonoBehaviour
 
     public void OnInteract()
     {
-        if (_puedeInteractuar && (_playerController.GetState() == PlayerController.PlayerState.Move || _playerController.GetState() == PlayerController.PlayerState.Rest)){ 
+        
+        if (_puedeInteractuar && !diverseMenusManager._IsOpen && (_playerController.GetState() == PlayerController.PlayerState.Move || _playerController.GetState() == PlayerController.PlayerState.Rest)){ 
             interactableObject.Interact();
         }
     }

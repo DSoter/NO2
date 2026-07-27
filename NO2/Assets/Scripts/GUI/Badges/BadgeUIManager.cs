@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
@@ -36,6 +37,7 @@ public class BadgeUIManager : MonoBehaviour
     {
         badgeCollection.Load();
         equippedBadges.Load(badgeCollection);
+
         CheckpointManager cm = GameManager.Instance.GetComponent<CheckpointManager>();
 
         if (cm != null)
@@ -43,7 +45,7 @@ public class BadgeUIManager : MonoBehaviour
             PlayerController player = cm.PlayerReference.gameObject.GetComponent<PlayerController>();
             playerState = player.GetState();
         }
-        RefreshUI();
+        StartCoroutine(RefreshNextFrame());
     }
     private void OnDisable()
     {
@@ -52,6 +54,12 @@ public class BadgeUIManager : MonoBehaviour
 
     public float GetSlotWidth() => slotWidth;
 
+
+    private IEnumerator RefreshNextFrame()
+    {
+        yield return null;
+        RefreshUI();
+    }
     public void RefreshUI()
     {
         foreach (Transform child in equipPanel)

@@ -32,15 +32,31 @@ public class BadgeIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
         _rectTransform = GetComponent<RectTransform>();
         _canvasGroup = GetComponent<CanvasGroup>();
+        
+        Image img = GetComponent<Image>();
+        img.sprite = b.icon;
+        //img.preserveAspect = false;
 
-        GetComponent<Image>().sprite = b.icon;
+        
 
-        // Escalar visualmente según slotsSize
-        float slotWidth = _manager.GetSlotWidth();
-        //_rectTransform.sizeDelta = new Vector2(slotWidth * b.slotsSize, _rectTransform.sizeDelta.y);
-        RectTransform slotRect = _manager.GetSlotRect();
-        float slotHeight = slotRect.rect.height;
-        _rectTransform.sizeDelta = new Vector2(slotWidth * b.slotsSize, slotHeight);
+        if (isEquipped)
+        {
+            // Escalar visualmente según el tamaño de slot
+            float slotWidth = _manager.GetSlotWidth();
+            RectTransform slotRect = _manager.GetSlotRect();
+            float slotHeight = slotRect.rect.height;
+            _rectTransform.sizeDelta = new Vector2(slotWidth * b.slotsSize, slotHeight);
+        }
+        else
+        {
+            // Escalar visualmente según el tamaño base
+            //float baseWidth = _rectTransform.sizeDelta.x;
+            //float baseHeight = _rectTransform.sizeDelta.y;
+            //_rectTransform.sizeDelta = new Vector2(baseWidth * b.slotsSize, baseHeight);
+            //Esto no funciona porque al estar en el coso de coleccion
+            //se fija el height y el width. Vamos a dejarlo escalado
+            _rectTransform.localScale = new Vector3( b.slotsSize,1, 1);
+        }
 
         _rectTransform.pivot = new Vector2(0f, 0.5f);
         _rectTransform.anchorMin = new Vector2(0f, 0.5f);
@@ -59,6 +75,7 @@ public class BadgeIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     {
         if (_manager.playerState != PlayerState.Rest)
         {
+            _canvasGroup.blocksRaycasts = true;
             return;
         }
         _originalPosition = _rectTransform.anchoredPosition;

@@ -45,7 +45,18 @@ public class SceneMapData : ScriptableObject
     }
 
     private string SaveKey => name + "_mapdata";
+    private string SaveKeyFog => name + "_foHasToUpdate";
 
+    public bool FogTextureHasToUpdate
+    {
+        get { return PlayerPrefs.GetInt(SaveKeyFog, 1) == 1; } // 1 = tiene q actualizarse
+        set
+        {
+            PlayerPrefs.SetInt(SaveKeyFog, value ? 1 : 0);
+            PlayerPrefs.Save();
+        }
+    }
+    
     public void Save()
     {
         int rows = mapMatrix.GetLength(0);

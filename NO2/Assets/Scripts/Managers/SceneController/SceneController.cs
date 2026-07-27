@@ -81,7 +81,9 @@ public class SceneController : MonoBehaviour
             checkpoints[i] = (listaAux[i].transform);
         }
         currentSpawnPointId = checkpoints.IndexOf(currentSpawnPoint);
-        if (currentSpawnPointId < 0 || currentSpawnPointId>checkpoints.Count) { currentSpawnPointId = checkpoints.IndexOf(currentSpawnPoint); }
+        //if (currentSpawnPointId < 0 || currentSpawnPointId>checkpoints.Count) { currentSpawnPointId = checkpoints.IndexOf(currentSpawnPoint); }
+        if (currentSpawnPointId < 0 || currentSpawnPointId >= checkpoints.Count)
+            currentSpawnPointId = 0;
 
         _checkpointManager = GameManager.Instance.GetComponent<CheckpointManager>();
 

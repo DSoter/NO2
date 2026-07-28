@@ -13,6 +13,15 @@ public class NextSceneTrigguer: MonoBehaviour
         GetComponent<Collider2D>().enabled = false;
         CheckpointManager cm = GameManager.Instance.GetComponent<CheckpointManager>();
         StartCoroutine(WaitAndActivateTriger(cm.GateTransitionSeconds));
+
+        // Registrar posición del gate
+        WorldMapData worldMapData = GameManager.Instance.GetComponent<WorldMapDataRegister>().WorldMapData;
+        string sceneName = SceneManager.GetActiveScene().name;
+        int gateId = SceneManager.GetActiveScene().name == gateData.sceneName1
+            ? gateData.gateId1
+            : gateData.gateId2;
+
+        worldMapData.RegisterGatePosition(sceneName, gateId, transform.position);
     }
     private IEnumerator WaitAndActivateTriger(float waitDurationSeconds)
     {

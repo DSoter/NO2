@@ -15,6 +15,8 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     [SerializeField] private RawImage fogImage;      // capa de niebla
     [SerializeField] private RectTransform mapContainer; // el rect que se mueve y escala
     private SceneMapData _lastMapData;
+    [Header("Mapa Mundial")]
+    [SerializeField] private WorldMapData worldMapData;
 
     [Header("Iconos")]
     [SerializeField] private Sprite npcSprite;
@@ -58,58 +60,347 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     }
     private void OnEnable()
     {
-        mapData.Save();
         //mapData.Save();
         //GenerateMapTexture();
+        //_targetScale = mapContainer.localScale.x;
+        //GenerateFogTexture();
+        //UpdatePlayerIcon();
 
-        //Esto igual da problemas pq antes no se quedaba guardado el mapData
-        GenerateMapTexture(); 
+
+        UpdateMapData();
         mapData.Save();
-
+        GenerateWorldMapTexture();
         _targetScale = mapContainer.localScale.x;
-        GenerateFogTexture();
-        UpdatePlayerIcon();
+        UpdatePlayerIcon(); 
+
+
+    }
+    public void GenerateWorldMapTexture()
+    {
+        GenerateWorldMap();
+        GenerateWorldFog();
+    }
+
+    private void GenerateWorldMap()
+    {
+        string path = GetWorldMapTexturePath();
+
+        if (!worldMapData.WorldMapNeedsUpdate && System.IO.File.Exists(path))
+        {
+            byte[] bytes = System.IO.File.ReadAllBytes(path);
+            _mapTexture = new Texture2D(2, 2, TextureFormat.RGBA32, false);
+            _mapTexture.filterMode = FilterMode.Point;
+            _mapTexture.LoadImage(bytes);
+            mapImage.texture = _mapTexture;
+            return;
+        }
+
+        (int minX, int minY, int totalCols, int totalRows) = CalculateWorldBounds();
+        if (totalCols <= 0 || totalRows <= 0) return;
+
+        int texWidth = totalCols * pixelsPerTile;
+        int texHeight = totalRows * pixelsPerTile;
+
+        if (_mapTexture != null) Destroy(_mapTexture);
+        _mapTexture = new Texture2D(texWidth, texHeight, TextureFormat.RGBA32, false);
+        _mapTexture.filterMode = FilterMode.Point;
+
+        Color[] clearPixels = new Color[texWidth * texHeight];
+        for (int i = 0; i < clearPixels.Length; i++) clearPixels[i] = Color.clear;
+        _mapTexture.SetPixels(clearPixels);
+
+        foreach (WorldMapData.SceneMapEntry entry in worldMapData.scenes)
+        {
+            if (entry.mapData?.MapMatrix == null) continue;
+
+            int rows = entry.mapData.MapMatrix.GetLength(0);
+            int cols = entry.mapData.MapMatrix.GetLength(1);
+            int offsetX = entry.offsetInCells.x - minX;
+            int offsetY = entry.offsetInCells.y - minY;
+
+            for (int row = 0; row < rows; row++)
+                for (int col = 0; col < cols; col++)
+                {
+                    Color color = GetTileColor(entry.mapData.MapMatrix[row, col]);
+                    FillTile(_mapTexture, offsetX + col, offsetY + row, color);
+                }
+
+            for (int row = 0; row < rows; row++)
+                for (int col = 0; col < cols; col++)
+                {
+                    Sprite icon = GetTileIcon(entry.mapData.MapMatrix[row, col]);
+                    if (icon != null)
+                        DrawIcon(_mapTexture, offsetX + col, offsetY + row, icon);
+                }
+        }
+
+        _mapTexture.Apply();
+        mapImage.texture = _mapTexture;
+        System.IO.File.WriteAllBytes(path, _mapTexture.EncodeToPNG());
+        worldMapData.WorldMapNeedsUpdate = false;
+    }
+
+    private void GenerateWorldFog()
+    {
+        string path = GetWorldFogTexturePath();
+        bool anyDirty = false;
+        foreach (WorldMapData.SceneMapEntry entry in worldMapData.scenes)
+            if (entry.mapData != null && entry.mapData.FogTextureHasToUpdate)
+                anyDirty = true;
+
+        if (!anyDirty && System.IO.File.Exists(path))
+        {
+            byte[] bytes = System.IO.File.ReadAllBytes(path);
+            if (_fogTexture != null) Destroy(_fogTexture);
+            _fogTexture = new Texture2D(2, 2, TextureFormat.RGBA32, false);
+            _fogTexture.filterMode = FilterMode.Point;
+            _fogTexture.LoadImage(bytes);
+            fogImage.texture = _fogTexture;
+            return;
+        }
+
+        (int minX, int minY, int totalCols, int totalRows) = CalculateWorldBounds();
+        if (totalCols <= 0 || totalRows <= 0) return;
+
+        int texWidth = totalCols * pixelsPerTile;
+        int texHeight = totalRows * pixelsPerTile;
+
+        if (_fogTexture != null) Destroy(_fogTexture);
+        _fogTexture = new Texture2D(texWidth, texHeight, TextureFormat.RGBA32, false);
+        _fogTexture.filterMode = FilterMode.Point;
+
+        // Fondo negro — todo oculto por defecto
+        Color[] blackPixels = new Color[texWidth * texHeight];
+        for (int i = 0; i < blackPixels.Length; i++) blackPixels[i] = Color.black;
+        _fogTexture.SetPixels(blackPixels);
+
+        foreach (WorldMapData.SceneMapEntry entry in worldMapData.scenes)
+        {
+            if (entry.mapData?.IsVisibleMatrix == null) continue;
+
+            int rows = entry.mapData.IsVisibleMatrix.GetLength(0);
+            int cols = entry.mapData.IsVisibleMatrix.GetLength(1);
+            int offsetX = entry.offsetInCells.x - minX;
+            int offsetY = entry.offsetInCells.y - minY;
+
+            for (int row = 0; row < rows; row++)
+                for (int col = 0; col < cols; col++)
+                {
+                    Color fogColor = entry.mapData.IsVisibleMatrix[row, col]
+                        ? Color.clear
+                        : Color.black;
+                    FillTile(_fogTexture, offsetX + col, offsetY + row, fogColor);
+                }
+
+            entry.mapData.FogTextureHasToUpdate = false;
+        }
+
+        _fogTexture.Apply();
+        fogImage.texture = _fogTexture;
+        System.IO.File.WriteAllBytes(path, _fogTexture.EncodeToPNG());
+    }
+
+    private (int minX, int minY, int totalCols, int totalRows) CalculateWorldBounds()
+    {
+        int minX = int.MaxValue, minY = int.MaxValue;
+        int maxX = int.MinValue, maxY = int.MinValue;
+
+        foreach (WorldMapData.SceneMapEntry entry in worldMapData.scenes)
+        {
+            if (entry.mapData?.MapMatrix == null) continue;
+            int rows = entry.mapData.MapMatrix.GetLength(0);
+            int cols = entry.mapData.MapMatrix.GetLength(1);
+
+            minX = Mathf.Min(minX, entry.offsetInCells.x);
+            minY = Mathf.Min(minY, entry.offsetInCells.y);
+            maxX = Mathf.Max(maxX, entry.offsetInCells.x + cols);
+            maxY = Mathf.Max(maxY, entry.offsetInCells.y + rows);
+        }
+
+        if (minX == int.MaxValue) return (0, 0, 0, 0);
+        return (minX, minY, maxX - minX, maxY - minY);
     }
 
     public void UpdatePlayerIcon()
     {
-
         if (playerIcon == null || playerSprite == null) return;
 
         CheckpointManager cm = GameManager.Instance.GetComponent<CheckpointManager>();
         Transform playerTransform = cm.PlayerReference;
-        TilemapToScriptable tilemapToScriptable = cm.TilemapToScriptable;
+        TilemapToScriptable tts = cm.TilemapToScriptable;
 
-        if (playerTransform == null || tilemapToScriptable == null) return;
+        if (playerTransform == null || tts == null) return;
 
+        // Encontrar la entrada del mapa de la escena actual
+        string currentScene = SceneManager.GetActiveScene().name;
+        WorldMapData.SceneMapEntry currentEntry = worldMapData.scenes.Find(
+            s => s.sceneName == currentScene);
 
-        playerIcon.sprite = playerSprite;
-        playerIcon.gameObject.SetActive(true);
+        if (currentEntry?.mapData == null) return;
 
-        // Convertir posición mundo a celda del mapa
-        Vector2Int gridPos = tilemapToScriptable.WorldToGrid(playerTransform.position);
+        (int minX, int minY, int totalCols, int totalRows) = CalculateWorldBounds();
+        if (totalCols <= 0) return;
 
-        int rows = mapData.MapMatrix.GetLength(0);
-        int cols = mapData.MapMatrix.GetLength(1);
+        // Posición en celdas locales
+        Vector2Int gridPos = tts.WorldToGrid(playerTransform.position);
 
-        int texWidth = cols * pixelsPerTile;
-        int texHeight = rows * pixelsPerTile;
+        // Convertir a coordenadas globales
+        int globalCol = currentEntry.offsetInCells.x - minX + gridPos.x;
+        int globalRow = currentEntry.offsetInCells.y - minY + gridPos.y;
 
-        // Posición en píxeles dentro de la textura
-        float pixelX = gridPos.x * pixelsPerTile + pixelsPerTile / 2f;
-        float pixelY = gridPos.y * pixelsPerTile + pixelsPerTile / 2f;
+        int texWidth = totalCols * pixelsPerTile;
+        int texHeight = totalRows * pixelsPerTile;
 
-        // Convertir a posición normalizada (0-1)
+        float pixelX = globalCol * pixelsPerTile + pixelsPerTile / 2f;
+        float pixelY = globalRow * pixelsPerTile + pixelsPerTile / 2f;
+
         float normX = pixelX / texWidth;
         float normY = pixelY / texHeight;
 
-        // Convertir a posición local dentro del mapContainer
         RectTransform mapRect = mapImage.rectTransform;
         float localX = (normX - 0.5f) * mapRect.rect.width;
         float localY = (normY - 0.5f) * mapRect.rect.height;
 
+        playerIcon.sprite = playerSprite;
+        playerIcon.gameObject.SetActive(true);
         playerIcon.rectTransform.localPosition = new Vector3(localX, localY, 0f);
     }
+    //public void GenerateWorldMapTexture()
+    //{
+    //    worldMapData.LoadOffsets();
+
+    //    // Calcular bounds globales
+    //    int minX = int.MaxValue, minY = int.MaxValue;
+    //    int maxX = int.MinValue, maxY = int.MinValue;
+
+    //    foreach (WorldMapData.SceneMapEntry entry in worldMapData.scenes)
+    //    {
+    //        if (entry.mapData?.MapMatrix == null) continue;
+    //        int rows = entry.mapData.MapMatrix.GetLength(0);
+    //        int cols = entry.mapData.MapMatrix.GetLength(1);
+
+    //        minX = Mathf.Min(minX, entry.offsetInCells.x);
+    //        minY = Mathf.Min(minY, entry.offsetInCells.y);
+    //        maxX = Mathf.Max(maxX, entry.offsetInCells.x + cols);
+    //        maxY = Mathf.Max(maxY, entry.offsetInCells.y + rows);
+    //    }
+
+    //    int totalCols = maxX - minX;
+    //    int totalRows = maxY - minY;
+    //    int texWidth = totalCols * pixelsPerTile;
+    //    int texHeight = totalRows * pixelsPerTile;
+
+    //    Texture2D worldTex = new Texture2D(texWidth, texHeight, TextureFormat.RGBA32, false);
+    //    worldTex.filterMode = FilterMode.Point;
+
+    //    // Fondo transparente
+    //    Color[] clearPixels = new Color[texWidth * texHeight];
+    //    for (int i = 0; i < clearPixels.Length; i++) clearPixels[i] = Color.clear;
+    //    worldTex.SetPixels(clearPixels);
+
+    //    // Dibujar cada escena
+    //    foreach (WorldMapData.SceneMapEntry entry in worldMapData.scenes)
+    //    {
+    //        if (entry.mapData?.MapMatrix == null) continue;
+
+    //        int rows = entry.mapData.MapMatrix.GetLength(0);
+    //        int cols = entry.mapData.MapMatrix.GetLength(1);
+    //        int offsetX = entry.offsetInCells.x - minX;
+    //        int offsetY = entry.offsetInCells.y - minY;
+
+    //        for (int row = 0; row < rows; row++)
+    //        {
+    //            for (int col = 0; col < cols; col++)
+    //            {
+    //                Color color = GetTileColor(entry.mapData.MapMatrix[row, col]);
+    //                int texCol = offsetX + col;
+    //                int texRow = offsetY + row;
+    //                FillTile(worldTex, texCol, texRow, color);
+    //            }
+    //        }
+
+    //        // Iconos
+    //        for (int row = 0; row < rows; row++)
+    //        {
+    //            for (int col = 0; col < cols; col++)
+    //            {
+    //                Sprite icon = GetTileIcon(entry.mapData.MapMatrix[row, col]);
+    //                if (icon != null)
+    //                    DrawIcon(worldTex, offsetX + col, offsetY + row, icon);
+    //            }
+    //        }
+    //    }
+
+    //    worldTex.Apply();
+    //    mapImage.texture = worldTex;
+    //}
+
+    private string GetWorldMapTexturePath()
+    {
+        return System.IO.Path.Combine(
+            Application.persistentDataPath,
+            worldMapData.name + "_worldMap.png"
+        );
+    }
+
+    private string GetWorldFogTexturePath()
+    {
+        return System.IO.Path.Combine(
+            Application.persistentDataPath,
+            worldMapData.name + "_worldFog.png"
+        );
+    }
+
+    [ContextMenu("Clear World Map Cache")]
+    public void ClearWorldMapCache()
+    {
+        string path = GetWorldMapTexturePath();
+        if (System.IO.File.Exists(path)) System.IO.File.Delete(path);
+        string fogPath = GetWorldFogTexturePath();
+        if (System.IO.File.Exists(fogPath)) System.IO.File.Delete(fogPath);
+        worldMapData.WorldMapNeedsUpdate = true;
+        Debug.Log("Caché de mapa mundial eliminada");
+    }
+
+    //public void UpdatePlayerIcon()
+    //{
+
+    //    if (playerIcon == null || playerSprite == null) return;
+
+    //    CheckpointManager cm = GameManager.Instance.GetComponent<CheckpointManager>();
+    //    Transform playerTransform = cm.PlayerReference;
+    //    TilemapToScriptable tilemapToScriptable = cm.TilemapToScriptable;
+
+    //    if (playerTransform == null || tilemapToScriptable == null) return;
+
+
+    //    playerIcon.sprite = playerSprite;
+    //    playerIcon.gameObject.SetActive(true);
+
+    //    // Convertir posición mundo a celda del mapa
+    //    Vector2Int gridPos = tilemapToScriptable.WorldToGrid(playerTransform.position);
+
+    //    int rows = mapData.MapMatrix.GetLength(0);
+    //    int cols = mapData.MapMatrix.GetLength(1);
+
+    //    int texWidth = cols * pixelsPerTile;
+    //    int texHeight = rows * pixelsPerTile;
+
+    //    // Posición en píxeles dentro de la textura
+    //    float pixelX = gridPos.x * pixelsPerTile + pixelsPerTile / 2f;
+    //    float pixelY = gridPos.y * pixelsPerTile + pixelsPerTile / 2f;
+
+    //    // Convertir a posición normalizada (0-1)
+    //    float normX = pixelX / texWidth;
+    //    float normY = pixelY / texHeight;
+
+    //    // Convertir a posición local dentro del mapContainer
+    //    RectTransform mapRect = mapImage.rectTransform;
+    //    float localX = (normX - 0.5f) * mapRect.rect.width;
+    //    float localY = (normY - 0.5f) * mapRect.rect.height;
+
+    //    playerIcon.rectTransform.localPosition = new Vector3(localX, localY, 0f);
+    //}
     public void GenerateMapTexture()
     {
         SceneMapData previousMapData = _lastMapData;

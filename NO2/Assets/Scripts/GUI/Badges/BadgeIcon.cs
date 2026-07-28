@@ -11,6 +11,7 @@ public class BadgeIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     private BadgeUIManager _manager;
     private RectTransform _rectTransform;
     private CanvasGroup _canvasGroup;
+    private LayoutElement layoutElement;
     private Canvas _canvas;
     private Vector2 _originalPosition;
     private Transform _originalParent;
@@ -32,6 +33,7 @@ public class BadgeIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
         _rectTransform = GetComponent<RectTransform>();
         _canvasGroup = GetComponent<CanvasGroup>();
+        layoutElement = GetComponent<LayoutElement>();
         
         Image img = GetComponent<Image>();
         img.sprite = b.icon;
@@ -50,12 +52,13 @@ public class BadgeIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         else
         {
             // Escalar visualmente según el tamaño base
-            //float baseWidth = _rectTransform.sizeDelta.x;
-            //float baseHeight = _rectTransform.sizeDelta.y;
-            //_rectTransform.sizeDelta = new Vector2(baseWidth * b.slotsSize, baseHeight);
+            float baseWidth = _manager.GetCollectionSize();
+            float baseHeight = _manager.GetCollectionSize();
+            _rectTransform.sizeDelta = new Vector2(baseWidth * b.slotsSize, baseHeight);
+            layoutElement.preferredWidth = baseWidth * b.slotsSize;
+            layoutElement.preferredHeight = baseHeight;
             //Esto no funciona porque al estar en el coso de coleccion
             //se fija el height y el width. Vamos a dejarlo escalado
-            _rectTransform.localScale = new Vector3( b.slotsSize,1, 1);
         }
 
         _rectTransform.pivot = new Vector2(0f, 0.5f);

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15adb7bec02e19d4093880a4c692b914, type: 3}
   m_Name: Rusell
   m_EditorClassIdentifier: Assembly-CSharp::FriendlyCharacterData
-  characterPortrait: {fileID: 1882757386390639219, guid: 11c17fc17ae8d014e9faca719ec3b51a, type: 3}
+  characterPortrait: {fileID: -8025327951791349527, guid: 933b08e1f9506b942ad275ff628ea7d4, type: 3}
   characterName: Rusell
   characterDialogs: {fileID: 11400000, guid: ea7eab90bd066854e96b1489c271e925, type: 2}

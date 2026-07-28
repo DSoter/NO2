@@ -652,6 +652,8 @@ public class PlayerController : MonoBehaviour
         Destroy(gameObject); // Destruir primero
         cm.CameraLockedPlayer = false;
         cm.RespawnPlayerAfterNoOxygen(); // Llamar despues, desde un objeto que sobrevive
+
+        GameManager.Instance.GetComponent<AchievementManager>().NotifyEvent("no_oxygen");
     }
 
 

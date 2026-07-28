@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: museo
   m_EditorClassIdentifier: Assembly-CSharp::Badge
   badgeName: Museo
+  achievement: {fileID: 0}
   description: Enhoirabuena por desbloquear el museo
   icon: {fileID: -2807307291967842913, guid: 23e96f9114ddbbe4e9c0f717efc20648, type: 3}
   slotsSize: 1

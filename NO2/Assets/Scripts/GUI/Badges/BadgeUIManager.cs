@@ -20,10 +20,12 @@ public class BadgeUIManager : MonoBehaviour
     [SerializeField] private BadgeSlot[] slots; // 4 slots asignados en inspector
     [SerializeField] private GameObject badgeIconPrefab;
     [SerializeField] private float slotWidth = 100f;
+    [SerializeField] private float sizeOnCollection;
     [SerializeField] private float maxDropDistance = 200f;
 
     [Header("Panel Info")]
     [SerializeField] private GameObject descriptionPanel;
+    [SerializeField] private Image backgroundBadgeIcon;
     [SerializeField] private Image infoIcon;
     [SerializeField] private TMPro.TMP_Text infoName;
     [SerializeField] private TMPro.TMP_Text infoDescription;
@@ -35,6 +37,8 @@ public class BadgeUIManager : MonoBehaviour
 
     private void OnEnable()
     {
+        infoIcon.transform.localScale = Vector3.one;
+        backgroundBadgeIcon.transform.localScale = Vector3.one;
         badgeCollection.Load();
         equippedBadges.Load(badgeCollection);
 
@@ -54,6 +58,7 @@ public class BadgeUIManager : MonoBehaviour
 
     public float GetSlotWidth() => slotWidth;
 
+    public float GetCollectionSize() => sizeOnCollection;
 
     private IEnumerator RefreshNextFrame()
     {
@@ -90,21 +95,21 @@ public class BadgeUIManager : MonoBehaviour
             
         }
 
-
         foreach (KeyValuePair<Badge, bool> entry in badgeCollection.UnlockedBadges)
         {
             Badge b = entry.Key;
             if (!badgeCollection.UnlockedBadges[b]) continue;
             if (alreadyPlaced.Contains(b)) continue;
 
-            
+
             GameObject iconGO = Instantiate(badgeIconPrefab, collectionPanel);
             BadgeIcon icon = iconGO.GetComponent<BadgeIcon>();
             icon.Initialize(b, this, canvas, false);
             _collectionIcons.Add(icon);
+            
         }
 
-        
+
     }
 
     public void OnBeginDrag(BadgeIcon icon)
@@ -255,6 +260,8 @@ public class BadgeUIManager : MonoBehaviour
         if (badge == null) return;
         descriptionPanel.SetActive(true);
         infoIcon.sprite = badge.icon;
+        //infoIcon.transform.localScale = new Vector3(badge.slotsSize, 1, 1);
+        backgroundBadgeIcon.transform.localScale = new Vector3(badge.slotsSize, 1, 1);
         infoName.text = badge.badgeName;
         infoDescription.text = badge.description;
     }

@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: 1900
   m_EditorClassIdentifier: Assembly-CSharp::Badge
   badgeName: To guapo
+  achievement: {fileID: 0}
   description: Dibujo to guapo
   icon: {fileID: 6571089672740034066, guid: e8cafc9db2be5f14dbb509cd0ad837b3, type: 3}
-  slotsSize: 1
+  slotsSize: 2
   effect:
     m_PersistentCalls:
       m_Calls: []

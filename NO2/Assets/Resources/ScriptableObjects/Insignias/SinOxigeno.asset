@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cefcbd99b00b4c14eab78afd4ec1278b, type: 3}
+  m_Name: SinOxigeno
+  m_EditorClassIdentifier: Assembly-CSharp::Badge
+  badgeName: NO2
+  achievement: {fileID: 11400000, guid: 10c1a8a04d50d5349b6c3727f3c37ac1, type: 2}
+  description: "Al haberte quedado sin oxigeno por primera vez, tienes un 10% m\xE1s
+    de oxigeno"
+  icon: {fileID: 21300000, guid: 3f17c7d1bd78c0348aab724ae279df13, type: 3}
+  slotsSize: 1
+  effect:
+    m_PersistentCalls:
+      m_Calls: []

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6ee89ba250aed242acf6373289812ab, type: 3}
+  m_Name: WorldMapData
+  m_EditorClassIdentifier: Assembly-CSharp::WorldMapData
+  scenes:
+  - sceneName: PruebaTileMap
+    mapData: {fileID: 11400000, guid: d3c0ec49d37ef354892ba4b98074bfed, type: 2}
+    offsetInCells: {x: 0, y: 0}
+  - sceneName: PruebaSiguienteNivel
+    mapData: {fileID: 11400000, guid: e35f527127aa874479acf00ca6d6fcd3, type: 2}
+    offsetInCells: {x: -132, y: 5}
+  gatePositions:
+  - sceneName: PruebaTileMap
+    gateId: 3
+    worldPosition: {x: -68.47, y: 2.06}
+  - sceneName: PruebaSiguienteNivel
+    gateId: 1
+    worldPosition: {x: 36.53, y: -3.93}
+  - sceneName: PruebaSiguienteNivel
+    gateId: 2
+    worldPosition: {x: 15.42, y: -32.9}

@@ -130,6 +130,8 @@ public class TilemapToScriptable : MonoBehaviour
         
         wallsTileMap = GameObject.FindGameObjectWithTag(wallsTileMapTag).GetComponent<Tilemap>();
         floorTileMap = GameObject.FindGameObjectWithTag(floorTileMapTag).GetComponent<Tilemap>();
+        wallsTileMap.CompressBounds(); 
+        floorTileMap.CompressBounds();
 
         boundsWalls  = wallsTileMap.cellBounds;
 
@@ -162,6 +164,9 @@ public class TilemapToScriptable : MonoBehaviour
 
         wallsTileMap = GameObject.FindGameObjectWithTag(wallsTileMapTag).GetComponent<Tilemap>();
         floorTileMap = GameObject.FindGameObjectWithTag(floorTileMapTag).GetComponent<Tilemap>();
+
+        wallsTileMap.CompressBounds();
+        floorTileMap.CompressBounds();
 
         boundsWalls = wallsTileMap.cellBounds;
 

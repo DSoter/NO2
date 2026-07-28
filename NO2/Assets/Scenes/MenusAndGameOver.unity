@@ -2741,8 +2741,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -195, y: -226.112}
-  m_SizeDelta: {x: -790, y: -571.9489}
+  m_AnchoredPosition: {x: -200, y: -211.84732}
+  m_SizeDelta: {x: -720, y: -554.25464}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &601075368
 MonoBehaviour:
@@ -2791,21 +2791,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 601075366}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Script: {fileID: 11500000, guid: fd57a438784cf4144a87b3d7ca899bf2, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GridLayoutGroup
+  m_EditorClassIdentifier: Assembly-CSharp::WrapLayoutGroup
   m_Padding:
     m_Left: 0
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_StartCorner: 0
-  m_StartAxis: 0
-  m_CellSize: {x: 150, y: 150}
-  m_Spacing: {x: 50, y: 50}
-  m_Constraint: 0
-  m_ConstraintCount: 2
+  m_Spacing: {x: 0, y: 0}
+  m_Horizontal: 1
 --- !u!1 &630040569
 GameObject:
   m_ObjectHideFlags: 0
@@ -3402,7 +3398,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &835440382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5146,7 +5142,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1249759808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5839,6 +5835,7 @@ MonoBehaviour:
   mapImage: {fileID: 127572605}
   fogImage: {fileID: 160112963}
   mapContainer: {fileID: 2026265499}
+  worldMapData: {fileID: 11400000, guid: b759603f51b9ccc4d8641177dd487650, type: 2}
   npcSprite: {fileID: -417260794, guid: 2749dd64e4c117e42bd766b6dc8f340b, type: 3}
   flowerSprite: {fileID: -2082329878, guid: 77d60040a28ac3d4492d9d5cb2672195, type: 3}
   campfireSprite: {fileID: 794380995, guid: 77d60040a28ac3d4492d9d5cb2672195, type: 3}
@@ -7317,8 +7314,10 @@ MonoBehaviour:
   - {fileID: 1054477447}
   badgeIconPrefab: {fileID: 7175334852135503976, guid: 5866757973296a740a9b8922d69c01f4, type: 3}
   slotWidth: 150
+  sizeOnCollection: 150
   maxDropDistance: 200
   descriptionPanel: {fileID: 788806720}
+  backgroundBadgeIcon: {fileID: 761152160}
   infoIcon: {fileID: 2086498916}
   infoName: {fileID: 555407313}
   infoDescription: {fileID: 1963371929}

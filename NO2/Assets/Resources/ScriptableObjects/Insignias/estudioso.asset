@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: estudioso
   m_EditorClassIdentifier: Assembly-CSharp::Badge
   badgeName: Has Estudiao
+  achievement: {fileID: 0}
   description: Le sabes a estudiar
   icon: {fileID: 4260968908813130095, guid: 151ae6d17271cc645a564d3a11c23a27, type: 3}
   slotsSize: 1

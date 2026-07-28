@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: mmmmCancer
   m_EditorClassIdentifier: Assembly-CSharp::Badge
   badgeName: Cancer
+  achievement: {fileID: 0}
   description: Enhorabuena por desbloquear cancer
   icon: {fileID: -7585040124126971045, guid: 4988a436af4791f4b99b950ea682db26, type: 3}
   slotsSize: 1

@@ -30,8 +30,13 @@ public class Nose : MonoBehaviour, IHitable
     {
         if (_isVulnerable && strength == AttackStrength.Strong)
         {
-            Destroy(gameObject);
+            _animator.SetTrigger("Death");
         }
+    }
+
+    public void Destroy()
+    {
+        Destroy(gameObject);
     }
 
     public void ToggleVulnerability()

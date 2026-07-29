@@ -6852,6 +6852,7 @@ MonoBehaviour:
   charDelay: 0.03
   characterNameText: {fileID: 7387059664408405488}
   characterPortrait: {fileID: 2507142843055108966}
+  animatorPortrait: {fileID: 8433859141196571491}
   colorCharPairs:
   - character: 42
     color: {r: 0, g: 0, b: 0, a: 0}
@@ -8118,6 +8119,7 @@ GameObject:
   - component: {fileID: 1269435438582452286}
   - component: {fileID: 5675121447185332730}
   - component: {fileID: 2507142843055108966}
+  - component: {fileID: 8433859141196571491}
   m_Layer: 0
   m_Name: iconoPersonaje
   m_TagString: Untagged
@@ -8182,3 +8184,25 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &8433859141196571491
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8998743938960327195}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 915aebf71ce917449947f524ab388f09, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

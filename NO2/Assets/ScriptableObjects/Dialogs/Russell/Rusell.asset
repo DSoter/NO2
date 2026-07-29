@@ -15,3 +15,4 @@ MonoBehaviour:
   characterPortrait: {fileID: -8025327951791349527, guid: 933b08e1f9506b942ad275ff628ea7d4, type: 3}
   characterName: Rusell
   characterDialogs: {fileID: 11400000, guid: ea7eab90bd066854e96b1489c271e925, type: 2}
+  characterAnimator: {fileID: 9100000, guid: 915aebf71ce917449947f524ab388f09, type: 2}

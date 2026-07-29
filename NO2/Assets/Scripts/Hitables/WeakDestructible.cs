@@ -32,10 +32,12 @@ public class WeakDestructible : MonoBehaviour, IHitable
             gameObject.GetComponent<PersistentRespawnObject>().RegisterDestroy();
         }
 
-        GameManager.Instance.GetComponent<AchievementManager>().NotifyCounter("box_slayer", 1);
+        
 
 
         gameObject.SetActive(false);
+
+        GameManager.Instance.GetComponent<AchievementManager>().NotifyCounter("box_slayer", 1);
     }
 
     private void SpawnContent(Vector2 direction)

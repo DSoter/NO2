@@ -1,10 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AchievementManager : MonoBehaviour
 {
+    [Header("Scriptable Object")]
     [SerializeField] private BadgeCollection badgeCollection;
+
+    [Header("Pop Up")]
+    [SerializeField] private Animator popUpAnimator;
+    [SerializeField] private Image achievementImage;
+    [SerializeField] private TextMeshProUGUI achievementName;
+    [SerializeField] private TextMeshProUGUI achievementDescription;
     private Dictionary<string, Achievement> _achievements = new Dictionary<string, Achievement>();
 
     // Eventos por id de logro
@@ -41,6 +50,7 @@ public class AchievementManager : MonoBehaviour
     private void OnAchievementCompleted(Badge badge)
     {
         Debug.Log($"Logro completado: {badge.achievement.achievementName} → Insignia desbloqueada: {badge.badgeName}");
+        ActivatePopUp(badge, badge.achievement);
         badgeCollection.Unlock(badge);
     }
     private void OnAchievementReset(Badge badge)
@@ -78,5 +88,13 @@ public class AchievementManager : MonoBehaviour
     {
         foreach (Achievement a in _achievements.Values)
             a.Reset();
+    }
+    public void ActivatePopUp(Badge badge, Achievement achievement)
+    {
+        achievementImage.sprite = badge.icon;
+        achievementName.text = achievement.name;
+        achievementDescription.text = achievement.description;
+        //popUpAnimator.gameObject.SetActive(true);
+        popUpAnimator.SetTrigger("start_animation");
     }
 }

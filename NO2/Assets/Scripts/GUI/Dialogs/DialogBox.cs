@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static PlayerController;
 using static System.Net.Mime.MediaTypeNames;
 using static UnityEditor.Rendering.MaterialUpgrader;
 
@@ -19,6 +20,7 @@ public class DialogBox : MonoBehaviour
     private float charDefault = 0.03f;
     [SerializeField] private TextMeshProUGUI characterNameText;
     [SerializeField] private UnityEngine.UI.Image characterPortrait;
+    [SerializeField] private Animator animatorPortrait;
 
     [Header("Colorines")]
     [SerializeField] private ColorCharPair[] colorCharPairs;
@@ -95,6 +97,8 @@ public class DialogBox : MonoBehaviour
         characterData = characterReference.CharacterData;
         characterPortrait.sprite = characterData.CharacterPortrait;
         characterNameText.text = characterData.CharacterName;
+        animatorPortrait.runtimeAnimatorController = characterData.CharacterAnimator;
+        animatorPortrait.SetBool("talking", isTyping);
 
         currentLines = lines;
         currentLineIndex = 0;
@@ -271,6 +275,7 @@ public class DialogBox : MonoBehaviour
         continueIndicator.SetActive(false);
         dialogText.text = "";
         CancelAllCoroutines();
+        animatorPortrait.SetBool("talking", true);
         typingCoroutine = StartCoroutine(TypeLine(text));
     }
 
@@ -349,7 +354,7 @@ public class DialogBox : MonoBehaviour
             if (charDelay > 0)
                 yield return new WaitForSeconds(charDelay);
         }
-
+        animatorPortrait.SetBool("talking", false);
         charDelay = charDefault;
         isTyping = false;
         continueIndicator.SetActive(true);
@@ -369,6 +374,7 @@ public class DialogBox : MonoBehaviour
         // Ponemos el texto completo de la línea actual directamente
         //dialogText.text = currentLines[currentLineIndex].text;
         charDelay = 0;
+        animatorPortrait.SetBool("talking", false);
         //isTyping = false;
         //continueIndicator.SetActive(true);
     }

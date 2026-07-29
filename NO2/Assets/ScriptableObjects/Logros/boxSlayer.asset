@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: boxSlayer
   m_EditorClassIdentifier: Assembly-CSharp::Achievement
   achievementName: box_slayer
-  description: 'Debes destruir 20 cajas debiles
+  description: 'Destruye veinte cajas
 
 '
   isCounter: 1

@@ -6,6 +6,7 @@ public class FriendlyCharacterData : ScriptableObject
     [SerializeField] private Sprite characterPortrait;
     [SerializeField] private string characterName;
     [SerializeField] private  ColectionOfDialogs characterDialogs;
+    [SerializeField] private RuntimeAnimatorController characterAnimator;
 
     public ColectionOfDialogs CharacterDialogs { 
         get { return characterDialogs; }
@@ -20,5 +21,10 @@ public class FriendlyCharacterData : ScriptableObject
     {
         get { return characterName; }
         set { characterName = value; }
+    }
+    public RuntimeAnimatorController CharacterAnimator
+    {
+        get { return characterAnimator; }
+        set { characterAnimator = value; }
     }
 }

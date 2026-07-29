@@ -60,6 +60,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     }
     private void OnEnable()
     {
+        mapData.Save();
         //mapData.Save();
         //GenerateMapTexture();
         //_targetScale = mapContainer.localScale.x;
@@ -68,7 +69,9 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
 
 
         UpdateMapData();
-        mapData.Save();
+
+        Debug.Log("Fog texture update");
+        Debug.Log(mapData.FogTextureHasToUpdate);
         GenerateWorldMapTexture();
         _targetScale = mapContainer.localScale.x;
         UpdatePlayerIcon(); 
@@ -176,22 +179,39 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
 
         foreach (WorldMapData.SceneMapEntry entry in worldMapData.scenes)
         {
-            if (entry.mapData?.IsVisibleMatrix == null) continue;
+            if (entry.mapData?.IsVisibleMatrix == null)
+            {
+                Debug.Log("Una matriz de visibilidad es nula");
+                continue;
+            }
+            int trues2 = 0;
+            for (int r = 0; r < entry.mapData.IsVisibleMatrix.GetLength(0); r++)
+                for (int c = 0; c < entry.mapData.IsVisibleMatrix.GetLength(1); c++)
+                    if (entry.mapData.IsVisibleMatrix[r, c]) trues2++;
+            Debug.Log($"IsVisibleMatrix en GenerateWorldFog escena {entry.sceneName} — Visibles: {trues2}");
 
             int rows = entry.mapData.IsVisibleMatrix.GetLength(0);
             int cols = entry.mapData.IsVisibleMatrix.GetLength(1);
             int offsetX = entry.offsetInCells.x - minX;
             int offsetY = entry.offsetInCells.y - minY;
-
+            int trues = 0;
+            int falses =0;
             for (int row = 0; row < rows; row++)
                 for (int col = 0; col < cols; col++)
                 {
                     Color fogColor = entry.mapData.IsVisibleMatrix[row, col]
                         ? Color.clear
                         : Color.black;
-                    FillTile(_fogTexture, offsetX + col, offsetY + row, fogColor);
+                    if (entry.mapData.IsVisibleMatrix[row, col])
+                    {
+                        trues++;
+                    }
+                    else
+                    {
+                        falses++;
+                    }
+                        FillTile(_fogTexture, offsetX + col, offsetY + row, fogColor);
                 }
-
             entry.mapData.FogTextureHasToUpdate = false;
         }
 

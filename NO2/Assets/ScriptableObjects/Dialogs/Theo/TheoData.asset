@@ -15,3 +15,4 @@ MonoBehaviour:
   characterPortrait: {fileID: -940479463673492583, guid: c78e13627f165e24694f199506aaa659, type: 3}
   characterName: Theo
   characterDialogs: {fileID: 11400000, guid: 314dbdb4c42db474b844164061a27346, type: 2}
+  characterAnimator: {fileID: 9100000, guid: 60afd4c2a2df94f4ebc4895cf0999cac, type: 2}

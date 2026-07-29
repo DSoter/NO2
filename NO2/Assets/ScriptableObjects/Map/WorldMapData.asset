@@ -18,7 +18,7 @@ MonoBehaviour:
     offsetInCells: {x: 0, y: 0}
   - sceneName: PruebaSiguienteNivel
     mapData: {fileID: 11400000, guid: e35f527127aa874479acf00ca6d6fcd3, type: 2}
-    offsetInCells: {x: -132, y: 5}
+    offsetInCells: {x: -59, y: 33}
   gatePositions:
   - sceneName: PruebaTileMap
     gateId: 3

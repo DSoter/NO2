@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: NO2
   m_EditorClassIdentifier: Assembly-CSharp::Achievement
   achievementName: no_oxygen
-  description: Ahogate por primera vez
+  description: Te has ahogado por primera vez
   isCounter: 0
   targetCount: 0

@@ -250,6 +250,14 @@ public class FogManager : MonoBehaviour
         GenerateFog();
         
     }
+    void OnApplicationQuit()
+    {
+        // Code executed before the application closes
+        Debug.Log("Application is quitting.");
+
+        sceneMapData.Save();
+    }
+
     private void Start()
     {
         InitializeVisibilityMatrix();

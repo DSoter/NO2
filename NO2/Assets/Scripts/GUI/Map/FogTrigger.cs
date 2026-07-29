@@ -106,7 +106,11 @@ public class FogTrigger : MonoBehaviour
         if (celdasReveladas > 0)
         {
             sceneMapData.FogTextureHasToUpdate = true;
-
+            int trues = 0;
+            for (int r = 0; r < sceneMapData.IsVisibleMatrix.GetLength(0); r++)
+                for (int c = 0; c < sceneMapData.IsVisibleMatrix.GetLength(1); c++)
+                    if (sceneMapData.IsVisibleMatrix[r, c]) trues++;
+            Debug.Log($"IsVisibleMatrix tras RevealMapCells — Visibles: {trues}");
         }
     }
 }

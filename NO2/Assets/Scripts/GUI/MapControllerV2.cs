@@ -230,7 +230,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
 
         foreach (WorldMapData.SceneMapEntry entry in worldMapData.scenes)
         {
-            if (entry.mapData?.MapMatrix == null) continue;
+            if(entry.mapData?.MapMatrix == null) { Debug.Log($"[Bounds] {entry.sceneName} SIN CARGAR"); continue; }
             int rows = entry.mapData.MapMatrix.GetLength(0);
             int cols = entry.mapData.MapMatrix.GetLength(1);
 
@@ -238,6 +238,8 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
             minY = Mathf.Min(minY, entry.offsetInCells.y);
             maxX = Mathf.Max(maxX, entry.offsetInCells.x + cols);
             maxY = Mathf.Max(maxY, entry.offsetInCells.y + rows);
+            Debug.Log($"[Bounds] {entry.sceneName} offset={entry.offsetInCells} size={cols}x{rows} " +
+                          $"rangoX=({entry.offsetInCells.x},{entry.offsetInCells.x + cols}) rangoY=({entry.offsetInCells.y},{entry.offsetInCells.y + rows})");
         }
 
         if (minX == int.MaxValue) return (0, 0, 0, 0);
@@ -269,10 +271,12 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
 
         // Posición en celdas locales
         Vector2Int gridPos = tts.WorldToGrid(playerTransform.position);
+        Debug.Log($"[PlayerIcon] scene={currentScene} gridPos={gridPos} offset={currentEntry.offsetInCells} worldBounds=({_worldMinX},{_worldMinY},{_worldTotalCols},{_worldTotalRows})");
 
         // Convertir a coordenadas globales
         int globalCol = currentEntry.offsetInCells.x - minX + gridPos.x;
         int globalRow = currentEntry.offsetInCells.y - minY + gridPos.y;
+        
 
         int texWidth = totalCols * pixelsPerTile;
         int texHeight = totalRows * pixelsPerTile;
@@ -286,6 +290,8 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         RectTransform mapRect = mapImage.rectTransform;
         float localX = (normX - 0.5f) * mapRect.rect.width;
         float localY = (normY - 0.5f) * mapRect.rect.height;
+
+        Debug.Log($"[PlayerIcon] globalCol={globalCol} globalRow={globalRow} texWidth={texWidth} texHeight={texHeight} localX={localX} localY={localY}");
 
         playerIcon.sprite = playerSprite;
         playerIcon.gameObject.SetActive(true);

@@ -8,10 +8,12 @@ public class FogTrigger : MonoBehaviour
     [SerializeField] private TilemapToScriptable tilemapToScriptable;
     [SerializeField] private GameObject fogImage;
     [SerializeField] private GameObject fogCollider;
+    private FogManager fogManager;
 
 
     private void Awake()
     {
+        fogManager = GetComponentInParent<FogManager>();
         fogData = GetComponentInParent<FogManager>().FogData;
         sceneMapData = GetComponentInParent<FogManager>().SceneMapData;
         tilemapToScriptable = GetComponentInParent<FogManager>().TilemapToScriptable;
@@ -64,8 +66,10 @@ public class FogTrigger : MonoBehaviour
         int rows = sceneMapData.IsVisibleMatrix.GetLength(0);
         int cols = sceneMapData.IsVisibleMatrix.GetLength(1);
 
-        float radioMundo = fogData.Separation;
+        //float radioMundo = fogData.Separation;
+        float radioMundo = fogManager.FogScale;
         int radioEnCeldas = Mathf.CeilToInt(radioMundo);
+
         Vector2Int center = tilemapToScriptable.WorldToGrid(transform.position);
         Debug.Log($"Center: {center}");
 

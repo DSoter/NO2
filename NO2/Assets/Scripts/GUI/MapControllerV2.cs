@@ -51,6 +51,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     private bool _isDragging;
     private bool _isHovered;
     private string sceneControllerTag = "SceneController";
+    private int _worldMinX, _worldMinY, _worldTotalCols, _worldTotalRows;
 
     private void OnEnable()
     {
@@ -73,14 +74,23 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     }
     public void GenerateWorldMapTexture()
     {
+        EnsureAllScenesLoaded();
         GenerateWorldMap();
         GenerateWorldFog();
     }
 
+
+
     private void GenerateWorldMap()
     {
         string path = GetWorldMapTexturePath();
-
+        (int minX, int minY, int totalCols, int totalRows) = CalculateWorldBounds();
+        _worldMinX = minX;
+        _worldMinY = minY;
+        _worldTotalCols = totalCols;
+        _worldTotalRows = totalRows;
+        Debug.Log($"[Texture] path={path} exists={File.Exists(path)} needsUpdate={worldMapData.WorldMapNeedsUpdate}");
+        Debug.Log($"[Bounds] minX={minX} minY={minY} cols={totalCols} rows={totalRows}");
         if (!worldMapData.WorldMapNeedsUpdate && System.IO.File.Exists(path))
         {
             byte[] bytes = System.IO.File.ReadAllBytes(path);
@@ -88,10 +98,10 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
             _mapTexture.filterMode = FilterMode.Point;
             _mapTexture.LoadImage(bytes);
             mapImage.texture = _mapTexture;
+            
             return;
         }
 
-        (int minX, int minY, int totalCols, int totalRows) = CalculateWorldBounds();
         if (totalCols <= 0 || totalRows <= 0) return;
 
         int texWidth = totalCols * pixelsPerTile;
@@ -251,8 +261,11 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
 
         if (currentEntry?.mapData == null) return;
 
-        (int minX, int minY, int totalCols, int totalRows) = CalculateWorldBounds();
-        if (totalCols <= 0) return;
+        //(int minX, int minY, int totalCols, int totalRows) = CalculateWorldBounds();
+        //if (totalCols <= 0) return;
+        if (_worldTotalCols <= 0) return;
+        int minX = _worldMinX, minY = _worldMinY, totalCols = _worldTotalCols, totalRows = _worldTotalRows;
+
 
         // Posición en celdas locales
         Vector2Int gridPos = tts.WorldToGrid(playerTransform.position);
@@ -277,76 +290,9 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         playerIcon.sprite = playerSprite;
         playerIcon.gameObject.SetActive(true);
         playerIcon.rectTransform.localPosition = new Vector3(localX, localY, 0f);
+
+        Debug.Log($"[Bounds] minX={minX} minY={minY} cols={totalCols} rows={totalRows}");
     }
-    //public void GenerateWorldMapTexture()
-    //{
-    //    worldMapData.LoadOffsets();
-
-    //    // Calcular bounds globales
-    //    int minX = int.MaxValue, minY = int.MaxValue;
-    //    int maxX = int.MinValue, maxY = int.MinValue;
-
-    //    foreach (WorldMapData.SceneMapEntry entry in worldMapData.scenes)
-    //    {
-    //        if (entry.mapData?.MapMatrix == null) continue;
-    //        int rows = entry.mapData.MapMatrix.GetLength(0);
-    //        int cols = entry.mapData.MapMatrix.GetLength(1);
-
-    //        minX = Mathf.Min(minX, entry.offsetInCells.x);
-    //        minY = Mathf.Min(minY, entry.offsetInCells.y);
-    //        maxX = Mathf.Max(maxX, entry.offsetInCells.x + cols);
-    //        maxY = Mathf.Max(maxY, entry.offsetInCells.y + rows);
-    //    }
-
-    //    int totalCols = maxX - minX;
-    //    int totalRows = maxY - minY;
-    //    int texWidth = totalCols * pixelsPerTile;
-    //    int texHeight = totalRows * pixelsPerTile;
-
-    //    Texture2D worldTex = new Texture2D(texWidth, texHeight, TextureFormat.RGBA32, false);
-    //    worldTex.filterMode = FilterMode.Point;
-
-    //    // Fondo transparente
-    //    Color[] clearPixels = new Color[texWidth * texHeight];
-    //    for (int i = 0; i < clearPixels.Length; i++) clearPixels[i] = Color.clear;
-    //    worldTex.SetPixels(clearPixels);
-
-    //    // Dibujar cada escena
-    //    foreach (WorldMapData.SceneMapEntry entry in worldMapData.scenes)
-    //    {
-    //        if (entry.mapData?.MapMatrix == null) continue;
-
-    //        int rows = entry.mapData.MapMatrix.GetLength(0);
-    //        int cols = entry.mapData.MapMatrix.GetLength(1);
-    //        int offsetX = entry.offsetInCells.x - minX;
-    //        int offsetY = entry.offsetInCells.y - minY;
-
-    //        for (int row = 0; row < rows; row++)
-    //        {
-    //            for (int col = 0; col < cols; col++)
-    //            {
-    //                Color color = GetTileColor(entry.mapData.MapMatrix[row, col]);
-    //                int texCol = offsetX + col;
-    //                int texRow = offsetY + row;
-    //                FillTile(worldTex, texCol, texRow, color);
-    //            }
-    //        }
-
-    //        // Iconos
-    //        for (int row = 0; row < rows; row++)
-    //        {
-    //            for (int col = 0; col < cols; col++)
-    //            {
-    //                Sprite icon = GetTileIcon(entry.mapData.MapMatrix[row, col]);
-    //                if (icon != null)
-    //                    DrawIcon(worldTex, offsetX + col, offsetY + row, icon);
-    //            }
-    //        }
-    //    }
-
-    //    worldTex.Apply();
-    //    mapImage.texture = worldTex;
-    //}
 
     private string GetWorldMapTexturePath()
     {
@@ -547,10 +493,12 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
                     mapData = tts.SceneMapData;
                     mapData.Save();
 
-                    WorldMapDataRegister.ScenesVisited scenesVisited =  GameManager.Instance.GetComponent <WorldMapDataRegister>().Scenes;
+                    WorldMapDataRegister register = GameManager.Instance.GetComponent<WorldMapDataRegister>();
+                    WorldMapDataRegister.ScenesVisited scenesVisited = register.Scenes;
                     if (!scenesVisited.references.Contains(scene.name))
                     {
                         scenesVisited.references.Add(scene.name);
+                        register.SaveVisited();
                         worldMapData.WorldMapNeedsUpdate = true;
                     }
                 }
@@ -688,6 +636,17 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
             case SceneMapData.MapTile.Gate: return gateSprite;
 
             default: return null;
+        }
+    }
+    private void EnsureAllScenesLoaded()
+    {
+        foreach (WorldMapData.SceneMapEntry entry in worldMapData.scenes)
+        {
+            if (entry.mapData == null) continue;
+            if (entry.mapData.MapMatrix == null)
+            {
+                entry.mapData.Load();
+            }
         }
     }
 

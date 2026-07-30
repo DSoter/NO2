@@ -15,6 +15,7 @@ public class AchievementManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI achievementName;
     [SerializeField] private TextMeshProUGUI achievementDescription;
     private Dictionary<string, Achievement> _achievements = new Dictionary<string, Achievement>();
+    private Queue<Badge> queueBadgesToUnlock = new Queue<Badge>();
 
     // Eventos por id de logro
     private Dictionary<string, Action> _singleEvents = new Dictionary<string, Action>();
@@ -24,6 +25,15 @@ public class AchievementManager : MonoBehaviour
     {
         LoadAll();
         RegisterCallbacks();
+    }
+    private void Update()
+    {
+        if (queueBadgesToUnlock.Count>0 && popUpAnimator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "popup_idle" )
+        {
+            Debug.Log("Animator libre");
+            Badge badge = queueBadgesToUnlock.Dequeue();
+            OnAchievementCompleted(badge);
+        }
     }
 
     private void LoadAll()
@@ -49,9 +59,23 @@ public class AchievementManager : MonoBehaviour
 
     private void OnAchievementCompleted(Badge badge)
     {
-        Debug.Log($"Logro completado: {badge.achievement.achievementName} → Insignia desbloqueada: {badge.badgeName}");
-        ActivatePopUp(badge, badge.achievement);
-        badgeCollection.Unlock(badge);
+        Debug.Log(popUpAnimator.GetCurrentAnimatorClipInfoCount(0));
+        AnimatorClipInfo[] animClipInfo = popUpAnimator.GetCurrentAnimatorClipInfo(0);
+        //Output the name of the actual clip
+        Debug.Log("Starting clip : " + animClipInfo[0].clip.name);
+        string clipName = "" + animClipInfo[0].clip.name;
+        if (clipName != "popup_idle")
+        {
+            Debug.Log("Animator ocupado, se va a la cola");
+            queueBadgesToUnlock.Enqueue(badge);
+        }
+        else
+        {
+            Debug.Log($"Logro completado: {badge.achievement.achievementName} → Insignia desbloqueada: {badge.badgeName}");
+            ActivatePopUp(badge, badge.achievement);
+            badgeCollection.Unlock(badge);
+        }
+        
     }
     private void OnAchievementReset(Badge badge)
     {
@@ -96,5 +120,6 @@ public class AchievementManager : MonoBehaviour
         achievementDescription.text = achievement.description;
         //popUpAnimator.gameObject.SetActive(true);
         popUpAnimator.SetTrigger("start_animation");
+        Debug.Log(popUpAnimator.GetCurrentAnimatorClipInfoCount(0));
     }
 }

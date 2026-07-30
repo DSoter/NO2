@@ -23,6 +23,11 @@ public class FogManager : MonoBehaviour
         get { return fogData; } 
         set { fogData = value; }
     }
+    public float FogScale
+    {
+        get { return fogScale; }
+        set { fogScale = value; }
+    }
     public SceneMapData SceneMapData
     {
         get { return sceneMapData; }

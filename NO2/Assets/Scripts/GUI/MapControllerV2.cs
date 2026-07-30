@@ -550,13 +550,15 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
                 if (tts != null && tts.CompareTag(sceneControllerTag))
                 {
                     Debug.Log($"UpdateMapData — SceneMapData encontrado: {tts.SceneMapData.name}");
-                    //tts.SaveMap();
                     mapData = tts.SceneMapData;
-                    if (mapData != auxMapData )
-                    {
-                        tts.FogManager.ResetAndReinitialize();
-                    }
                     mapData.Save();
+
+                    WorldMapDataRegister.ScenesVisited scenesVisited =  GameManager.Instance.GetComponent <WorldMapDataRegister>().Scenes;
+                    if (!scenesVisited.references.Contains(scene.name))
+                    {
+                        scenesVisited.references.Add(scene.name);
+                        worldMapData.WorldMapNeedsUpdate = true;
+                    }
                 }
             }
         }

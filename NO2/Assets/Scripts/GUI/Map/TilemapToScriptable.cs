@@ -7,6 +7,7 @@ using static UnityEngine.Rendering.DebugUI.Table;
 public class TilemapToScriptable : MonoBehaviour
 {
     [SerializeField] SceneMapData sceneMapData;
+    [SerializeField] FogManager fogManager;
     private Tilemap floorTileMap;
     private string floorTileMapTag = "MainTileMap";
     private Tilemap wallsTileMap;
@@ -20,6 +21,10 @@ public class TilemapToScriptable : MonoBehaviour
     public SceneMapData SceneMapData
     {
         get { return sceneMapData; }
+    }
+    public FogManager FogManager
+    {
+        get { return fogManager; }
     }
 
     private void Awake()

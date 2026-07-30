@@ -52,12 +52,6 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     private bool _isHovered;
     private string sceneControllerTag = "SceneController";
 
-    private void Start()
-    {
-       
-
-        
-    }
     private void OnEnable()
     {
         mapData.Save();

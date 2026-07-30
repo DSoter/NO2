@@ -29,7 +29,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     [Header("Colores")]
     [SerializeField] private Color floorColor = Color.gray;
     [SerializeField] private Color wallColor = Color.white;
-    [SerializeField] private Color emptyColor = Color.clear;
+    [SerializeField] private Color emptyColor = Color.black;
 
     [Header("Zoom y movimiento")]
     [SerializeField] private float scrollSensitivity = 0.1f;
@@ -52,16 +52,9 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     private bool _isHovered;
     private string sceneControllerTag = "SceneController";
 
-    private void Start()
-    {
-       
-
-        
-    }
     private void OnEnable()
     {
         mapData.Save();
-        //mapData.Save();
         //GenerateMapTexture();
         //_targetScale = mapContainer.localScale.x;
         //GenerateFogTexture();
@@ -537,7 +530,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     }
     private void UpdateMapData()
     {
-
+        SceneMapData auxMapData = mapData;
         Scene additiveScene = gameObject.scene; // la escena donde vive este script
 
         for (int i = 0; i < SceneManager.sceneCount; i++)
@@ -551,8 +544,15 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
                 if (tts != null && tts.CompareTag(sceneControllerTag))
                 {
                     Debug.Log($"UpdateMapData — SceneMapData encontrado: {tts.SceneMapData.name}");
-                    tts.SaveMap();
                     mapData = tts.SceneMapData;
+                    mapData.Save();
+
+                    WorldMapDataRegister.ScenesVisited scenesVisited =  GameManager.Instance.GetComponent <WorldMapDataRegister>().Scenes;
+                    if (!scenesVisited.references.Contains(scene.name))
+                    {
+                        scenesVisited.references.Add(scene.name);
+                        worldMapData.WorldMapNeedsUpdate = true;
+                    }
                 }
             }
         }

@@ -1,7 +1,5 @@
-using Unity.VisualScripting.Antlr3.Runtime.Tree;
-using UnityEditor.U2D.Aseprite;
+
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI.Table;
 
 public class FogManager : MonoBehaviour
 {

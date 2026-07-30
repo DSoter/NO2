@@ -1,15 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.UI;
-using static PlayerController;
-using static System.Net.Mime.MediaTypeNames;
-using static UnityEditor.Rendering.MaterialUpgrader;
 
 public class DialogBox : MonoBehaviour
 {

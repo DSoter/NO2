@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cefcbd99b00b4c14eab78afd4ec1278b, type: 3}
   m_Name: estudioso
   m_EditorClassIdentifier: Assembly-CSharp::Badge
-  badgeName: Has Estudiao
-  achievement: {fileID: 0}
-  description: Le sabes a estudiar
+  badgeName: Primera medalla
+  achievement: {fileID: 11400000, guid: 8362e8652bbaaa548a8a29519a67853b, type: 2}
+  description: Para aprender debes lograr un aprendizaje logrado
   icon: {fileID: 4260968908813130095, guid: 151ae6d17271cc645a564d3a11c23a27, type: 3}
   slotsSize: 1
   effect:

@@ -21,11 +21,7 @@ MonoBehaviour:
     - conditionKey: 
       text: Soy un explorador y me dedico a llegar a sitios exoticos
     - conditionKey: 
-      text: "*prueba* para ver si las palabras que saltan de una linea a otra se
-        ven bien de primeras o si pegan un salto mientras se est\xE1n generando rompiendo
-        la inmersion del jugador. Efectivamente, que duro, se podr\xEDa cambiar la
-        transparencia de las letras en vez de colocarlas en tiempo real para q eso
-        no pase."
+      text: Me alegro de ver caras nuevas por aqui
   - lines:
     - conditionKey: 
       text: Estoy buscando _flores_ raras
@@ -33,21 +29,33 @@ MonoBehaviour:
       text: Te permiten obtener poderes de la naturaleza
     - conditionKey: 
       text: "\xBFMe puedes ense\xF1ar alguna?"
+    - conditionKey: 
+      text: "\xBFMe puedes ense\xF1ar alguna?"
   repetitionTexts:
   - lines:
     - conditionKey: anyFlowerUnlockedAndTheoFirstDialogFinished
+      text: "Recuerda: en una hoguera abrir el men\xFA (O), confirmar (espacio) ny
+        elegir la flor que desees. Se equipar\xE1 confirmando o cerrando el men\xFA"
+    - conditionKey: anyFlowerUnlockedAndTheoFirstDialogFinished
       text: '#Buena _suerte_# en tu $viaje$.'
     - conditionKey: anyFlowerUnlockedAndNotTheoFirstDialogFinished
-      text: OSTIAS TO GUAPO
+      text: OSTIAS TO GUAPA
     - conditionKey: noneFlowerUnlocked
       text: Veo que todavia no has encontrado ninguna flor
     - conditionKey: noneFlowerUnlocked
-      text: "Est\xE1 arriba a la izquierda cegato"
+      text: Recuerda que suelen estar en sitios apartados
+    - conditionKey: noneFlowerUnlocked
+      text: Para agarrarla debes de interactuar con ella con la tecla /E/
     - conditionKey: anyFlowerUnlockedAndNotTheoFirstDialogFinished
       text: No habia visto ninguna parecida a esta
     - conditionKey: anyFlowerUnlockedAndNotTheoFirstDialogFinished
-      text: mmmmmmm
+      text: Para usarla debes de descansar en una hoguera como la que tengo al lado
     - conditionKey: anyFlowerUnlockedAndNotTheoFirstDialogFinished
-      text: Interesante, veo que blah blah cosas cientificas blah blah
+      text: "Despues abre el men\xFA de flores con la \"O\""
+    - conditionKey: anyFlowerUnlockedAndNotTheoFirstDialogFinished
+      text: "Al confirmar con la tecla espacio activar\xE1s el men\xFA y podr\xE1s
+        moverte con las flechas o W S"
+    - conditionKey: anyFlowerUnlockedAndNotTheoFirstDialogFinished
+      text: Cada flor tiene unas cualidades distintas
     - conditionKey: anyFlowerUnlockedThenTheoFirstDialogFinished
       text: "Muchas gracias, voy a continuar mis viajes. Espero verte por ah\xED"

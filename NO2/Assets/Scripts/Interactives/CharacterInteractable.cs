@@ -7,6 +7,11 @@ public class CharacterInteractable : Interactable
 {
     [SerializeField] FriendlyCharacterData characterData;
     [SerializeField] int conversationNumber = 1; //se usa para acceder a la lista de dialogos pero empieza en uno
+
+    [Header("Guardado")]
+    [Tooltip("Identificador único para esta instancia. Debe ser distinto para cada personaje/instancia en el juego.")]
+    [SerializeField] private string saveId;
+
     private AllConditionsDIalog acd;
     private DialogTextData fullConversation;
     private List<DialogSequence> normalTexts;
@@ -16,6 +21,10 @@ public class CharacterInteractable : Interactable
     private DialogBox dialogBox;
     private bool dialogIsOpen;
     private bool dialogIsRecentlyOpen;
+
+    public string SaveId => saveId;
+
+    private string TimesTalkedKey => saveId + "_timesTalked";
 
     public bool DialogIsOpen
     {
@@ -42,16 +51,66 @@ public class CharacterInteractable : Interactable
         acd = GetComponent<AllConditionsDIalog>();
         conditions = new Dictionary<string, Func<bool>>
         {
+            //theo
             { "anyFlowerUnlocked",   () => acd.FlowerIsUnlocked()},
             { "anyFlowerUnlockedThenDestroy",   () => acd.FlowerIsUnlockedThenDestroy()},
+
             {"anyFlowerUnlockedAndNotTheoFirstDialogFinished", () => acd.FlowerIsUnlocked() && !acd.FirstTheoDialogIsFinished() },
             {"anyFlowerUnlockedThenTheoFirstDialogFinished", () =>  !acd.FirstTheoDialogIsFinished() && acd.FlowerIsUnlockedThenFinishTheoFirstDialog()  },
             {"anyFlowerUnlockedAndTheoFirstDialogFinished", () => acd.FlowerIsUnlocked() && acd.FirstTheoDialogIsFinished() },
             {"anyFlowerUnlockedThenTheoSecondDialogFinished", () => acd.FlowerIsUnlockedThenFinishTheoSecondDialog() },
             {"anyFlowerUnlockedAndTheoSecondDialogFinished", () => acd.FlowerIsUnlocked() && acd.SecondTheoDialogIsFinished() },
+
             { "noneFlowerUnlocked", () => !acd.FlowerIsUnlocked()},
+
+            //Russell
+            { "anyBadgeUnlocked",   () => acd.BadgeIsUnlocked()},
+            
+
+            {"anyBadgeUnlockedAndNotRusellFirstDialogFinished", () => acd.BadgeIsUnlocked() && !acd.FirstRusellDialogIsFinished() },
+            {"anyBadgeUnlockedThenRusellFirstDialogFinished", () =>  !acd.FirstRusellDialogIsFinished() && acd.BadgeIsUnlockedThenFinishRusellFirstDialog()  },
+            {"anyBadgeUnlockedAndRusellFirstDialogFinished", () => acd.BadgeIsUnlocked() && acd.FirstRusellDialogIsFinished() },
+
+            { "noneBadgeUnlocked",   () => !acd.BadgeIsUnlocked()},
+            { "noneBadgeUnlockedAndThenUnlockFirstBadge",   () => !acd.BadgeIsUnlocked() && acd.RusellGiveFirstBadge()},
+            { "anyBadgeUnlockedAndThenUnlockFirstBadge",   () => acd.BadgeIsUnlocked() && acd.RusellGiveFirstBadge()},
+
+            
             // añadir TODAS las condiciones
         };
+        LoadState();
+    }
+    private void LoadState()
+    {
+        if (string.IsNullOrEmpty(saveId))
+        {
+            Debug.LogWarning($"{gameObject.name}: CharacterInteractable no tiene saveId asignado, el progreso no se guardará correctamente.");
+            return;
+        }
+        timesTalked = PlayerPrefs.GetInt(TimesTalkedKey, 0);
+    }
+
+    private void SaveState()
+    {
+        if (string.IsNullOrEmpty(saveId)) return;
+        PlayerPrefs.SetInt(TimesTalkedKey, timesTalked);
+        PlayerPrefs.Save();
+    }
+
+    [ContextMenu("Reset Conversation Progress")]
+    public void ResetConversationProgress()
+    {
+        if (string.IsNullOrEmpty(saveId))
+        {
+            Debug.LogWarning($"{gameObject.name}: no tiene saveId asignado, no se puede reiniciar el progreso.");
+            return;
+        }
+
+        timesTalked = 0;
+        PlayerPrefs.DeleteKey(TimesTalkedKey);
+        PlayerPrefs.Save();
+
+        Debug.Log($"Progreso de conversación reiniciado para '{saveId}'.");
     }
 
     public bool Evaluate(string conditionKey)
@@ -70,7 +129,7 @@ public class CharacterInteractable : Interactable
         fullConversation = characterData.CharacterDialogs.ListOfDialogs[conversationNumber-1];
         normalTexts = fullConversation.ListOfTexts;
         repetitionTexts = fullConversation.RepetitionTexts;
-        timesTalked = 0;
+        //timesTalked = 0;
     }
     public override void Interact()
     {
@@ -101,6 +160,7 @@ public class CharacterInteractable : Interactable
             actualConversation = normalTexts[timesTalked];
             dialogBox.StartDialog(actualConversation.lines, this); 
             timesTalked++;
+            SaveState();
         }
         else
         {

@@ -30,6 +30,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     [SerializeField] private Color floorColor = Color.gray;
     [SerializeField] private Color wallColor = Color.white;
     [SerializeField] private Color emptyColor = Color.black;
+    [SerializeField] private Color oxygenColor = Color.cyan;
 
     [Header("Zoom y movimiento")]
     [SerializeField] private float scrollSensitivity = 0.1f;
@@ -43,6 +44,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     [SerializeField] private Image playerIcon;
     [SerializeField] private Sprite playerSprite;
     [SerializeField] private TilemapToScriptable tilemapToScriptable;
+
 
     private Texture2D _mapTexture;
     private Texture2D _fogTexture;
@@ -628,6 +630,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         {
             case SceneMapData.MapTile.Floor: return floorColor;
             case SceneMapData.MapTile.Wall: return wallColor;
+            case SceneMapData.MapTile.Oxygen: return oxygenColor;
             default: return floorColor;
         }
     }

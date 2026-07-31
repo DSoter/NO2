@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 644728135234314064}
   - component: {fileID: 3934381448577092082}
   - component: {fileID: 1259781470417437746}
-  - component: {fileID: 7341859080973720632}
+  - component: {fileID: 6112442009641256193}
   m_Layer: 7
   m_Name: OxygenArea
   m_TagString: Untagged
@@ -105,8 +105,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a32ba2beb68fd2a4fb82c9ee7b951baf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OxygenArea
---- !u!61 &7341859080973720632
-BoxCollider2D:
+--- !u!60 &6112442009641256193
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -149,5 +149,10 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.5, y: 0.5}
+      - {x: -0.5, y: -0.5}
+      - {x: 0.5, y: -0.5}
+      - {x: 0.5, y: 0.5}
+  m_UseDelaunayMesh: 1

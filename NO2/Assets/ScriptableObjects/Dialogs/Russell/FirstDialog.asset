@@ -20,8 +20,30 @@ MonoBehaviour:
       text: "\xBFComo te llamas?"
   - lines:
     - conditionKey: 
-      text: "Aqui ir\xE1 un tuto de insignias"
+      text: "\xBFTienes alguna insignia? $!Son lo m\xE1s!$"
+    - conditionKey: anyBadgeUnlocked
+      text: '!No sabia que eras $scout$!'
+    - conditionKey: anyBadgeUnlocked
+      text: Parece que he encontrado un valiente explorador
+    - conditionKey: anyBadgeUnlockedAndThenUnlockFirstBadge
+      text: "Toma, no ser\xE1 nada para ti pero te la mereces"
+    - conditionKey: noneBadgeUnlocked
+      text: Veo que no has conseguido ninguna insignia que muestre tu valia
+    - conditionKey: noneBadgeUnlocked
+      text: Estas de #_suerte_#, tengo el honor de poder otorgar insignias
+    - conditionKey: noneBadgeUnlockedAndThenUnlockFirstBadge
+      text: "Para ti, ser\xE1 la primera de muchas"
   repetitionTexts:
   - lines:
     - conditionKey: 
-      text: Comprobar que ha terminado el tuto de insignias
+      text: Para equiparte una medalla primero debes de ir a una hoguera y descansar
+    - conditionKey: 
+      text: "Abre el men\xFA de insignias con la \"I\" y ver\xE1s tu banda scout
+        junto a tus insignias coleccionadas"
+    - conditionKey: 
+      text: Simplemente arrastra la insignia que quieras a tu banda para equiparla
+    - conditionKey: 
+      text: "/Cuidado/ solo tienes 4 huecos, en los que puedes ponerte 4 insignias
+        peque\xF1as, dos grandes o una #gigante#"
+    - conditionKey: 
+      text: "Buscame cuando hayas demostrado tu valia y conseguido m\xE1s insignias"

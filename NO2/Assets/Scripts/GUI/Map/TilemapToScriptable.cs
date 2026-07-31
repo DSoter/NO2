@@ -8,16 +8,16 @@ public class TilemapToScriptable : MonoBehaviour
 {
     [SerializeField] SceneMapData sceneMapData;
     [SerializeField] FogManager fogManager;
-    private Tilemap floorTileMap;
-    private string floorTileMapTag = "MainTileMap";
-    private Tilemap wallsTileMap;
-    private string wallsTileMapTag = "WallsTileMap";
+    [Header("Tilemaps")]
+    [SerializeField] private Tilemap floorTileMap;
+    [SerializeField] private Tilemap wallsTileMap;
 
     //Al ser más grande el de muros lo usamos como referencia
     private BoundsInt boundsWalls;
     private int widthWalls;
     private int heightWalls;
 
+    private bool boundsReady = false;
     public SceneMapData SceneMapData
     {
         get { return sceneMapData; }
@@ -41,7 +41,9 @@ public class TilemapToScriptable : MonoBehaviour
         AddFlowersToTileMap();
         AddNpcsToTileMap();
         AddGatesToTileMap();
-        
+        AddOxygenZonesToTileMap();
+
+
         sceneMapData.SaveMapOnly();
     }
 
@@ -60,12 +62,7 @@ public class TilemapToScriptable : MonoBehaviour
 
     public Vector2Int WorldToGrid(Vector3 worldPosition)
     {
-
-        if(wallsTileMap == null)
-        {
-            wallsTileMap = GameObject.FindGameObjectWithTag(wallsTileMapTag).GetComponent<Tilemap>();
-            floorTileMap = GameObject.FindGameObjectWithTag(floorTileMapTag).GetComponent<Tilemap>();
-        }
+        EnsureBoundsCompressed();
 
         Vector3Int tilemapCell = wallsTileMap.WorldToCell(worldPosition);
         boundsWalls = wallsTileMap.cellBounds;
@@ -78,14 +75,66 @@ public class TilemapToScriptable : MonoBehaviour
 
     public Vector3 GridToWorld(Vector2Int gridPos)
     {
-        if (wallsTileMap == null)
-        {
-            wallsTileMap = GameObject.FindGameObjectWithTag(wallsTileMapTag).GetComponent<Tilemap>();
-            floorTileMap = GameObject.FindGameObjectWithTag(floorTileMapTag).GetComponent<Tilemap>();
-        }
+        EnsureBoundsCompressed();
+
         int tilemapX = boundsWalls.xMin + gridPos.x;
         int tilemapY = boundsWalls.yMin + gridPos.y;
         return wallsTileMap.CellToWorld(new Vector3Int(tilemapX, tilemapY, 0));
+    }
+
+
+
+    private void EnsureBoundsCompressed()
+    {
+        if (boundsReady) return;
+
+        Debug.Log($"[Bounds] {gameObject.scene.name} ANTES compress: xMin={wallsTileMap.cellBounds.xMin} yMin={wallsTileMap.cellBounds.yMin} size={wallsTileMap.cellBounds.size}");
+
+        wallsTileMap.CompressBounds();
+        floorTileMap.CompressBounds();
+        boundsWalls = wallsTileMap.cellBounds;
+        widthWalls = boundsWalls.size.x;
+        heightWalls = boundsWalls.size.y;
+        Debug.Log($"[Bounds] {gameObject.scene.name} DESPUES compress: xMin={wallsTileMap.cellBounds.xMin} yMin={wallsTileMap.cellBounds.yMin} size={wallsTileMap.cellBounds.size}");
+
+        boundsReady = true;
+    }
+    public void AddOxygenZonesToTileMap()
+    {
+        OxygenArea[] zonas = FindObjectsByType<OxygenArea>();
+
+        foreach (OxygenArea zona in zonas)
+        {
+            PolygonCollider2D col = zona.GetComponent<PolygonCollider2D>();
+
+            if (col == null) continue;
+
+            Bounds worldBounds = col.bounds;
+
+            Vector2Int minCell = WorldToGrid(worldBounds.min);
+            Vector2Int maxCell = WorldToGrid(worldBounds.max);
+
+            int rows = sceneMapData.MapMatrix.GetLength(0);
+            int cols = sceneMapData.MapMatrix.GetLength(1);
+
+            for (int row = Mathf.Max(0, minCell.y); row <= Mathf.Min(rows - 1, maxCell.y); row++)
+            {
+                for (int col2 = Mathf.Max(0, minCell.x); col2 <= Mathf.Min(cols - 1, maxCell.x); col2++)
+                {
+                    SceneMapData.MapTile current = sceneMapData.MapMatrix[row, col2];
+
+                    // cuenta como casilla de terreno aunque se dibuje despues
+                    if (current != SceneMapData.MapTile.Floor && current != SceneMapData.MapTile.Wall)
+                        continue;
+
+                    Vector3 cellWorldCenter = GridToWorld(new Vector2Int(col2, row));
+                    if (col.OverlapPoint(cellWorldCenter))
+                    {
+                        sceneMapData.MapMatrix[row, col2] = SceneMapData.MapTile.Oxygen;
+                    }
+                }
+            }
+        }
     }
 
     public void AddFlowersToTileMap()
@@ -133,8 +182,6 @@ public class TilemapToScriptable : MonoBehaviour
     public void LoadFloorTilemap()
     {
         
-        wallsTileMap = GameObject.FindGameObjectWithTag(wallsTileMapTag).GetComponent<Tilemap>();
-        floorTileMap = GameObject.FindGameObjectWithTag(floorTileMapTag).GetComponent<Tilemap>();
         wallsTileMap.CompressBounds(); 
         floorTileMap.CompressBounds();
 
@@ -166,9 +213,6 @@ public class TilemapToScriptable : MonoBehaviour
     public void LoadWallsTilemap()
     {
         
-
-        wallsTileMap = GameObject.FindGameObjectWithTag(wallsTileMapTag).GetComponent<Tilemap>();
-        floorTileMap = GameObject.FindGameObjectWithTag(floorTileMapTag).GetComponent<Tilemap>();
 
         wallsTileMap.CompressBounds();
         floorTileMap.CompressBounds();

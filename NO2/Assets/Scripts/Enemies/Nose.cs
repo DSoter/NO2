@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Nose : MonoBehaviour, IHitable
+public class Nose : Enemy
 {
 
     private Animator _animator;
@@ -26,11 +26,12 @@ public class Nose : MonoBehaviour, IHitable
         }
     }
 
-    public void Hit(Vector2 direction, float damage, AttackStrength strength)
+    public override void Hit(Vector2 direction, float damage, AttackStrength strength)
     {
         if (_isVulnerable && strength == AttackStrength.Strong)
         {
             _animator.SetTrigger("Death");
+            SpawnContent(direction);
         }
     }
 

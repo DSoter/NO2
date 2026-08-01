@@ -30,6 +30,8 @@ public class AchievementManager : MonoBehaviour
             enabled = false;
             return;
         }
+
+        badgeCollection.Load();
         auxAnimator = popUpAnimator;
         LoadAll();
         RegisterCallbacks();

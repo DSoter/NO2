@@ -55,6 +55,38 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     private string sceneControllerTag = "SceneController";
     private int _worldMinX, _worldMinY, _worldTotalCols, _worldTotalRows;
 
+    public Color FloorColor
+    {
+        get { return floorColor; }
+    }
+    public Color WallColor
+    {
+        get { return wallColor; }
+    }
+    public Color OxygenColor
+    {
+        get { return oxygenColor; }
+    }
+    public Sprite NpcSprite
+    {
+        get { return npcSprite; }
+    }
+    public Sprite FlowerSprite
+    {
+        get { return flowerSprite; }
+    }
+
+    public Sprite CampfireSprite
+    {
+        get { return campfireSprite; }
+    }
+
+    public Sprite GateSprite
+    {
+        get { return gateSprite; }
+    }
+
+
     private void OnEnable()
     {
         mapData.Save();

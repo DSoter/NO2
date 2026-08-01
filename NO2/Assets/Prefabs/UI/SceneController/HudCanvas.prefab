@@ -5573,8 +5573,8 @@ MonoBehaviour:
     de ejemplo para ver que pasa con textos de gran tama\xF1o. Un misisipi, YE\xC9EPA
     ya \xE9sto P\xD3r aq\xFA\xCD\nABCDEFGHIJKLMN\xD1OPQRSTUVXYZ"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 524525b155cd02847a12d19788153a2d, type: 2}
+  m_sharedMaterial: {fileID: -8624792438648299625, guid: 524525b155cd02847a12d19788153a2d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

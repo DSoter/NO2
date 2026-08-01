@@ -25,7 +25,7 @@ public class BadgeUIManager : MonoBehaviour
 
     [Header("Panel Info")]
     [SerializeField] private GameObject descriptionPanel;
-    [SerializeField] private Image backgroundBadgeIcon;
+    //[SerializeField] private Image backgroundBadgeIcon;
     [SerializeField] private Image infoIcon;
     [SerializeField] private TMPro.TMP_Text infoName;
     [SerializeField] private TMPro.TMP_Text infoDescription;
@@ -38,7 +38,6 @@ public class BadgeUIManager : MonoBehaviour
     private void OnEnable()
     {
         infoIcon.transform.localScale = Vector3.one;
-        backgroundBadgeIcon.transform.localScale = Vector3.one;
         badgeCollection.Load();
         equippedBadges.Load(badgeCollection);
 
@@ -260,8 +259,10 @@ public class BadgeUIManager : MonoBehaviour
         if (badge == null) return;
         descriptionPanel.SetActive(true);
         infoIcon.sprite = badge.icon;
-        //infoIcon.transform.localScale = new Vector3(badge.slotsSize, 1, 1);
-        backgroundBadgeIcon.transform.localScale = new Vector3(badge.slotsSize, 1, 1);
+        float size = badge.slotsSize; //si no no dan decimalees
+        
+        infoIcon.transform.localScale = new Vector3(1, 1.0f / size, 1);
+
         infoName.text = badge.badgeName;
         infoDescription.text = badge.description;
     }

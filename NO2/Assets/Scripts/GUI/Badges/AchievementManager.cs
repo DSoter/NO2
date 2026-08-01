@@ -11,6 +11,7 @@ public class AchievementManager : MonoBehaviour
 
     [Header("Pop Up")]
     [SerializeField] private Animator popUpAnimator;
+    private Animator auxAnimator;
     [SerializeField] private Image achievementImage;
     [SerializeField] private TextMeshProUGUI achievementName;
     [SerializeField] private TextMeshProUGUI achievementDescription;
@@ -23,6 +24,13 @@ public class AchievementManager : MonoBehaviour
 
     private void Awake()
     {
+        GameManager ownerGm = GetComponent<GameManager>();
+        if (GameManager.Instance != null && ownerGm != GameManager.Instance)
+        {
+            enabled = false;
+            return;
+        }
+        auxAnimator = popUpAnimator;
         LoadAll();
         RegisterCallbacks();
     }
@@ -59,7 +67,11 @@ public class AchievementManager : MonoBehaviour
 
     private void OnAchievementCompleted(Badge badge)
     {
-        Debug.Log(popUpAnimator.GetCurrentAnimatorClipInfoCount(0));
+        Debug.Log(popUpAnimator);
+        if(popUpAnimator == null)
+        {
+            popUpAnimator = auxAnimator;
+        }
         AnimatorClipInfo[] animClipInfo = popUpAnimator.GetCurrentAnimatorClipInfo(0);
         //Output the name of the actual clip
         Debug.Log("Starting clip : " + animClipInfo[0].clip.name);

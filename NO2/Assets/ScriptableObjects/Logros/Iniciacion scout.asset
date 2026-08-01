@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b802fc446965f64286319608d3083da, type: 3}
-  m_Name: IniciacionScout
+  m_Name: Iniciacion scout
   m_EditorClassIdentifier: Assembly-CSharp::Achievement
   achievementName: first_badge
   description: Has iniciado el camino scouter

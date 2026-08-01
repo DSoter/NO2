@@ -1,24 +1,12 @@
 using UnityEngine;
+using static UnityEngine.Tilemaps.TilemapRenderer;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class YSort : MonoBehaviour
 {
-    private SpriteRenderer _renderer;
-
+    private int sortOrder = 0;
     private void Awake()
     {
-        _renderer = GetComponent<SpriteRenderer>();
-    }
-
-    private void LateUpdate()
-    {
-        _renderer.sortingOrder = Mathf.RoundToInt(-transform.position.y * 100);
-    }
-
-    [ContextMenu("Sort In Editor")]
-    private void SortInEditor()
-    {
-        var renderer = GetComponent<SpriteRenderer>();
-        renderer.sortingOrder = Mathf.RoundToInt(-transform.position.y * 100);
+        GetComponent<SpriteRenderer>().sortingOrder = sortOrder;
     }
 }

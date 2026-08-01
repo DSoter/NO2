@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4811053630241635105}
   - component: {fileID: 4570632439726330297}
   - component: {fileID: 4087389857567578542}
-  - component: {fileID: 2906529629489484774}
   - component: {fileID: 2604086050630219745}
   m_Layer: 0
   m_Name: Rusell
@@ -134,7 +133,7 @@ BoxCollider2D:
   m_Offset: {x: -0.029761791, y: 0.64408994}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1.2837838}
     adaptiveTilingThreshold: 0.5
@@ -157,6 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharacterInteractable
   characterData: {fileID: 11400000, guid: c220458c42dbf83448c47fbf3830d57c, type: 2}
   conversationNumber: 1
+  saveId: 
 --- !u!114 &4087389857567578542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,18 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AllConditionsDIalog
   flowerCollection: {fileID: 11400000, guid: 8e1da91b1283cf54ebdcdf0b4a85e26a, type: 2}
---- !u!114 &2906529629489484774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 744969975415022814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b603c64911084b140aae8078bcfa8eaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::YSort
+  badgeCollection: {fileID: 0}
 --- !u!95 &2604086050630219745
 Animator:
   serializedVersion: 7

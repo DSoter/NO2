@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -87.3, y: 0}
-  m_SizeDelta: {x: 60, y: 60}
+  m_AnchoredPosition: {x: -96.3, y: 1.379}
+  m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7461621550471026810
 CanvasRenderer:
@@ -244,6 +244,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldMapDataRegister
   worldMapData: {fileID: 11400000, guid: b759603f51b9ccc4d8641177dd487650, type: 2}
+  scenesVisited:
+    references: []
 --- !u!1 &516718627763750330
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,7 +538,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 40.22461, y: 9.2}
+  m_AnchoredPosition: {x: 40.224, y: 21.921}
   m_SizeDelta: {x: 177.6849, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4015072382303029752
@@ -567,7 +569,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Titulo logro
+  m_text: 'Titulo logro '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0fc6ff7601b15cf4db238ad3ea678301, type: 2}
   m_sharedMaterial: {fileID: -8473603090039966257, guid: 0fc6ff7601b15cf4db238ad3ea678301, type: 2}
@@ -602,7 +604,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_characterHorizontalScale: 1
@@ -776,7 +778,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 42.98535, y: -12.9}
+  m_AnchoredPosition: {x: 40.224, y: -27.4}
   m_SizeDelta: {x: 183.2063, y: 41.442}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1799277286299138309
@@ -898,7 +900,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6601171147944881775
 RectTransform:
   m_ObjectHideFlags: 0
@@ -918,8 +920,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 342.63, y: -329}
-  m_SizeDelta: {x: -685.2648, y: -462.8831}
+  m_AnchoredPosition: {x: 342.63, y: -314.71048}
+  m_SizeDelta: {x: -685.2648, y: -434.3041}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6453480381026957827
 CanvasRenderer:

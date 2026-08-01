@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cefcbd99b00b4c14eab78afd4ec1278b, type: 3}
-  m_Name: Badge
+  m_Name: Scout2
   m_EditorClassIdentifier: Assembly-CSharp::Badge
-  objectName: 
-  achievementRelated: 
-  description: 
-  size: 
+  badgeName: Scout principiante
+  achievement: {fileID: 11400000, guid: f984561aab277844f89e0b0270d8d4d5, type: 2}
+  description: Has demostrado tu valia diversas veces adquiriendo un total de 5 insignias
+  icon: {fileID: 21300000, guid: 296fc84df53c1194db2c2e7903b0933d, type: 3}
+  slotsSize: 1
   effect:
     m_PersistentCalls:
       m_Calls: []
-  flor: {fileID: 11400000, guid: 60ac8c1bf6427a9419740f1d14774564, type: 2}

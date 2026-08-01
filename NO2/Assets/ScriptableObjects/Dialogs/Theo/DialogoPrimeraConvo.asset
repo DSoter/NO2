@@ -28,9 +28,7 @@ MonoBehaviour:
     - conditionKey: 
       text: Te permiten obtener poderes de la naturaleza
     - conditionKey: 
-      text: "\xBFMe puedes ense\xF1ar alguna?"
-    - conditionKey: 
-      text: "\xBFMe puedes ense\xF1ar alguna?"
+      text: "\xBFMe puedes mostrar alguna?"
   repetitionTexts:
   - lines:
     - conditionKey: anyFlowerUnlockedAndTheoFirstDialogFinished

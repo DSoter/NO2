@@ -94,6 +94,18 @@ public class AllConditionsDIalog : MonoBehaviour
     {
         return badgeCollection.UnlockedBadges.ContainsValue(true);
     }
+    public bool FiveBadgesIsUnlocked()
+    {
+        int badgesUnlockedCount = 0;
+        foreach(bool key in badgeCollection.UnlockedBadges.Keys)
+        {
+            if (key)
+            {
+                badgesUnlockedCount++;
+            }
+        }
+        return badgesUnlockedCount>=5;
+    }
 
     public bool FlowerIsUnlockedThenDestroy()
     {
@@ -117,6 +129,7 @@ public class AllConditionsDIalog : MonoBehaviour
 
     public bool FlowerIsUnlockedThenFinishTheoFirstDialog()
     {
+
         if (flowerCollection.unlockedFlowers.ContainsValue(true))
         {
             talkedToTheoAboutFlowersFirstTime = true;
@@ -129,9 +142,17 @@ public class AllConditionsDIalog : MonoBehaviour
     {
         return talkedToTheoAboutFlowersFirstTime;
     }
-    public bool BadgeIsUnlockedThenFinishRusellFirstDialog()
+    public bool FiveBadgesIsUnlockedThenFinishRusellFirstDialog()
     {
-        if (badgeCollection.UnlockedBadges.ContainsValue(true))
+        int badgesUnlockedCount = 0;
+        foreach (bool key in badgeCollection.UnlockedBadges.Keys)
+        {
+            if (key)
+            {
+                badgesUnlockedCount++;
+            }
+        }
+        if(badgesUnlockedCount>=5)
         {
             talkedToRusellAboutBadgesFirstTime = true;
             SaveSharedState();
@@ -142,6 +163,12 @@ public class AllConditionsDIalog : MonoBehaviour
     public bool RusellGiveFirstBadge()
     {
         GameManager.Instance.GetComponent<AchievementManager>().NotifyEvent("first_badge");
+        return true;
+    }
+    public bool RusellGiveSecondBadge()
+    {
+        GameManager.Instance.GetComponent<AchievementManager>().NotifyEvent("second_badge");
+        Debug.Log("Segunda insignia otorgada");
         return true;
     }
     public bool FirstRusellDialogIsFinished()

@@ -104,7 +104,6 @@ GameObject:
   - component: {fileID: 6730618104438558913}
   - component: {fileID: 7899792802149195996}
   - component: {fileID: 4135234411571940284}
-  - component: {fileID: 6159645335012249007}
   m_Layer: 0
   m_Name: theoo
   m_TagString: Untagged
@@ -247,6 +246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharacterInteractable
   characterData: {fileID: 11400000, guid: b4a908258c719984cbf6a8d7165ae77c, type: 2}
   conversationNumber: 1
+  saveId: 
 --- !u!114 &4135234411571940284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,15 +260,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AllConditionsDIalog
   flowerCollection: {fileID: 11400000, guid: 8e1da91b1283cf54ebdcdf0b4a85e26a, type: 2}
---- !u!114 &6159645335012249007
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9071255816241564446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b603c64911084b140aae8078bcfa8eaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::YSort
+  badgeCollection: {fileID: 0}

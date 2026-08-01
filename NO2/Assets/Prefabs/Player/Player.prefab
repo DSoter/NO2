@@ -689,7 +689,6 @@ GameObject:
   - component: {fileID: 1363480059194287446}
   - component: {fileID: 1728810054660856816}
   - component: {fileID: 132464971765904495}
-  - component: {fileID: 898727236085585093}
   - component: {fileID: 8272714048974360551}
   m_Layer: 3
   m_Name: Player
@@ -893,18 +892,6 @@ MonoBehaviour:
   interactableObject: {fileID: 0}
   interactables: []
   _keySprite: {fileID: -536044497137714808, guid: 47a8837c209a6814e92cd74b8bbee0cd, type: 3}
---- !u!114 &898727236085585093
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7308374800647762407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b603c64911084b140aae8078bcfa8eaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TopDownSort
 --- !u!95 &8272714048974360551
 Animator:
   serializedVersion: 7

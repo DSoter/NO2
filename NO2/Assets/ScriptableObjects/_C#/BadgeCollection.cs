@@ -5,7 +5,7 @@ using UnityEngine;
 public class BadgeCollection : ScriptableObject
 {
     public List<Badge> allBadges;
-    private Dictionary<Badge,bool> unlockedBadges;
+    private Dictionary<Badge,bool> unlockedBadges = new Dictionary<Badge, bool>();
     
 
     public Dictionary<Badge,bool> UnlockedBadges

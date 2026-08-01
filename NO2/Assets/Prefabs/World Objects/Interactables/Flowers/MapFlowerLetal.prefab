@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5394656599270160678}
   - component: {fileID: 4051533620851978368}
   - component: {fileID: 2110443570443679864}
-  - component: {fileID: -4532763079684494828}
   m_Layer: 0
   m_Name: MapFlowerLetal
   m_TagString: Untagged
@@ -154,15 +153,3 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.8026266, y: 1.0334382}
   m_EdgeRadius: 0
---- !u!114 &-4532763079684494828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1249044688843550419}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b603c64911084b140aae8078bcfa8eaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::YSort

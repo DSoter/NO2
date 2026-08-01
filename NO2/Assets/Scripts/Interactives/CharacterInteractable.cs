@@ -65,13 +65,16 @@ public class CharacterInteractable : Interactable
 
             //Russell
             { "anyBadgeUnlocked",   () => acd.BadgeIsUnlocked()},
-            
 
-            {"anyBadgeUnlockedAndNotRusellFirstDialogFinished", () => acd.BadgeIsUnlocked() && !acd.FirstRusellDialogIsFinished() },
-            {"anyBadgeUnlockedThenRusellFirstDialogFinished", () =>  !acd.FirstRusellDialogIsFinished() && acd.BadgeIsUnlockedThenFinishRusellFirstDialog()  },
-            {"anyBadgeUnlockedAndRusellFirstDialogFinished", () => acd.BadgeIsUnlocked() && acd.FirstRusellDialogIsFinished() },
+
+            {"fiveBadgeUnlockedAndNotRusellFirstDialogFinished", () => acd.FiveBadgesIsUnlocked() && !acd.FirstRusellDialogIsFinished()},
+            {"fiveBadgeUnlockedAndNotRusellFirstDialogFinishedThenGiveSecondBadge", () => acd.FiveBadgesIsUnlocked() && !acd.FirstRusellDialogIsFinished() && acd.RusellGiveSecondBadge()},
+            {"fiveBadgesUnlockedThenRusellFirstDialogFinished", () =>  !acd.FirstRusellDialogIsFinished() && acd.FiveBadgesIsUnlockedThenFinishRusellFirstDialog()  },
+            {"fiveBadgesUnlockedAndRusellFirstDialogFinished", () => acd.FiveBadgesIsUnlocked() && acd.FirstRusellDialogIsFinished() },
 
             { "noneBadgeUnlocked",   () => !acd.BadgeIsUnlocked()},
+            { "notFiveBadgesUnlocked",   () => !acd.FiveBadgesIsUnlocked()},
+            { "fiveBadgesUnlocked",   () => acd.FiveBadgesIsUnlocked()},
             { "noneBadgeUnlockedAndThenUnlockFirstBadge",   () => !acd.BadgeIsUnlocked() && acd.RusellGiveFirstBadge()},
             { "anyBadgeUnlockedAndThenUnlockFirstBadge",   () => acd.BadgeIsUnlocked() && acd.RusellGiveFirstBadge()},
 

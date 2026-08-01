@@ -36,6 +36,8 @@ MonoBehaviour:
   iniRollingSeconds: 0.4
   endRollingSeconds: 0.3
   weakAttackSeconds: 0.5
+  invulnerabilitySeconds: 1.25
+  hurtSeconds: 0.5
   weakAttackDamage: 5
   minStrongAttackDamage: 10
   maxStrongAttackDamage: 20

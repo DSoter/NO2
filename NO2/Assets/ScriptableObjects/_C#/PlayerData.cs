@@ -44,6 +44,8 @@ public class PlayerData : ScriptableObject
     [SerializeField] private float iniRollingSeconds;
     [SerializeField] private float endRollingSeconds;
     [SerializeField] private float weakAttackSeconds;
+    [SerializeField] private float invulnerabilitySeconds;
+    [SerializeField] private float hurtSeconds;
 
 
     [Space(5)]
@@ -201,6 +203,16 @@ public class PlayerData : ScriptableObject
     public float WeakAttackSeconds
     {
         get { return weakAttackSeconds; }
+    }
+
+    public float InvulnerabilitySeconds
+    {
+        get { return invulnerabilitySeconds; }
+    }
+
+    public float HurtSeconds
+    {
+        get { return hurtSeconds; }
     }
 
     public float WeakAttackDamage

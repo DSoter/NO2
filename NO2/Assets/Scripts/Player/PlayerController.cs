@@ -1,8 +1,5 @@
-using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -23,6 +20,11 @@ public class PlayerController : MonoBehaviour
     private bool _isOnOxigenZone = false;
     private float _chargeTime = 0f;
     private bool _chargeReleased = false;
+    private bool _rollInvulnerability = false;
+    private bool _hurtInvulnerability = false;
+    private bool _isInvulnerable => _rollInvulnerability || _hurtInvulnerability;
+
+    private Coroutine _rollCoroutine;
 
     private bool _isPause => Time.timeScale == 0;
     private bool _isRunning = false;
@@ -84,6 +86,7 @@ public class PlayerController : MonoBehaviour
     {
         Move,
         Roll,
+        Hurt,
         Dead,
         WeakAttack,
         Charging,
@@ -383,12 +386,13 @@ public class PlayerController : MonoBehaviour
     {
         if (canRoll && _areInputsEnabled && !_isPause && !_dialogIsOpen)
         {
-            StartCoroutine(RollCoroutine());
+            _rollCoroutine = StartCoroutine(RollCoroutine());
         }
     }
 
     private IEnumerator RollCoroutine()
     {
+        Debug.Log("Roll - Roll");
         _state = PlayerState.Roll;
 
         UpdateLookDirection();
@@ -396,12 +400,17 @@ public class PlayerController : MonoBehaviour
 
         ConsumeStamina(_playerData.RollingStaminaCost);
 
+        // FIRST PART OF THE ROLL (Invulnerable)
+        _rollInvulnerability = true;
         SetVelocityInstant(_playerData.IniRollingSpeed * _lookDirection);
         yield return new WaitForSeconds(_playerData.IniRollingSeconds);
 
+        // SECOND PART OF THE ROLL (Vulnerable)
+        _rollInvulnerability = false;
         SetVelocityInstant(_playerData.EndRollingSpeed * _lookDirection);
         yield return new WaitForSeconds(_playerData.EndRollingSeconds);
 
+        Debug.Log("Roll - Move");
         _state = PlayerState.Move;
     }
 
@@ -486,6 +495,50 @@ public class PlayerController : MonoBehaviour
         _healData.ActualCooldownSeconds = Mathf.Min(_healData.ActualCooldownSeconds, _healData.CooldownSeconds);
     }
 
+    public void TakeDamage(float damage, Vector2 knockbackDirection, float knockbackForce)
+    {
+        if (!_isInvulnerable)
+        {
+            Debug.Log("Damage Take: " + damage);
+
+            StartCoroutine(InvulnerabilityCoroutine());
+            StartCoroutine(HurtCoroutine());
+
+            _playerData.Health -= damage;
+
+            if (_playerData.Health <= 0)
+            {
+                Death();
+            }
+            else
+            {
+                // Apply knockback
+                _rigidbody.AddForce(knockbackDirection.normalized * knockbackForce, ForceMode2D.Impulse);
+            }
+        }
+    }
+
+    private IEnumerator InvulnerabilityCoroutine()
+    {
+        _hurtInvulnerability = true;
+        yield return new WaitForSeconds(_playerData.InvulnerabilitySeconds);
+        _hurtInvulnerability = false;
+    }
+
+    private IEnumerator HurtCoroutine()
+    {
+
+        if(_rollCoroutine != null)
+        {
+            StopCoroutine(_rollCoroutine);
+        }
+
+        _state = PlayerState.Hurt;
+        yield return new WaitForSeconds(_playerData.HurtSeconds);
+
+        Debug.Log("Damage - Move");
+        _state = PlayerState.Move;
+    }
 
     // -------------------------------------------------------------------------
     // Oxygen

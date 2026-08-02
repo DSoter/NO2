@@ -45,6 +45,27 @@ public class InputManager : MonoBehaviour
             _moveDirection = context.ReadValue<Vector2>();
             onMovePerformed?.Invoke();
             
+            if(_moveDirection.x > 0)
+            {
+                OnGoRight(context);
+                return;
+            }
+            if (_moveDirection.x < 0)
+            {
+                OnGoLeft(context);
+                return;
+            }
+
+            if (_moveDirection.y > 0)
+            {
+                OnGoUp(context);
+                return;
+            }
+            if (_moveDirection.y < 0)
+            {
+                OnGoDown(context);
+                return;
+            }
         }
         if (context.canceled){
             _moveDirection = Vector2.zero;
@@ -247,10 +268,14 @@ public class InputManager : MonoBehaviour
         _navigateRight = InputActionReference.Create(UIMap.FindAction("NavigateRight"));
         _confirm = InputActionReference.Create(UIMap.FindAction("Confirm"));
         _leftClick = InputActionReference.Create(UIMap.FindAction("LeftClick"));
-        _goUp = InputActionReference.Create(UIMap.FindAction("GoUp"));
-        _goDown = InputActionReference.Create(UIMap.FindAction("GoDown"));
-        _goRight = InputActionReference.Create(UIMap.FindAction("GoRight"));
-        _goLeft = InputActionReference.Create(UIMap.FindAction("GoLeft"));
+
+        //_goUp = InputActionReference.Create(UIMap.FindAction("GoUp"));
+        //_goDown = InputActionReference.Create(UIMap.FindAction("GoDown"));
+        //_goRight = InputActionReference.Create(UIMap.FindAction("GoRight"));
+        //_goLeft = InputActionReference.Create(UIMap.FindAction("GoLeft"));
+
+
+
         UIMap.Enable();
         playerMap.Enable();
 
@@ -277,10 +302,10 @@ public class InputManager : MonoBehaviour
             _navigateRight.action.performed -= OnNavigateRight;
             _confirm.action.performed -= OnConfirm;
             _leftClick.action.performed -= OnLeftClick;
-            _goUp.action.performed -= OnGoUp;
-            _goDown.action.performed -= OnGoDown;
-            _goRight.action.performed -= OnGoRight;
-            _goLeft.action.performed -= OnGoLeft;
+            //_goUp.action.performed -= OnGoUp;
+            //_goDown.action.performed -= OnGoDown;
+            //_goRight.action.performed -= OnGoRight;
+            //_goLeft.action.performed -= OnGoLeft;
             _scapeRef.action.performed -= OnEscape;
             _strongAttackRef.action.performed -= OnStrongAttack;
 
@@ -309,10 +334,10 @@ public class InputManager : MonoBehaviour
         _navigateRight.action.performed += OnNavigateRight;
         _confirm.action.performed += OnConfirm;
         _leftClick.action.performed += OnLeftClick;
-        _goUp.action.performed += OnGoUp;
-        _goDown.action.performed += OnGoDown;
-        _goRight.action.performed += OnGoRight;
-        _goLeft.action.performed += OnGoLeft;
+        //_goUp.action.performed += OnGoUp;
+        //_goDown.action.performed += OnGoDown;
+        //_goRight.action.performed += OnGoRight;
+        //_goLeft.action.performed += OnGoLeft;
         _scapeRef.action.performed += OnEscape;
 
     }

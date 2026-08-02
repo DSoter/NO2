@@ -7777,10 +7777,11 @@ MonoBehaviour:
   wallColor: {r: 1, g: 0, b: 0, a: 1}
   emptyColor: {r: 1, g: 1, b: 0, a: 0}
   oxygenColor: {r: 0, g: 1, b: 1, a: 1}
+  viewportRect: {fileID: 837443878}
   scrollSensitivity: 0.1
   minScale: 0.5
   maxScale: 5
-  panSensitivity: 1
+  panSensitivity: 2
   inertiaDeceleration: 5
   pixelsPerTile: 16
   playerIcon: {fileID: 250146611}

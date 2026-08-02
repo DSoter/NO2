@@ -56,11 +56,7 @@ public class FogTrigger : MonoBehaviour
             return;
         }
 
-        Debug.Log($"IsVisibleMatrix size: {sceneMapData.IsVisibleMatrix.GetLength(0)}x{sceneMapData.IsVisibleMatrix.GetLength(1)}");
-        Debug.Log($"FogCoverCount size: {sceneMapData.FogCoverCount.GetLength(0)}x{sceneMapData.FogCoverCount.GetLength(1)}");
-
-
-
+      
         
 
         int rows = sceneMapData.IsVisibleMatrix.GetLength(0);
@@ -100,8 +96,7 @@ public class FogTrigger : MonoBehaviour
                     sceneMapData.IsVisibleMatrix[mapRow, mapCol] = true;
                     celdasReveladas++;
                 }
-                Debug.Log($"Celda [{mapRow},{mapCol}] — FogCount antes: {countBefore} después: {sceneMapData.FogCoverCount[mapRow, mapCol]} visible: {sceneMapData.IsVisibleMatrix[mapRow, mapCol]}");
-                Debug.Log($"Celdas reveladas: {celdasReveladas}");
+
 
                 
                     
@@ -110,11 +105,7 @@ public class FogTrigger : MonoBehaviour
         if (celdasReveladas > 0)
         {
             sceneMapData.FogTextureHasToUpdate = true;
-            int trues = 0;
-            for (int r = 0; r < sceneMapData.IsVisibleMatrix.GetLength(0); r++)
-                for (int c = 0; c < sceneMapData.IsVisibleMatrix.GetLength(1); c++)
-                    if (sceneMapData.IsVisibleMatrix[r, c]) trues++;
-            Debug.Log($"IsVisibleMatrix tras RevealMapCells — Visibles: {trues}");
+            
         }
     }
 }

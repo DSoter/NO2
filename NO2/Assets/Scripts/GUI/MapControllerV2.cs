@@ -33,8 +33,9 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     [SerializeField] private Color oxygenColor = Color.cyan;
 
     [Header("Zoom y movimiento")]
+    [SerializeField] private RectTransform viewportRect; //limite
     [SerializeField] private float scrollSensitivity = 0.1f;
-    [SerializeField] private float minScale = 0.5f;
+    private float minScale = 0.5f;
     [SerializeField] private float maxScale = 5f;
     [SerializeField] private float panSensitivity = 1f;
     [SerializeField] private float inertiaDeceleration = 5f;
@@ -111,6 +112,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         EnsureAllScenesLoaded();
         GenerateWorldMap();
         GenerateWorldFog();
+        RecalculateMinScale();
     }
 
 
@@ -305,8 +307,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
 
         // Posición en celdas locales
         Vector2Int gridPos = tts.WorldToGrid(playerTransform.position);
-        Debug.Log($"[PlayerIcon] scene={currentScene} gridPos={gridPos} offset={currentEntry.offsetInCells} worldBounds=({_worldMinX},{_worldMinY},{_worldTotalCols},{_worldTotalRows})");
-
+        
         // Convertir a coordenadas globales
         int globalCol = currentEntry.offsetInCells.x - minX + gridPos.x;
         int globalRow = currentEntry.offsetInCells.y - minY + gridPos.y;
@@ -325,13 +326,10 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         float localX = (normX - 0.5f) * mapRect.rect.width;
         float localY = (normY - 0.5f) * mapRect.rect.height;
 
-        Debug.Log($"[PlayerIcon] globalCol={globalCol} globalRow={globalRow} texWidth={texWidth} texHeight={texHeight} localX={localX} localY={localY}");
-
+        
         playerIcon.sprite = playerSprite;
         playerIcon.gameObject.SetActive(true);
         playerIcon.rectTransform.localPosition = new Vector3(localX, localY, 0f);
-
-        Debug.Log($"[Bounds] minX={minX} minY={minY} cols={totalCols} rows={totalRows}");
     }
 
     private string GetWorldMapTexturePath()
@@ -632,22 +630,39 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         Rect spriteRect = sprite.textureRect;
 
         int totalPixels = iconTileSize * pixelsPerTile;
-        int startX = col * pixelsPerTile + pixelsPerTile / 2 - totalPixels / 2;
-        int startY = row * pixelsPerTile + pixelsPerTile / 2 - totalPixels / 2;
 
-        for (int px = 0; px < totalPixels; px++)
+        // Calcular el tamaño real a dibujar respetando el aspect ratio del sprite
+        float spriteAspect = spriteRect.width / spriteRect.height;
+        int drawWidth, drawHeight;
+
+        if (spriteAspect >= 1f)
         {
-            for (int py = 0; py < totalPixels; py++)
+            // Sprite más ancho que alto (o cuadrado): el ancho ocupa todo el espacio disponible
+            drawWidth = totalPixels;
+            drawHeight = Mathf.RoundToInt(totalPixels / spriteAspect);
+        }
+        else
+        {
+            // Sprite más alto que ancho: el alto ocupa todo el espacio disponible
+            drawHeight = totalPixels;
+            drawWidth = Mathf.RoundToInt(totalPixels * spriteAspect);
+        }
+
+        int startX = col * pixelsPerTile + pixelsPerTile / 2 - drawWidth / 2;
+        int startY = row * pixelsPerTile + pixelsPerTile / 2 - drawHeight / 2;
+
+        for (int px = 0; px < drawWidth; px++)
+        {
+            for (int py = 0; py < drawHeight; py++)
             {
                 int texX = startX + px;
                 int texY = startY + py;
 
-                // Ignorar pixels fuera de la textura
                 if (texX < 0 || texX >= tex.width || texY < 0 || texY >= tex.height)
                     continue;
 
-                float u = spriteRect.x / iconTex.width + (float)px / totalPixels * (spriteRect.width / iconTex.width);
-                float v = spriteRect.y / iconTex.height + (float)py / totalPixels * (spriteRect.height / iconTex.height);
+                float u = spriteRect.x / iconTex.width + (float)px / drawWidth * (spriteRect.width / iconTex.width);
+                float v = spriteRect.y / iconTex.height + (float)py / drawHeight * (spriteRect.height / iconTex.height);
 
                 Color c = iconTex.GetPixelBilinear(u, v);
                 if (c.a > 0.1f)
@@ -704,6 +719,61 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
             _velocity = Vector3.Lerp(_velocity, Vector3.zero, inertiaDeceleration * Time.unscaledDeltaTime);
             if (_velocity.magnitude < 0.001f) _velocity = Vector3.zero;
         }
+        Vector2 clamped = ClampMapPosition(mapContainer.localPosition, newScale);
+        mapContainer.localPosition = new Vector3(clamped.x, clamped.y, mapContainer.localPosition.z);
+    }
+
+    private Vector2 ClampMapPosition(Vector2 desiredPosition, float scale)
+    {
+        if (viewportRect == null || mapImage == null) return desiredPosition;
+
+        RectTransform mapRect = mapImage.rectTransform;
+
+        float scaledMapWidth = mapRect.rect.width * scale;
+        float scaledMapHeight = mapRect.rect.height * scale;
+
+        float viewportWidth = viewportRect.rect.width;
+        float viewportHeight = viewportRect.rect.height;
+
+        // Si el mapa (a este zoom) cabe entero en el viewport en ese eje, se centra (no se permite mover)
+        float clampedX;
+        if (scaledMapWidth <= viewportWidth)
+            clampedX = 0f;
+        else
+        {
+            float maxX = (scaledMapWidth - viewportWidth) / 2f;
+            clampedX = Mathf.Clamp(desiredPosition.x, -maxX, maxX);
+        }
+
+        float clampedY;
+        if (scaledMapHeight <= viewportHeight)
+            clampedY = 0f;
+        else
+        {
+            float maxY = (scaledMapHeight - viewportHeight) / 2f;
+            clampedY = Mathf.Clamp(desiredPosition.y, -maxY, maxY);
+        }
+
+        return new Vector2(clampedX, clampedY);
+    }
+    private void RecalculateMinScale()
+    {
+        if (viewportRect == null || mapImage == null) return;
+
+        RectTransform mapRect = mapImage.rectTransform;
+
+        if (mapRect.rect.width <= 0f || mapRect.rect.height <= 0f) return;
+
+        float scaleToFitWidth = viewportRect.rect.width / mapRect.rect.width;
+        float scaleToFitHeight = viewportRect.rect.height / mapRect.rect.height;
+
+        // El mayor de los dos, para que el mapa cubra el viewport en ambos ejes (no solo uno)
+        minScale = Mathf.Max(scaleToFitWidth, scaleToFitHeight);
+
+        // Si el zoom actual/objetivo quedó por debajo del nuevo mínimo, lo reajustamos
+        _targetScale = Mathf.Max(_targetScale, minScale);
+        if (mapContainer.localScale.x < minScale)
+            mapContainer.localScale = new Vector3(minScale, minScale, 1f);
     }
 
     public void OnScroll(PointerEventData eventData)
@@ -718,7 +788,9 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         if (!_isDragging) return;
         float scaleRatio = mapContainer.localScale.x / maxScale;
         _velocity = new Vector3(eventData.delta.x, eventData.delta.y, 0f) * panSensitivity * scaleRatio;
-        mapContainer.localPosition += _velocity;
+        Vector3 desired = mapContainer.localPosition + _velocity;
+        Vector2 clamped = ClampMapPosition(desired, mapContainer.localScale.x);
+        mapContainer.localPosition = new Vector3(clamped.x, clamped.y, mapContainer.localPosition.z);
     }
 
     public void OnPointerDown(PointerEventData eventData)

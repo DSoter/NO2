@@ -14,8 +14,8 @@ public class BadgeCollection : ScriptableObject
         set { unlockedBadges = value; }
     }
 
-    private string KeySaveKey = "UnlockedFlowers_Keys";
-    private string ValueSaveKey = "UnlockedFlowers_Values";
+    private string KeySaveKey = "UnlockedBadgges_Keys";
+    private string ValueSaveKey = "UnlockedBadges_Values";
 
     public void InitializeDictionary()
     {

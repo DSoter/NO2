@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Unity.VectorGraphics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -107,6 +108,8 @@ public class SceneController : MonoBehaviour
         {
             GameManager.Instance.audioManager.PlayMusic(theme);
         }
+
+        FadeTransition.Instance.MakeVisible();
 
     }
     public void SpawnPlayer()

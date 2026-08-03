@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,7 +9,8 @@ using UnityEngine.UI;
 public class MainMenuSceneManager : MonoBehaviour
 {
 
-    public Button playButton;
+    public Button continueButton;
+    public Button newGameButton;
     [SerializeField] private string nameFirstScene;
     public GameObject canvasCredits;
     public GameObject canvasOptions;
@@ -19,6 +21,14 @@ public class MainMenuSceneManager : MonoBehaviour
     [SerializeField] private HealData healData;
     [SerializeField] private PlayerData playerData;
 
+    [Header("Administrar nueva partida")]
+    [SerializeField] private WorldMapData worldMapData;
+    [SerializeField] private WorldMapDataRegister worldMapDataRegister;
+    [SerializeField] private FogCollection fogCollection;
+    [SerializeField] private AchievementCollection achievementCollection;
+    [SerializeField] private FlowerCollection flowerCollection;
+    [SerializeField] private BadgeCollection badgeCollection;
+
 
 
     void Start()
@@ -27,6 +37,7 @@ public class MainMenuSceneManager : MonoBehaviour
         {
             GameManager.Instance.audioManager.PlayMusic(theme);
         }
+        continueButton.gameObject.SetActive(HasSavedGame());
         //EventSystem.current.SetSelectedGameObject(defaultButton.gameObject);
     }
 
@@ -34,8 +45,40 @@ public class MainMenuSceneManager : MonoBehaviour
     {
         InitializePlayerValues();
         coleccionFlores.Load();
-        GameManager.Instance.GetComponent<CheckpointManager>().StartScene(nameFirstScene);
+        GameManager.Instance.GetComponent<CheckpointManager>().StartSceneWithFade(nameFirstScene);
     }
+    public void StartNewGame()
+    {
+        foreach (WorldMapData.SceneMapEntry entry in worldMapData.scenes)
+        {
+            if (entry.mapData != null)
+                entry.mapData.ResetProgressKeepMap();
+        }
+
+        foreach (FogData fog in fogCollection.AllFogData)
+        {
+            if (fog != null)
+                fog.Reset();
+        }
+        worldMapDataRegister.ResetVisited();
+        worldMapData.WorldMapNeedsUpdate = true;
+        AllConditionsDIalog.ResetSharedProgress();
+
+        foreach (Achievement achievement in achievementCollection.AllAchievements)
+        {
+            if (achievement != null)
+                achievement.Reset();
+        }
+        flowerCollection.Load();
+        flowerCollection.Reset();
+        badgeCollection.Load();
+        badgeCollection.Reset();
+
+        Debug.Log("Nueva partida iniciada: progreso reseteado, layout de mapas conservado.");
+
+        StartGame();
+    }
+
     private void InitializePlayerValues()
     {
 
@@ -44,6 +87,11 @@ public class MainMenuSceneManager : MonoBehaviour
         playerData.Oxygen = playerData.MaxOxygen;
         playerData.Stamina = playerData.MaxStamina;
 
+    }
+
+    public bool HasSavedGame()
+    {
+        return worldMapDataRegister.HasSavedGame();
     }
     public void QuitGame()
     {

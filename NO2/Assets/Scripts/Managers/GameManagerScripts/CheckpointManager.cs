@@ -136,9 +136,14 @@ public class CheckpointManager : MonoBehaviour
     {
         hasToSpawnPlayer = true;
         SceneManager.LoadScene(sceneName);
-        
-        
+        //FadeTransition.Instance.LoadSceneWithFade(sceneName);
     }
+    public void StartSceneWithFade(string sceneName)
+    {
+        hasToSpawnPlayer = true;
+        FadeTransition.Instance.LoadSceneWithFade(sceneName);
+    }
+
     public void SpawnPlayer()
     {
         if (nextScene is null)

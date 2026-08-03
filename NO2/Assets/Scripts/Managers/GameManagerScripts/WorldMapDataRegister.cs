@@ -47,4 +47,10 @@ public class WorldMapDataRegister : MonoBehaviour
         PlayerPrefs.Save();
         scenesVisited.references = new List<string>();
     }
+
+    public bool HasSavedGame()
+    {
+        string saved = PlayerPrefs.GetString(SaveKeyVisited, "");
+        return !string.IsNullOrEmpty(saved);
+    }
 }

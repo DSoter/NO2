@@ -176,4 +176,16 @@ public class SceneMapData : ScriptableObject
         isVisibleMatrix = null;
         fogCoverCount = null;
     }
+
+    [ContextMenu("Reset Progress (Keep Map Layout)")]
+    public void ResetProgressKeepMap()
+    {
+        PlayerPrefs.DeleteKey(SaveKey + "_visible");
+        PlayerPrefs.DeleteKey(SaveKey + "_fog");
+        PlayerPrefs.DeleteKey(SaveKeyFog);
+        PlayerPrefs.Save();
+
+        isVisibleMatrix = null;
+        fogCoverCount = null;
+    }
 }

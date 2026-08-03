@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AllConditionsDIalog : MonoBehaviour
@@ -25,6 +26,8 @@ public class AllConditionsDIalog : MonoBehaviour
     private const string KeyFirstRusell = "ACD_talkedRusellBadgesFirst";
     private const string KeySecondRusell = "ACD_talkedRusellBadgesSecond";
     private string KeyDestroyed => "ACD_destroyed_" + gameObject.name; // por instancia
+
+    private const string KeyDestroyedRegistry = "ACD_destroyedKeysRegistry";
 
     private void Awake()
     {
@@ -65,11 +68,28 @@ public class AllConditionsDIalog : MonoBehaviour
     private void SaveInstanceState()
     {
         PlayerPrefs.SetInt(KeyDestroyed, destroyedByFlowerUnlock ? 1 : 0);
+        if (destroyedByFlowerUnlock)
+            RegisterDestroyedKey(KeyDestroyed);
         PlayerPrefs.Save();
+    }
+    private static void RegisterDestroyedKey(string key)
+    {
+        string saved = PlayerPrefs.GetString(KeyDestroyedRegistry, "");
+        List<string> keys = string.IsNullOrEmpty(saved) ? new List<string>() : new List<string>(saved.Split(','));
+        if (!keys.Contains(key))
+        {
+            keys.Add(key);
+            PlayerPrefs.SetString(KeyDestroyedRegistry, string.Join(",", keys));
+        }
     }
 
     [ContextMenu("Reset All Conversations Progress")]
     public void ResetAllConversationsProgress()
+    {
+        ResetSharedProgress();
+    }
+
+    public static void ResetSharedProgress()
     {
         talkedToTheoAboutFlowersFirstTime = false;
         talkedToTheoAboutFlowersSecondTime = false;
@@ -80,9 +100,17 @@ public class AllConditionsDIalog : MonoBehaviour
         PlayerPrefs.DeleteKey(KeySecondTheo);
         PlayerPrefs.DeleteKey(KeyFirstRusell);
         PlayerPrefs.DeleteKey(KeySecondRusell);
-        PlayerPrefs.Save();
 
-        Debug.Log("Progreso de conversaciones (AllConditionsDIalog) reiniciado.");
+        string saved = PlayerPrefs.GetString(KeyDestroyedRegistry, "");
+        if (!string.IsNullOrEmpty(saved))
+        {
+            foreach (string key in saved.Split(','))
+                PlayerPrefs.DeleteKey(key);
+            PlayerPrefs.DeleteKey(KeyDestroyedRegistry);
+        }
+
+        PlayerPrefs.Save();
+        Debug.Log("Progreso de conversaciones (AllConditionsDIalog) reiniciado, incluyendo NPCs destruidos.");
     }
 
 

@@ -125,8 +125,6 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         _worldMinY = minY;
         _worldTotalCols = totalCols;
         _worldTotalRows = totalRows;
-        Debug.Log($"[Texture] path={path} exists={File.Exists(path)} needsUpdate={worldMapData.WorldMapNeedsUpdate}");
-        Debug.Log($"[Bounds] minX={minX} minY={minY} cols={totalCols} rows={totalRows}");
         if (!worldMapData.WorldMapNeedsUpdate && System.IO.File.Exists(path))
         {
             byte[] bytes = System.IO.File.ReadAllBytes(path);

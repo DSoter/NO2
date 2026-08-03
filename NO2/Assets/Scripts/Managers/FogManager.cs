@@ -86,8 +86,6 @@ public class FogManager : MonoBehaviour
             for (int col = 0; col < fogData.Cols; col++)
                 if (fogData.Active[row, col]) trues++; else falses++;
 
-        Debug.Log($"Nieblas Activas: {trues} Inactivas: {falses}");
-        Debug.Log($"MinX: {fogData.MinX} MinY: {fogData.MinY} Separation: {fogData.Separation}");
 
         if (sceneMapData.IsVisibleMatrix == null)
         {
@@ -216,7 +214,6 @@ public class FogManager : MonoBehaviour
     public void InitializeVisibilityMatrix()
     {
         bool loaded = sceneMapData.Load();
-        Debug.Log($"SceneMapData.Load() devuelve: {loaded}");
         if (!loaded)
         {
             Debug.Log("Inicializando visibilidad desde cero");
@@ -230,13 +227,6 @@ public class FogManager : MonoBehaviour
             InitializeFromScratch();
             return;
         }
-        //if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "PruebaSiguienteNivel")
-        //{
-        //    Debug.Log("Inicializando visibilidad desde cer al ser pruebaSiguiente nivel");
-        //    tilemapToScriptable.InitializeMap();
-        //    InitializeFromScratch();
-        //    return;
-        //}
 
         int rows = sceneMapData.IsVisibleMatrix.GetLength(0);
         int cols = sceneMapData.IsVisibleMatrix.GetLength(1);
@@ -245,7 +235,6 @@ public class FogManager : MonoBehaviour
             for (int col = 0; col < cols; col++)
                 if (sceneMapData.IsVisibleMatrix[row, col]) trues++; else falses++;
 
-        Debug.Log($"Tras Load — Visibles: {trues} No visibles: {falses}");
     }
 
     private void Awake()

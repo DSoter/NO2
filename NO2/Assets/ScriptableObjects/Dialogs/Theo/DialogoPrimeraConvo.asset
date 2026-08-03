@@ -32,7 +32,7 @@ MonoBehaviour:
   repetitionTexts:
   - lines:
     - conditionKey: anyFlowerUnlockedAndTheoFirstDialogFinished
-      text: "Recuerda: en una hoguera abrir el men\xFA (O), confirmar (espacio) ny
+      text: "Recuerda: en una hoguera abrir el men\xFA (O), confirmar (espacio) y
         elegir la flor que desees. Se equipar\xE1 confirmando o cerrando el men\xFA"
     - conditionKey: anyFlowerUnlockedAndTheoFirstDialogFinished
       text: '#Buena _suerte_# en tu $viaje$.'

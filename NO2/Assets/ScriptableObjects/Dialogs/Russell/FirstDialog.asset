@@ -61,6 +61,3 @@ MonoBehaviour:
       text: "Cuando volvamos a vernos tendr\xE9 mas insignias"
     - conditionKey: fiveBadgesUnlockedAndRusellFirstDialogFinished
       text: "Ser\xE9 mejor $scout$"
-    - conditionKey: fiveBadgesUnlockedAndRusellFirstDialogFinished
-      text: "$ABCDEFGHIJKLMN\xD1OPQRSTUVXYZ\xC9\xC1\xCD\xD3\xDA\xE1\xE9\xED\xF3\xFA12345678890
-        patata()&"

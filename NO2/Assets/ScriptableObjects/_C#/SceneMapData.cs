@@ -119,14 +119,11 @@ public class SceneMapData : ScriptableObject
     public bool Load()
     {
         string savedMap = PlayerPrefs.GetString(SaveKey + "_map", "");
-        Debug.Log($"SaveKey: {SaveKey}");
-        Debug.Log($"savedMap longitud: {savedMap.Length}");
 
         if (string.IsNullOrEmpty(savedMap)) return false;
 
         int rows = PlayerPrefs.GetInt(SaveKey + "_rows", 0);
         int cols = PlayerPrefs.GetInt(SaveKey + "_cols", 0);
-        Debug.Log($"Rows: {rows} Cols: {cols}");
         if (rows == 0 || cols == 0) return false;
 
         // Cargar MapMatrix
@@ -140,7 +137,6 @@ public class SceneMapData : ScriptableObject
 
         isVisibleMatrix = new bool[rows, cols];
         string savedVisible = PlayerPrefs.GetString(SaveKey + "_visible", "");
-        Debug.Log($"savedVisible longitud: {savedVisible.Length}");
         int visibles = 0;
         int noVisibles = 0;
 
@@ -151,11 +147,9 @@ public class SceneMapData : ScriptableObject
                 isVisibleMatrix[row, col] = savedVisible[i++] == '1';
                 if (isVisibleMatrix[row, col]) visibles++; else noVisibles++;
             }
-        Debug.Log($"Visibles cargados: {visibles} No visibles: {noVisibles}");
 
         // Cargar FogCoverCount
         string savedFog = PlayerPrefs.GetString(SaveKey + "_fog", "");
-        Debug.Log($"savedFog longitud: {savedFog.Length}");
         FogCoverCount = new int[rows, cols];
 
 

@@ -715,7 +715,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Acciones Men\xFA"
+  m_text: Acciones Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0fc6ff7601b15cf4db238ad3ea678301, type: 2}
   m_sharedMaterial: {fileID: -8473603090039966257, guid: 0fc6ff7601b15cf4db238ad3ea678301, type: 2}
@@ -4506,7 +4506,7 @@ PrefabInstance:
       objectReference: {fileID: 1825079428015357267, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}
     - target: {fileID: 5097625678350250470, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
       propertyPath: m_text
-      value: Confirm
+      value: Confirmar
       objectReference: {fileID: 0}
     - target: {fileID: 5097625678350250470, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
       propertyPath: m_fontSize
@@ -6191,7 +6191,7 @@ PrefabInstance:
       objectReference: {fileID: 1825079428015357267, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}
     - target: {fileID: 5097625678350250470, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
       propertyPath: m_text
-      value: Navigate Left
+      value: Navegar izquierda
       objectReference: {fileID: 0}
     - target: {fileID: 5097625678350250470, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
       propertyPath: m_fontSize
@@ -6943,7 +6943,7 @@ PrefabInstance:
       objectReference: {fileID: 1825079428015357267, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}
     - target: {fileID: 5097625678350250470, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
       propertyPath: m_text
-      value: Navigate Right
+      value: Navegar derecha
       objectReference: {fileID: 0}
     - target: {fileID: 5097625678350250470, guid: 22b11d9bda50b8e44a8e8a078ee89000, type: 3}
       propertyPath: m_fontSize

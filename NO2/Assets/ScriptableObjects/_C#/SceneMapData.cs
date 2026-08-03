@@ -135,29 +135,47 @@ public class SceneMapData : ScriptableObject
 
         // Cargar IsVisibleMatrix
 
-        isVisibleMatrix = new bool[rows, cols];
         string savedVisible = PlayerPrefs.GetString(SaveKey + "_visible", "");
-        int visibles = 0;
-        int noVisibles = 0;
+        Debug.Log($"savedVisible longitud: {savedVisible.Length}");
 
-        i = 0;
-        for (int row = 0; row < rows; row++)
-            for (int col = 0; col < cols; col++)
-            {
-                isVisibleMatrix[row, col] = savedVisible[i++] == '1';
-                if (isVisibleMatrix[row, col]) visibles++; else noVisibles++;
-            }
+        if (savedVisible.Length == rows * cols)
+        {
+            isVisibleMatrix = new bool[rows, cols];
+            int visibles = 0;
+            int noVisibles = 0;
+            i = 0;
+            for (int row = 0; row < rows; row++)
+                for (int col = 0; col < cols; col++)
+                {
+                    isVisibleMatrix[row, col] = savedVisible[i++] == '1';
+                    if (isVisibleMatrix[row, col]) visibles++; else noVisibles++;
+                }
+            Debug.Log($"Visibles cargados: {visibles} No visibles: {noVisibles}");
+        }
+        else
+        {
+            Debug.Log("Datos de visibilidad no válidos o ausentes (longitud no coincide); isVisibleMatrix queda null");
+            isVisibleMatrix = null;
+        }
 
         // Cargar FogCoverCount
         string savedFog = PlayerPrefs.GetString(SaveKey + "_fog", "");
-        FogCoverCount = new int[rows, cols];
+        Debug.Log($"savedFog longitud: {savedFog.Length}");
 
+        string[] fogValues = string.IsNullOrEmpty(savedFog) ? new string[0] : savedFog.Split(',');
 
-        string[] fogValues = savedFog.Split(',');
-        i = 0;
-        for (int row = 0; row < rows; row++)
-            for (int col = 0; col < cols; col++)
-                FogCoverCount[row, col] = int.Parse(fogValues[i++]);
+        if (fogValues.Length == rows * cols)
+        {
+            FogCoverCount = new int[rows, cols];
+            i = 0;
+            for (int row = 0; row < rows; row++)
+                for (int col = 0; col < cols; col++)
+                    FogCoverCount[row, col] = int.Parse(fogValues[i++]);
+        }
+        else
+        {
+            FogCoverCount = null;
+        }
 
 
 

@@ -64,11 +64,13 @@ public class MainMenuSceneManager : MonoBehaviour
         worldMapData.WorldMapNeedsUpdate = true;
         AllConditionsDIalog.ResetSharedProgress();
 
-        foreach (Achievement achievement in achievementCollection.AllAchievements)
-        {
-            if (achievement != null)
-                achievement.Reset();
-        }
+        //foreach (Achievement achievement in achievementCollection.AllAchievements)
+        //{
+        //    if (achievement != null)
+        //        achievement.Reset();
+        //}
+        GameManager.Instance.GetComponent<AchievementManager>().ResetAll();
+
         flowerCollection.Load();
         flowerCollection.Reset();
         badgeCollection.Load();

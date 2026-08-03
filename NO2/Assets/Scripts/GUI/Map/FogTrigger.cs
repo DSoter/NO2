@@ -67,7 +67,6 @@ public class FogTrigger : MonoBehaviour
         int radioEnCeldas = Mathf.CeilToInt(radioMundo);
 
         Vector2Int center = tilemapToScriptable.WorldToGrid(transform.position);
-        Debug.Log($"Center: {center}");
 
         int celdasReveladas = 0;
 

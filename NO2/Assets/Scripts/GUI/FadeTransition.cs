@@ -38,8 +38,7 @@ public class FadeTransition : MonoBehaviour
     private IEnumerator FadeAndLoad(string sceneName)
     {
         yield return StartCoroutine(FadeTo(1f));
-
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadSceneAsync(sceneName);
         
         //yield return StartCoroutine(FadeTo(0f));
     }

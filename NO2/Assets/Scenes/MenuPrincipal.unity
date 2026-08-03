@@ -401,6 +401,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -15.1
       objectReference: {fileID: 0}
+    - target: {fileID: 2929802053841653526, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
+      propertyPath: m_UpdateMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929802053841653526, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4870212720846815958, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
       propertyPath: _mixerGroup
       value: 
@@ -424,6 +432,10 @@ PrefabInstance:
     - target: {fileID: 7521091902895558689, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
       propertyPath: gateTransitionSeconds
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8416733487623270363, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
+      propertyPath: m_Alpha
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8873094639088180625, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
       propertyPath: m_IsActive

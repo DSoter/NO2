@@ -189,9 +189,9 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         string path = GetWorldFogTexturePath();
         bool anyDirty = false;
         foreach (WorldMapData.SceneMapEntry entry in worldMapData.scenes)
-            if (entry.mapData != null && entry.mapData.FogTextureHasToUpdate)
+            if (entry.mapData != null && entry.mapData.IsVisibleMatrix != null && entry.mapData.FogTextureHasToUpdate)
                 anyDirty = true;
-
+        Debug.Log($"Any  dirty es {anyDirty}");
         if (!anyDirty && System.IO.File.Exists(path))
         {
             byte[] bytes = System.IO.File.ReadAllBytes(path);
@@ -213,7 +213,6 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         _fogTexture = new Texture2D(texWidth, texHeight, TextureFormat.RGBA32, false);
         _fogTexture.filterMode = FilterMode.Point;
 
-        // Fondo negro — todo oculto por defecto
         Color[] blackPixels = new Color[texWidth * texHeight];
         for (int i = 0; i < blackPixels.Length; i++) blackPixels[i] = Color.black;
         _fogTexture.SetPixels(blackPixels);
@@ -254,11 +253,13 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
                         FillTile(_fogTexture, offsetX + col, offsetY + row, fogColor);
                 }
             entry.mapData.FogTextureHasToUpdate = false;
+            //entry.mapData.Save();
         }
 
         _fogTexture.Apply();
         fogImage.texture = _fogTexture;
         System.IO.File.WriteAllBytes(path, _fogTexture.EncodeToPNG());
+
     }
 
     private (int minX, int minY, int totalCols, int totalRows) CalculateWorldBounds()

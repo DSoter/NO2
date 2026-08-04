@@ -1,5 +1,7 @@
 
+using UnityEditor.U2D.Aseprite;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FogManager : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class FogManager : MonoBehaviour
 
     [SerializeField] private FogData fogData;
     [SerializeField] private SceneMapData sceneMapData;
+    [SerializeField] private WorldMapData worldMapData;
     [SerializeField] private TilemapToScriptable tilemapToScriptable;
 
     [SerializeField] private float fogScale = 1f;
@@ -242,7 +245,7 @@ public class FogManager : MonoBehaviour
         GenerateFog();
         
     }
-    void OnApplicationQuit()
+    private void OnApplicationQuit()
     {
         // Code executed before the application closes
         Debug.Log("Application is quitting.");
@@ -252,6 +255,22 @@ public class FogManager : MonoBehaviour
         {
             MapControllerV2.Instance.UpdateMapData();
         }
+        else
+        {
+            UpdateScenesVisited();
+        }
+    }
+    private void UpdateScenesVisited() {
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        WorldMapDataRegister.ScenesVisited scenesVisited = GameManager.Instance.GetComponent<WorldMapDataRegister>().Scenes;
+        if (!scenesVisited.references.Contains(sceneName))
+        {
+            scenesVisited.references.Add(sceneName);
+            worldMapData.WorldMapNeedsUpdate = true;
+            GameManager.Instance.GetComponent<WorldMapDataRegister>().SaveVisited();
+        }
+
     }
 
     private void Start()

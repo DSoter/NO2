@@ -39,6 +39,10 @@ public class PlayerController : MonoBehaviour
     // References
     [Header("Sonidos")]
     [SerializeField] private AudioClip deathSound;
+    [SerializeField] private AudioClip hurtSound;
+    [SerializeField] [Range(0, 1)] private float hurtVolume = 1f;
+    [SerializeField] private float hurtPitchVar = 0.3f;
+
 
     [Space(5)]
     [Header("Scriptable Objects")]
@@ -115,7 +119,6 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _renderer = GetComponent<SpriteRenderer>();
 
-        _inputManager = GameManager.Instance.gameObject.GetComponent<InputManager>();
 
         _playerData.Stamina = _playerData.MaxStamina;
         _oxygenData.LastOxygenSeconds = _playerData.LastOxygenSeconds;
@@ -123,6 +126,15 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        _inputManager = GameManager.Instance.gameObject.GetComponent<InputManager>();
+
+        if (_inputManager != null)
+        {
+            EnableActions();
+        }
+
+        Debug.Log(_inputManager);
+
         _playerData.OnOxygenIncreased += HandleOnOxygenIncreased;
         _oxygenData.LastOxygenTimer = 0;
     }
@@ -232,7 +244,7 @@ public class PlayerController : MonoBehaviour
     void OnEnable()
     {
         if (_inputManager == null) return;
-        EnableActions();
+            EnableActions();
     }
 
     void OnDisable()
@@ -392,7 +404,6 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator RollCoroutine()
     {
-        Debug.Log("Roll - Roll");
         _state = PlayerState.Roll;
 
         UpdateLookDirection();
@@ -410,7 +421,6 @@ public class PlayerController : MonoBehaviour
         SetVelocityInstant(_playerData.EndRollingSpeed * _lookDirection);
         yield return new WaitForSeconds(_playerData.EndRollingSeconds);
 
-        Debug.Log("Roll - Move");
         _state = PlayerState.Move;
     }
 
@@ -512,7 +522,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                // Apply knockback
+                GameManager.Instance.audioManager.PlaySound(hurtSound, hurtVolume, hurtPitchVar);
                 _rigidbody.AddForce(knockbackDirection.normalized * knockbackForce, ForceMode2D.Impulse);
             }
         }
@@ -536,7 +546,6 @@ public class PlayerController : MonoBehaviour
         _state = PlayerState.Hurt;
         yield return new WaitForSeconds(_playerData.HurtSeconds);
 
-        Debug.Log("Damage - Move");
         _state = PlayerState.Move;
     }
 

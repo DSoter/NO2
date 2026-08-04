@@ -2,12 +2,18 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class RebindButton : MonoBehaviour
 {
     [SerializeField] private InputActionReference actionReference;
     [SerializeField] private TMP_Text buttonText;
+    [SerializeField] private Image buttonIcon;
+    [SerializeField] private KeyIconDatabase keyIconDatabase;
     [SerializeField] private int indexInput;
+
+    private string currentEffectivePath;
+    private string currentIconLookupPath;
 
     public InputActionReference ActionReference
     {
@@ -28,16 +34,21 @@ public class RebindButton : MonoBehaviour
         {
             actionReference.action.actionMap.asset.LoadBindingOverridesFromJson(json);
         }
-        buttonText.text = InputControlPath.ToHumanReadableString(
-                actionReference.action.bindings[indexInput].effectivePath,
-                InputControlPath.HumanReadableStringOptions.OmitDevice
-            );
 
-        
+        UpdateDisplayText();
     }
     public void StartRebinding()
     {
-        buttonText.text = "...";
+        if (buttonIcon.gameObject.activeSelf)
+        {
+            Sprite pressedIcon = keyIconDatabase.GetIconPressed(currentIconLookupPath);
+            if (pressedIcon != null)
+                buttonIcon.sprite = pressedIcon;
+        }
+        else
+        {
+            buttonText.text = "...";
+        }
 
         actionReference.action.Disable();
 
@@ -55,7 +66,7 @@ public class RebindButton : MonoBehaviour
         rebindingOperation.Start();
     }
 
-    
+
 
     private void UpdateBindingText()
     {
@@ -100,27 +111,38 @@ public class RebindButton : MonoBehaviour
             }
         }
 
-
-        buttonText.text = InputControlPath.ToHumanReadableString(
-            newPath,
-            InputControlPath.HumanReadableStringOptions.OmitDevice
-        );
-
         PlayerPrefs.SetString(
             "rebinds",
             actionReference.action.actionMap.asset.SaveBindingOverridesAsJson()
         );
         RefreshUIInteractManager();
+
+        UpdateDisplayText();
     }
     public void UpdateDisplayText()
     {
-        string path = actionReference.action.bindings[indexInput].effectivePath;
-        buttonText.text = string.IsNullOrEmpty(path)
-            ? "None"
-            : InputControlPath.ToHumanReadableString(
-                path,
-                InputControlPath.HumanReadableStringOptions.OmitDevice
-              );
+        currentEffectivePath = actionReference.action.bindings[indexInput].effectivePath;
+        currentIconLookupPath = string.IsNullOrEmpty(currentEffectivePath) ? "empty" : currentEffectivePath;
+
+        Sprite icon = keyIconDatabase.GetIcon(currentIconLookupPath);
+
+        if (icon != null)
+        {
+            buttonIcon.sprite = icon;
+            buttonIcon.gameObject.SetActive(true);
+            buttonText.gameObject.SetActive(false);
+        }
+        else
+        {
+            buttonIcon.gameObject.SetActive(false);
+            buttonText.gameObject.SetActive(true);
+            buttonText.text = string.IsNullOrEmpty(currentEffectivePath)
+                ? "None"
+                : InputControlPath.ToHumanReadableString(
+                    currentEffectivePath,
+                    InputControlPath.HumanReadableStringOptions.OmitDevice
+                  );
+        }
     }
 
 

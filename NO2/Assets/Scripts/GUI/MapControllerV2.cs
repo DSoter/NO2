@@ -86,17 +86,16 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     {
         get { return gateSprite; }
     }
+    public static MapControllerV2 Instance { get; private set; }
 
 
-    private void OnEnable()
+    private void Awake()
     {
+        Instance = this;
+    }
+    private void OnEnable()
+    { 
         mapData.Save();
-        //GenerateMapTexture();
-        //_targetScale = mapContainer.localScale.x;
-        //GenerateFogTexture();
-        //UpdatePlayerIcon();
-
-
         UpdateMapData();
 
         Debug.Log("Fog texture update");
@@ -106,6 +105,11 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         UpdatePlayerIcon(); 
 
 
+    }
+    private void OnDisable()
+    {
+        if (Instance == this)
+            Instance = null;
     }
     public void GenerateWorldMapTexture()
     {
@@ -356,46 +360,6 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         worldMapData.WorldMapNeedsUpdate = true;
         Debug.Log("Caché de mapa mundial eliminada");
     }
-
-    //public void UpdatePlayerIcon()
-    //{
-
-    //    if (playerIcon == null || playerSprite == null) return;
-
-    //    CheckpointManager cm = GameManager.Instance.GetComponent<CheckpointManager>();
-    //    Transform playerTransform = cm.PlayerReference;
-    //    TilemapToScriptable tilemapToScriptable = cm.TilemapToScriptable;
-
-    //    if (playerTransform == null || tilemapToScriptable == null) return;
-
-
-    //    playerIcon.sprite = playerSprite;
-    //    playerIcon.gameObject.SetActive(true);
-
-    //    // Convertir posición mundo a celda del mapa
-    //    Vector2Int gridPos = tilemapToScriptable.WorldToGrid(playerTransform.position);
-
-    //    int rows = mapData.MapMatrix.GetLength(0);
-    //    int cols = mapData.MapMatrix.GetLength(1);
-
-    //    int texWidth = cols * pixelsPerTile;
-    //    int texHeight = rows * pixelsPerTile;
-
-    //    // Posición en píxeles dentro de la textura
-    //    float pixelX = gridPos.x * pixelsPerTile + pixelsPerTile / 2f;
-    //    float pixelY = gridPos.y * pixelsPerTile + pixelsPerTile / 2f;
-
-    //    // Convertir a posición normalizada (0-1)
-    //    float normX = pixelX / texWidth;
-    //    float normY = pixelY / texHeight;
-
-    //    // Convertir a posición local dentro del mapContainer
-    //    RectTransform mapRect = mapImage.rectTransform;
-    //    float localX = (normX - 0.5f) * mapRect.rect.width;
-    //    float localY = (normY - 0.5f) * mapRect.rect.height;
-
-    //    playerIcon.rectTransform.localPosition = new Vector3(localX, localY, 0f);
-    //}
     public void GenerateMapTexture()
     {
         SceneMapData previousMapData = _lastMapData;
@@ -510,7 +474,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         _fogTexture.Apply();
         
     }
-    private void UpdateMapData()
+    public void UpdateMapData()
     {
         SceneMapData auxMapData = mapData;
         Scene additiveScene = gameObject.scene; // la escena donde vive este script
@@ -535,13 +499,13 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
                     {
                         scenesVisited.references.Add(scene.name);
                         register.SaveVisited();
+                        Debug.Log($"Longitud de  referrences es {scenesVisited.references.Count}");
                         worldMapData.WorldMapNeedsUpdate = true;
                     }
                 }
             }
         }
-
-}
+    }
     private string GetFogTexturePath()
     {
         return System.IO.Path.Combine(

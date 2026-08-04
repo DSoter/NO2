@@ -173,9 +173,9 @@ public class AllConditionsDIalog : MonoBehaviour
     public bool FiveBadgesIsUnlockedThenFinishRusellFirstDialog()
     {
         int badgesUnlockedCount = 0;
-        foreach (bool key in badgeCollection.UnlockedBadges.Keys)
+        foreach (bool value in badgeCollection.UnlockedBadges.Values)
         {
-            if (key)
+            if (value)
             {
                 badgesUnlockedCount++;
             }

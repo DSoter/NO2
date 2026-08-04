@@ -702,6 +702,10 @@ PrefabInstance:
       propertyPath: m_Text
       value: CONTINUAR
       objectReference: {fileID: 0}
+    - target: {fileID: 895477062038100042, guid: 22b6e14101003474495177f3323053f6, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2ce9fe4e640979044a9829ec1296c186, type: 2}
     - target: {fileID: 1613863428695713971, guid: 22b6e14101003474495177f3323053f6, type: 3}
       propertyPath: m_SizeDelta.x
       value: 338.2
@@ -729,7 +733,7 @@ PrefabInstance:
     - target: {fileID: 2120418578361959007, guid: 22b6e14101003474495177f3323053f6, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -1477781801, guid: d7a6609bd78173e46a0b1119ed07940d, type: 3}
+      objectReference: {fileID: -586208809, guid: d7a6609bd78173e46a0b1119ed07940d, type: 3}
     - target: {fileID: 2120418578361959007, guid: 22b6e14101003474495177f3323053f6, type: 3}
       propertyPath: m_Color.a
       value: 1
@@ -746,21 +750,25 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2425041282499070293, guid: 22b6e14101003474495177f3323053f6, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2ce9fe4e640979044a9829ec1296c186, type: 2}
     - target: {fileID: 2788814752357517967, guid: 22b6e14101003474495177f3323053f6, type: 3}
       propertyPath: m_Text
       value: SALIR
       objectReference: {fileID: 0}
     - target: {fileID: 2788814752357517967, guid: 22b6e14101003474495177f3323053f6, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2788814752357517967, guid: 22b6e14101003474495177f3323053f6, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2788814752357517967, guid: 22b6e14101003474495177f3323053f6, type: 3}
       propertyPath: m_Color.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3256470011597818947, guid: 22b6e14101003474495177f3323053f6, type: 3}
       propertyPath: m_Pivot.x
@@ -849,7 +857,7 @@ PrefabInstance:
     - target: {fileID: 3505798186896593728, guid: 22b6e14101003474495177f3323053f6, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -1934377298, guid: d7a6609bd78173e46a0b1119ed07940d, type: 3}
+      objectReference: {fileID: -586208809, guid: d7a6609bd78173e46a0b1119ed07940d, type: 3}
     - target: {fileID: 3505798186896593728, guid: 22b6e14101003474495177f3323053f6, type: 3}
       propertyPath: m_Color.a
       value: 1
@@ -874,17 +882,21 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: QuitGame
       objectReference: {fileID: 0}
+    - target: {fileID: 4817413587080923628, guid: 22b6e14101003474495177f3323053f6, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2ce9fe4e640979044a9829ec1296c186, type: 2}
     - target: {fileID: 5030030596365683254, guid: 22b6e14101003474495177f3323053f6, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5030030596365683254, guid: 22b6e14101003474495177f3323053f6, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5030030596365683254, guid: 22b6e14101003474495177f3323053f6, type: 3}
       propertyPath: m_Color.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5968146373932947443, guid: 22b6e14101003474495177f3323053f6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -917,7 +929,7 @@ PrefabInstance:
     - target: {fileID: 9083940110671397606, guid: 22b6e14101003474495177f3323053f6, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -6935634560952893127, guid: d7a6609bd78173e46a0b1119ed07940d, type: 3}
+      objectReference: {fileID: -586208809, guid: d7a6609bd78173e46a0b1119ed07940d, type: 3}
     - target: {fileID: 9083940110671397606, guid: 22b6e14101003474495177f3323053f6, type: 3}
       propertyPath: m_Color.a
       value: 1
@@ -1054,6 +1066,10 @@ PrefabInstance:
       propertyPath: m_Text
       value: NUEVA PARTIDA
       objectReference: {fileID: 0}
+    - target: {fileID: 5477611025995298114, guid: f9484fbf7bfd23640b43cde916c632a9, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2ce9fe4e640979044a9829ec1296c186, type: 2}
     - target: {fileID: 6633128900335512413, guid: f9484fbf7bfd23640b43cde916c632a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -1475,6 +1491,14 @@ PrefabInstance:
     - target: {fileID: 4920303139439164464, guid: e4cb207a5644d1e46b91785d0dd41bfd, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0.379583
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985662609825247752, guid: e4cb207a5644d1e46b91785d0dd41bfd, type: 3}
+      propertyPath: m_fontSize
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985662609825247752, guid: e4cb207a5644d1e46b91785d0dd41bfd, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5236328775417347870, guid: e4cb207a5644d1e46b91785d0dd41bfd, type: 3}
       propertyPath: m_AnchorMax.y

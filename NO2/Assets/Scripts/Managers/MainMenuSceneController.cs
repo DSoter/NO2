@@ -37,7 +37,8 @@ public class MainMenuSceneManager : MonoBehaviour
         {
             GameManager.Instance.audioManager.PlayMusic(theme);
         }
-        continueButton.gameObject.SetActive(HasSavedGame());
+        continueButton.interactable = HasSavedGame();
+        //continueButton.gameObject.SetActive(HasSavedGame());
         //EventSystem.current.SetSelectedGameObject(defaultButton.gameObject);
     }
 
@@ -63,12 +64,7 @@ public class MainMenuSceneManager : MonoBehaviour
         worldMapDataRegister.ResetVisited();
         worldMapData.WorldMapNeedsUpdate = true;
         AllConditionsDIalog.ResetSharedProgress();
-
-        //foreach (Achievement achievement in achievementCollection.AllAchievements)
-        //{
-        //    if (achievement != null)
-        //        achievement.Reset();
-        //}
+        CharacterInteractable.ResetAllConversationsProgress();
         GameManager.Instance.GetComponent<AchievementManager>().ResetAll();
 
         flowerCollection.Load();

@@ -248,6 +248,10 @@ public class FogManager : MonoBehaviour
         Debug.Log("Application is quitting.");
 
         sceneMapData.Save();
+        if (MapControllerV2.Instance != null)
+        {
+            MapControllerV2.Instance.UpdateMapData();
+        }
     }
 
     private void Start()

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cefcbd99b00b4c14eab78afd4ec1278b, type: 3}
+  m_Name: CuracionRapida
+  m_EditorClassIdentifier: Assembly-CSharp::Badge
+  badgeName: "Curaci\xF3n rapida"
+  achievement: {fileID: 11400000, guid: cc7cbc9a289ffa6499f9e2cc925a249b, type: 2}
+  description: "Gracias a tu experiencia bebiendo liquidos muy rapido, asimilas m\xE1s
+    rapido las pociones y te curan m\xE1s "
+  icon: {fileID: 21300000, guid: 2838d905f0b94194fa36aee7e81f8520, type: 3}
+  slotsSize: 1
+  effect:
+    m_PersistentCalls:
+      m_Calls: []

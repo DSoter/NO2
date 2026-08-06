@@ -301,6 +301,7 @@ MonoBehaviour:
   flowerCollection: {fileID: 11400000, guid: 8e1da91b1283cf54ebdcdf0b4a85e26a, type: 2}
   badgeCollection: {fileID: 11400000, guid: 40b829128fc4ee841bf6273a1be7eefa, type: 2}
   moneyData: {fileID: 11400000, guid: e75e14bc5463f9747b495a397649266e, type: 2}
+  respawnData: {fileID: 11400000, guid: 1f379699d1594d340b10590f5a87a506, type: 2}
 --- !u!4 &127887843
 Transform:
   m_ObjectHideFlags: 0
@@ -430,6 +431,10 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7521091902895558689, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
+      propertyPath: respawnData
+      value: 
+      objectReference: {fileID: 11400000, guid: 1f379699d1594d340b10590f5a87a506, type: 2}
     - target: {fileID: 7521091902895558689, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
       propertyPath: gateTransitionSeconds
       value: 1

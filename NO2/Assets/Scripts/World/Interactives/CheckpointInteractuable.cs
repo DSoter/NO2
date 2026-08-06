@@ -1,6 +1,3 @@
-using System.IO;
-using System.Security.Cryptography.X509Certificates;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class CheckpointInteractuable : Interactable
@@ -52,6 +49,7 @@ public class CheckpointInteractuable : Interactable
                 int id = si.IdSpawn;
                 cm.IdRespawn = id;
                 cm.SceneWhereRespawn = SceneManager.GetActiveScene().name;
+                cm.SaveRespawnPoint();
                 Debug.Log("Checkpoint alcanzado: " + gameObject.name);
 
                 //refill potions

@@ -29,6 +29,7 @@ public class MainMenuSceneManager : MonoBehaviour
     [SerializeField] private FlowerCollection flowerCollection;
     [SerializeField] private BadgeCollection badgeCollection;
     [SerializeField] private MoneyData moneyData;
+    [SerializeField] private RespawnData respawnData;
 
 
 
@@ -47,8 +48,18 @@ public class MainMenuSceneManager : MonoBehaviour
     public void StartGame()
     {
         InitializePlayerValues();
+
         coleccionFlores.Load();
-        GameManager.Instance.GetComponent<CheckpointManager>().StartSceneWithFade(nameFirstScene);
+
+        respawnData.Load();
+
+        CheckpointManager cm = GameManager.Instance.GetComponent<CheckpointManager>();
+        cm.SceneWhereRespawn = respawnData.SceneWhereRespawn;
+        cm.IdRespawn = respawnData.CheckpointId;
+        cm.HasToSpawnPlayerAfterDeath = true;
+
+        //GameManager.Instance.GetComponent<CheckpointManager>().StartSceneWithFade(nameFirstScene);
+        FadeTransition.Instance.LoadSceneWithFade(respawnData.SceneWhereRespawn);
     }
     public void StartNewGame()
     {
@@ -68,6 +79,7 @@ public class MainMenuSceneManager : MonoBehaviour
         AllConditionsDIalog.ResetSharedProgress();
         CharacterInteractable.ResetAllConversationsProgress();
         GameManager.Instance.GetComponent<AchievementManager>().ResetAll();
+        respawnData.Reset();
 
         flowerCollection.Load();
         flowerCollection.Reset();

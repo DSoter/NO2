@@ -28,6 +28,8 @@ public class MainMenuSceneManager : MonoBehaviour
     [SerializeField] private AchievementCollection achievementCollection;
     [SerializeField] private FlowerCollection flowerCollection;
     [SerializeField] private BadgeCollection badgeCollection;
+    [SerializeField] private MoneyData moneyData;
+
 
 
 
@@ -71,6 +73,7 @@ public class MainMenuSceneManager : MonoBehaviour
         flowerCollection.Reset();
         badgeCollection.Load();
         badgeCollection.Reset();
+        moneyData.Reset();
 
         Debug.Log("Nueva partida iniciada: progreso reseteado, layout de mapas conservado.");
 

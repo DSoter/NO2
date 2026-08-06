@@ -71,6 +71,9 @@ public class PlayerData : ScriptableObject
     {
         get { return health; }
         set {
+            if( health <= 1 && 0 < health && value > 1){
+                GameManager.Instance.GetComponent<AchievementManager>().NotifyEvent("strong_heart");
+            }
             health = Mathf.Clamp(value, 0, maxHealth);
             OnHealthChanged?.Invoke();
         }

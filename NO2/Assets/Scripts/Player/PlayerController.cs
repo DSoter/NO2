@@ -392,6 +392,10 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator RollCoroutine()
     {
+
+        GameManager.Instance.GetComponent<AchievementManager>().NotifyCounter("100_rolls", 1);
+        GameManager.Instance.GetComponent<AchievementManager>().NotifyCounter("1000_rolls", 1);
+
         Debug.Log("Roll - Roll");
         _state = PlayerState.Roll;
 

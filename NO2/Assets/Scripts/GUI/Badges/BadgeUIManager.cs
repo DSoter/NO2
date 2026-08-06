@@ -85,6 +85,7 @@ public class BadgeUIManager : MonoBehaviour
             if (equipped[i] == null || alreadyPlaced.Contains(equipped[i])) continue;
             if(badgeCollection.UnlockedBadges[equipped[i]] == false)
             {
+                equippedBadges.UnequipBadge(equipped[i]);
                 equipped[i] = null;
                 continue;
             }

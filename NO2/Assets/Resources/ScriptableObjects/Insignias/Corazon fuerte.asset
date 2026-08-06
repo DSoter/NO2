@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cefcbd99b00b4c14eab78afd4ec1278b, type: 3}
+  m_Name: Corazon fuerte
+  m_EditorClassIdentifier: Assembly-CSharp::Badge
+  badgeName: Corazon fuerte
+  achievement: {fileID: 11400000, guid: e552257212b713a43a5b2d14ea327b4d, type: 2}
+  description: "Tienes un fuerte corazon despu\xE9s de sobrevivir a uno de vida"
+  icon: {fileID: 21300000, guid: 69fcc81662a08a74ba5fdbbb8072aef6, type: 3}
+  slotsSize: 1
+  effect:
+    m_PersistentCalls:
+      m_Calls: []

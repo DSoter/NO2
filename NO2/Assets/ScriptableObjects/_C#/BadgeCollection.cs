@@ -14,8 +14,8 @@ public class BadgeCollection : ScriptableObject
         set { unlockedBadges = value; }
     }
 
-    private string KeySaveKey = "UnlockedFlowers_Keys";
-    private string ValueSaveKey = "UnlockedFlowers_Values";
+    private string KeySaveKey = "UnlockedBadges_Keys";
+    private string ValueSaveKey = "UnlockedBadges_Values";
 
     public void InitializeDictionary()
     {
@@ -105,9 +105,11 @@ public class BadgeCollection : ScriptableObject
         PlayerPrefs.SetString(KeySaveKey, "");
         PlayerPrefs.SetString(ValueSaveKey, "");
         PlayerPrefs.Save();
-        foreach (KeyValuePair<Badge, bool> entry in unlockedBadges)
+
+        List<Badge> keys = new List<Badge>(unlockedBadges.Keys);
+        foreach (Badge key in keys)
         {
-            unlockedBadges[entry.Key] = false;
+            unlockedBadges[key] = false;
         }
     }
 }

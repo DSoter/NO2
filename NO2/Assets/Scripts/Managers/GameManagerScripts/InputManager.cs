@@ -42,14 +42,14 @@ public class InputManager : MonoBehaviour
 
         if (context.performed)
         {
+
             _moveDirection = context.ReadValue<Vector2>();
             onMovePerformed?.Invoke();
             
         }
         if (context.canceled){
             _moveDirection = Vector2.zero;
-            onMoveCancelled?.Invoke();
-            
+            onMoveCancelled?.Invoke();       
         }
     }
     private void OnInteract(InputAction.CallbackContext context)
@@ -137,7 +137,6 @@ public class InputManager : MonoBehaviour
 
         if (context.performed)
         {
-            Debug.Log($"onEscape suscriptores: {onEscape?.GetInvocationList().Length ?? 0}");
             onEscape?.Invoke();
         }
     }
@@ -247,10 +246,14 @@ public class InputManager : MonoBehaviour
         _navigateRight = InputActionReference.Create(UIMap.FindAction("NavigateRight"));
         _confirm = InputActionReference.Create(UIMap.FindAction("Confirm"));
         _leftClick = InputActionReference.Create(UIMap.FindAction("LeftClick"));
+
         _goUp = InputActionReference.Create(UIMap.FindAction("GoUp"));
         _goDown = InputActionReference.Create(UIMap.FindAction("GoDown"));
         _goRight = InputActionReference.Create(UIMap.FindAction("GoRight"));
         _goLeft = InputActionReference.Create(UIMap.FindAction("GoLeft"));
+
+
+
         UIMap.Enable();
         playerMap.Enable();
 

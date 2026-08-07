@@ -1,16 +1,21 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class CompositeButton : MonoBehaviour
 {
     [SerializeField] private InputActionReference actionReference;
     [SerializeField] private TMP_Text buttonText;
+    [SerializeField] private Image buttonIcon;
+    [SerializeField] private KeyIconDatabase keyIconDatabase;
     [SerializeField] private int indexInput;
     [SerializeField] private int compositeValue;
 
 
     private int dif;
+    private string currentEffectivePath;
+    private string currentIconLookupPath;
 
     private InputSystem m_Actions;
     private InputSystem.PlayerActions m_Player;
@@ -48,10 +53,8 @@ public class CompositeButton : MonoBehaviour
         {
             actionReference.action.actionMap.asset.LoadBindingOverridesFromJson(json);
         }
-        buttonText.text = InputControlPath.ToHumanReadableString(
-                actionReference.action.bindings[compositeValue+dif].effectivePath,
-                InputControlPath.HumanReadableStringOptions.OmitDevice
-            );
+
+        UpdateDisplayTextComposite();
 
         if (actionReference is null) { Debug.Log("Falta Action Reference"); }
         if (buttonText is null) { Debug.Log("Falta TMP_Text"); }
@@ -59,12 +62,21 @@ public class CompositeButton : MonoBehaviour
     }
     public void StartRebinding()
     {
-        buttonText.text = "...";
+        if (buttonIcon.gameObject.activeSelf)
+        {
+            Sprite pressedIcon = keyIconDatabase.GetIconPressed(currentIconLookupPath);
+            if (pressedIcon != null)
+                buttonIcon.sprite = pressedIcon;
+        }
+        else
+        {
+            buttonText.text = "...";
+        }
 
         actionReference.action.Disable();
 
         rebindingOperation = actionReference.action
-            .PerformInteractiveRebinding(compositeValue+dif).WithCancelingThrough("<Keyboard>/escape")
+            .PerformInteractiveRebinding(compositeValue + dif).WithCancelingThrough("<Keyboard>/escape")
             .OnComplete(operation =>
             {
                 operation.Dispose();
@@ -121,28 +133,40 @@ public class CompositeButton : MonoBehaviour
         }
 
 
-        buttonText.text = InputControlPath.ToHumanReadableString(
-            newPath,
-            InputControlPath.HumanReadableStringOptions.OmitDevice
-        );
-
         PlayerPrefs.SetString(
             "rebinds",
             actionReference.action.actionMap.asset.SaveBindingOverridesAsJson()
         );
 
         RefreshUIInteractManager();
+
+        UpdateDisplayTextComposite();
     }
 
     public void UpdateDisplayTextComposite()
     {
-        string path = actionReference.action.bindings[compositeValue + dif].effectivePath;
-        buttonText.text = string.IsNullOrEmpty(path)
-            ? "None"
-            : InputControlPath.ToHumanReadableString(
-                path,
-                InputControlPath.HumanReadableStringOptions.OmitDevice
-              );
+        currentEffectivePath = actionReference.action.bindings[compositeValue + dif].effectivePath;
+        currentIconLookupPath = string.IsNullOrEmpty(currentEffectivePath) ? "empty" : currentEffectivePath;
+
+        Sprite icon = keyIconDatabase.GetIcon(currentIconLookupPath);
+
+        if (icon != null)
+        {
+            buttonIcon.sprite = icon;
+            buttonIcon.gameObject.SetActive(true);
+            buttonText.gameObject.SetActive(false);
+        }
+        else
+        {
+            buttonIcon.gameObject.SetActive(false);
+            buttonText.gameObject.SetActive(true);
+            buttonText.text = string.IsNullOrEmpty(currentEffectivePath)
+                ? "None"
+                : InputControlPath.ToHumanReadableString(
+                    currentEffectivePath,
+                    InputControlPath.HumanReadableStringOptions.OmitDevice
+                  );
+        }
     }
 
     private void RefreshUIInteractManager()

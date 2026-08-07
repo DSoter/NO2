@@ -147,6 +147,10 @@ MonoBehaviour:
   topRight: {fileID: 1428913637886996459}
   bottomLeft: {fileID: 489380911938493981}
   bottomRight: {fileID: 7235803611790574634}
+  fogData: {fileID: 0}
+  sceneMapData: {fileID: 0}
+  worldMapData: {fileID: 11400000, guid: b759603f51b9ccc4d8641177dd487650, type: 2}
+  tilemapToScriptable: {fileID: 0}
   fogScale: 4
   separation: 4
 --- !u!1 &6782209289164606863

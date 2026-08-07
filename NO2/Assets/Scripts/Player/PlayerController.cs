@@ -1,5 +1,6 @@
 using System.Collections;
 using Unity.Cinemachine;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -77,6 +78,12 @@ public class PlayerController : MonoBehaviour
     [Header("Charge Settings")]
     [SerializeField] private float _minCharge = 0.5f;
     [SerializeField] private float _maxCharge = 1.5f;
+
+    [Space(5)]
+    [Header("Achievement fast potions")]
+    [SerializeField] private float _fastHealWindowSeconds = 6f;
+    [SerializeField] private int _fastHealCount = 3;
+    private List<float> _recentHealTimestamps = new List<float>();
 
     public Transform Center
     {
@@ -406,6 +413,11 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator RollCoroutine()
     {
+
+        GameManager.Instance.GetComponent<AchievementManager>().NotifyCounter("100_rolls", 1);
+        GameManager.Instance.GetComponent<AchievementManager>().NotifyCounter("1000_rolls", 1);
+
+        Debug.Log("Roll - Roll");
         _state = PlayerState.Roll;
 
         UpdateLookDirection();
@@ -461,7 +473,7 @@ public class PlayerController : MonoBehaviour
     // Health
     // -------------------------------------------------------------------------
 
-    private void HandleHealthStatus() //gestionar posibles fectos de estado y daño por segundo
+    private void HandleHealthStatus() //gestionar posibles fectos de estado y daÃ±o por segundo
     {
         if (_playerData.Health <= 0)
         {
@@ -471,7 +483,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleHealthRegeneration()
     {
-        bool shouldRegenerate = _state == PlayerState.Rest; //ahora mismo no hace falta porque el handle health está dentro del estado rest
+        bool shouldRegenerate = _state == PlayerState.Rest; //ahora mismo no hace falta porque el handle health estÃ¡ dentro del estado rest
 
         if (shouldRegenerate)
         {
@@ -494,6 +506,8 @@ public class PlayerController : MonoBehaviour
 
             _playerData.Health += _healData.HealAmount;
             _healData.ActualCooldownSeconds = 0;
+
+            RegisterFastHeal();
         }
         else
         {
@@ -505,6 +519,20 @@ public class PlayerController : MonoBehaviour
     {
         _healData.ActualCooldownSeconds += Time.deltaTime;
         _healData.ActualCooldownSeconds = Mathf.Min(_healData.ActualCooldownSeconds, _healData.CooldownSeconds);
+    }
+
+    private void RegisterFastHeal()
+    {
+        float now = Time.time;
+        _recentHealTimestamps.Add(now);
+
+        _recentHealTimestamps.RemoveAll(t => now - t > _fastHealWindowSeconds);
+
+        if (_recentHealTimestamps.Count >= _fastHealCount)
+        {
+            GameManager.Instance.GetComponent<AchievementManager>().NotifyEvent("fast_potions");
+            _recentHealTimestamps.Clear(); 
+        }
     }
 
     public void TakeDamage(float damage, Vector2 knockbackDirection, float knockbackForce)

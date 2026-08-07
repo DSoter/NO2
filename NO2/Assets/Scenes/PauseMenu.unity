@@ -1516,7 +1516,6 @@ MonoBehaviour:
   sfxSlider: {fileID: 267624975}
   soundOn: {fileID: 777204858}
   soundOff: {fileID: 777204857}
-  actionReference: {fileID: 4014850048532301077, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}
   applyAuxKeybinds:
     m_PersistentCalls:
       m_Calls:
@@ -1546,6 +1545,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GeneralKeybindsManager
   _inputSystemReference: {fileID: -944628639613478452, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}
   popUp: {fileID: 0}
+  _goUp: {fileID: 8140193625386093728, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}
+  _goLeft: {fileID: -1753630023206235589, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}
+  _goRight: {fileID: 397581782745330164, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}
+  _goDown: {fileID: 7530465295676470901, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}
 --- !u!1 &1684827447
 GameObject:
   m_ObjectHideFlags: 0

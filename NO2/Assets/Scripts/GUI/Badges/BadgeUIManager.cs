@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static PlayerController;
@@ -82,6 +83,12 @@ public class BadgeUIManager : MonoBehaviour
         for (int i = 0; i < EquippedBadges.TotalSlots; i++)
         {
             if (equipped[i] == null || alreadyPlaced.Contains(equipped[i])) continue;
+            if(badgeCollection.UnlockedBadges[equipped[i]] == false)
+            {
+                equippedBadges.UnequipBadge(equipped[i]);
+                equipped[i] = null;
+                continue;
+            }
             alreadyPlaced.Add(equipped[i]);
 
             GameObject iconGO = Instantiate(badgeIconPrefab, slots[i].transform);

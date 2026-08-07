@@ -67,15 +67,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Interact
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3825a319ea4977541a80e6dd8900daea, type: 2}
-  m_sharedMaterial: {fileID: -8759967375358071088, guid: 3825a319ea4977541a80e6dd8900daea, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0fc6ff7601b15cf4db238ad3ea678301, type: 2}
+  m_sharedMaterial: {fileID: -8473603090039966257, guid: 0fc6ff7601b15cf4db238ad3ea678301, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4286308995
-  m_fontColor: {r: 0.5137255, g: 0.8862746, b: 0.48235297, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -92,8 +92,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 112
-  m_fontSizeBase: 112
+  m_fontSize: 104
+  m_fontSizeBase: 104
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -483,11 +483,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1782051244287317021, guid: f9484fbf7bfd23640b43cde916c632a9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 197.0116
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 1782051244287317021, guid: f9484fbf7bfd23640b43cde916c632a9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 220.76
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 1782051244287317021, guid: f9484fbf7bfd23640b43cde916c632a9, type: 3}
       propertyPath: m_LocalScale.x
@@ -603,15 +603,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8128475540506213960, guid: f9484fbf7bfd23640b43cde916c632a9, type: 3}
       propertyPath: m_Color.b
-      value: 0.4784314
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8128475540506213960, guid: f9484fbf7bfd23640b43cde916c632a9, type: 3}
       propertyPath: m_Color.g
-      value: 0.7254902
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8128475540506213960, guid: f9484fbf7bfd23640b43cde916c632a9, type: 3}
       propertyPath: m_Color.r
-      value: 0.8862746
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -649,6 +649,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RebindButton
   actionReference: {fileID: 5641551158608982305, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}
   buttonText: {fileID: 3321783607959382609}
+  buttonIcon: {fileID: 0}
+  keyIconDatabase: {fileID: 0}
   indexInput: 1
 --- !u!1001 &4862539011618305358
 PrefabInstance:
@@ -684,11 +686,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1782051244287317021, guid: f9484fbf7bfd23640b43cde916c632a9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 198.529
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 1782051244287317021, guid: f9484fbf7bfd23640b43cde916c632a9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 220.7547
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 1782051244287317021, guid: f9484fbf7bfd23640b43cde916c632a9, type: 3}
       propertyPath: m_LocalScale.x
@@ -804,15 +806,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8128475540506213960, guid: f9484fbf7bfd23640b43cde916c632a9, type: 3}
       propertyPath: m_Color.b
-      value: 0.4784314
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8128475540506213960, guid: f9484fbf7bfd23640b43cde916c632a9, type: 3}
       propertyPath: m_Color.g
-      value: 0.7254902
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8128475540506213960, guid: f9484fbf7bfd23640b43cde916c632a9, type: 3}
       propertyPath: m_Color.r
-      value: 0.8862746
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -845,6 +847,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RebindButton
   actionReference: {fileID: 5641551158608982305, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}
   buttonText: {fileID: 3374626253142307587}
+  buttonIcon: {fileID: 0}
+  keyIconDatabase: {fileID: 0}
   indexInput: 0
 --- !u!224 &6611331935282471251 stripped
 RectTransform:

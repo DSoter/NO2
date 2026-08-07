@@ -11,6 +11,7 @@ public class CharacterInteractable : Interactable
     [Header("Guardado")]
     [Tooltip("Identificador único para esta instancia. Debe ser distinto para cada personaje/instancia en el juego.")]
     [SerializeField] private string saveId;
+    private const string SaveIdRegistryKey = "CharacterInteractable_AllSaveIds";
 
     private AllConditionsDIalog acd;
     private DialogTextData fullConversation;
@@ -91,6 +92,7 @@ public class CharacterInteractable : Interactable
             return;
         }
         timesTalked = PlayerPrefs.GetInt(TimesTalkedKey, 0);
+        RegisterSaveId(saveId);
     }
 
     private void SaveState()
@@ -98,6 +100,21 @@ public class CharacterInteractable : Interactable
         if (string.IsNullOrEmpty(saveId)) return;
         PlayerPrefs.SetInt(TimesTalkedKey, timesTalked);
         PlayerPrefs.Save();
+    }
+
+    private static void RegisterSaveId(string id)
+    {
+        string existing = PlayerPrefs.GetString(SaveIdRegistryKey, "");
+        List<string> ids = string.IsNullOrEmpty(existing)
+            ? new List<string>()
+            : new List<string>(existing.Split(','));
+
+        if (!ids.Contains(id))
+        {
+            ids.Add(id);
+            PlayerPrefs.SetString(SaveIdRegistryKey, string.Join(",", ids));
+            PlayerPrefs.Save();
+        }
     }
 
     [ContextMenu("Reset Conversation Progress")]
@@ -114,6 +131,26 @@ public class CharacterInteractable : Interactable
         PlayerPrefs.Save();
 
         Debug.Log($"Progreso de conversación reiniciado para '{saveId}'.");
+    }
+
+    public static void ResetAllConversationsProgress()
+    {
+        string existing = PlayerPrefs.GetString(SaveIdRegistryKey, "");
+        if (string.IsNullOrEmpty(existing))
+        {
+            Debug.Log("No hay personajes registrados, nada que reiniciar.");
+            return;
+        }
+
+        string[] ids = existing.Split(',');
+        foreach (string id in ids)
+        {
+            if (string.IsNullOrEmpty(id)) continue;
+            PlayerPrefs.DeleteKey(id + "_timesTalked");
+        }
+        PlayerPrefs.Save();
+
+        Debug.Log($"Progreso de conversación reiniciado para {ids.Length} personajes.");
     }
 
     public bool Evaluate(string conditionKey)

@@ -62,9 +62,11 @@ public class FlowerCollection : ScriptableObject
         PlayerPrefs.SetString(KeySaveKey, "");
         PlayerPrefs.SetString(ValueSaveKey, "");
         PlayerPrefs.Save();
-        foreach (KeyValuePair<Flower, bool> entry in unlockedFlowers)
+
+        List<Flower> keys = new List<Flower>(unlockedFlowers.Keys);
+        foreach (Flower key in keys)
         {
-            unlockedFlowers[entry.Key] = false;
+            unlockedFlowers[key] = false;
         }
     }
 }

@@ -33,8 +33,9 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     [SerializeField] private Color oxygenColor = Color.cyan;
 
     [Header("Zoom y movimiento")]
+    [SerializeField] private RectTransform viewportRect; //limite
     [SerializeField] private float scrollSensitivity = 0.1f;
-    [SerializeField] private float minScale = 0.5f;
+    private float minScale = 0.5f;
     [SerializeField] private float maxScale = 5f;
     [SerializeField] private float panSensitivity = 1f;
     [SerializeField] private float inertiaDeceleration = 5f;
@@ -85,17 +86,16 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     {
         get { return gateSprite; }
     }
+    public static MapControllerV2 Instance { get; private set; }
 
 
-    private void OnEnable()
+    private void Awake()
     {
+        Instance = this;
+    }
+    private void OnEnable()
+    { 
         mapData.Save();
-        //GenerateMapTexture();
-        //_targetScale = mapContainer.localScale.x;
-        //GenerateFogTexture();
-        //UpdatePlayerIcon();
-
-
         UpdateMapData();
 
         Debug.Log("Fog texture update");
@@ -106,11 +106,17 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
 
 
     }
+    private void OnDisable()
+    {
+        if (Instance == this)
+            Instance = null;
+    }
     public void GenerateWorldMapTexture()
     {
         EnsureAllScenesLoaded();
         GenerateWorldMap();
         GenerateWorldFog();
+        RecalculateMinScale();
     }
 
 
@@ -123,8 +129,6 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         _worldMinY = minY;
         _worldTotalCols = totalCols;
         _worldTotalRows = totalRows;
-        Debug.Log($"[Texture] path={path} exists={File.Exists(path)} needsUpdate={worldMapData.WorldMapNeedsUpdate}");
-        Debug.Log($"[Bounds] minX={minX} minY={minY} cols={totalCols} rows={totalRows}");
         if (!worldMapData.WorldMapNeedsUpdate && System.IO.File.Exists(path))
         {
             byte[] bytes = System.IO.File.ReadAllBytes(path);
@@ -185,9 +189,9 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         string path = GetWorldFogTexturePath();
         bool anyDirty = false;
         foreach (WorldMapData.SceneMapEntry entry in worldMapData.scenes)
-            if (entry.mapData != null && entry.mapData.FogTextureHasToUpdate)
+            if (entry.mapData != null && entry.mapData.IsVisibleMatrix != null && entry.mapData.FogTextureHasToUpdate)
                 anyDirty = true;
-
+        Debug.Log($"Any  dirty es {anyDirty}");
         if (!anyDirty && System.IO.File.Exists(path))
         {
             byte[] bytes = System.IO.File.ReadAllBytes(path);
@@ -209,7 +213,6 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         _fogTexture = new Texture2D(texWidth, texHeight, TextureFormat.RGBA32, false);
         _fogTexture.filterMode = FilterMode.Point;
 
-        // Fondo negro — todo oculto por defecto
         Color[] blackPixels = new Color[texWidth * texHeight];
         for (int i = 0; i < blackPixels.Length; i++) blackPixels[i] = Color.black;
         _fogTexture.SetPixels(blackPixels);
@@ -250,11 +253,13 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
                         FillTile(_fogTexture, offsetX + col, offsetY + row, fogColor);
                 }
             entry.mapData.FogTextureHasToUpdate = false;
+            //entry.mapData.Save();
         }
 
         _fogTexture.Apply();
         fogImage.texture = _fogTexture;
         System.IO.File.WriteAllBytes(path, _fogTexture.EncodeToPNG());
+
     }
 
     private (int minX, int minY, int totalCols, int totalRows) CalculateWorldBounds()
@@ -305,8 +310,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
 
         // Posición en celdas locales
         Vector2Int gridPos = tts.WorldToGrid(playerTransform.position);
-        Debug.Log($"[PlayerIcon] scene={currentScene} gridPos={gridPos} offset={currentEntry.offsetInCells} worldBounds=({_worldMinX},{_worldMinY},{_worldTotalCols},{_worldTotalRows})");
-
+        
         // Convertir a coordenadas globales
         int globalCol = currentEntry.offsetInCells.x - minX + gridPos.x;
         int globalRow = currentEntry.offsetInCells.y - minY + gridPos.y;
@@ -325,13 +329,10 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         float localX = (normX - 0.5f) * mapRect.rect.width;
         float localY = (normY - 0.5f) * mapRect.rect.height;
 
-        Debug.Log($"[PlayerIcon] globalCol={globalCol} globalRow={globalRow} texWidth={texWidth} texHeight={texHeight} localX={localX} localY={localY}");
-
+        
         playerIcon.sprite = playerSprite;
         playerIcon.gameObject.SetActive(true);
         playerIcon.rectTransform.localPosition = new Vector3(localX, localY, 0f);
-
-        Debug.Log($"[Bounds] minX={minX} minY={minY} cols={totalCols} rows={totalRows}");
     }
 
     private string GetWorldMapTexturePath()
@@ -360,46 +361,6 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         worldMapData.WorldMapNeedsUpdate = true;
         Debug.Log("Caché de mapa mundial eliminada");
     }
-
-    //public void UpdatePlayerIcon()
-    //{
-
-    //    if (playerIcon == null || playerSprite == null) return;
-
-    //    CheckpointManager cm = GameManager.Instance.GetComponent<CheckpointManager>();
-    //    Transform playerTransform = cm.PlayerReference;
-    //    TilemapToScriptable tilemapToScriptable = cm.TilemapToScriptable;
-
-    //    if (playerTransform == null || tilemapToScriptable == null) return;
-
-
-    //    playerIcon.sprite = playerSprite;
-    //    playerIcon.gameObject.SetActive(true);
-
-    //    // Convertir posición mundo a celda del mapa
-    //    Vector2Int gridPos = tilemapToScriptable.WorldToGrid(playerTransform.position);
-
-    //    int rows = mapData.MapMatrix.GetLength(0);
-    //    int cols = mapData.MapMatrix.GetLength(1);
-
-    //    int texWidth = cols * pixelsPerTile;
-    //    int texHeight = rows * pixelsPerTile;
-
-    //    // Posición en píxeles dentro de la textura
-    //    float pixelX = gridPos.x * pixelsPerTile + pixelsPerTile / 2f;
-    //    float pixelY = gridPos.y * pixelsPerTile + pixelsPerTile / 2f;
-
-    //    // Convertir a posición normalizada (0-1)
-    //    float normX = pixelX / texWidth;
-    //    float normY = pixelY / texHeight;
-
-    //    // Convertir a posición local dentro del mapContainer
-    //    RectTransform mapRect = mapImage.rectTransform;
-    //    float localX = (normX - 0.5f) * mapRect.rect.width;
-    //    float localY = (normY - 0.5f) * mapRect.rect.height;
-
-    //    playerIcon.rectTransform.localPosition = new Vector3(localX, localY, 0f);
-    //}
     public void GenerateMapTexture()
     {
         SceneMapData previousMapData = _lastMapData;
@@ -514,7 +475,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         _fogTexture.Apply();
         
     }
-    private void UpdateMapData()
+    public void UpdateMapData()
     {
         SceneMapData auxMapData = mapData;
         Scene additiveScene = gameObject.scene; // la escena donde vive este script
@@ -539,13 +500,13 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
                     {
                         scenesVisited.references.Add(scene.name);
                         register.SaveVisited();
+                        Debug.Log($"Longitud de  referrences es {scenesVisited.references.Count}");
                         worldMapData.WorldMapNeedsUpdate = true;
                     }
                 }
             }
         }
-
-}
+    }
     private string GetFogTexturePath()
     {
         return System.IO.Path.Combine(
@@ -632,22 +593,39 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         Rect spriteRect = sprite.textureRect;
 
         int totalPixels = iconTileSize * pixelsPerTile;
-        int startX = col * pixelsPerTile + pixelsPerTile / 2 - totalPixels / 2;
-        int startY = row * pixelsPerTile + pixelsPerTile / 2 - totalPixels / 2;
 
-        for (int px = 0; px < totalPixels; px++)
+        // Calcular el tamaño real a dibujar respetando el aspect ratio del sprite
+        float spriteAspect = spriteRect.width / spriteRect.height;
+        int drawWidth, drawHeight;
+
+        if (spriteAspect >= 1f)
         {
-            for (int py = 0; py < totalPixels; py++)
+            // Sprite más ancho que alto (o cuadrado): el ancho ocupa todo el espacio disponible
+            drawWidth = totalPixels;
+            drawHeight = Mathf.RoundToInt(totalPixels / spriteAspect);
+        }
+        else
+        {
+            // Sprite más alto que ancho: el alto ocupa todo el espacio disponible
+            drawHeight = totalPixels;
+            drawWidth = Mathf.RoundToInt(totalPixels * spriteAspect);
+        }
+
+        int startX = col * pixelsPerTile + pixelsPerTile / 2 - drawWidth / 2;
+        int startY = row * pixelsPerTile + pixelsPerTile / 2 - drawHeight / 2;
+
+        for (int px = 0; px < drawWidth; px++)
+        {
+            for (int py = 0; py < drawHeight; py++)
             {
                 int texX = startX + px;
                 int texY = startY + py;
 
-                // Ignorar pixels fuera de la textura
                 if (texX < 0 || texX >= tex.width || texY < 0 || texY >= tex.height)
                     continue;
 
-                float u = spriteRect.x / iconTex.width + (float)px / totalPixels * (spriteRect.width / iconTex.width);
-                float v = spriteRect.y / iconTex.height + (float)py / totalPixels * (spriteRect.height / iconTex.height);
+                float u = spriteRect.x / iconTex.width + (float)px / drawWidth * (spriteRect.width / iconTex.width);
+                float v = spriteRect.y / iconTex.height + (float)py / drawHeight * (spriteRect.height / iconTex.height);
 
                 Color c = iconTex.GetPixelBilinear(u, v);
                 if (c.a > 0.1f)
@@ -704,6 +682,61 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
             _velocity = Vector3.Lerp(_velocity, Vector3.zero, inertiaDeceleration * Time.unscaledDeltaTime);
             if (_velocity.magnitude < 0.001f) _velocity = Vector3.zero;
         }
+        Vector2 clamped = ClampMapPosition(mapContainer.localPosition, newScale);
+        mapContainer.localPosition = new Vector3(clamped.x, clamped.y, mapContainer.localPosition.z);
+    }
+
+    private Vector2 ClampMapPosition(Vector2 desiredPosition, float scale)
+    {
+        if (viewportRect == null || mapImage == null) return desiredPosition;
+
+        RectTransform mapRect = mapImage.rectTransform;
+
+        float scaledMapWidth = mapRect.rect.width * scale;
+        float scaledMapHeight = mapRect.rect.height * scale;
+
+        float viewportWidth = viewportRect.rect.width;
+        float viewportHeight = viewportRect.rect.height;
+
+        // Si el mapa (a este zoom) cabe entero en el viewport en ese eje, se centra (no se permite mover)
+        float clampedX;
+        if (scaledMapWidth <= viewportWidth)
+            clampedX = 0f;
+        else
+        {
+            float maxX = (scaledMapWidth - viewportWidth) / 2f;
+            clampedX = Mathf.Clamp(desiredPosition.x, -maxX, maxX);
+        }
+
+        float clampedY;
+        if (scaledMapHeight <= viewportHeight)
+            clampedY = 0f;
+        else
+        {
+            float maxY = (scaledMapHeight - viewportHeight) / 2f;
+            clampedY = Mathf.Clamp(desiredPosition.y, -maxY, maxY);
+        }
+
+        return new Vector2(clampedX, clampedY);
+    }
+    private void RecalculateMinScale()
+    {
+        if (viewportRect == null || mapImage == null) return;
+
+        RectTransform mapRect = mapImage.rectTransform;
+
+        if (mapRect.rect.width <= 0f || mapRect.rect.height <= 0f) return;
+
+        float scaleToFitWidth = viewportRect.rect.width / mapRect.rect.width;
+        float scaleToFitHeight = viewportRect.rect.height / mapRect.rect.height;
+
+        // El mayor de los dos, para que el mapa cubra el viewport en ambos ejes (no solo uno)
+        minScale = Mathf.Max(scaleToFitWidth, scaleToFitHeight);
+
+        // Si el zoom actual/objetivo quedó por debajo del nuevo mínimo, lo reajustamos
+        _targetScale = Mathf.Max(_targetScale, minScale);
+        if (mapContainer.localScale.x < minScale)
+            mapContainer.localScale = new Vector3(minScale, minScale, 1f);
     }
 
     public void OnScroll(PointerEventData eventData)
@@ -718,7 +751,9 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         if (!_isDragging) return;
         float scaleRatio = mapContainer.localScale.x / maxScale;
         _velocity = new Vector3(eventData.delta.x, eventData.delta.y, 0f) * panSensitivity * scaleRatio;
-        mapContainer.localPosition += _velocity;
+        Vector3 desired = mapContainer.localPosition + _velocity;
+        Vector2 clamped = ClampMapPosition(desired, mapContainer.localScale.x);
+        mapContainer.localPosition = new Vector3(clamped.x, clamped.y, mapContainer.localPosition.z);
     }
 
     public void OnPointerDown(PointerEventData eventData)

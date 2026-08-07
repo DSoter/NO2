@@ -22,6 +22,7 @@ public class CheckpointManager : MonoBehaviour
     private Vector2 exitGateDirection;
     [SerializeField] private float gateTransitionSeconds = 0.5f;
 
+    [SerializeField] private RespawnData respawnData;
 
     private SceneController sc;
     private DiverseMenusManager _menusManager;
@@ -76,6 +77,11 @@ public class CheckpointManager : MonoBehaviour
     {
         get { return tilemapToScriptable; }
         set { tilemapToScriptable = value; }
+    }
+
+    public RespawnData RespawnData
+    {
+        get { return respawnData; }
     }
     public Vector2 ExitGateDirection
     {
@@ -136,9 +142,14 @@ public class CheckpointManager : MonoBehaviour
     {
         hasToSpawnPlayer = true;
         SceneManager.LoadScene(sceneName);
-        
-        
+        //FadeTransition.Instance.LoadSceneWithFade(sceneName);
     }
+    public void StartSceneWithFade(string sceneName)
+    {
+        hasToSpawnPlayer = true;
+        FadeTransition.Instance.LoadSceneWithFade(sceneName);
+    }
+
     public void SpawnPlayer()
     {
         if (nextScene is null)
@@ -170,7 +181,17 @@ public class CheckpointManager : MonoBehaviour
         Debug.Log(idRespawn);
         StartCoroutine(RespawnAfterNoOxygenCoroutine());
     }
-
+    public void SaveRespawnPoint()
+    {
+        if (respawnData == null)
+        {
+            Debug.LogWarning("RespawnData no asignado en CheckpointManager");
+            return;
+        }
+        respawnData.SceneWhereRespawn = sceneWhereRespawn;
+        respawnData.CheckpointId = idRespawn;
+        respawnData.Save();
+    }
     private IEnumerator RespawnCoroutine()
     {
         yield return null;

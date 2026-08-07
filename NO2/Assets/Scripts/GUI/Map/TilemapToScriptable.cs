@@ -88,14 +88,12 @@ public class TilemapToScriptable : MonoBehaviour
     {
         if (boundsReady) return;
 
-        Debug.Log($"[Bounds] {gameObject.scene.name} ANTES compress: xMin={wallsTileMap.cellBounds.xMin} yMin={wallsTileMap.cellBounds.yMin} size={wallsTileMap.cellBounds.size}");
-
         wallsTileMap.CompressBounds();
         floorTileMap.CompressBounds();
         boundsWalls = wallsTileMap.cellBounds;
         widthWalls = boundsWalls.size.x;
         heightWalls = boundsWalls.size.y;
-        Debug.Log($"[Bounds] {gameObject.scene.name} DESPUES compress: xMin={wallsTileMap.cellBounds.xMin} yMin={wallsTileMap.cellBounds.yMin} size={wallsTileMap.cellBounds.size}");
+
 
         boundsReady = true;
     }

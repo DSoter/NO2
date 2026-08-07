@@ -1,0 +1,192 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b285f2cad6367e4088b75c562300819, type: 3}
+  m_Name: KeyIconDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::KeyIconDatabase
+  keyIcons:
+  - bindingPath: <Keyboard>/a
+    iconIdle: {fileID: 7729766390180179821, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: 6064424697374090946, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/escape
+    iconIdle: {fileID: 4168116837462163238, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: 2397056665686912164, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/b
+    iconIdle: {fileID: -6462381145477314878, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: -2550422604556563592, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/c
+    iconIdle: {fileID: 6787685294428049460, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: 8091045271683299987, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/tab
+    iconIdle: {fileID: -1976970949965627364, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: -5951686098831131338, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/d
+    iconIdle: {fileID: 3768007215264069401, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: 1059794760048734217, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/e
+    iconIdle: {fileID: 48390982017773581, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: 4144357225288613592, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/f
+    iconIdle: {fileID: -7392236681034068964, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: -7387405509978313604, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/leftShift
+    iconIdle: {fileID: 3400554552663347507, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: -538427760352215719, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/rightShift
+    iconIdle: {fileID: 3400554552663347507, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: -538427760352215719, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/g
+    iconIdle: {fileID: -694055388878761091, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: -7206303406968488874, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/leftCtrl
+    iconIdle: {fileID: -4731437939607007461, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: 1713844975408632650, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/ctrl
+    iconIdle: {fileID: -4731437939607007461, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: 1713844975408632650, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/rightCtrl
+    iconIdle: {fileID: -4731437939607007461, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: 1713844975408632650, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/rightControl
+    iconIdle: {fileID: -4731437939607007461, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: 1713844975408632650, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/h
+    iconIdle: {fileID: 1173543945000081499, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: -6112404887671180297, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/allt
+    iconIdle: {fileID: 2394212820483998567, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: -2159916420160724481, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/delete
+    iconIdle: {fileID: -1111990928881836496, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: 4564914299610191436, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/i
+    iconIdle: {fileID: 5351742836186326962, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: -368078574807076484, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/shift
+    iconIdle: {fileID: 3400554552663347507, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: -538427760352215719, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/space
+    iconIdle: {fileID: 2100468187672105455, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: -3423533056388414167, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/j
+    iconIdle: {fileID: 3824894930918639528, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: 1942483759446864320, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/k
+    iconIdle: {fileID: 9164171555501010459, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: 4445830584536451613, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/l
+    iconIdle: {fileID: 2117385191045985219, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: 4089448216767461553, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/m
+    iconIdle: {fileID: -2136148013395230112, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: 4941820086869929735, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/1
+    iconIdle: {fileID: 6383668682761476524, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: 8491643207609031157, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/upArrow
+    iconIdle: {fileID: -2165602621528565262, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: 466913624026476913, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/n
+    iconIdle: {fileID: 6768419438699641598, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: 5206818566395933112, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/2
+    iconIdle: {fileID: -2132723375978179603, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: -3944960269885612731, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/leftArrow
+    iconIdle: {fileID: 8746342764438225453, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: 46050715304335678, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/o
+    iconIdle: {fileID: 358076206865250477, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: -7684269520364266263, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/3
+    iconIdle: {fileID: -6335171123509409347, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: -8236618539739184590, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/backslash
+    iconIdle: {fileID: 6396471868761069363, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: -7735387616492971454, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/downArrow
+    iconIdle: {fileID: -3798998906436529524, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: 2296917250436518745, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/p
+    iconIdle: {fileID: 1849252466028074636, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: 478540939159236237, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/4
+    iconIdle: {fileID: -7620058708290448733, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: -6841400871661796208, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/rightArrow
+    iconIdle: {fileID: -8585493491078291697, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: 2480682418808482285, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/q
+    iconIdle: {fileID: 7824825067896858141, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: -5425465219440739699, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/5
+    iconIdle: {fileID: 177773970568839744, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: 8261629197172989432, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/r
+    iconIdle: {fileID: 1780586740193833848, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: 875746628405400367, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/6
+    iconIdle: {fileID: 3676897197909508130, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: -2244692944220856984, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/s
+    iconIdle: {fileID: 4783826922053809173, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: 3612162467980266681, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/7
+    iconIdle: {fileID: -5728520442883638686, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: -8175150621778312455, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/t
+    iconIdle: {fileID: 9020200790316951612, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: -7334956633835907514, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/8
+    iconIdle: {fileID: -6330118316815401407, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: 5782480943155091899, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/u
+    iconIdle: {fileID: 6179932512055966064, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: -2121501045780925616, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/9
+    iconIdle: {fileID: -9213927648061272283, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: 2520810586799959522, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/0
+    iconIdle: {fileID: -7949774048793036082, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: -4266348262939855765, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/v
+    iconIdle: {fileID: -4872361869654815441, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: 1729121914404479278, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/w
+    iconIdle: {fileID: 8772863714534620750, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: -9169251325827955685, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/x
+    iconIdle: {fileID: 6267342987324933203, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: -3019598144005488424, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/backspace
+    iconIdle: {fileID: 2806515027767915785, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: -1001648598192387138, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/y
+    iconIdle: {fileID: 8883194307445082019, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: 7435178082028106638, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/enter
+    iconIdle: {fileID: -443658313457551118, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: 8173881305707189805, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Keyboard>/z
+    iconIdle: {fileID: -8105253589346492043, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+    iconPressed: {fileID: 6481722699130060123, guid: 10ac70562ed60e04391089a2a736c55d, type: 3}
+  - bindingPath: <Mouse>/leftButton
+    iconIdle: {fileID: -3397387025712965628, guid: f89314be3da138e48a8030d549270d2a, type: 3}
+    iconPressed: {fileID: -3397387025712965628, guid: f89314be3da138e48a8030d549270d2a, type: 3}
+  - bindingPath: <Mouse>/rightButton
+    iconIdle: {fileID: -3124372832261642726, guid: f89314be3da138e48a8030d549270d2a, type: 3}
+    iconPressed: {fileID: -3124372832261642726, guid: f89314be3da138e48a8030d549270d2a, type: 3}
+  - bindingPath: <Mouse>/midleButton
+    iconIdle: {fileID: 3612782681000396837, guid: f89314be3da138e48a8030d549270d2a, type: 3}
+    iconPressed: {fileID: 3612782681000396837, guid: f89314be3da138e48a8030d549270d2a, type: 3}
+  - bindingPath: empty
+    iconIdle: {fileID: 21300000, guid: 4ac14f301f75cd147ad97ff564e0b106, type: 3}
+    iconPressed: {fileID: 21300000, guid: 4dc6abd4ae9a6ed44ab2c65859deee8b, type: 3}

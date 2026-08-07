@@ -119,14 +119,11 @@ public class SceneMapData : ScriptableObject
     public bool Load()
     {
         string savedMap = PlayerPrefs.GetString(SaveKey + "_map", "");
-        Debug.Log($"SaveKey: {SaveKey}");
-        Debug.Log($"savedMap longitud: {savedMap.Length}");
 
         if (string.IsNullOrEmpty(savedMap)) return false;
 
         int rows = PlayerPrefs.GetInt(SaveKey + "_rows", 0);
         int cols = PlayerPrefs.GetInt(SaveKey + "_cols", 0);
-        Debug.Log($"Rows: {rows} Cols: {cols}");
         if (rows == 0 || cols == 0) return false;
 
         // Cargar MapMatrix
@@ -138,32 +135,47 @@ public class SceneMapData : ScriptableObject
 
         // Cargar IsVisibleMatrix
 
-        isVisibleMatrix = new bool[rows, cols];
         string savedVisible = PlayerPrefs.GetString(SaveKey + "_visible", "");
         Debug.Log($"savedVisible longitud: {savedVisible.Length}");
-        int visibles = 0;
-        int noVisibles = 0;
 
-        i = 0;
-        for (int row = 0; row < rows; row++)
-            for (int col = 0; col < cols; col++)
-            {
-                isVisibleMatrix[row, col] = savedVisible[i++] == '1';
-                if (isVisibleMatrix[row, col]) visibles++; else noVisibles++;
-            }
-        Debug.Log($"Visibles cargados: {visibles} No visibles: {noVisibles}");
+        if (savedVisible.Length == rows * cols)
+        {
+            isVisibleMatrix = new bool[rows, cols];
+            int visibles = 0;
+            int noVisibles = 0;
+            i = 0;
+            for (int row = 0; row < rows; row++)
+                for (int col = 0; col < cols; col++)
+                {
+                    isVisibleMatrix[row, col] = savedVisible[i++] == '1';
+                    if (isVisibleMatrix[row, col]) visibles++; else noVisibles++;
+                }
+            Debug.Log($"Visibles cargados: {visibles} No visibles: {noVisibles}");
+        }
+        else
+        {
+            Debug.Log("Datos de visibilidad no válidos o ausentes (longitud no coincide); isVisibleMatrix queda null");
+            isVisibleMatrix = null;
+        }
 
         // Cargar FogCoverCount
         string savedFog = PlayerPrefs.GetString(SaveKey + "_fog", "");
         Debug.Log($"savedFog longitud: {savedFog.Length}");
-        FogCoverCount = new int[rows, cols];
 
+        string[] fogValues = string.IsNullOrEmpty(savedFog) ? new string[0] : savedFog.Split(',');
 
-        string[] fogValues = savedFog.Split(',');
-        i = 0;
-        for (int row = 0; row < rows; row++)
-            for (int col = 0; col < cols; col++)
-                FogCoverCount[row, col] = int.Parse(fogValues[i++]);
+        if (fogValues.Length == rows * cols)
+        {
+            FogCoverCount = new int[rows, cols];
+            i = 0;
+            for (int row = 0; row < rows; row++)
+                for (int col = 0; col < cols; col++)
+                    FogCoverCount[row, col] = int.Parse(fogValues[i++]);
+        }
+        else
+        {
+            FogCoverCount = null;
+        }
 
 
 
@@ -179,6 +191,18 @@ public class SceneMapData : ScriptableObject
         PlayerPrefs.DeleteKey(SaveKey + "_cols");
         PlayerPrefs.Save();
         mapMatrix = null;
+        isVisibleMatrix = null;
+        fogCoverCount = null;
+    }
+
+    [ContextMenu("Reset Progress (Keep Map Layout)")]
+    public void ResetProgressKeepMap()
+    {
+        PlayerPrefs.DeleteKey(SaveKey + "_visible");
+        PlayerPrefs.DeleteKey(SaveKey + "_fog");
+        PlayerPrefs.DeleteKey(SaveKeyFog);
+        PlayerPrefs.Save();
+
         isVisibleMatrix = null;
         fogCoverCount = null;
     }

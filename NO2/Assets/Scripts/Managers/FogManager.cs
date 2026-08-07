@@ -1,5 +1,7 @@
 
+using UnityEditor.U2D.Aseprite;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FogManager : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class FogManager : MonoBehaviour
 
     [SerializeField] private FogData fogData;
     [SerializeField] private SceneMapData sceneMapData;
+    [SerializeField] private WorldMapData worldMapData;
     [SerializeField] private TilemapToScriptable tilemapToScriptable;
 
     [SerializeField] private float fogScale = 1f;
@@ -86,8 +89,6 @@ public class FogManager : MonoBehaviour
             for (int col = 0; col < fogData.Cols; col++)
                 if (fogData.Active[row, col]) trues++; else falses++;
 
-        Debug.Log($"Nieblas Activas: {trues} Inactivas: {falses}");
-        Debug.Log($"MinX: {fogData.MinX} MinY: {fogData.MinY} Separation: {fogData.Separation}");
 
         if (sceneMapData.IsVisibleMatrix == null)
         {
@@ -216,7 +217,6 @@ public class FogManager : MonoBehaviour
     public void InitializeVisibilityMatrix()
     {
         bool loaded = sceneMapData.Load();
-        Debug.Log($"SceneMapData.Load() devuelve: {loaded}");
         if (!loaded)
         {
             Debug.Log("Inicializando visibilidad desde cero");
@@ -230,13 +230,6 @@ public class FogManager : MonoBehaviour
             InitializeFromScratch();
             return;
         }
-        //if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "PruebaSiguienteNivel")
-        //{
-        //    Debug.Log("Inicializando visibilidad desde cer al ser pruebaSiguiente nivel");
-        //    tilemapToScriptable.InitializeMap();
-        //    InitializeFromScratch();
-        //    return;
-        //}
 
         int rows = sceneMapData.IsVisibleMatrix.GetLength(0);
         int cols = sceneMapData.IsVisibleMatrix.GetLength(1);
@@ -245,7 +238,6 @@ public class FogManager : MonoBehaviour
             for (int col = 0; col < cols; col++)
                 if (sceneMapData.IsVisibleMatrix[row, col]) trues++; else falses++;
 
-        Debug.Log($"Tras Load — Visibles: {trues} No visibles: {falses}");
     }
 
     private void Awake()
@@ -253,12 +245,32 @@ public class FogManager : MonoBehaviour
         GenerateFog();
         
     }
-    void OnApplicationQuit()
+    private void OnApplicationQuit()
     {
         // Code executed before the application closes
         Debug.Log("Application is quitting.");
 
         sceneMapData.Save();
+        if (MapControllerV2.Instance != null)
+        {
+            MapControllerV2.Instance.UpdateMapData();
+        }
+        else
+        {
+            UpdateScenesVisited();
+        }
+    }
+    private void UpdateScenesVisited() {
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        WorldMapDataRegister.ScenesVisited scenesVisited = GameManager.Instance.GetComponent<WorldMapDataRegister>().Scenes;
+        if (!scenesVisited.references.Contains(sceneName))
+        {
+            scenesVisited.references.Add(sceneName);
+            worldMapData.WorldMapNeedsUpdate = true;
+            GameManager.Instance.GetComponent<WorldMapDataRegister>().SaveVisited();
+        }
+
     }
 
     private void Start()

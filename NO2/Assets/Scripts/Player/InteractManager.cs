@@ -32,10 +32,7 @@ public class InteractManager : MonoBehaviour
     private void Awake()
     {
 
-        inputManager = GameManager.Instance.gameObject.GetComponent<InputManager>();
-        diverseMenusManager = GameManager.Instance.gameObject.GetComponent<DiverseMenusManager>();
-
-        inputManager.onInteract += OnInteract; 
+        
         
         
 
@@ -45,10 +42,15 @@ public class InteractManager : MonoBehaviour
         _textoUI = _canvas.transform.GetChild(1).gameObject;
         interactables = new List<Interactable>();
 
-        RefreshInteractBinding();
     }
     private void Start()
     {
+        inputManager = GameManager.Instance.gameObject.GetComponent<InputManager>();
+        diverseMenusManager = GameManager.Instance.gameObject.GetComponent<DiverseMenusManager>();
+
+        inputManager.onInteract += OnInteract;
+        RefreshInteractBinding();
+
         _playerController = GetComponent<PlayerController>();
     }
 

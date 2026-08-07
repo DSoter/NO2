@@ -16,7 +16,7 @@ MonoBehaviour:
   maxHealth: 60
   healthRegenerationSpeed: 40
   healthDropingSpeed: 20
-  stamina: 50
+  stamina: 31.907589
   maxStamina: 50
   secondsUntilStaminaRegeneration: 1.25
   staminaRegenerationSpeed: 20
@@ -24,7 +24,7 @@ MonoBehaviour:
   rollingStaminaCost: 10
   weakAttackStaminaCost: 5
   strongAttackStaminaCost: 15
-  oxygen: 78.991135
+  oxygen: 120
   maxOxygen: 120
   oxygenDropingSpeed: 1
   oxygenRegenerationSpeed: 60

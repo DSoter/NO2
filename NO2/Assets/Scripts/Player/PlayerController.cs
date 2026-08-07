@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Cinemachine;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private Animator _animator;
     private SpriteRenderer _renderer;
     private Collider2D _collider;
+    private CinemachineImpulseSource _impulseSource;
 
     // Local Variables
     private Vector2 _moveDirection = new Vector2(0, 0);
@@ -40,6 +42,10 @@ public class PlayerController : MonoBehaviour
     // References
     [Header("Sonidos")]
     [SerializeField] private AudioClip deathSound;
+    [SerializeField] private AudioClip hurtSound;
+    [SerializeField] [Range(0, 1)] private float hurtVolume = 1f;
+    [SerializeField] private float hurtPitchVar = 0.3f;
+
 
     [Space(5)]
     [Header("Scriptable Objects")]
@@ -121,8 +127,7 @@ public class PlayerController : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _renderer = GetComponent<SpriteRenderer>();
-
-        _inputManager = GameManager.Instance.gameObject.GetComponent<InputManager>();
+        _impulseSource = GetComponent<CinemachineImpulseSource>();
 
         _playerData.Stamina = _playerData.MaxStamina;
         _oxygenData.LastOxygenSeconds = _playerData.LastOxygenSeconds;
@@ -130,6 +135,15 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        _inputManager = GameManager.Instance.gameObject.GetComponent<InputManager>();
+
+        if (_inputManager != null)
+        {
+            EnableActions();
+        }
+
+        Debug.Log(_inputManager);
+
         _playerData.OnOxygenIncreased += HandleOnOxygenIncreased;
         _oxygenData.LastOxygenTimer = 0;
     }
@@ -239,7 +253,7 @@ public class PlayerController : MonoBehaviour
     void OnEnable()
     {
         if (_inputManager == null) return;
-        EnableActions();
+            EnableActions();
     }
 
     void OnDisable()
@@ -421,7 +435,6 @@ public class PlayerController : MonoBehaviour
         SetVelocityInstant(_playerData.EndRollingSpeed * _lookDirection);
         yield return new WaitForSeconds(_playerData.EndRollingSeconds);
 
-        Debug.Log("Roll - Move");
         _state = PlayerState.Move;
     }
 
@@ -460,7 +473,7 @@ public class PlayerController : MonoBehaviour
     // Health
     // -------------------------------------------------------------------------
 
-    private void HandleHealthStatus() //gestionar posibles fectos de estado y daño por segundo
+    private void HandleHealthStatus() //gestionar posibles fectos de estado y daÃ±o por segundo
     {
         if (_playerData.Health <= 0)
         {
@@ -470,7 +483,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleHealthRegeneration()
     {
-        bool shouldRegenerate = _state == PlayerState.Rest; //ahora mismo no hace falta porque el handle health está dentro del estado rest
+        bool shouldRegenerate = _state == PlayerState.Rest; //ahora mismo no hace falta porque el handle health estÃ¡ dentro del estado rest
 
         if (shouldRegenerate)
         {
@@ -528,6 +541,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Damage Take: " + damage);
 
+            _impulseSource.GenerateImpulse();
             StartCoroutine(InvulnerabilityCoroutine());
             StartCoroutine(HurtCoroutine());
 
@@ -539,7 +553,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                // Apply knockback
+                GameManager.Instance.audioManager.PlaySound(hurtSound, hurtVolume, hurtPitchVar);
                 _rigidbody.AddForce(knockbackDirection.normalized * knockbackForce, ForceMode2D.Impulse);
             }
         }
@@ -563,7 +577,6 @@ public class PlayerController : MonoBehaviour
         _state = PlayerState.Hurt;
         yield return new WaitForSeconds(_playerData.HurtSeconds);
 
-        Debug.Log("Damage - Move");
         _state = PlayerState.Move;
     }
 

@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -9,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private Animator _animator;
     private SpriteRenderer _renderer;
     private Collider2D _collider;
+    private CinemachineImpulseSource _impulseSource;
 
     // Local Variables
     private Vector2 _moveDirection = new Vector2(0, 0);
@@ -118,7 +120,7 @@ public class PlayerController : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _renderer = GetComponent<SpriteRenderer>();
-
+        _impulseSource = GetComponent<CinemachineImpulseSource>();
 
         _playerData.Stamina = _playerData.MaxStamina;
         _oxygenData.LastOxygenSeconds = _playerData.LastOxygenSeconds;
@@ -511,6 +513,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Damage Take: " + damage);
 
+            _impulseSource.GenerateImpulse();
             StartCoroutine(InvulnerabilityCoroutine());
             StartCoroutine(HurtCoroutine());
 

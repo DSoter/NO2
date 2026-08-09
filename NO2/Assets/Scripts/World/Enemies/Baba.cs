@@ -1,5 +1,5 @@
 using System.Collections;
-using TMPro;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,7 +10,7 @@ public class Baba : Enemy
     private int _currentPatrollPoint = 0;
 
     [Space(5)]
-    [Header("Detection Area")]
+    [Header("ScriptReferences")]
     [SerializeField] private DetectionArea _detectionArea;
 
     [Space(5)]
@@ -28,6 +28,10 @@ public class Baba : Enemy
     private Vector2 _attackDirection;
 
     [Space(5)]
+    [Header("On Hit")]
+    [SerializeField] private float _disabledSecondsOnHit = 0.5f;
+
+    [Space(5)]
     [Header("Ranges")]
     [SerializeField] private float _backToPatrollRange = 20f;
     [SerializeField] private float _attackRange = 2f;
@@ -37,10 +41,13 @@ public class Baba : Enemy
     [SerializeField] private LayerMask _playerLayer;
 
     private PlayerController _player;
+    private Coroutine _diableAgentCoroutine;
 
     private NavMeshAgent _agent;
     private Rigidbody2D _rigidbody;
     private Animator _animator;
+    private CinemachineImpulseSource _impulseSource;
+    private SpriteFlash _spriteFlash;
 
     private BabaState _state = BabaState.Patroll;
     private enum BabaState
@@ -48,8 +55,7 @@ public class Baba : Enemy
         Patroll,
         Chase,
         Charge,
-        Attack,
-        Hurt
+        Attack
     }
 
     private void Awake()
@@ -57,6 +63,8 @@ public class Baba : Enemy
         _agent = GetComponent<NavMeshAgent>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+        _impulseSource = GetComponent<CinemachineImpulseSource>();
+        _spriteFlash = GetComponent<SpriteFlash>();
 
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
@@ -124,9 +132,17 @@ public class Baba : Enemy
         }
     }
 
+    private void LateUpdate()
+    {
+        if (transform.position.z != 0f)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
+        }
+    }
 
     public void OnAttackStartedAnimationEvent()
     {
+
         _cooldownTimer = _cooldownSeconds;
 
         _state = BabaState.Attack;
@@ -197,8 +213,10 @@ public class Baba : Enemy
             _healthPoints -= damage;
         }
 
-
         // Apply Hit Effects and Check for Death
+
+        _impulseSource.GenerateImpulse();
+
         if (_healthPoints <= 0)
         {
             SpawnContent(direction);
@@ -206,29 +224,9 @@ public class Baba : Enemy
         }
         else
         {
-            StopAllCoroutines();
-
-            _state = BabaState.Hurt;
-            _animator.SetTrigger("Hurt");
-
-            _agent.enabled = false;
-
+            _spriteFlash.ApplyEffect();
             _rigidbody.linearVelocity = Vector2.zero;
             _rigidbody.AddForce(direction * 2, ForceMode2D.Impulse);
-        }
-    }
-
-    public void OnHurtEndedAnimationEvent()
-    {
-        _agent.enabled = true;
-
-        if(_player != null)
-        {
-            _state = BabaState.Chase;
-        }
-        else
-        {
-            _state = BabaState.Patroll;
         }
     }
 
@@ -242,6 +240,20 @@ public class Baba : Enemy
             _player = player;
         }
     }
+
+    //private IEnumerator DisableAgent(float seconds)
+    //{
+    //    if (_diableAgentCoroutine != null) 
+    //    { 
+    //        StopCoroutine(_diableAgentCoroutine);
+    //    }
+
+    //    _agent.enabled = false;
+    //    yield return new WaitForSeconds(seconds);
+    //    _agent.enabled = true;
+
+    //    _diableAgentCoroutine = null;
+    //}
 
 
     private void OnDrawGizmos()

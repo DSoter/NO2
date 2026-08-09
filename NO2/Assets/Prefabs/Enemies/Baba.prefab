@@ -125,9 +125,11 @@ GameObject:
   - component: {fileID: 5631451801633355897}
   - component: {fileID: 2854968161358431289}
   - component: {fileID: 7490324042507748272}
+  - component: {fileID: 53124591309143465}
   - component: {fileID: 3378583383172172358}
   - component: {fileID: 5643359169273431226}
   - component: {fileID: 8589834819234733083}
+  - component: {fileID: 1961687623752319823}
   m_Layer: 8
   m_Name: Baba
   m_TagString: Untagged
@@ -177,7 +179,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: c21bfbcb962607d4799f747b580d50fc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -260,18 +262,32 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   _detectionArea: {fileID: 3408969524423527280}
-  _chargeClip: {fileID: 7400000, guid: cade78c479525f94ea661aaf51f8ad62, type: 2}
   _targetingProportion: 0.9
   _attackImpulse: 10
   _damage: 10
   _knockbackForce: 7
   _attackSeconds: 1
   _cooldownSeconds: 2
+  _disabledSecondsOnHit: 0.5
   _backToPatrollRange: 13
   _attackRange: 2.5
   _playerLayer:
     serializedVersion: 2
     m_Bits: 8
+--- !u!114 &53124591309143465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3385104020248448736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a241bcab74964f747906edb0e18993ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteFlash
+  _flashDuration: 0.1
+  _fadeOutDuration: 0.1
 --- !u!50 &3378583383172172358
 Rigidbody2D:
   serializedVersion: 5
@@ -358,3 +374,56 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1961687623752319823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3385104020248448736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineImpulseSource
+  ImpulseDefinition:
+    ImpulseChannel: 1
+    ImpulseShape: 2
+    CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    ImpulseDuration: 0.1
+    ImpulseType: 0
+    DissipationRate: 0.25
+    RawSignal: {fileID: 0}
+    AmplitudeGain: 1
+    FrequencyGain: 1
+    RepeatMode: 0
+    Randomize: 1
+    TimeEnvelope:
+      AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      AttackTime: 0
+      SustainTime: 0.2
+      DecayTime: 0.7
+      ScaleWithImpact: 1
+      HoldForever: 0
+    ImpactRadius: 100
+    DirectionMode: 0
+    DissipationMode: 2
+    DissipationDistance: 100
+    PropagationSpeed: 343
+  DefaultVelocity: {x: 0, y: -0.3, z: 0}

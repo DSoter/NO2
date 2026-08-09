@@ -525,35 +525,14 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 410176089906247750, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 843141664}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
---- !u!1 &843141663 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 410176089906247750, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
-  m_PrefabInstance: {fileID: 843141662}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &843141664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 843141663}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b610720638b93141ab66c966fdf84e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DiverseMenusManager
-  menusSceneName: MenusAndGameOver
 --- !u!114 &843141668 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8459440560862438701, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
   m_PrefabInstance: {fileID: 843141662}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 843141663}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 794cbdb95cc76094484a121c4cc47318, type: 3}

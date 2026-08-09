@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 8700301992882023543}
   - component: {fileID: 1189158600535525632}
   - component: {fileID: 8459440560862438701}
+  - component: {fileID: 3809862304930984732}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -190,6 +191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CheckpointManager
   gateTransitionSeconds: 0
+  respawnData: {fileID: 0}
 --- !u!114 &7038373842693858928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,6 +249,19 @@ MonoBehaviour:
   worldMapData: {fileID: 11400000, guid: b759603f51b9ccc4d8641177dd487650, type: 2}
   scenesVisited:
     references: []
+--- !u!114 &3809862304930984732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410176089906247750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b610720638b93141ab66c966fdf84e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DiverseMenusManager
+  menusSceneName: MenusAndGameOver
 --- !u!1 &516718627763750330
 GameObject:
   m_ObjectHideFlags: 0

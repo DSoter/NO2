@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b49230386c9488b4589bfd09990aeddf, type: 3}
   m_Name: MoneyData
   m_EditorClassIdentifier: Assembly-CSharp::MoneyData
-  money: 67
+  money: 811
   maxAmount: 99999999
+  equippedBadges: {fileID: 11400000, guid: be93a51aa16842a4c85fa0af75138391, type: 2}
+  nameBadgeHundredCoins: "Peque\xF1a fortuna"
+  nameBadgeFiveThousandCoins: Codicioso

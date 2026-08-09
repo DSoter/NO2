@@ -588,6 +588,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   _playerData: {fileID: 11400000, guid: 707aa1a40a1bb064193fd4f6f25fcc6a, type: 2}
+  _weakAttackSound: {fileID: 8300000, guid: db58653dcc0f3c046b9b1e57a9fed055, type: 3}
+  _volume: 0.7
+  _pitchVar: 0.3
 --- !u!114 &7944651771693726206
 MonoBehaviour:
   m_ObjectHideFlags: 0

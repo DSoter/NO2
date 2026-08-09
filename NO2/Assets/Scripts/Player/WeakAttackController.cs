@@ -3,7 +3,15 @@ using UnityEngine;
 
 public class WeakAttackController : MonoBehaviour
 {
+    [Header("Player Data")]
     [SerializeField] private PlayerData _playerData;
+
+    [Space(5)]
+    [Header("Audio Settings")]
+    [SerializeField] private AudioClip _weakAttackSound;
+    [SerializeField] [Range(0, 1)] private float _volume = 1f;
+    [SerializeField] private float _pitchVar = 0.3f;
+
 
     private SpriteRenderer _renderer;
     private Animator _animator;
@@ -28,6 +36,9 @@ public class WeakAttackController : MonoBehaviour
         _centerTransform.rotation = Quaternion.Euler(0, 0, -angle);
 
         _renderer.flipY = shouldFlip;
+
+        GameManager.Instance.audioManager.PlaySound(_weakAttackSound, _volume, _pitchVar);
+
         _animator.SetTrigger("Play");
     }
 

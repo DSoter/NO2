@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class Enemy : MonoBehaviour, IHitable
+public abstract class Enemy : MonoBehaviour, IHitable, IEffectable, IVulnerable
 {
     [Header("Content")]
     [SerializeField] protected GameObject[] _content;
@@ -11,7 +11,27 @@ public abstract class Enemy : MonoBehaviour, IHitable
     [Header("Health")]
     [SerializeField] protected float _healthPoints = 1;
 
-    public abstract void Hit(Vector2 direction, float damage, AttackStrength strength);
+    public virtual bool IsVulnerable { get; set; } = false;
+
+    public virtual void Hit(Vector2 direction, float damage, AttackStrength strength)
+    {
+        if (IsVulnerable && strength == AttackStrength.Strong) 
+        {
+            Debug.Log("Enemy - Vulnerable Damage Taken: " + damage * 2);
+            _healthPoints -= damage * 2;
+
+        }
+        else
+        {
+            Debug.Log("Enemy - Damage Taken: " + damage);
+            _healthPoints -= damage;
+        }
+    }
+
+    public virtual void ApplyBurn(float damagePerSecond, float duration)
+    {
+        // Implementation for applying burn effect
+    }
 
     protected void SpawnContent(Vector2 direction)
     {
@@ -31,7 +51,7 @@ public abstract class Enemy : MonoBehaviour, IHitable
     // Añade un factor aleatorio a la dirección y fuerza con la que salen disparados los pickups
     protected Vector2 AddNoise(Vector2 direction, float maxAngleDegrees, float minForce, float maxForce)
     {
-        float noise = UnityEngine.Random.Range(-maxAngleDegrees, maxAngleDegrees);
+        float noise = Random.Range(-maxAngleDegrees, maxAngleDegrees);
         float rad = noise * Mathf.Deg2Rad;
 
         Vector2 noisyDirection = new Vector2(
@@ -39,6 +59,6 @@ public abstract class Enemy : MonoBehaviour, IHitable
             direction.x * Mathf.Sin(rad) + direction.y * Mathf.Cos(rad)
         ).normalized;
 
-        return noisyDirection * UnityEngine.Random.Range(minForce, maxForce);
+        return noisyDirection * Random.Range(minForce, maxForce);
     }
 }

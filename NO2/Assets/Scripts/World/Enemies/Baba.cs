@@ -49,6 +49,8 @@ public class Baba : Enemy
     private CinemachineImpulseSource _impulseSource;
     private SpriteFlash _spriteFlash;
 
+    public override bool IsVulnerable => _state == BabaState.Charge;
+
     private BabaState _state = BabaState.Patroll;
     private enum BabaState
     {
@@ -200,20 +202,11 @@ public class Baba : Enemy
 
     public override void Hit(Vector2 direction, float damage, AttackStrength strength)
     {
-
-        // Vulnetability Check: If the Baba is in Charge state while receiving a strong attack, it takes double damage
-        if (_state == BabaState.Charge && strength == AttackStrength.Strong)
-        {
-            Debug.Log("Baba - Vulnerable Damage Taken: " + damage * 2);
-            _healthPoints -= damage * 2;
-        }
-        else
-        {
-            Debug.Log("Baba - Damage Taken: " + damage);
-            _healthPoints -= damage;
-        }
+        base.Hit(direction, damage, strength);
 
         // Apply Hit Effects and Check for Death
+
+        Debug.Log("Baba HP: " + _healthPoints);
 
         _impulseSource.GenerateImpulse();
 

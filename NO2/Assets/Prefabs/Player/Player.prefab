@@ -798,6 +798,7 @@ MonoBehaviour:
   _playerData: {fileID: 11400000, guid: 707aa1a40a1bb064193fd4f6f25fcc6a, type: 2}
   _oxygenData: {fileID: 11400000, guid: b15507aeddc94724cac4078700f00819, type: 2}
   _healData: {fileID: 11400000, guid: ccc02f2f8da643c4db2030f236d9a261, type: 2}
+  _moneyData: {fileID: 11400000, guid: e75e14bc5463f9747b495a397649266e, type: 2}
   _weakAttack: {fileID: 3006558068619297952}
   _strongAttack: {fileID: 1089113821434922892}
   _oxygenAlert50: {fileID: 8300000, guid: 2c033969aabb4bd4c91567926048c0e6, type: 3}
@@ -808,6 +809,8 @@ MonoBehaviour:
   _attackImpulse: 2
   _minCharge: 0.5
   _maxCharge: 1.5
+  _fastHealWindowSeconds: 6
+  _fastHealCount: 3
 --- !u!50 &1363480059194287446
 Rigidbody2D:
   serializedVersion: 5

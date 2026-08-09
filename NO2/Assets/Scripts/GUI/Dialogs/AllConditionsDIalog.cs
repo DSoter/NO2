@@ -125,11 +125,12 @@ public class AllConditionsDIalog : MonoBehaviour
     public bool FiveBadgesIsUnlocked()
     {
         int badgesUnlockedCount = 0;
-        foreach(bool key in badgeCollection.UnlockedBadges.Keys)
+        foreach(Badge key in badgeCollection.UnlockedBadges.Keys)
         {
-            if (key)
+            if (badgeCollection.UnlockedBadges[key])
             {
                 badgesUnlockedCount++;
+                
             }
         }
         return badgesUnlockedCount>=5;

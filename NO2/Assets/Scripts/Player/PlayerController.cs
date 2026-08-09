@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerData _playerData;
     [SerializeField] private OxygenData _oxygenData;
     [SerializeField] private HealData _healData;
+    [SerializeField] private MoneyData _moneyData;
 
     [Space(5)]
     [Header("Attacks")]
@@ -702,6 +703,8 @@ public class PlayerController : MonoBehaviour
 
         cm.CameraLockedPlayer = true;
 
+        LoseProgressUntilLastCheckpoint();
+
         yield return new WaitForSeconds(segundos);
 
         _renderer.sortingLayerName = "Default";
@@ -735,6 +738,8 @@ public class PlayerController : MonoBehaviour
 
         cm.CameraLockedPlayer = true;
 
+        LoseProgressUntilLastCheckpoint();
+
         yield return new WaitForSeconds(segundos);
 
         SetDead(false);
@@ -747,6 +752,10 @@ public class PlayerController : MonoBehaviour
         cm.RespawnPlayerAfterNoOxygen(); // Llamar despues, desde un objeto que sobrevive
 
         GameManager.Instance.GetComponent<AchievementManager>().NotifyEvent("no_oxygen");
+    }
+    private void LoseProgressUntilLastCheckpoint()
+    {
+        _moneyData.Load();
     }
 
 

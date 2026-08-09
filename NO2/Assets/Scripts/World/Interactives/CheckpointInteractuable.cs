@@ -3,7 +3,8 @@ using UnityEngine.SceneManagement;
 public class CheckpointInteractuable : Interactable
 {
     private ParticleSystem sistemaParts;
-    [SerializeField] private HealData _healData; 
+    [SerializeField] private HealData _healData;
+    [SerializeField] private MoneyData _moneyData;
 
     protected override void Start()
     {
@@ -55,7 +56,8 @@ public class CheckpointInteractuable : Interactable
                 //refill potions
                 RefillHealthPotions();
 
-
+                //save data on checkpoint
+                SaveData();
 
             }
         }
@@ -76,6 +78,10 @@ public class CheckpointInteractuable : Interactable
     private void RefillHealthPotions()
     {
         _healData.RemainingUses = _healData.MaxUses;
+    }
+    private void SaveData()
+    {
+        _moneyData.Save();
     }
 
 }

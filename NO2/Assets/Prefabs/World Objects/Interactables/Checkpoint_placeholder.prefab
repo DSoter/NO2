@@ -5114,6 +5114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CheckpointInteractuable
   _healData: {fileID: 11400000, guid: ccc02f2f8da643c4db2030f236d9a261, type: 2}
+  _moneyData: {fileID: 11400000, guid: e75e14bc5463f9747b495a397649266e, type: 2}
 --- !u!114 &5608422688076337642
 MonoBehaviour:
   m_ObjectHideFlags: 0

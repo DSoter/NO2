@@ -16,7 +16,7 @@ MonoBehaviour:
   maxHealth: 60
   healthRegenerationSpeed: 40
   healthDropingSpeed: 20
-  stamina: 50
+  stamina: 34.39366
   maxStamina: 50
   secondsUntilStaminaRegeneration: 1.25
   staminaRegenerationSpeed: 20

@@ -19420,6 +19420,18 @@ PrefabInstance:
       value: Baba
       objectReference: {fileID: 0}
     - target: {fileID: 7490324042507748272, guid: 564675f96f88d5946894e576d3c28097, type: 3}
+      propertyPath: _burnColor.b
+      value: 0.57169807
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490324042507748272, guid: 564675f96f88d5946894e576d3c28097, type: 3}
+      propertyPath: _burnColor.g
+      value: 0.7094265
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490324042507748272, guid: 564675f96f88d5946894e576d3c28097, type: 3}
+      propertyPath: _burnColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490324042507748272, guid: 564675f96f88d5946894e576d3c28097, type: 3}
       propertyPath: '_patrollPoints.Array.data[0]'
       value: 
       objectReference: {fileID: 1973743750}

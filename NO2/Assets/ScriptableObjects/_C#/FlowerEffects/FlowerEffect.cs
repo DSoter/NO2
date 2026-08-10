@@ -1,7 +1,5 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "FlowerEffect", menuName = "Scriptable Objects/FlowerEffect")]
-
 public abstract class FlowerEffect : ScriptableObject
 {
     // Ataque debil

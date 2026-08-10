@@ -28,9 +28,9 @@ public abstract class Enemy : MonoBehaviour, IHitable, IEffectable, IVulnerable
         }
     }
 
-    public virtual void ApplyBurn(float damagePerSecond, float duration)
+    public virtual void ApplyBurn(float damagePerSecond, int duration)
     {
-        // Implementation for applying burn effect
+        Debug.Log("Enemy Burn: " + damagePerSecond + " damage per second for " + duration + " seconds");
     }
 
     protected void SpawnContent(Vector2 direction)

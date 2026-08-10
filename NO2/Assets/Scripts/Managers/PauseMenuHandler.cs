@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using static UnityEngine.InputSystem.UI.VirtualMouseInput;
 
 public class PauseMenuHandler : MonoBehaviour
 {
@@ -73,7 +74,8 @@ public class PauseMenuHandler : MonoBehaviour
 		}
 		else
 		{
-			if (exitPauseSound != null)
+            Cursor.SetCursor(null, Vector2.zero, UnityEngine.CursorMode.Auto);
+            if (exitPauseSound != null)
 				GameManager.Instance.audioManager.PlaySound(exitPauseSound);
 			Time.timeScale = 1f;
 			SceneManager.UnloadSceneAsync(pauseSceneName);

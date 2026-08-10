@@ -234,7 +234,7 @@ public class Baba : Enemy
             StopCoroutine( _burnCoroutine );
         }
 
-        StartCoroutine(BurnCoroutine(damagePerSecond, duration));
+        _burnCoroutine = StartCoroutine(BurnCoroutine(damagePerSecond, duration));
     }
     private IEnumerator BurnCoroutine(float damagePerSecond, int duration)
     {
@@ -242,13 +242,12 @@ public class Baba : Enemy
 
         _renderer.color = _burnColor;
 
-        yield return new WaitForSeconds(1);
 
         while (burnCount < duration)
         {
+            yield return new WaitForSeconds(1);
             Hit(Vector2.zero, damagePerSecond, AttackStrength.Weak);
             burnCount++;
-            yield return new WaitForSeconds(1);
         }
 
         _renderer.color = Color.white;

@@ -2294,6 +2294,7 @@ GameObject:
   - component: {fileID: 442254426}
   - component: {fileID: 442254425}
   - component: {fileID: 442254424}
+  - component: {fileID: 442254427}
   m_Layer: 5
   m_Name: Boton Flecha Abajo
   m_TagString: Untagged
@@ -2414,6 +2415,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 442254422}
   m_CullTransparentMesh: 1
+--- !u!114 &442254427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 442254422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3d50f456d06f194ba48b81d9acac429, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChangeCursor
+  cursorIdle: {fileID: 2800000, guid: 821af8a059af8274696d3f3dd833a82c, type: 3}
+  cursorCanClick: {fileID: 2800000, guid: d5099e14e8a0dd94e93b00ef87033cba, type: 3}
 --- !u!1 &459025081
 GameObject:
   m_ObjectHideFlags: 0
@@ -8134,6 +8149,7 @@ GameObject:
   - component: {fileID: 1591384327}
   - component: {fileID: 1591384326}
   - component: {fileID: 1591384325}
+  - component: {fileID: 1591384328}
   m_Layer: 5
   m_Name: Boton Flecha Arriba
   m_TagString: Untagged
@@ -8254,6 +8270,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1591384323}
   m_CullTransparentMesh: 1
+--- !u!114 &1591384328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1591384323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3d50f456d06f194ba48b81d9acac429, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChangeCursor
+  cursorIdle: {fileID: 2800000, guid: 821af8a059af8274696d3f3dd833a82c, type: 3}
+  cursorCanClick: {fileID: 2800000, guid: d5099e14e8a0dd94e93b00ef87033cba, type: 3}
 --- !u!1 &1610636924
 GameObject:
   m_ObjectHideFlags: 0

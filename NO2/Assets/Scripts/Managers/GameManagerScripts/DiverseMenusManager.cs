@@ -117,8 +117,8 @@ public class DiverseMenusManager : MonoBehaviour
             }
             else
             {
-                
-                if(_menuType == MenuType.Gameover)
+                Cursor.SetCursor(null, Vector2.zero, UnityEngine.CursorMode.Auto);
+                if (_menuType == MenuType.Gameover)
                 {
                     Time.timeScale = 1f;
                     SceneManager.UnloadSceneAsync(menusSceneName);

@@ -310,7 +310,7 @@ public class PlayerController : MonoBehaviour
         var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
 
-        _lookDirection = (mousePos - transform.position).normalized;
+        _lookDirection = (mousePos - _center.transform.position).normalized;
 
         _renderer.flipX = (_lookDirection.x < 0);
     }

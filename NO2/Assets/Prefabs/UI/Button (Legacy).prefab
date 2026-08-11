@@ -157,8 +157,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d50f456d06f194ba48b81d9acac429, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChangeCursor
-  cursorIdle: {fileID: 2800000, guid: 821af8a059af8274696d3f3dd833a82c, type: 3}
-  cursorCanClick: {fileID: 2800000, guid: d5099e14e8a0dd94e93b00ef87033cba, type: 3}
+  cursorIdle: {fileID: 2800000, guid: 252078da8602e654083766c2ce2e4238, type: 3}
+  cursorCanClick: {fileID: 2800000, guid: 5d759e4692fbf704583b1078a2a3b357, type: 3}
 --- !u!1 &7987024196857362548
 GameObject:
   m_ObjectHideFlags: 0

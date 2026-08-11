@@ -296,9 +296,6 @@ public class CheckpointManager : MonoBehaviour
             scenesHasToRespawn = new Dictionary<string, bool>();
         }
 
-        Debug.Log(scenesHasToRespawn["PruebaTileMap"]);
-        scenesHasToRespawn["PruebaTileMap"] = true;
-
         List<string> keys = new List<string>(scenesHasToRespawn.Keys);
         foreach (string name in keys)
         {

@@ -16,12 +16,4 @@ MonoBehaviour:
   description: La "Papaver rhoeas" posee la esencia del sol causando quemaduras a
     quien ose tocarla
   flowerIcon: {fileID: -5257907116096501005, guid: aca4077c00978ed4ba025b5f6d3fb31e, type: 3}
-  basicAttack:
-    m_PersistentCalls:
-      m_Calls: []
-  chargeAttack:
-    m_PersistentCalls:
-      m_Calls: []
-  vulnerablePoint:
-    m_PersistentCalls:
-      m_Calls: []
+  flowerEffect: {fileID: 11400000, guid: 2e9867b25d30dab47ad96152fc1d8704, type: 2}

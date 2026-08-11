@@ -8,8 +8,6 @@ public class Nose : Enemy
     private float _toggleTimer = 0;
     private float _toggleSeconds = 4; // Tiempo entre cambio de estados
 
-    private bool _isVulnerable = false;
-
     void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -28,7 +26,7 @@ public class Nose : Enemy
 
     public override void Hit(Vector2 direction, float damage, AttackStrength strength)
     {
-        if (_isVulnerable && strength == AttackStrength.Strong)
+        if (IsVulnerable && strength == AttackStrength.Strong)
         {
             _animator.SetTrigger("Death");
             SpawnContent(direction);
@@ -42,6 +40,6 @@ public class Nose : Enemy
 
     public void ToggleVulnerability()
     {
-        _isVulnerable = !_isVulnerable;
+        IsVulnerable = !IsVulnerable;
     }
 }

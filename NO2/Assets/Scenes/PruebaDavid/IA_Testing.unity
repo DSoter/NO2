@@ -615,68 +615,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5362778469171188388, guid: 61ca8207deced414784e29320396d3ad, type: 3}
   m_PrefabInstance: {fileID: 253946495}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &265502590
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1293860728}
-    m_Modifications:
-    - target: {fileID: 3065395396513597598, guid: 61ca8207deced414784e29320396d3ad, type: 3}
-      propertyPath: m_Name
-      value: Spikes
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362778469171188388, guid: 61ca8207deced414784e29320396d3ad, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -4.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362778469171188388, guid: 61ca8207deced414784e29320396d3ad, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -5.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362778469171188388, guid: 61ca8207deced414784e29320396d3ad, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362778469171188388, guid: 61ca8207deced414784e29320396d3ad, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362778469171188388, guid: 61ca8207deced414784e29320396d3ad, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362778469171188388, guid: 61ca8207deced414784e29320396d3ad, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362778469171188388, guid: 61ca8207deced414784e29320396d3ad, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362778469171188388, guid: 61ca8207deced414784e29320396d3ad, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362778469171188388, guid: 61ca8207deced414784e29320396d3ad, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362778469171188388, guid: 61ca8207deced414784e29320396d3ad, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 61ca8207deced414784e29320396d3ad, type: 3}
---- !u!4 &265502591 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5362778469171188388, guid: 61ca8207deced414784e29320396d3ad, type: 3}
-  m_PrefabInstance: {fileID: 265502590}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &373151932
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -728,6 +666,10 @@ PrefabInstance:
     - target: {fileID: 3385104020248448736, guid: 564675f96f88d5946894e576d3c28097, type: 3}
       propertyPath: m_Name
       value: Baba (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490324042507748272, guid: 564675f96f88d5946894e576d3c28097, type: 3}
+      propertyPath: _healthPoints
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7490324042507748272, guid: 564675f96f88d5946894e576d3c28097, type: 3}
       propertyPath: '_patrollPoints.Array.data[0]'
@@ -834,68 +776,6 @@ Transform:
   - {fileID: 532281356}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &402235265
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1293860728}
-    m_Modifications:
-    - target: {fileID: 3065395396513597598, guid: 61ca8207deced414784e29320396d3ad, type: 3}
-      propertyPath: m_Name
-      value: Spikes
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362778469171188388, guid: 61ca8207deced414784e29320396d3ad, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362778469171188388, guid: 61ca8207deced414784e29320396d3ad, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -5.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362778469171188388, guid: 61ca8207deced414784e29320396d3ad, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362778469171188388, guid: 61ca8207deced414784e29320396d3ad, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362778469171188388, guid: 61ca8207deced414784e29320396d3ad, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362778469171188388, guid: 61ca8207deced414784e29320396d3ad, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362778469171188388, guid: 61ca8207deced414784e29320396d3ad, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362778469171188388, guid: 61ca8207deced414784e29320396d3ad, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362778469171188388, guid: 61ca8207deced414784e29320396d3ad, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362778469171188388, guid: 61ca8207deced414784e29320396d3ad, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 61ca8207deced414784e29320396d3ad, type: 3}
---- !u!4 &402235266 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5362778469171188388, guid: 61ca8207deced414784e29320396d3ad, type: 3}
-  m_PrefabInstance: {fileID: 402235265}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &411502146
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1133,7 +1013,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5778682996471978417, guid: 8cd1a4b028703394abae9fbf65a74dd0, type: 3}
       propertyPath: orthographic size
-      value: 7.625
+      value: 6.9166665
       objectReference: {fileID: 0}
     - target: {fileID: 5778682996471978417, guid: 8cd1a4b028703394abae9fbf65a74dd0, type: 3}
       propertyPath: m_BackGroundColor.b
@@ -1779,6 +1659,10 @@ PrefabInstance:
     - target: {fileID: 3385104020248448736, guid: 564675f96f88d5946894e576d3c28097, type: 3}
       propertyPath: m_Name
       value: Baba (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490324042507748272, guid: 564675f96f88d5946894e576d3c28097, type: 3}
+      propertyPath: _healthPoints
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7490324042507748272, guid: 564675f96f88d5946894e576d3c28097, type: 3}
       propertyPath: '_patrollPoints.Array.data[0]'
@@ -10383,12 +10267,10 @@ Transform:
   - {fileID: 2035660466}
   - {fileID: 943388080}
   - {fileID: 414139887}
-  - {fileID: 402235266}
   - {fileID: 247063268}
   - {fileID: 411502147}
   - {fileID: 597002642}
   - {fileID: 880125329}
-  - {fileID: 265502591}
   - {fileID: 1996077572}
   - {fileID: 1570332099}
   - {fileID: 1403848195}
@@ -19468,6 +19350,10 @@ PrefabInstance:
       value: Baba (1)
       objectReference: {fileID: 0}
     - target: {fileID: 7490324042507748272, guid: 564675f96f88d5946894e576d3c28097, type: 3}
+      propertyPath: _healthPoints
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490324042507748272, guid: 564675f96f88d5946894e576d3c28097, type: 3}
       propertyPath: '_patrollPoints.Array.data[0]'
       value: 
       objectReference: {fileID: 537258477}
@@ -19544,6 +19430,10 @@ PrefabInstance:
     - target: {fileID: 3385104020248448736, guid: 564675f96f88d5946894e576d3c28097, type: 3}
       propertyPath: m_Name
       value: Baba
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490324042507748272, guid: 564675f96f88d5946894e576d3c28097, type: 3}
+      propertyPath: _healthPoints
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7490324042507748272, guid: 564675f96f88d5946894e576d3c28097, type: 3}
       propertyPath: '_patrollPoints.Array.data[0]'

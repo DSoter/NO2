@@ -16,7 +16,7 @@ MonoBehaviour:
   maxHealth: 60
   healthRegenerationSpeed: 40
   healthDropingSpeed: 20
-  stamina: 50
+  stamina: 44.946228
   maxStamina: 50
   secondsUntilStaminaRegeneration: 1.25
   staminaRegenerationSpeed: 20
@@ -41,4 +41,4 @@ MonoBehaviour:
   weakAttackDamage: 5
   minStrongAttackDamage: 10
   maxStrongAttackDamage: 20
-  equipedFlower: {fileID: 11400000, guid: f8d80e0850cacc441800e8cb66478b56, type: 2}
+  equipedFlower: {fileID: 11400000, guid: 60ac8c1bf6427a9419740f1d14774564, type: 2}

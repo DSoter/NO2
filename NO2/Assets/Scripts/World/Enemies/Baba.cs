@@ -30,6 +30,9 @@ public class Baba : Enemy
     [Space(5)]
     [Header("On Hit")]
     [SerializeField] private float _disabledSecondsOnHit = 0.5f;
+    [SerializeField] private float _knockbackAmountOnHit = 5f;
+    [SerializeField] private Color _burnColor;
+    [SerializeField] private Color _severeBurnColor;
 
     [Space(5)]
     [Header("Ranges")]
@@ -41,13 +44,18 @@ public class Baba : Enemy
     [SerializeField] private LayerMask _playerLayer;
 
     private PlayerController _player;
-    private Coroutine _diableAgentCoroutine;
 
     private NavMeshAgent _agent;
     private Rigidbody2D _rigidbody;
     private Animator _animator;
+    private SpriteRenderer _renderer;
     private CinemachineImpulseSource _impulseSource;
     private SpriteFlash _spriteFlash;
+
+    private Coroutine _burnCoroutine;
+    private Coroutine _severeBurnCoroutine;
+
+    public override bool IsVulnerable => _state == BabaState.Charge;
 
     private BabaState _state = BabaState.Patroll;
     private enum BabaState
@@ -63,6 +71,7 @@ public class Baba : Enemy
         _agent = GetComponent<NavMeshAgent>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+        _renderer = GetComponent<SpriteRenderer>();
         _impulseSource = GetComponent<CinemachineImpulseSource>();
         _spriteFlash = GetComponent<SpriteFlash>();
 
@@ -200,20 +209,11 @@ public class Baba : Enemy
 
     public override void Hit(Vector2 direction, float damage, AttackStrength strength)
     {
-
-        // Vulnetability Check: If the Baba is in Charge state while receiving a strong attack, it takes double damage
-        if (_state == BabaState.Charge && strength == AttackStrength.Strong)
-        {
-            Debug.Log("Baba - Vulnerable Damage Taken: " + damage * 2);
-            _healthPoints -= damage * 2;
-        }
-        else
-        {
-            Debug.Log("Baba - Damage Taken: " + damage);
-            _healthPoints -= damage;
-        }
+        base.Hit(direction, damage, strength);
 
         // Apply Hit Effects and Check for Death
+
+        Debug.Log("Baba HP: " + _healthPoints);
 
         _impulseSource.GenerateImpulse();
 
@@ -225,9 +225,72 @@ public class Baba : Enemy
         else
         {
             _spriteFlash.ApplyEffect();
-            _rigidbody.linearVelocity = Vector2.zero;
-            _rigidbody.AddForce(direction * 2, ForceMode2D.Impulse);
+            _rigidbody.AddForce(direction * _knockbackAmountOnHit, ForceMode2D.Impulse);
         }
+    }
+
+    public override void ApplyBurn(float damagePerSecond, int duration)
+    {
+        if (_severeBurnCoroutine != null) { return; } // Severe burn has priority over basic burn
+
+        if(_burnCoroutine != null)
+        {
+            StopCoroutine( _burnCoroutine );
+        }
+
+        _burnCoroutine = StartCoroutine(BurnCoroutine(damagePerSecond, duration));
+    }
+
+    public override void ApplySevereBurn(float damagePerSecond, int duration)
+    {
+        if(_burnCoroutine != null)
+        {
+            StopCoroutine( _burnCoroutine );
+        }
+
+        if(_severeBurnCoroutine != null)
+        {
+            StopCoroutine(_severeBurnCoroutine);
+        }
+
+        _severeBurnCoroutine = StartCoroutine(SevereBurnCoroutine(damagePerSecond, duration));
+
+    }
+
+    private IEnumerator BurnCoroutine(float damagePerSecond, int duration)
+    {
+        int burnCount = 0;
+
+        _renderer.color = _burnColor;
+
+
+        while (burnCount < duration)
+        {
+            yield return new WaitForSeconds(1);
+            Hit(Vector2.zero, damagePerSecond, AttackStrength.Weak);
+            burnCount++;
+        }
+
+        _renderer.color = Color.white;
+        _burnCoroutine = null;
+    }
+
+    private IEnumerator SevereBurnCoroutine(float damagePerSecond, int duration)
+    {
+        int burnCount = 0;
+
+        _renderer.color = _severeBurnColor;
+
+
+        while (burnCount < duration)
+        {
+            yield return new WaitForSeconds(1);
+            Hit(Vector2.zero, damagePerSecond, AttackStrength.Weak);
+            burnCount++;
+        }
+
+        _renderer.color = Color.white;
+        _severeBurnCoroutine = null;
     }
 
     public void StartChasing(PlayerController player)
@@ -240,20 +303,6 @@ public class Baba : Enemy
             _player = player;
         }
     }
-
-    //private IEnumerator DisableAgent(float seconds)
-    //{
-    //    if (_diableAgentCoroutine != null) 
-    //    { 
-    //        StopCoroutine(_diableAgentCoroutine);
-    //    }
-
-    //    _agent.enabled = false;
-    //    yield return new WaitForSeconds(seconds);
-    //    _agent.enabled = true;
-
-    //    _diableAgentCoroutine = null;
-    //}
 
 
     private void OnDrawGizmos()

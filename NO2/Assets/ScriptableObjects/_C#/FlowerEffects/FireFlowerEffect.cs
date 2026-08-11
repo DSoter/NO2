@@ -27,7 +27,7 @@ public class FireFlowerEffect : FlowerEffect
     {
         if (enemy.TryGetComponent<IEffectable>(out var enemyScript))
         {
-            enemyScript.ApplyBurn(burnDamagePerSecond * vulnableDamageMultiplier, burnSeconds);
+            enemyScript.ApplySevereBurn(burnDamagePerSecond * vulnableDamageMultiplier, burnSeconds);
         }
     }
 }

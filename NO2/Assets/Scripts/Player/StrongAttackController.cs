@@ -78,7 +78,7 @@ public class StrongAttackController : MonoBehaviour
             var direction = (collision.transform.position - transform.position).normalized;
             hitable.Hit(direction, _damage, AttackStrength.Strong);
 
-            FlowerEffectResolver.ApplyOnHit(_playerData.EquipedFlower.flowerEffect, collision.gameObject, _playerData, AttackStrength.Weak);
+            FlowerEffectResolver.ApplyOnHit(_playerData.EquipedFlower.flowerEffect, collision.gameObject, _playerData, AttackStrength.Strong);
         }
     }
 

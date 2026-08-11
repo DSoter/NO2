@@ -32,6 +32,7 @@ public class Baba : Enemy
     [SerializeField] private float _disabledSecondsOnHit = 0.5f;
     [SerializeField] private float _knockbackAmountOnHit = 5f;
     [SerializeField] private Color _burnColor;
+    [SerializeField] private Color _severeBurnColor;
 
     [Space(5)]
     [Header("Ranges")]
@@ -52,6 +53,7 @@ public class Baba : Enemy
     private SpriteFlash _spriteFlash;
 
     private Coroutine _burnCoroutine;
+    private Coroutine _severeBurnCoroutine;
 
     public override bool IsVulnerable => _state == BabaState.Charge;
 
@@ -229,6 +231,8 @@ public class Baba : Enemy
 
     public override void ApplyBurn(float damagePerSecond, int duration)
     {
+        if (_severeBurnCoroutine != null) { return; } // Severe burn has priority over basic burn
+
         if(_burnCoroutine != null)
         {
             StopCoroutine( _burnCoroutine );
@@ -236,6 +240,23 @@ public class Baba : Enemy
 
         _burnCoroutine = StartCoroutine(BurnCoroutine(damagePerSecond, duration));
     }
+
+    public override void ApplySevereBurn(float damagePerSecond, int duration)
+    {
+        if(_burnCoroutine != null)
+        {
+            StopCoroutine( _burnCoroutine );
+        }
+
+        if(_severeBurnCoroutine != null)
+        {
+            StopCoroutine(_severeBurnCoroutine);
+        }
+
+        _severeBurnCoroutine = StartCoroutine(SevereBurnCoroutine(damagePerSecond, duration));
+
+    }
+
     private IEnumerator BurnCoroutine(float damagePerSecond, int duration)
     {
         int burnCount = 0;
@@ -252,6 +273,24 @@ public class Baba : Enemy
 
         _renderer.color = Color.white;
         _burnCoroutine = null;
+    }
+
+    private IEnumerator SevereBurnCoroutine(float damagePerSecond, int duration)
+    {
+        int burnCount = 0;
+
+        _renderer.color = _severeBurnColor;
+
+
+        while (burnCount < duration)
+        {
+            yield return new WaitForSeconds(1);
+            Hit(Vector2.zero, damagePerSecond, AttackStrength.Weak);
+            burnCount++;
+        }
+
+        _renderer.color = Color.white;
+        _severeBurnCoroutine = null;
     }
 
     public void StartChasing(PlayerController player)

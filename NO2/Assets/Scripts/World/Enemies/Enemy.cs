@@ -30,7 +30,12 @@ public abstract class Enemy : MonoBehaviour, IHitable, IEffectable, IVulnerable
 
     public virtual void ApplyBurn(float damagePerSecond, int duration)
     {
-        Debug.Log("Enemy Burn: " + damagePerSecond + " damage per second for " + duration + " seconds");
+        Debug.Log("BURN - Not Implemented");
+    }
+
+    public virtual void ApplySevereBurn(float damagePerSecond, int duration)
+    {
+        Debug.Log("SEVERE BURN - Not Implemented");
     }
 
     protected void SpawnContent(Vector2 direction)

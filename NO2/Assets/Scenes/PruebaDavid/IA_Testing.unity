@@ -668,6 +668,10 @@ PrefabInstance:
       value: Baba (3)
       objectReference: {fileID: 0}
     - target: {fileID: 7490324042507748272, guid: 564675f96f88d5946894e576d3c28097, type: 3}
+      propertyPath: _healthPoints
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490324042507748272, guid: 564675f96f88d5946894e576d3c28097, type: 3}
       propertyPath: '_patrollPoints.Array.data[0]'
       value: 
       objectReference: {fileID: 945151557}
@@ -1009,7 +1013,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5778682996471978417, guid: 8cd1a4b028703394abae9fbf65a74dd0, type: 3}
       propertyPath: orthographic size
-      value: 7.625
+      value: 6.9166665
       objectReference: {fileID: 0}
     - target: {fileID: 5778682996471978417, guid: 8cd1a4b028703394abae9fbf65a74dd0, type: 3}
       propertyPath: m_BackGroundColor.b
@@ -1655,6 +1659,10 @@ PrefabInstance:
     - target: {fileID: 3385104020248448736, guid: 564675f96f88d5946894e576d3c28097, type: 3}
       propertyPath: m_Name
       value: Baba (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490324042507748272, guid: 564675f96f88d5946894e576d3c28097, type: 3}
+      propertyPath: _healthPoints
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7490324042507748272, guid: 564675f96f88d5946894e576d3c28097, type: 3}
       propertyPath: '_patrollPoints.Array.data[0]'
@@ -19342,6 +19350,10 @@ PrefabInstance:
       value: Baba (1)
       objectReference: {fileID: 0}
     - target: {fileID: 7490324042507748272, guid: 564675f96f88d5946894e576d3c28097, type: 3}
+      propertyPath: _healthPoints
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490324042507748272, guid: 564675f96f88d5946894e576d3c28097, type: 3}
       propertyPath: '_patrollPoints.Array.data[0]'
       value: 
       objectReference: {fileID: 537258477}
@@ -19418,6 +19430,10 @@ PrefabInstance:
     - target: {fileID: 3385104020248448736, guid: 564675f96f88d5946894e576d3c28097, type: 3}
       propertyPath: m_Name
       value: Baba
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490324042507748272, guid: 564675f96f88d5946894e576d3c28097, type: 3}
+      propertyPath: _healthPoints
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7490324042507748272, guid: 564675f96f88d5946894e576d3c28097, type: 3}
       propertyPath: '_patrollPoints.Array.data[0]'

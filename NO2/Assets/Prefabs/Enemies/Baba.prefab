@@ -270,7 +270,8 @@ MonoBehaviour:
   _cooldownSeconds: 2
   _disabledSecondsOnHit: 0.5
   _knockbackAmountOnHit: 5
-  _burnColor: {r: 1, g: 0.82039195, b: 0.6396227, a: 1}
+  _burnColor: {r: 1, g: 0.82354385, b: 0.54905653, a: 1}
+  _severeBurnColor: {r: 1, g: 0.52246994, b: 0.39811313, a: 1}
   _backToPatrollRange: 13
   _attackRange: 2.5
   _playerLayer:

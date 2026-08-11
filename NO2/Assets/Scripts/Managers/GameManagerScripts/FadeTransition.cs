@@ -39,7 +39,6 @@ public class FadeTransition : MonoBehaviour
     {
         yield return StartCoroutine(FadeTo(1f));
         SceneManager.LoadSceneAsync(sceneName);
-        
         //yield return StartCoroutine(FadeTo(0f));
     }
     public void MakeVisible()

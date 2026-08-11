@@ -91,7 +91,11 @@ public class DialogBox : MonoBehaviour
         characterPortrait.sprite = characterData.CharacterPortrait;
         characterNameText.text = characterData.CharacterName;
         animatorPortrait.runtimeAnimatorController = characterData.CharacterAnimator;
-        animatorPortrait.SetBool("talking", isTyping);
+        if (animatorPortrait != null)
+        {
+            animatorPortrait.SetBool("talking", isTyping);
+        }
+        
 
         currentLines = lines;
         currentLineIndex = 0;
@@ -268,7 +272,11 @@ public class DialogBox : MonoBehaviour
         continueIndicator.SetActive(false);
         dialogText.text = "";
         CancelAllCoroutines();
-        animatorPortrait.SetBool("talking", true);
+        if (animatorPortrait != null)
+        {
+            animatorPortrait.SetBool("talking", true);
+        }
+        
         typingCoroutine = StartCoroutine(TypeLine(text));
     }
 
@@ -347,7 +355,11 @@ public class DialogBox : MonoBehaviour
             if (charDelay > 0)
                 yield return new WaitForSeconds(charDelay);
         }
-        animatorPortrait.SetBool("talking", false);
+        if (animatorPortrait != null)
+        {
+            animatorPortrait.SetBool("talking", false);
+        }
+        
         charDelay = charDefault;
         isTyping = false;
         continueIndicator.SetActive(true);
@@ -367,7 +379,10 @@ public class DialogBox : MonoBehaviour
         // Ponemos el texto completo de la línea actual directamente
         //dialogText.text = currentLines[currentLineIndex].text;
         charDelay = 0;
-        animatorPortrait.SetBool("talking", false);
+        if(animatorPortrait != null)
+        {
+            animatorPortrait.SetBool("talking", false);
+        }
         //isTyping = false;
         //continueIndicator.SetActive(true);
     }

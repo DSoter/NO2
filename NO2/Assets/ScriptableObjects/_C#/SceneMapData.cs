@@ -60,6 +60,11 @@ public class SceneMapData : ScriptableObject
     
     public void Save()
     {
+        if (mapMatrix == null)
+        {
+            Debug.LogWarning($"{name}: intento de Save() sin MapMatrix inicializado. Se ignora.");
+            return;
+        }
         int rows = mapMatrix.GetLength(0);
         int cols = mapMatrix.GetLength(1);
 

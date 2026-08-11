@@ -6861,6 +6861,10 @@ MonoBehaviour:
     color: {r: 0.007932842, g: 1, b: 0, a: 0}
   - character: 47
     color: {r: 0.99206716, g: 1, b: 0, a: 0}
+  - character: 61
+    color: {r: 1, g: 0, b: 0, a: 0}
+  - character: 38
+    color: {r: 0, g: 0, b: 1, a: 0}
   animationCharPairs:
   - character: 35
     keyFunction: wave

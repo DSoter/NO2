@@ -4972,6 +4972,7 @@ GameObject:
   - component: {fileID: 8877040011815412682}
   - component: {fileID: 3938351752135297975}
   - component: {fileID: 5608422688076337642}
+  - component: {fileID: 4884986558001238099}
   m_Layer: 0
   m_Name: Checkpoint_placeholder
   m_TagString: SpawnPoint
@@ -4989,7 +4990,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.12, y: -2.39, z: 0}
-  m_LocalScale: {x: 0.47674, y: 0.47674, z: 0.47674}
+  m_LocalScale: {x: 1, y: 1, z: 0.47674}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5988365460005825655}
@@ -5045,7 +5046,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 6415281176296361798, guid: dd5cfbd8ee67f6b4f89c14cc035ec97a, type: 3}
+  m_Sprite: {fileID: 372287839227939782, guid: f0490de387ca3df498bb686f3fc77a49, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5093,7 +5094,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
-    oldSize: {x: 2.93, y: 3.18}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 2.93, y: 3.18}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -5114,7 +5115,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CheckpointInteractuable
   _healData: {fileID: 11400000, guid: ccc02f2f8da643c4db2030f236d9a261, type: 2}
-  _moneyData: {fileID: 11400000, guid: e75e14bc5463f9747b495a397649266e, type: 2}
 --- !u!114 &5608422688076337642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5128,6 +5128,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnId
   spawnid: 0
+--- !u!95 &4884986558001238099
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7543410730610923333}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a9a02a898d2965b45906f8c2c276d2a5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8594541899859575447
 GameObject:
   m_ObjectHideFlags: 0
@@ -5154,7 +5176,7 @@ Transform:
   m_GameObject: {fileID: 8594541899859575447}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.01, y: 1.52, z: -25}
+  m_LocalPosition: {x: -0.01, y: -0.16, z: -25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5209,7 +5231,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -1653951772147818831, guid: a89fdc1f66f2e584bb83a4f4cc0b9781, type: 3}
+  m_Sprite: {fileID: -1264044898, guid: 2749dd64e4c117e42bd766b6dc8f340b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

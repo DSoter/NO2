@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97bce0d3f5874d843bee66385cf5dd80, type: 3}
   m_Name: RespawnData
   m_EditorClassIdentifier: Assembly-CSharp::RespawnData
-  defaultSceneName: PruebaTileMap
+  defaultSceneName: Tutorial
   defaultCheckpointId: 0

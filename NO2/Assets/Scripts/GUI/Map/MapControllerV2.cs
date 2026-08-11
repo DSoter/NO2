@@ -95,6 +95,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     }
     private void OnEnable()
     { 
+        
         mapData.Save();
         UpdateMapData();
 

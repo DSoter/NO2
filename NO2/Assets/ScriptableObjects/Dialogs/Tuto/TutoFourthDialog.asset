@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e2bb7e4f927c16469fb8e20a9d08185, type: 3}
+  m_Name: TutoFourthDialog
+  m_EditorClassIdentifier: Assembly-CSharp::DialogTextData
+  listOfTexts:
+  - lines:
+    - conditionKey: 
+      text: "Puedes realizar un poderoso ataque cargado para hacer m\xE1s da\xF1o
+        a los enemigos."
+    - conditionKey: 
+      text: Manten el click derecho para empezar a cargar
+    - conditionKey: 
+      text: "Sueltalo para golpear hacia donde apunte el rat\xF3n"
+    - conditionKey: 
+      text: Tambien sirve para realizar una ruptura en enemigos vulnerables
+    - conditionKey: 
+      text: Los enemigos estan vulnerables cuando tienen un borde naranja
+  repetitionTexts:
+  - lines:
+    - conditionKey: 
+      text: Manten el click derecho para empezar a cargar
+    - conditionKey: 
+      text: "Sueltalo para golpear hacia donde apunte el rat\xF3n"
+    - conditionKey: 
+      text: Tambien sirve para realizar una ruptura en enemigos vulnerables
+    - conditionKey: 
+      text: Tambien sirve para realizar una ruptura en enemigos vulnerables
+    - conditionKey: 
+      text: Recuerda que los enemigos vulnerables son los que tienen un borde naranja

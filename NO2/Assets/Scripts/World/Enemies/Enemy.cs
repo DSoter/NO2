@@ -10,6 +10,7 @@ public abstract class Enemy : MonoBehaviour, IHitable, IEffectable, IVulnerable
 
     [Header("Health")]
     [SerializeField] protected float _healthPoints = 1;
+    [SerializeField] protected float _vulnerableMult = 1.5f;
 
     public virtual bool IsVulnerable { get; set; } = false;
 
@@ -17,8 +18,8 @@ public abstract class Enemy : MonoBehaviour, IHitable, IEffectable, IVulnerable
     {
         if (IsVulnerable && strength == AttackStrength.Strong) 
         {
-            Debug.Log("Enemy - Vulnerable Damage Taken: " + damage * 2);
-            _healthPoints -= damage * 2;
+            Debug.Log("Enemy - Vulnerable Damage Taken: " + damage * _vulnerableMult);
+            _healthPoints -= damage * _vulnerableMult;
 
         }
         else

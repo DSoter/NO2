@@ -256,6 +256,7 @@ MonoBehaviour:
   _minForce: 2
   _maxForce: 6
   _healthPoints: 20
+  _vulnerableMult: 1.5
   _patrollPoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -307,7 +308,7 @@ Rigidbody2D:
   m_LinearDamping: 2
   m_AngularDamping: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 2ded083b796464d4dab75f063caf0692, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

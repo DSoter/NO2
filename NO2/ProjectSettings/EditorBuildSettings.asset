@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MenuPrincipal.unity
     guid: 3f73ec6095c697b438a146a6674c10a0
   - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: e37f81f5929837549a2787a2903db64b
+  - enabled: 1
     path: Assets/Scenes/PruebaVictor/PruebaTileMap.unity
     guid: 25658945e3c474c4d9183d044f728cbc
   - enabled: 1
@@ -26,8 +29,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PruebaVictor/SiguienteSiguienteNivel.unity
     guid: a2dcd4e60d19d90468ffcb69a6bdca57
-  - enabled: 1
-    path: Assets/Scenes/Tutorial.unity
-    guid: e37f81f5929837549a2787a2903db64b
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}

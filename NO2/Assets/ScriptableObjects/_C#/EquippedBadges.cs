@@ -10,6 +10,8 @@ public class EquippedBadges : ScriptableObject
     public Badge[] Slots => slots;
 
     public event Action OnEquippedChanged;
+    public event Action<string> OnEquipped;
+    public event Action<string> OnUnequipped;
 
     private string SaveKey => name + "_equipped";
 
@@ -59,18 +61,36 @@ public class EquippedBadges : ScriptableObject
 
         Save();
         OnEquippedChanged?.Invoke();
+        OnEquipped?.Invoke(badge.badgeName);
         return displaced;
     }
 
     public void UnequipBadge(Badge badge)
     {
+        if(IsEquipped(badge.badgeName))
+        {
+            OnUnequipped?.Invoke(badge.badgeName);
+        }
         for (int i = 0; i < TotalSlots; i++)
             if (slots[i] == badge)
                 slots[i] = null;
 
         Save();
         OnEquippedChanged?.Invoke();
+        
     }
+    public bool IsEquipped(string badgeName) {
+    
+        foreach(Badge b in slots)
+        {
+            if(b == null) { continue; }
+            if (b.badgeName == badgeName) { 
+                return true; 
+            }
+        }
+        return false;
+    }
+
 
     public void Save()
     {

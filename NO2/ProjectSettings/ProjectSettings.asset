@@ -14,7 +14,7 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: David&Co
   productName: NO2
-  defaultCursor: {fileID: 0}
+  defaultCursor: {fileID: 2800000, guid: 821af8a059af8274696d3f3dd833a82c, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.12156863, g: 0.12389651, b: 0.13725491, a: 1}
   m_ShowUnitySplashScreen: 1

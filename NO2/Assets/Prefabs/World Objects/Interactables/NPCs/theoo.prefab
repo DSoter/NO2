@@ -104,6 +104,7 @@ GameObject:
   - component: {fileID: 6730618104438558913}
   - component: {fileID: 7899792802149195996}
   - component: {fileID: 4135234411571940284}
+  - component: {fileID: 1775301893285398916}
   m_Layer: 0
   m_Name: theoo
   m_TagString: Untagged
@@ -176,12 +177,12 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: ce4052de4f93d2b4aa6e4fc48c987008, type: 3}
+  m_Sprite: {fileID: 1082811129388189725, guid: b1531198ad434014da0a85ea037f8718, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1.2837838}
+  m_Size: {x: 1, y: 1.375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -224,8 +225,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
-    oldSize: {x: 1, y: 1.2837838}
-    newSize: {x: 1, y: 1.2837838}
+    oldSize: {x: 1, y: 1.375}
+    newSize: {x: 1, y: 1.375}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -261,3 +262,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AllConditionsDIalog
   flowerCollection: {fileID: 11400000, guid: 8e1da91b1283cf54ebdcdf0b4a85e26a, type: 2}
   badgeCollection: {fileID: 0}
+--- !u!95 &1775301893285398916
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9071255816241564446}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7587bae84820bc744b22aa7062e1ede3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

@@ -15,19 +15,21 @@ MonoBehaviour:
   listOfTexts:
   - lines:
     - conditionKey: 
-      text: "Hola, soy Cartel, y estoy aqu\xED para explicarte como funciona esto"
+      text: "Buenos d\xEDas, dormil\xF3n."
     - conditionKey: 
-      text: Recuerda que has venido a esta cueva en busca de una flor rara
+      text: Ya he visto que anoche te escabulliste para dormir en tu alijo secreto.
     - conditionKey: 
-      text: Se dice que es una flor caliente como la =llama=
+      text: "Aqu\xED afuera estamos teniendo... problemas de plagas. Cuando puedas,
+        p\xE1sate a echar un cable."
     - conditionKey: 
-      text: La puedes encontrar al final de esta cueva
+      text: Si no han acabado con nosotros para cuando decidas salir a respirar algo
+        de aire fresco. JAJAJAJAJAJAJA.
     - conditionKey: 
-      text: $The Game$
+      text: "Ahora enserio, m\xE1s te vale pasarte a ayudar. O t\xFA y yo tendremos
+        una charla. Y esta vez ni tu alijo secreto te salvar\xE1."
     - conditionKey: 
-      text: Pero ten #=cuidado=#
-    - conditionKey: 
-      text: Hay peligros en esta cueva
+      text: Por cierto, y solo por si acaso, ten #=cuidado=#. Puede que se nos hayan
+        escapado algunos de nuestros... problemas adentro de la cueva.
   repetitionTexts:
   - lines:
     - conditionKey: 

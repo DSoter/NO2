@@ -6,6 +6,7 @@ public class AllConditionsDIalog : MonoBehaviour
 {
     [SerializeField] FlowerCollection flowerCollection;
     [SerializeField] BadgeCollection badgeCollection;
+    [SerializeField] Badge badgeFirstDeath;
     private PlayerData _playerData;
     private PlayerController _playerController;
 
@@ -251,6 +252,10 @@ public class AllConditionsDIalog : MonoBehaviour
         if (flowerCollection != null)
             return flowerCollection.unlockedFlowers[flowerCollection.allFlowers[3]];
         return false;
+    }
+    public bool PlayerHasDied()
+    {
+        return badgeCollection.UnlockedBadges[badgeFirstDeath];
     }
 
     public bool ItemPurchased()

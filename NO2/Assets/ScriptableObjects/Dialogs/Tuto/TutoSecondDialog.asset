@@ -18,5 +18,10 @@ MonoBehaviour:
       text: "Para pasar a trav\xE9s de peligros usa la voltereta, con la tecla Espacio"
   repetitionTexts:
   - lines:
-    - conditionKey: 
-      text: "Para pasar a trav\xE9s de peligros usa la voltereta, con la tecla Espacio"
+    - conditionKey: playerNeverDied
+      text: "Para pasar a trav\xE9s de peligros usa la voltereta, con la tecla Espacio."
+    - conditionKey: playerHasDied
+      text: Veo que has muerto.
+    - conditionKey: playerHasDied
+      text: Recuerda, puedes esquivar peligros haciendo una voltereta, pulsando el
+        espacio.

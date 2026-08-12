@@ -79,6 +79,11 @@ public class CharacterInteractable : Interactable
             { "noneBadgeUnlockedAndThenUnlockFirstBadge",   () => !acd.BadgeIsUnlocked() && acd.RusellGiveFirstBadge()},
             { "anyBadgeUnlockedAndThenUnlockFirstBadge",   () => acd.BadgeIsUnlocked() && acd.RusellGiveFirstBadge()},
 
+
+            //tutorial
+            { "playerHasDied",   () => acd.PlayerHasDied()},
+            { "playerNeverDied",   () => !acd.PlayerHasDied()},
+
             
             // añadir TODAS las condiciones
         };

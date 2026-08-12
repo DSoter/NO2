@@ -262,7 +262,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AllConditionsDIalog
   flowerCollection: {fileID: 11400000, guid: 8e1da91b1283cf54ebdcdf0b4a85e26a, type: 2}
-  badgeCollection: {fileID: 0}
+  badgeCollection: {fileID: 11400000, guid: 40b829128fc4ee841bf6273a1be7eefa, type: 2}
+  badgeFirstDeath: {fileID: 11400000, guid: 89b78baea4847b8438d68acc55ba9e34, type: 2}
 --- !u!95 &1775301893285398916
 Animator:
   serializedVersion: 7

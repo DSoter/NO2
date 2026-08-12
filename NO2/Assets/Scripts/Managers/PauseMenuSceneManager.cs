@@ -8,6 +8,7 @@ public class PauseMenuSceneManager : MonoBehaviour
 {
 
 	public Button defaultButton;
+	[SerializeField] private WorldMapData worldMapData;
 	void Start()
 	{
 		Cursor.visible = true;
@@ -28,7 +29,22 @@ public class PauseMenuSceneManager : MonoBehaviour
 
 	public void BotonSalir()
 	{
-		PauseMenuHandler.Instance.QuitToMainMenu();
+        UpdateScenesVisited();
+        PauseMenuHandler.Instance.QuitToMainMenu();
 	}
+
+    private void UpdateScenesVisited()
+    {
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        WorldMapDataRegister.ScenesVisited scenesVisited = GameManager.Instance.GetComponent<WorldMapDataRegister>().Scenes;
+        if (!scenesVisited.references.Contains(sceneName))
+        {
+            scenesVisited.references.Add(sceneName);
+            worldMapData.WorldMapNeedsUpdate = true;
+            GameManager.Instance.GetComponent<WorldMapDataRegister>().SaveVisited();
+        }
+
+    }
 
 }

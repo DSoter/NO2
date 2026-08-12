@@ -830,6 +830,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseMenuSceneManager
   defaultButton: {fileID: 705664557}
+  worldMapData: {fileID: 11400000, guid: b759603f51b9ccc4d8641177dd487650, type: 2}
 --- !u!1001 &705664555
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1545,10 +1546,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GeneralKeybindsManager
   _inputSystemReference: {fileID: -944628639613478452, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}
   popUp: {fileID: 0}
-  _goUp: {fileID: 8140193625386093728, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}
-  _goLeft: {fileID: -1753630023206235589, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}
-  _goRight: {fileID: 397581782745330164, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}
-  _goDown: {fileID: 7530465295676470901, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}
 --- !u!1 &1684827447
 GameObject:
   m_ObjectHideFlags: 0

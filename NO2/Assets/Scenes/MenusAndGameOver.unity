@@ -7711,10 +7711,10 @@ MonoBehaviour:
   gateSprite: {fileID: -935713919, guid: 2749dd64e4c117e42bd766b6dc8f340b, type: 3}
   iconSize: 16
   iconTileSize: 3
-  floorColor: {r: 0.9996939, g: 1, b: 0, a: 1}
-  wallColor: {r: 1, g: 0, b: 0, a: 1}
-  emptyColor: {r: 1, g: 1, b: 0, a: 0}
-  oxygenColor: {r: 0, g: 1, b: 1, a: 1}
+  floorColor: {r: 0.9686275, g: 0.8117648, b: 0.5686275, a: 1}
+  wallColor: {r: 0.30588236, g: 0.16862746, b: 0.27058825, a: 1}
+  emptyColor: {r: 0, g: 0, b: 0, a: 0}
+  oxygenColor: {r: 0.627451, g: 0.86666673, b: 0.82745105, a: 1}
   viewportRect: {fileID: 837443878}
   scrollSensitivity: 0.1
   maxScale: 5

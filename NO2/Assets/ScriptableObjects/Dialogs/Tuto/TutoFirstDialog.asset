@@ -17,7 +17,7 @@ MonoBehaviour:
     - conditionKey: 
       text: "Buenos d\xEDas, dormil\xF3n."
     - conditionKey: 
-      text: Ya he visto que anoche te escabulliste para dormir en tu alijo secreto.
+      text: Ya he visto que anoche te escabulliste para dormir en tu guarida secreto.
     - conditionKey: 
       text: "Aqu\xED afuera estamos teniendo... problemas de plagas. Cuando puedas,
         p\xE1sate a echar un cable."
@@ -26,7 +26,7 @@ MonoBehaviour:
         de aire fresco. JAJAJAJAJAJAJA.
     - conditionKey: 
       text: "Ahora enserio, m\xE1s te vale pasarte a ayudar. O t\xFA y yo tendremos
-        una charla. Y esta vez ni tu alijo secreto te salvar\xE1."
+        una charla. Y esta vez ni tu guarida secreto te salvar\xE1."
     - conditionKey: 
       text: Por cierto, y solo por si acaso, ten #=cuidado=#. Puede que se nos hayan
         escapado algunos de nuestros... problemas hacia el interior de la cueva.

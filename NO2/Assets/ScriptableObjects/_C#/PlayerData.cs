@@ -61,8 +61,11 @@ public class PlayerData : ScriptableObject
 
     // Events
 
+    public event Action OnMaxHealthChanged;
     public event Action OnHealthChanged;
+    public event Action OnMaxStaminaChanged;
     public event Action OnStaminaChanged;
+    public event Action OnMaxOxygenChanged;
     public event Action OnOxygenChanged;
     public event Action OnOxygenIncreased;
 
@@ -106,23 +109,37 @@ public class PlayerData : ScriptableObject
         }
     }
 
-
-    // Read only properties
-
     public float MaxHealth 
     { 
         get {  return maxHealth;    }
+        set
+        {
+            maxHealth = value;
+            OnMaxHealthChanged?.Invoke();
+        }
     }
 
     public float MaxStamina
     {
         get { return maxStamina; }
+        set
+        {
+            maxStamina = value;
+            OnMaxStaminaChanged?.Invoke();
+        }
     }
 
     public float MaxOxygen
     {
         get { return maxOxygen; }
+        set
+        {
+            maxOxygen = value;
+            OnMaxOxygenChanged?.Invoke();
+        }
     }
+
+    // Read only properties
 
     public float SecondsUntilStaminaRegeneration
     {

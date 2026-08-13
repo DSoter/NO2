@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cefcbd99b00b4c14eab78afd4ec1278b, type: 3}
   m_Name: Volteretista experto
   m_EditorClassIdentifier: Assembly-CSharp::Badge
-  badgeName: Volteretista experto
+  badgeName: Acrobata experto
   achievement: {fileID: 11400000, guid: e835fcff27d5d604db7c6b9575196bda, type: 2}
   description: Ya eres un expero voltereun volteretista experto
   icon: {fileID: 6408713674569499924, guid: 2ccd57835bd6e294ba4dfd60e63cc0ec, type: 3}

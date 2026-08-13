@@ -7,7 +7,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df6ba87a4b3f8a146b4139e434e936c4, type: 3}
   m_Name: PlayerData
@@ -42,3 +42,6 @@ MonoBehaviour:
   minStrongAttackDamage: 5
   maxStrongAttackDamage: 15
   equipedFlower: {fileID: 11400000, guid: 60ac8c1bf6427a9419740f1d14774564, type: 2}
+  equippedBadges: {fileID: 11400000, guid: be93a51aa16842a4c85fa0af75138391, type: 2}
+  nameBadgeHundredRolls: Acrobata amateur
+  nameBadgeStrongHeart: Corazon fuerte

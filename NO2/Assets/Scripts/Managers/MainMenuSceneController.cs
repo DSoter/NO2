@@ -86,6 +86,7 @@ public class MainMenuSceneManager : MonoBehaviour
         badgeCollection.Load();
         badgeCollection.Reset();
         moneyData.Reset();
+        playerData.EquipedFlower = null;
 
         Debug.Log("Nueva partida iniciada: progreso reseteado, layout de mapas conservado.");
 

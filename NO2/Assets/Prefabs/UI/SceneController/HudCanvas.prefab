@@ -6870,8 +6870,12 @@ MonoBehaviour:
     keyFunction: wave
   - character: 36
     keyFunction: rainbowWave
+  - character: 186
+    keyFunction: tinyWave
   waveSpeed: 3
   waveHeight: 1.5
+  tinyWaveSpeed: 6
+  tinyWaveAmplitude: 0.6
 --- !u!1 &6411394988309552641
 GameObject:
   m_ObjectHideFlags: 0

@@ -432,6 +432,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -22.400024
       objectReference: {fileID: 0}
+    - target: {fileID: 9082821685056798722, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
+      propertyPath: tinyWaveSpeed
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2117063171559927495, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
     m_RemovedGameObjects:

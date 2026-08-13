@@ -26,6 +26,8 @@ public class DialogBox : MonoBehaviour
     private Dictionary<string, Func<int,int,bool?>> functions;
     [SerializeField] private float waveSpeed = 1f;
     [SerializeField] private float waveHeight = 2f;
+    [SerializeField] private float tinyWaveSpeed = 1f;
+    [SerializeField] private float tinyWaveAmplitude = 0.3f;
     private char lastFunctionChar;
     private int firstCharFromAnimationChain;
     private List<Coroutine> animationCoroutines = new List<Coroutine>();
@@ -48,6 +50,7 @@ public class DialogBox : MonoBehaviour
         {
             { "wave",   (first,last) => AnimateWave(first,last)},
             { "rainbowWave",   (first,last) => AnimateRainbowWave(first,last)},
+            { "tinyWave",   (first,last) => AnimateTinyWave(first,last)},
             // añadir funciones que se quieran
         };
 
@@ -211,6 +214,56 @@ public class DialogBox : MonoBehaviour
         }
     }
 
+    private bool AnimateTinyWave(int firstCharacter, int lastCharacter)
+    {
+        Coroutine c = StartCoroutine(DoingTinyWave(firstCharacter, lastCharacter));
+        animationCoroutines.Add(c);
+
+        return true;
+    }
+
+    private IEnumerator DoingTinyWave(int firstCharacter, int lastCharacter)
+    {
+        while (true)
+        {
+            TMP_TextInfo textInfo = dialogText.textInfo;
+            float cumulativeOffsetX = 0f;
+
+            for (int i = firstCharacter; i < lastCharacter; i++)
+            {
+                if (i >= textInfo.characterCount) break;
+                TMP_CharacterInfo charInfo = textInfo.characterInfo[i];
+                if (!charInfo.isVisible) continue;
+
+                int materialIndex = charInfo.materialReferenceIndex;
+                int vertexIndex = charInfo.vertexIndex;
+
+                Vector3[] sourceVertices = textInfo.meshInfo[materialIndex].vertices;
+
+                // Oscila entre 0 y 1 según la posición del carácter, igual que en AnimateWave
+                float t = (Mathf.Sin(Time.time * tinyWaveSpeed + i * 0.5f) + 1f) / 2f;
+                float scale = 1f - tinyWaveAmplitude * t;
+
+                Vector3 charCenter = (charInfo.bottomLeft + charInfo.topRight) / 2f;
+
+                sourceVertices[vertexIndex + 0] = charCenter + (charInfo.bottomLeft - charCenter) * scale;
+                sourceVertices[vertexIndex + 1] = charCenter + (charInfo.topLeft - charCenter) * scale;
+                sourceVertices[vertexIndex + 2] = charCenter + (charInfo.topRight - charCenter) * scale;
+                sourceVertices[vertexIndex + 3] = charCenter + (charInfo.bottomRight - charCenter) * scale;
+            }
+
+            for (int i = 0; i < textInfo.meshInfo.Length; i++)
+            {
+                TMP_MeshInfo meshInfo = textInfo.meshInfo[i];
+                meshInfo.mesh.vertices = meshInfo.vertices;
+                dialogText.UpdateGeometry(meshInfo.mesh, i);
+            }
+
+            yield return null;
+        }
+    }
+
+
     public void ConfirmWithInteractButton()
     {
         if (!isOpen) return;
@@ -316,7 +369,6 @@ public class DialogBox : MonoBehaviour
                 continue;
             }
 
-            // Añadir letra con color pero invisible (alpha 0)
             string hex = UnityEngine.ColorUtility.ToHtmlStringRGB(actualColor);
             sb.Append($"<color=#{hex}00>{c}</color>"); // 00 = alpha 0
             cont++;
@@ -352,8 +404,12 @@ public class DialogBox : MonoBehaviour
             }
 
             visibleCount++;
-            if (charDelay > 0)
-                yield return new WaitForSeconds(charDelay);
+            float actualDelay = charDelay;
+            if (c == '.') actualDelay = charDelay * 3f;
+            else if (c == ',') actualDelay = charDelay * 2f;
+
+            if (actualDelay > 0)
+                yield return new WaitForSeconds(actualDelay);
         }
         if (animatorPortrait != null)
         {

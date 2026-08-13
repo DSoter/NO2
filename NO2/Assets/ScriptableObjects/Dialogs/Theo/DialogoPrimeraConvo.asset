@@ -57,3 +57,6 @@ MonoBehaviour:
       text: Cada flor tiene unas cualidades distintas
     - conditionKey: anyFlowerUnlockedThenTheoFirstDialogFinished
       text: "Muchas gracias, voy a continuar mis viajes. Espero verte por ah\xED"
+    - conditionKey: 
+      text: "\xBAPrueba de la, tiny wwave a ver si se ve bien, y tambien probar lo
+        de los puntos. Se notar\xE1 m\xE1s... con los suspensivos...\xBA"

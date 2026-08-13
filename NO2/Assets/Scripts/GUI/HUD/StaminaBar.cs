@@ -34,11 +34,13 @@ public class StaminaBar : MonoBehaviour
     private void OnEnable()
     {
         _playerData.OnStaminaChanged += UpdateCurrentStamina;
+        _playerData.OnMaxStaminaChanged += UpdateMaxStamina;
     }
 
     private void OnDisable()
     {
         _playerData.OnStaminaChanged -= UpdateCurrentStamina;
+        _playerData.OnMaxStaminaChanged -= UpdateMaxStamina;
     }
 
     public void UpdateMaxStamina()

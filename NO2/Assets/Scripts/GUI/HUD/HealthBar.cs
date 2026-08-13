@@ -36,11 +36,13 @@ public class HealthBar : MonoBehaviour
     private void OnEnable()
     {
         _playerData.OnHealthChanged += UpdateCurrentHealth;
+        _playerData.OnMaxHealthChanged += UpdateMaxHealth;
     }
 
     private void OnDisable()
     {
         _playerData.OnHealthChanged -= UpdateCurrentHealth;
+        _playerData.OnHealthChanged -= UpdateMaxHealth;
     }
 
     public void UpdateMaxHealth()

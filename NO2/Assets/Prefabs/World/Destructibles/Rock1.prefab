@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -1873523964693313579}
   - component: {fileID: 8299146908168598192}
   - component: {fileID: 9100872222575639493}
+  - component: {fileID: -3843715698197565577}
   m_Layer: 10
   m_Name: Rock1
   m_TagString: Untagged
@@ -305,6 +306,22 @@ MonoBehaviour:
     DissipationDistance: 100
     PropagationSpeed: 343
   DefaultVelocity: {x: 0, y: -0.5, z: 0}
+--- !u!114 &-3843715698197565577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7909471338730567896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifier
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1001 &736312344541436613
 PrefabInstance:
   m_ObjectHideFlags: 0

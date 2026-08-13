@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6345491074485053970}
   - component: {fileID: 4105346210740380887}
   - component: {fileID: 6182571106600752587}
+  - component: {fileID: -196531135859921004}
   m_Layer: 10
   m_Name: Crate1
   m_TagString: Untagged
@@ -179,6 +180,22 @@ MonoBehaviour:
   respawnAfterRest: 1
   neverRespawn: 0
   guid: 008f5dc8-b98c-4d8f-8be9-970c53a7c74a
+--- !u!114 &-196531135859921004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7712892219432782146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifier
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1001 &197255352477863230
 PrefabInstance:
   m_ObjectHideFlags: 0

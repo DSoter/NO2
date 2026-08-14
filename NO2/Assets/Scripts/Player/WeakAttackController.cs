@@ -46,10 +46,13 @@ public class WeakAttackController : MonoBehaviour
     {
         if(collision.TryGetComponent<IHitable>(out var hitable))
         {
-            var direction = (collision.transform.position - transform.position).normalized;
-            hitable.Hit(direction, _playerData.WeakAttackDamage, AttackStrength.Weak);
+            if (collision.TryGetComponent<IEffectable>(out var effectable) && _playerData.EquipedFlower != null)
+            {
+                FlowerEffectResolver.ApplyOnHit(_playerData.EquipedFlower.flowerEffect, collision.gameObject, _playerData, AttackStrength.Weak);
+            }
 
-            FlowerEffectResolver.ApplyOnHit(_playerData.EquipedFlower.flowerEffect, collision.gameObject, _playerData, AttackStrength.Weak);
+            var direction = (collision.transform.position - transform.position).normalized;
+            hitable.Hit(direction, _playerData.WeakAttackDamage, AttackStrength.Weak);            
         }
     }
 

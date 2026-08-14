@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -1873523964693313579}
   - component: {fileID: 8299146908168598192}
   - component: {fileID: 9100872222575639493}
+  - component: {fileID: 8030825852647295133}
   - component: {fileID: -3843715698197565577}
   m_Layer: 10
   m_Name: Rock1
@@ -306,6 +307,18 @@ MonoBehaviour:
     DissipationDistance: 100
     PropagationSpeed: 343
   DefaultVelocity: {x: 0, y: -0.5, z: 0}
+--- !u!114 &8030825852647295133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7909471338730567896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f00226ec4e358fd4896ce06a2b1a97e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NavDestructible
 --- !u!114 &-3843715698197565577
 MonoBehaviour:
   m_ObjectHideFlags: 0

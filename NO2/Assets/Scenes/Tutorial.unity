@@ -119808,6 +119808,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2112288750906575330, guid: d0aaf7f0a5dca124fb8ab64aefa109fe, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1779067657}
+    - targetCorrespondingSourceObject: {fileID: 2018976155153590974, guid: d0aaf7f0a5dca124fb8ab64aefa109fe, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1286788091}
   m_SourcePrefab: {fileID: 100100000, guid: d0aaf7f0a5dca124fb8ab64aefa109fe, type: 3}
 --- !u!4 &1286788086 stripped
 Transform:
@@ -119829,6 +119832,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5870135222654062860, guid: d0aaf7f0a5dca124fb8ab64aefa109fe, type: 3}
   m_PrefabInstance: {fileID: 1286788085}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1286788090 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2018976155153590974, guid: d0aaf7f0a5dca124fb8ab64aefa109fe, type: 3}
+  m_PrefabInstance: {fileID: 1286788085}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1286788091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286788090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fec7b7904f76c4498a68fd145934563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Extensions.RootSources2d
+  _rootSources: []
 --- !u!1001 &1325198020
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -119902,9 +119923,10 @@ GameObject:
   - component: {fileID: 1488168916}
   - component: {fileID: 1488168915}
   - component: {fileID: 1488168917}
+  - component: {fileID: 1488168918}
   m_Layer: 0
   m_Name: NavMesh
-  m_TagString: Untagged
+  m_TagString: NavMesh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119971,6 +119993,18 @@ MonoBehaviour:
   m_UseMeshPrefab: {fileID: 0}
   m_CompressBounds: 0
   m_OverrideVector: {x: 1, y: 1, z: 1}
+--- !u!114 &1488168918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1488168914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37607963f177bae498fd420361c06e26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NavMeshUpdater
 --- !u!1001 &1550560362
 PrefabInstance:
   m_ObjectHideFlags: 0

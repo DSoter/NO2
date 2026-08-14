@@ -271,10 +271,12 @@ public class PlayerData : ScriptableObject
     }
     private void OnEnable()
     {
-        equippedBadges.OnEquipped += (badgeName) => IncreaseMaxHealth(badgeName);
-        equippedBadges.OnUnequipped += (badgeName) => DecreaseMaxHealth(badgeName);
-        equippedBadges.OnEquipped += (badgeName) => IncreaseMaxStamina(badgeName);
-        equippedBadges.OnUnequipped += (badgeName) => DecreaseMaxStamina(badgeName);
+        if(equippedBadges != null) {
+            equippedBadges.OnEquipped += (badgeName) => IncreaseMaxHealth(badgeName);
+            equippedBadges.OnUnequipped += (badgeName) => DecreaseMaxHealth(badgeName);
+            equippedBadges.OnEquipped += (badgeName) => IncreaseMaxStamina(badgeName);
+            equippedBadges.OnUnequipped += (badgeName) => DecreaseMaxStamina(badgeName);
+        }
     }
     private void OnDestroy()
     {

@@ -10,6 +10,7 @@ TagManager:
   - MainTileMap
   - WallsTileMap
   - SceneController
+  - NavMesh
   layers:
   - Default
   - TransparentFX

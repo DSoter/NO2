@@ -16,7 +16,7 @@ MonoBehaviour:
   achievement: {fileID: 11400000, guid: cc7cbc9a289ffa6499f9e2cc925a249b, type: 2}
   description: "Gracias a tu experiencia bebiendo liquidos muy rapido, asimilas m\xE1s
     rapido las pociones y te curan m\xE1s "
-  icon: {fileID: 21300000, guid: cca39a050049cc541bcc07730acc8c86, type: 3}
+  icon: {fileID: 21300000, guid: 5a161775a856e6c44a500c6cbeec0dcc, type: 3}
   slotsSize: 1
   effect:
     m_PersistentCalls:

@@ -11,7 +11,6 @@ public class RespawnObjectsManager : MonoBehaviour
 
     private void Awake()
     {
-
         objectsOnScene.Load();
         PersistentRespawnObject[] objects = FindObjectsByType<PersistentRespawnObject>();
 
@@ -20,26 +19,41 @@ public class RespawnObjectsManager : MonoBehaviour
             respawnObjects.Add(obj.Guid, obj);
         }
 
+        CheckpointManager checkpointManager = GameManager.Instance.GetComponent<CheckpointManager>();
         string sceneName = SceneManager.GetActiveScene().name;
-        if (!GameManager.Instance.GetComponent<CheckpointManager>().ScenesHasToRespawn.ContainsKey(sceneName))
+
+        if (!checkpointManager.ScenesHasToRespawn.ContainsKey(sceneName))
         {
-            GameManager.Instance.GetComponent<CheckpointManager>().ScenesHasToRespawn.Add(sceneName, true);
-            //si el checkpoint manager no tiene la referencia de la escena la genera nueva y la pone a true
+            checkpointManager.ScenesHasToRespawn.Add(sceneName, true);
         }
 
-        hasToUpdateRest = GameManager.Instance.GetComponent<CheckpointManager>().ScenesHasToRespawn[sceneName];
-        GameManager.Instance.GetComponent<CheckpointManager>().ScenesHasToRespawn[sceneName] = false;
+        hasToUpdateRest = checkpointManager.ScenesHasToRespawn[sceneName];
+        checkpointManager.ScenesHasToRespawn[sceneName] = false;
         if (hasToUpdateRest)
         {
             UpdateRest();
         }
+
+        if (!checkpointManager.ScenesHasToRespawnAfterDeath.ContainsKey(sceneName))
+        {
+            checkpointManager.ScenesHasToRespawnAfterDeath.Add(sceneName, true);
+        }
+
+        bool hasToUpdateDeath = checkpointManager.ScenesHasToRespawnAfterDeath[sceneName];
+        checkpointManager.ScenesHasToRespawnAfterDeath[sceneName] = false;
+        if (hasToUpdateDeath)
+        {
+            UpdateDeath();
+        }
     }
+
     public void UpdateRest()
     {
         Debug.Log("Respawn all rest things");
         if (objectsOnScene.ObjectsRespawnAfterRest == null)
         {
             objectsOnScene.ObjectsRespawnAfterRest = new Dictionary<string, bool>();
+            objectsOnScene.ObjectsRespawnAfterDeath = new Dictionary<string, bool>();
             objectsOnScene.ObjectsNeverRespawn = new Dictionary<string, bool>();
         }
 
@@ -55,6 +69,27 @@ public class RespawnObjectsManager : MonoBehaviour
         hasToUpdateRest = false;
     }
 
+    public void UpdateDeath()
+    {
+        Debug.Log("Respawn all death things");
+        if (objectsOnScene.ObjectsRespawnAfterDeath == null)
+        {
+            objectsOnScene.ObjectsRespawnAfterRest = new Dictionary<string, bool>();
+            objectsOnScene.ObjectsRespawnAfterDeath = new Dictionary<string, bool>();
+            objectsOnScene.ObjectsNeverRespawn = new Dictionary<string, bool>();
+        }
+
+        List<string> keys = new List<string>(objectsOnScene.ObjectsRespawnAfterDeath.Keys);
+        foreach (string objeto in keys)
+        {
+            objectsOnScene.ObjectsRespawnAfterDeath[objeto] = true;
+            if (respawnObjects.ContainsKey(objeto))
+                respawnObjects[objeto].gameObject.SetActive(true);
+        }
+
+        objectsOnScene.Save();
+    }
+
     public void SetObjectRest(string objeto, bool state)
     {
         if (!objectsOnScene.ObjectsRespawnAfterRest.ContainsKey(objeto))
@@ -63,14 +98,13 @@ public class RespawnObjectsManager : MonoBehaviour
         }
         objectsOnScene.ObjectsRespawnAfterRest[objeto] = state;
         objectsOnScene.Save();
-
     }
 
     public bool GetObjectRest(string objeto)
     {
         if (!objectsOnScene.ObjectsRespawnAfterRest.ContainsKey(objeto))
         {
-            objectsOnScene.ObjectsRespawnAfterRest.Add(objeto,true);
+            objectsOnScene.ObjectsRespawnAfterRest.Add(objeto, true);
             return true;
         }
         else
@@ -78,9 +112,34 @@ public class RespawnObjectsManager : MonoBehaviour
             return objectsOnScene.ObjectsRespawnAfterRest[objeto];
         }
     }
+
+    public void SetObjectRespawnAfterDeath(string objeto, bool state)
+    {
+        if (!objectsOnScene.ObjectsRespawnAfterDeath.ContainsKey(objeto))
+        {
+            objectsOnScene.ObjectsRespawnAfterDeath.Add(objeto, true);
+        }
+        objectsOnScene.ObjectsRespawnAfterDeath[objeto] = state;
+        objectsOnScene.Save();
+    }
+
+    public bool GetObjectRespawnAfterDeath(string objeto)
+    {
+        if (!objectsOnScene.ObjectsRespawnAfterDeath.ContainsKey(objeto))
+        {
+            objectsOnScene.ObjectsRespawnAfterDeath.Add(objeto, true);
+            return true;
+        }
+        else
+        {
+            return objectsOnScene.ObjectsRespawnAfterDeath[objeto];
+        }
+    }
+
     public void SetObjectNeverRespawn(string objeto, bool state)
     {
-        if(!objectsOnScene.ObjectsNeverRespawn.ContainsKey(objeto)) {
+        if (!objectsOnScene.ObjectsNeverRespawn.ContainsKey(objeto))
+        {
             objectsOnScene.ObjectsNeverRespawn.Add(objeto, true);
         }
         objectsOnScene.ObjectsNeverRespawn[objeto] = state;
@@ -99,5 +158,4 @@ public class RespawnObjectsManager : MonoBehaviour
             return objectsOnScene.ObjectsNeverRespawn[objeto];
         }
     }
-
 }

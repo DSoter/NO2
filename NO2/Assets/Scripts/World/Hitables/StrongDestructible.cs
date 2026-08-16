@@ -66,7 +66,8 @@ public class StrongDestructible : MonoBehaviour, IHitable
             gameObject.GetComponent<PersistentRespawnObject>().RegisterDestroy();
         }
 
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     private void SpawnContent(Vector2 direction)

@@ -31,6 +31,7 @@ public class CheckpointManager : MonoBehaviour
     private bool cameraLockedPlayer;
 
     private Dictionary<string, bool> scenesHasToRespawn = new Dictionary<string, bool>();
+    private Dictionary<string, bool> scenesHasToRespawnAfterDeath = new Dictionary<string, bool>();
 
     public string SceneWhereRespawn
     {
@@ -109,6 +110,11 @@ public class CheckpointManager : MonoBehaviour
     {
         get { return scenesHasToRespawn; }
         set {  scenesHasToRespawn = value;}
+    }
+    public Dictionary<string, bool> ScenesHasToRespawnAfterDeath
+    {
+        get { return scenesHasToRespawnAfterDeath; }
+        set { scenesHasToRespawnAfterDeath = value; }
     }
 
 
@@ -218,8 +224,11 @@ public class CheckpointManager : MonoBehaviour
 
     public void RespawnAfterGameOver()
     {
+        
 
         _menusManager.OpenMenus();//Para cerrar el menú
+
+        ResetAllDeathRespawns();
 
         if (sceneWhereRespawn != null)
         {
@@ -302,14 +311,26 @@ public class CheckpointManager : MonoBehaviour
              scenesHasToRespawn[name] = true;
 
         }
-        //foreach(string name in scenesHasToRespawn.Keys)
-        //{
-        //    scenesHasToRespawn[name] = true;
-        //}
         RespawnObjectsManager rom = GameObject.FindGameObjectWithTag("SceneController").GetComponent<RespawnObjectsManager>();
         rom.UpdateRest();
 
+    }
 
+    public void ResetAllDeathRespawns()
+    {
+        if (scenesHasToRespawnAfterDeath == null)
+        {
+            scenesHasToRespawnAfterDeath = new Dictionary<string, bool>();
+        }
+
+        List<string> keys = new List<string>(scenesHasToRespawnAfterDeath.Keys);
+        foreach (string name in keys)
+        {
+            scenesHasToRespawnAfterDeath[name] = true;
+        }
+
+        RespawnObjectsManager rom = GameObject.FindGameObjectWithTag("SceneController").GetComponent<RespawnObjectsManager>();
+        rom.UpdateDeath();
     }
 
 }

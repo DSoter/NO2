@@ -5,15 +5,22 @@ using UnityEngine;
 public class ObjectsOnScene : ScriptableObject
 {
     private Dictionary<string, bool> objectsRespawnAfterRest;
+    private Dictionary<string, bool> objectsRespawnAfterDeath;
     private Dictionary<string, bool> objectsNeverRespawn;
 
     private string SaveKeyRest => name + "_rest";
+    private string SaveKeyDeath => name + "_death";
     private string SaveKeyNever => name + "_never";
 
     public Dictionary<string, bool> ObjectsRespawnAfterRest
     {
         get { return objectsRespawnAfterRest; }
         set { objectsRespawnAfterRest = value; }
+    }
+    public Dictionary<string, bool> ObjectsRespawnAfterDeath
+    {
+        get { return objectsRespawnAfterDeath; }
+        set { objectsRespawnAfterDeath = value; }
     }
     public Dictionary<string, bool> ObjectsNeverRespawn
     {
@@ -24,12 +31,14 @@ public class ObjectsOnScene : ScriptableObject
     public void Save()
     {
         SaveDictionary(objectsRespawnAfterRest, SaveKeyRest);
+        SaveDictionary(objectsRespawnAfterDeath, SaveKeyDeath);
         SaveDictionary(objectsNeverRespawn, SaveKeyNever);
     }
 
     public void Load()
     {
         objectsRespawnAfterRest = LoadDictionary(SaveKeyRest);
+        objectsRespawnAfterDeath = LoadDictionary(SaveKeyDeath);
         objectsNeverRespawn = LoadDictionary(SaveKeyNever);
     }
 
@@ -37,10 +46,13 @@ public class ObjectsOnScene : ScriptableObject
     {
         PlayerPrefs.DeleteKey(SaveKeyRest + "_keys");
         PlayerPrefs.DeleteKey(SaveKeyRest + "_values");
+        PlayerPrefs.DeleteKey(SaveKeyDeath + "_keys");
+        PlayerPrefs.DeleteKey(SaveKeyDeath + "_values");
         PlayerPrefs.DeleteKey(SaveKeyNever + "_keys");
         PlayerPrefs.DeleteKey(SaveKeyNever + "_values");
         PlayerPrefs.Save();
         objectsRespawnAfterRest = new Dictionary<string, bool>();
+        objectsRespawnAfterDeath = new Dictionary<string, bool>();
         objectsNeverRespawn = new Dictionary<string, bool>();
     }
 

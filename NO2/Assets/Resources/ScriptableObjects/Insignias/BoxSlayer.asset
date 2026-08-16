@@ -15,7 +15,7 @@ MonoBehaviour:
   badgeName: Box Slayer
   achievement: {fileID: 11400000, guid: d1ab7005b90738d47a46a02b922a655e, type: 2}
   description: Las cajas te tienen miedo
-  icon: {fileID: 2057393859615664156, guid: 425eafcd6b09754468a27bdc384d1ff7, type: 3}
+  icon: {fileID: 21300000, guid: d11026e896455224da3b2a64ab70f667, type: 3}
   slotsSize: 1
   effect:
     m_PersistentCalls:

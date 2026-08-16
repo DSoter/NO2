@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6182571106600752587, guid: 03e63f18a1ea35f4383a3e8fa7d78306, type: 3}
       propertyPath: guid
-      value: 6203e9b-aa86-442a-85ba-b8958c30c2f1
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6182571106600752587, guid: 03e63f18a1ea35f4383a3e8fa7d78306, type: 3}
       propertyPath: neverRespawn

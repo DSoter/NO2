@@ -198,9 +198,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06ecb66432b0e33468960a743ba61dd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PersistentRespawnObject
+  prefab: {fileID: 7909471338730567896}
   respawnAfterRest: 0
+  respawnAfterDeath: 0
   neverRespawn: 0
-  guid: 51ad1dbd-5744-4cc5-8cb3-942d847cb497
+  guid: 
 --- !u!114 &8299146908168598192
 MonoBehaviour:
   m_ObjectHideFlags: 0

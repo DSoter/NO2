@@ -7,6 +7,7 @@ public class PersistentRespawnObject : MonoBehaviour
 {
     [Header("Spawn")]
     [SerializeField] private bool respawnAfterRest;
+    [SerializeField] private bool respawnAfterDeath;
     [SerializeField] private bool neverRespawn;
     private RespawnObjectsManager respawnObjectsManager;
     [SerializeField] private string guid;
@@ -15,14 +16,19 @@ public class PersistentRespawnObject : MonoBehaviour
 
     private void Awake()
     {
-        if (neverRespawn) { respawnAfterRest = false; }
+        if (neverRespawn)
+        {
+            respawnAfterRest = false;
+            respawnAfterDeath = false;
+        }
         respawnObjectsManager = GameObject.FindGameObjectWithTag("SceneController").GetComponent<RespawnObjectsManager>();
-        
     }
+
     private void Start()
     {
         HandleSpawn();
     }
+
     private void HandleSpawn()
     {
         if (neverRespawn)
@@ -30,13 +36,16 @@ public class PersistentRespawnObject : MonoBehaviour
             bool shouldSpawn = respawnObjectsManager.GetObjectNeverRespawn(guid);
             if (!shouldSpawn)
                 gameObject.SetActive(false);
+            return;
         }
-        else if (respawnAfterRest)
-        {
-            bool shouldSpawn = respawnObjectsManager.GetObjectRest(guid);
-            if (!shouldSpawn)
-                gameObject.SetActive(false);
-        }   
+
+        bool shouldSpawnByRest = !respawnAfterRest || respawnObjectsManager.GetObjectRest(guid);
+        bool shouldSpawnByDeath = !respawnAfterDeath || respawnObjectsManager.GetObjectRespawnAfterDeath(guid);
+
+        // Si tiene ambos triggers activos, debe cumplir los dos para permanecer visible;
+        // si solo tiene uno activo, basta con que ese lo permita.
+        if (!shouldSpawnByRest || !shouldSpawnByDeath)
+            gameObject.SetActive(false);
     }
 
     public void RegisterDestroy()
@@ -48,6 +57,10 @@ public class PersistentRespawnObject : MonoBehaviour
         if (respawnAfterRest)
         {
             respawnObjectsManager.SetObjectRest(guid, false);
+        }
+        if (respawnAfterDeath)
+        {
+            respawnObjectsManager.SetObjectRespawnAfterDeath(guid, false);
         }
     }
 

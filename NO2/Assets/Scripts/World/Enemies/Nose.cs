@@ -35,7 +35,7 @@ public class Nose : Enemy
 
     public void Destroy()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     public void ToggleVulnerability()

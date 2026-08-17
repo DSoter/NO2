@@ -220,7 +220,8 @@ public class Baba : Enemy
         if (_healthPoints <= 0)
         {
             SpawnContent(direction);
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            gameObject.SetActive(false);
         }
         else
         {

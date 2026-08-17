@@ -14,9 +14,9 @@ public class NavDestructible : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
-        if(_updater != null)
+        if (_updater != null)
         {
             _updater.MarkDirty();
         }

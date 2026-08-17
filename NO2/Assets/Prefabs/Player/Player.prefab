@@ -160,7 +160,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -960.518, y: -539.3076}
-  m_SizeDelta: {x: 40.0173, y: 41.7388}
+  m_SizeDelta: {x: 65, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8996007185074870020
 CanvasRenderer:
@@ -801,7 +801,6 @@ MonoBehaviour:
   _playerData: {fileID: 11400000, guid: 707aa1a40a1bb064193fd4f6f25fcc6a, type: 2}
   _oxygenData: {fileID: 11400000, guid: b15507aeddc94724cac4078700f00819, type: 2}
   _healData: {fileID: 11400000, guid: ccc02f2f8da643c4db2030f236d9a261, type: 2}
-  _moneyData: {fileID: 11400000, guid: e75e14bc5463f9747b495a397649266e, type: 2}
   _weakAttack: {fileID: 3006558068619297952}
   _strongAttack: {fileID: 1089113821434922892}
   _oxygenAlert50: {fileID: 8300000, guid: 2c033969aabb4bd4c91567926048c0e6, type: 3}
@@ -902,6 +901,7 @@ MonoBehaviour:
   interactableObject: {fileID: 0}
   interactables: []
   _keySprite: {fileID: -536044497137714808, guid: 47a8837c209a6814e92cd74b8bbee0cd, type: 3}
+  keyIconDatabase: {fileID: 11400000, guid: 4e9bfdddf4d54084ab00c131ca4e61cc, type: 2}
 --- !u!95 &8272714048974360551
 Animator:
   serializedVersion: 7

@@ -22,6 +22,7 @@ public class InteractManager : MonoBehaviour
     private GameObject _textoUI;
     private GameObject _textoLetraImagenUI;
     [SerializeField] private Sprite _keySprite;
+    [SerializeField] private KeyIconDatabase keyIconDatabase;
 
 
     private InputManager inputManager;
@@ -29,13 +30,9 @@ public class InteractManager : MonoBehaviour
     private PlayerController _playerController;
 
     private string _cachedBindingText;
+    private Sprite _cachedKeyIcon;
     private void Awake()
     {
-
-        
-        
-        
-
         _canvas = transform.GetChild(0).gameObject;
         _imagenUI = _canvas.transform.GetChild(0).gameObject;
         _textoLetraImagenUI = _imagenUI.transform.GetChild(0).gameObject;
@@ -60,9 +57,18 @@ public class InteractManager : MonoBehaviour
         if (_puedeInteractuar)
         {
             _canvas.SetActive(true);
-            _imagenUI.GetComponent<UnityEngine.UI.Image>().sprite = _keySprite;
 
-            _textoLetraImagenUI.GetComponent<TextMeshProUGUI>().text = _cachedBindingText;
+            if (_cachedKeyIcon != null)
+            {
+                _imagenUI.GetComponent<UnityEngine.UI.Image>().sprite = _cachedKeyIcon;
+                _textoLetraImagenUI.SetActive(false);
+            }
+            else
+            {
+                _imagenUI.GetComponent<UnityEngine.UI.Image>().sprite = _keySprite;
+                _textoLetraImagenUI.SetActive(true);
+                _textoLetraImagenUI.GetComponent<TextMeshProUGUI>().text = _cachedBindingText;
+            }
         }
         else
         {
@@ -72,8 +78,9 @@ public class InteractManager : MonoBehaviour
 
     public void OnInteract()
     {
-        
-        if (_puedeInteractuar && !diverseMenusManager._IsOpen && (_playerController.GetState() == PlayerController.PlayerState.Move || _playerController.GetState() == PlayerController.PlayerState.Rest)){ 
+
+        if (_puedeInteractuar && !diverseMenusManager._IsOpen && (_playerController.GetState() == PlayerController.PlayerState.Move || _playerController.GetState() == PlayerController.PlayerState.Rest))
+        {
             interactableObject.Interact();
         }
     }
@@ -94,16 +101,19 @@ public class InteractManager : MonoBehaviour
 
     public void RefreshInteractBinding()
     {
+        string effectivePath = inputManager._InteractRef.action.bindings[0].effectivePath;
+
+        _cachedKeyIcon = keyIconDatabase.GetIcon(effectivePath);
+
         _cachedBindingText = InputControlPath.ToHumanReadableString(
-         inputManager._InteractRef.action.bindings[0].effectivePath,
+         effectivePath,
          InputControlPath.HumanReadableStringOptions.OmitDevice
      );
     }
 
-    public void ChangeDisplayText( string text)
+    public void ChangeDisplayText(string text)
     {
 
         _textoUI.GetComponent<TextMeshProUGUI>().text = text;
     }
 }
-

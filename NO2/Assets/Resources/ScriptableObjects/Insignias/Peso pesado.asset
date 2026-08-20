@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cefcbd99b00b4c14eab78afd4ec1278b, type: 3}
   m_Name: Peso pesado
   m_EditorClassIdentifier: Assembly-CSharp::Badge
-  badgeName: 
-  achievement: {fileID: 0}
-  description: 
-  icon: {fileID: 0}
+  badgeName: Peso pesado
+  achievement: {fileID: 11400000, guid: 35f44cf673054c8479bd1ac6ca84e803, type: 2}
+  description: Otorgado por realizar un ataque cargado durante mucho tiempo.
+  icon: {fileID: 21300000, guid: 467b1a66acf80544693e51f8740ce16e, type: 3}
   slotsSize: 1
   effect:
     m_PersistentCalls:

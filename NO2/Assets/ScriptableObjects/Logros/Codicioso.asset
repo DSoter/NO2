@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Achievement
   achievementName: 5000_money
   description: Has conseguido cinco mil monedas
-  isCounter: 1
-  targetCount: 5000
+  isCounter: 0
+  targetCount: 0

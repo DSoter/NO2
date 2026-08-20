@@ -228,35 +228,26 @@ public class CheckpointManager : MonoBehaviour
 
         _menusManager.OpenMenus();//Para cerrar el menú
 
-        ResetAllDeathRespawns();
 
-        if (sceneWhereRespawn != null)
+        if (sceneWhereRespawn != null && !sceneWhereRespawn.Equals(""))
         {
-            if (sceneWhereRespawn.Equals(""))
+            MarkAllScenesForDeathRespawn();
+
+            hasToSpawnPlayerAfterDeath = true;
+            if (sceneWhereRespawn.Equals(SceneManager.GetActiveScene().name))
             {
-                if (ExistsSceneController())
-                {
-                    sc.RespawnPlayer();
-                }
+                FadeTransition.Instance.LoadSceneWithFade(sceneWhereRespawn);
             }
-            else
+            else 
             {
-                if (!CheckIsActiveScene(sceneWhereRespawn))
-                {
-                    hasToSpawnPlayerAfterDeath = true;
-                    SceneManager.LoadScene(sceneWhereRespawn);
-                }
-                else
-                {
-                    if (ExistsSceneController())
-                    {
-                        sc.RespawnPlayer();
-                    }
-                }
+                SceneManager.LoadScene(sceneWhereRespawn);
             }
+                
         }
         else
         {
+            ResetAllDeathRespawns();
+
             if (ExistsSceneController())
             {
                 sc.RespawnPlayer();
@@ -316,7 +307,7 @@ public class CheckpointManager : MonoBehaviour
 
     }
 
-    public void ResetAllDeathRespawns()
+    public void MarkAllScenesForDeathRespawn()
     {
         if (scenesHasToRespawnAfterDeath == null)
         {
@@ -328,6 +319,11 @@ public class CheckpointManager : MonoBehaviour
         {
             scenesHasToRespawnAfterDeath[name] = true;
         }
+    }
+
+    public void ResetAllDeathRespawns()
+    {
+        MarkAllScenesForDeathRespawn();
 
         RespawnObjectsManager rom = GameObject.FindGameObjectWithTag("SceneController").GetComponent<RespawnObjectsManager>();
         rom.UpdateDeath();

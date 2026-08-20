@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: PuertaTutorialPruebas
   m_EditorClassIdentifier: Assembly-CSharp::GateData
   sceneName1: Tutorial
-  gateId1: 2
-  gateDirection1: {x: 0, y: -1}
+  gateId1: 1
+  gateDirection1: {x: 1, y: 0}
   sceneName2: PruebaTileMap
   gateId2: 4
   gateDirection2: {x: 0, y: 1}

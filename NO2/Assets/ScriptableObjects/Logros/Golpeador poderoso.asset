@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b802fc446965f64286319608d3083da, type: 3}
   m_Name: Golpeador poderoso
   m_EditorClassIdentifier: Assembly-CSharp::Achievement
-  achievementName: 
-  description: 
+  achievementName: big_charge
+  description: Has ejecutado un golpe tras cargar unos 6 o 7 segundos
   isCounter: 0
   targetCount: 0

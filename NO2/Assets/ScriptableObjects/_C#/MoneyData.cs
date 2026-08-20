@@ -27,9 +27,17 @@ public class MoneyData : ScriptableObject
                     value = value + (value-money);
                 }
             }
-            GameManager.Instance.GetComponent<AchievementManager>().NotifyCounter("100_money", value-money);
-            GameManager.Instance.GetComponent<AchievementManager>().NotifyCounter("5000_money", value-money);
+            
             money = Mathf.Clamp(value, 0, maxAmount);
+            if (money >= 100)
+            {
+                GameManager.Instance.GetComponent<AchievementManager>().NotifyEvent("100_money");
+                if (money >= 5000)
+                {
+                    GameManager.Instance.GetComponent<AchievementManager>().NotifyEvent("5000_money");
+
+                }
+            }
             OnMoneyChanged?.Invoke();
             Save();
         }

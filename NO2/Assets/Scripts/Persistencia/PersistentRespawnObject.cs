@@ -39,12 +39,15 @@ public class PersistentRespawnObject : MonoBehaviour
             return;
         }
 
-        bool shouldSpawnByRest = !respawnAfterRest || respawnObjectsManager.GetObjectRest(guid);
-        bool shouldSpawnByDeath = !respawnAfterDeath || respawnObjectsManager.GetObjectRespawnAfterDeath(guid);
+        if (!respawnAfterRest && !respawnAfterDeath)
+            return; // objeto persistente normal, ningún trigger lo controla
 
-        // Si tiene ambos triggers activos, debe cumplir los dos para permanecer visible;
-        // si solo tiene uno activo, basta con que ese lo permita.
-        if (!shouldSpawnByRest || !shouldSpawnByDeath)
+        bool allowedByRest = respawnAfterRest && respawnObjectsManager.GetObjectRest(guid);
+        bool allowedByDeath = respawnAfterDeath && respawnObjectsManager.GetObjectRespawnAfterDeath(guid);
+
+        bool shouldBeVisible = allowedByRest || allowedByDeath;
+
+        if (!shouldBeVisible)
             gameObject.SetActive(false);
     }
 

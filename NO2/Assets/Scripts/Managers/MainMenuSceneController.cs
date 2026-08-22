@@ -16,7 +16,6 @@ public class MainMenuSceneManager : MonoBehaviour
     public GameObject canvasOptions;
     [SerializeField] private AudioClip theme;
 
-    [SerializeField] private FlowerCollection coleccionFlores;
 
     [SerializeField] private HealData healData;
     [SerializeField] private PlayerData playerData;
@@ -49,7 +48,7 @@ public class MainMenuSceneManager : MonoBehaviour
     {
         InitializePlayerValues();
 
-        coleccionFlores.Load();
+        flowerCollection.Load();
 
         respawnData.Load();
 

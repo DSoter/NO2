@@ -36,12 +36,13 @@ public class TilemapToScriptable : MonoBehaviour
     public void InitializeMap()
     {
         LoadFloorTilemap();
+        AddOxygenZonesToTileMap();
         LoadWallsTilemap();
         AddCampfiresToTileMap();
         AddFlowersToTileMap();
         AddNpcsToTileMap();
         AddGatesToTileMap();
-        AddOxygenZonesToTileMap();
+        
 
 
         sceneMapData.SaveMapOnly();

@@ -100,6 +100,11 @@ public class FogData : ScriptableObject
             for (int col = 0; col < Cols; col++)
                 Active[row, col] = true;
         Save();
+
+        //igual da error
+        active = null;
+        cols = 0;
+        rows = 0;
     }
 
 }

@@ -15,3 +15,4 @@ MonoBehaviour:
   allFogData:
   - {fileID: 11400000, guid: 8007cff1f7382244fad642f54f650a45, type: 2}
   - {fileID: 11400000, guid: 34ee63567211af242a311dd90ea359ea, type: 2}
+  - {fileID: 11400000, guid: e4b5ff0a6fddd9346845c10e99581ea8, type: 2}

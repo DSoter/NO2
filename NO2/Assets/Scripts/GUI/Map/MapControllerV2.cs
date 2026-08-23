@@ -448,6 +448,15 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         }
     }
 
+    [ContextMenu("Update Global Map")]
+    public void UpdateGlobalMap()
+    {
+        tilemapToScriptable.FogManager.ResetFog();
+        tilemapToScriptable.SaveMap();
+        ClearMapTextureCache();
+        ClearWorldMapCache();
+    }
+
     public void UpdateFogTexture()
     {
         bool[,] visible = mapData.IsVisibleMatrix;
@@ -654,7 +663,6 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
             case SceneMapData.MapTile.Flower: return flowerSprite;
             case SceneMapData.MapTile.Campfire: return campfireSprite;
             case SceneMapData.MapTile.Gate: return gateSprite;
-
             default: return null;
         }
     }

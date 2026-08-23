@@ -279,7 +279,7 @@ public class FogManager : MonoBehaviour
     }
 
     [ContextMenu("Reset")]
-    private void ResetFog()
+    public void ResetFog()
     {
         fogData.Reset();
     }

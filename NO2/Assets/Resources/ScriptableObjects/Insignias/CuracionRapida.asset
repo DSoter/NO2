@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cefcbd99b00b4c14eab78afd4ec1278b, type: 3}
   m_Name: CuracionRapida
   m_EditorClassIdentifier: Assembly-CSharp::Badge
-  badgeName: "Curaci\xF3n rapida"
+  badgeName: Curacion rapida
   achievement: {fileID: 11400000, guid: cc7cbc9a289ffa6499f9e2cc925a249b, type: 2}
   description: "Gracias a tu experiencia bebiendo liquidos muy rapido, asimilas m\xE1s
     rapido las pociones y te curan m\xE1s "

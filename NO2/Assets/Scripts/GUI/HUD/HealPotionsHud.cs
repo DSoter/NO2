@@ -26,6 +26,7 @@ public class HealPotionsHud : MonoBehaviour
     private void UpdateCurrentUses()
     {
         textRemainingPotions.text = healData.RemainingUses + "";
+        textMaxPotions.text = healData.MaxUses + "";
     }
    
     private void UpdateMaskFill()

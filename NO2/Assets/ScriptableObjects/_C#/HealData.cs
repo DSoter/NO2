@@ -12,6 +12,9 @@ public class HealData : ScriptableObject
     [SerializeField] private float actualCooldownSeconds;
     [SerializeField] private float cooldownSeconds;
 
+    [SerializeField] private EquippedBadges equippedBadges;
+    private string fastPotionsName = "Curacion rapida";
+
     public Action healUsesChanged;
 
     public Action actualCooldownChanged;
@@ -27,7 +30,11 @@ public class HealData : ScriptableObject
     public int MaxUses
     {
         get { return maxUses; }
-        set {  maxUses = value;}
+        set
+        { 
+            maxUses = value;
+            healUsesChanged?.Invoke();
+        }
     }
     public int HealAmount
     {
@@ -45,6 +52,43 @@ public class HealData : ScriptableObject
         set {
                 actualCooldownSeconds = value; 
                 actualCooldownChanged?.Invoke();
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (equippedBadges != null)
+        {
+            equippedBadges.OnEquipped += (badgeName) => IncreaseMaxPotions(badgeName);
+            equippedBadges.OnUnequipped += (badgeName) => DecreaseMaxPotions(badgeName);
+        }
+    }
+    private void OnDestroy()
+    {
+        equippedBadges.OnEquipped -= (badgeName) => IncreaseMaxPotions(badgeName);
+        equippedBadges.OnUnequipped -= (badgeName) => DecreaseMaxPotions(badgeName);
+    }
+    private void OnDisable()
+    {
+        equippedBadges.OnEquipped -= (badgeName) => IncreaseMaxPotions(badgeName);
+        equippedBadges.OnUnequipped -= (badgeName) => DecreaseMaxPotions(badgeName);
+    }
+
+    private void IncreaseMaxPotions(string badgeName)
+    {
+        if (fastPotionsName== badgeName)
+        {
+            MaxUses = maxUses + 2;
+            RemainingUses = remainingUses + 2;
+
+        }
+    }
+    private void DecreaseMaxPotions(string badgeName)
+    {
+        if (fastPotionsName == badgeName)
+        {
+            MaxUses = maxUses - 2;
+            RemainingUses = maxUses;
         }
     }
 

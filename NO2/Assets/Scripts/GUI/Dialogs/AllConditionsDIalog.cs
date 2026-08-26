@@ -255,7 +255,11 @@ public class AllConditionsDIalog : MonoBehaviour
     }
     public bool PlayerHasDied()
     {
-        return badgeCollection.UnlockedBadges[badgeFirstDeath];
+        if (badgeCollection != null)
+        {
+            return badgeCollection.UnlockedBadges[badgeFirstDeath];
+        }
+        return false;
     }
 
     public bool ItemPurchased()

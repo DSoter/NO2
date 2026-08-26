@@ -32,19 +32,25 @@ MonoBehaviour:
         hacia el interior de la cueva. Ten cuidado dormil\xF3n."
   repetitionTexts:
   - lines:
-    - conditionKey: 
+    - conditionKey: playerNeverDied
       text: "Buenos d\xEDas, dormil\xF3n."
-    - conditionKey: 
+    - conditionKey: playerNeverDied
       text: Ya he visto que anoche te escabulliste para dormir en tu alijo secreto.
-    - conditionKey: 
+    - conditionKey: playerNeverDied
       text: "Aqu\xED afuera estamos teniendo... problemas de plagas. Cuando puedas,
         p\xE1sate a echar un cable."
-    - conditionKey: 
+    - conditionKey: playerNeverDied
       text: Si no han acabado con nosotros para cuando decidas salir a respirar algo
         de aire fresco. JAJAJAJAJAJAJA.
-    - conditionKey: 
+    - conditionKey: playerNeverDied
       text: "Ahora enserio, m\xE1s te vale pasarte a ayudar. O t\xFA y yo tendremos
         una charla. Y esta vez ni tu alijo secreto te salvar\xE1."
-    - conditionKey: 
+    - conditionKey: playerNeverDied
       text: Por cierto, y solo por si acaso, ten #=cuidado=#. Puede que se nos hayan
         escapado algunos de nuestros... problemas hacia el interior de la cueva.
+    - conditionKey: playerHasDied
+      text: Hola otra vez.
+    - conditionKey: playerHasDied
+      text: Veo que no has podido con nuestros problemillas que ocupan esta cueva.
+    - conditionKey: playerHasDied
+      text: Pero puedes volver a intentarlo

@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e2bb7e4f927c16469fb8e20a9d08185, type: 3}
+  m_Name: TutoEspadaDialog
+  m_EditorClassIdentifier: Assembly-CSharp::DialogTextData
+  listOfTexts:
+  - lines:
+    - conditionKey: 
+      text: Veo que ha habido un =#derrumbe#=, te han cortado el paso
+    - conditionKey: 
+      text: "/\xA1Estamos atrapados!/ \xBFQue vamos a hacer?"
+  - lines:
+    - conditionKey: 
+      text: "Se me olvidaba, yo simplemente soy un pu\xF1ado de $carteles$ "
+    - conditionKey: 
+      text: "Pero si no hacemos nada... \xA1Te quedar\xE1s atrapado para  *siempre*!"
+    - conditionKey: 
+      text: "\xA1No podr\xE1s volver a #_casa_#!"
+  - lines:
+    - conditionKey: 
+      text: "_Tranquilo_ tengo una soluci\xF3n"
+    - conditionKey: 
+      text: "\xBFTe acuerdas esa espada tuya? La puedes usar para *destruir* rocas "
+    - conditionKey: 
+      text: "Puedes utilizarla para destruir esas rocas y conseguir sacarnos de aqu\xED.
+        Bueno, yo no tengo piernas, pero me entiendes."
+    - conditionKey: 
+      text: "Para atacar con tu espada utiliza el clic izquierdo del rat\xF3n"
+  repetitionTexts:
+  - lines:
+    - conditionKey: 
+      text: "Para atacar con tu espada utiliza el click izquierdo del rat\xF3n"

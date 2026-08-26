@@ -10,13 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e2bb7e4f927c16469fb8e20a9d08185, type: 3}
-  m_Name: TutoThirdDialog
+  m_Name: TutoVolteretaDialog
   m_EditorClassIdentifier: Assembly-CSharp::DialogTextData
   listOfTexts:
   - lines:
     - conditionKey: 
-      text: Utiliza tu espada para cortar cajas u enemigos
+      text: "Para pasar a trav\xE9s de peligros usa la voltereta, con la tecla Espacio"
   repetitionTexts:
   - lines:
-    - conditionKey: 
-      text: "Para atacar con tu espada utiliza el click izquierdo del rat\xF3n"
+    - conditionKey: playerNeverDied
+      text: "Para pasar a trav\xE9s de peligros usa la voltereta, con la tecla Espacio."
+    - conditionKey: playerHasDied
+      text: Veo que has muerto.
+    - conditionKey: playerHasDied
+      text: Recuerda, puedes esquivar peligros haciendo una voltereta, pulsando el
+        espacio.

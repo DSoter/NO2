@@ -85,6 +85,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int _fastHealCount = 3;
     private List<float> _recentHealTimestamps = new List<float>();
 
+    private bool hasToUnlockBadgeBigCharge;
+
+    public bool HasToUnlockBadgeBigCharge
+    {
+        get { return hasToUnlockBadgeBigCharge; }
+        set {hasToUnlockBadgeBigCharge = value;}
+    }
+
     public Transform Center
     {
         get { return _center; }
@@ -190,8 +198,14 @@ public class PlayerController : MonoBehaviour
 
                     _state = PlayerState.StrongAttack;
                     _chargeReleased = false;
+                    if (_chargeTime >= 6.5f)
+                    {
+                        hasToUnlockBadgeBigCharge = true;
+                        
+                    }
                     _chargeTime = 0f;
                 }
+                
 
                 break;
             case PlayerState.StrongAttack:
@@ -335,6 +349,7 @@ public class PlayerController : MonoBehaviour
     {
         if (canAttack && _areInputsEnabled && !_isPause && !_dialogIsOpen)
         {
+            hasToUnlockBadgeBigCharge = false;
             StartCoroutine(WeakAttackCoroutine());
         }
     }
@@ -372,6 +387,7 @@ public class PlayerController : MonoBehaviour
         if (canCharge && !_isPause)
         {
             _state = PlayerState.Charging;
+            hasToUnlockBadgeBigCharge = false;
         }
     }
 

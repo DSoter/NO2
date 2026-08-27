@@ -291,7 +291,6 @@ MonoBehaviour:
   canvasCredits: {fileID: 2141946945}
   canvasOptions: {fileID: 2141946945}
   theme: {fileID: 8300000, guid: 2b168a8411396d84e8f09cd1e379e8b1, type: 3}
-  coleccionFlores: {fileID: 11400000, guid: 8e1da91b1283cf54ebdcdf0b4a85e26a, type: 2}
   healData: {fileID: 11400000, guid: ccc02f2f8da643c4db2030f236d9a261, type: 2}
   playerData: {fileID: 11400000, guid: 707aa1a40a1bb064193fd4f6f25fcc6a, type: 2}
   worldMapData: {fileID: 11400000, guid: b759603f51b9ccc4d8641177dd487650, type: 2}

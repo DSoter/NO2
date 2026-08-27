@@ -228,6 +228,14 @@ public class Baba : Enemy
             _spriteFlash.ApplyEffect();
             _rigidbody.AddForce(direction * _knockbackAmountOnHit, ForceMode2D.Impulse);
         }
+
+        //cosas insignia carga grande
+        if (_player.HasToUnlockBadgeBigCharge)
+        {
+            GameManager.Instance.GetComponent<AchievementManager>().NotifyEvent("big_charge");
+            _player.HasToUnlockBadgeBigCharge=false;
+        }
+        
     }
 
     public override void ApplyBurn(float damagePerSecond, int duration)

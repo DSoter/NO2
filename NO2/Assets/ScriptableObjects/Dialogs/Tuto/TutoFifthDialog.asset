@@ -14,26 +14,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogTextData
   listOfTexts:
   - lines:
+    - conditionKey: playerNeverDies
+      text: Veo que has salido ileso de la pelea.
     - conditionKey: 
-      text: "Puedes realizar un poderoso ataque cargado para hacer m\xE1s da\xF1o
-        a los enemigos."
+      text: _#Bien hecho#_ has conseguido derrotar a uno de ellos.
     - conditionKey: 
-      text: Manten el click derecho para empezar a cargar
+      text: Es inevitable, necesitas enfrentarte a ellos para defender tu casa.
     - conditionKey: 
-      text: "Sueltalo para golpear hacia donde apunte el rat\xF3n"
+      text: Has hecho el primer paso, ahora solo te falta seguir avanzando.
+  - lines:
     - conditionKey: 
-      text: Tambien sirve para realizar una ruptura en enemigos vulnerables
+      text: '!#&Cachis la mar salada &#, no podemos continuar!'
     - conditionKey: 
-      text: Los enemigos estan vulnerables cuando tienen un borde naranja
+      text: Parece una roca... Pero creo que es una poderosa criatura.
+    - conditionKey: 
+      text: "\xBFPuedes despejar el paso?"
   repetitionTexts:
   - lines:
     - conditionKey: 
-      text: Manten el click derecho para empezar a cargar
+      text: "Fijate bien, hay un momento que tiene un borde naranja. Eso significa
+        que est\xE1 $vulnerable$."
     - conditionKey: 
-      text: "Sueltalo para golpear hacia donde apunte el rat\xF3n"
+      text: "Cuando un enemigo est\xE9 vulnerable podr\xE1s hacer una #/ruptura/#.
+        Simplemente deber\xE1s de golpearle para inflingirle da\xF1o extra."
     - conditionKey: 
-      text: Tambien sirve para realizar una ruptura en enemigos vulnerables
+      text: "Pero con esa espadita no podr\xE1s hacer nada, tienes que usar tu #=mazo=#."
     - conditionKey: 
-      text: Tambien sirve para realizar una ruptura en enemigos vulnerables
+      text: "Mant\xE9n el #click derecho# para cargar un poderoso ataque, cuanto
+        m\xE1s lo cargues m\xE1s da\xF1o har\xE1s. Pero recuerda, cuando empieces
+        a parpadear significa que has cargado /a tope/"
     - conditionKey: 
-      text: Recuerda que los enemigos vulnerables son los que tienen un borde naranja
+      text: "Cuando sueltes el clic golpear\xE1s en la direcci\xF3n del rat\xF3n."
+    - conditionKey: 
+      text: "Ten =#cuidado#=, no podr\xE1s moverte mientras cargues, pero si consigues
+        golpear a un enemigo en el momento clave, la espera merecer\xE1 la pena."

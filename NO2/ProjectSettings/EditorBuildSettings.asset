@@ -29,5 +29,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PruebaVictor/SiguienteSiguienteNivel.unity
     guid: a2dcd4e60d19d90468ffcb69a6bdca57
+  - enabled: 1
+    path: Assets/Scenes/Zona1Escena1.unity
+    guid: c78f5c0f3dab45743971371aadf4b76e
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}

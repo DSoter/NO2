@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feeebd2a2d48cc049bc5b19f3beb2bc7, type: 3}
   m_Name: HealData
   m_EditorClassIdentifier: Assembly-CSharp::HealData
-  maxUses: 5
-  remainingUses: 5
-  healAmount: 20
+  maxUses: 3
+  remainingUses: 3
+  healAmount: 30
   actualCooldownSeconds: 2
   cooldownSeconds: 2
   equippedBadges: {fileID: 11400000, guid: be93a51aa16842a4c85fa0af75138391, type: 2}

@@ -15,6 +15,6 @@ MonoBehaviour:
   sceneName1: Tutorial
   gateId1: 1
   gateDirection1: {x: 1, y: 0}
-  sceneName2: PruebaTileMap
+  sceneName2: Zona1Escena1
   gateId2: 4
-  gateDirection2: {x: 0, y: 1}
+  gateDirection2: {x: -1, y: 0}

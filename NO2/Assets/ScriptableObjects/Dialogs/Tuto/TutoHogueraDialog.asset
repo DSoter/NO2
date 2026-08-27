@@ -15,6 +15,19 @@ MonoBehaviour:
   listOfTexts:
   - lines:
     - conditionKey: 
-      text: Has encontrado una hoguera, puedes descansar en ella
+      text: "\xBFHa sido f\xE1cil, no? Sabia que podr\xEDas llegar hasta aqu\xED. "
+    - conditionKey: 
+      text: No se si lo recuerdas, pero encendiste esta hoguera para poder hacer
+        una parada en el camino.
+    - conditionKey: 
+      text: "Permitete #/descansar/#, podr\xE1s recuperar vida y guardar tu progreso."
+    - conditionKey: 
+      text: Puedes sentarte igual que hablas conmigo, con la tecla /E/, quedandote
+        descansando en el fuego hasta volver a pulsarla.
   repetitionTexts:
-  - lines: []
+  - lines:
+    - conditionKey: 
+      text: "Permitete #/descansar/#, podr\xE1s recuperar vida y guardar tu progreso."
+    - conditionKey: 
+      text: Puedes sentarte igual que hablas conmigo, con la tecla /E/, quedandote
+        descansando en el fuego hasta volver a pulsarla.

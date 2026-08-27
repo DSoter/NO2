@@ -29,12 +29,12 @@ MonoBehaviour:
     - conditionKey: 
       text: "_Tranquilo_ tengo una soluci\xF3n"
     - conditionKey: 
-      text: "\xBFTe acuerdas esa espada tuya? La puedes usar para *destruir* rocas "
+      text: "\xBFTe acuerdas esa espada tuya? La puedes usar para *#destruir#* rocas "
     - conditionKey: 
       text: "Puedes utilizarla para destruir esas rocas y conseguir sacarnos de aqu\xED.
         Bueno, yo no tengo piernas, pero me entiendes."
     - conditionKey: 
-      text: "Para atacar con tu espada utiliza el clic izquierdo del rat\xF3n"
+      text: "Para atacar con tu espada utiliza el clic izquierdo del rat\xF3n."
   repetitionTexts:
   - lines:
     - conditionKey: 

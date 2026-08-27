@@ -15,13 +15,21 @@ MonoBehaviour:
   listOfTexts:
   - lines:
     - conditionKey: 
-      text: "Para pasar a trav\xE9s de peligros usa la voltereta, con la tecla Espacio"
+      text: "Cuidado, esta *cueva* est\xE1 llena de #=trampas=#"
+    - conditionKey: 
+      text: Para llegar a casa necesitas estar vivo
+    - conditionKey: 
+      text: "Para pasar a trav\xE9s de peligros usa la voltereta, con la tecla Espacio,
+        ser\xE1s invulnerable durante unos momentos."
   repetitionTexts:
   - lines:
     - conditionKey: playerNeverDied
-      text: "Para pasar a trav\xE9s de peligros usa la voltereta, con la tecla Espacio."
+      text: "Para pasar a trav\xE9s de peligros usa la voltereta, con la tecla Espacio,
+        ser\xE1s invulnerable durante unos momentos."
     - conditionKey: playerHasDied
-      text: Veo que has muerto.
+      text: "Veo que no te han quedado claras mis ense\xF1anzas.."
     - conditionKey: playerHasDied
       text: Recuerda, puedes esquivar peligros haciendo una voltereta, pulsando el
         espacio.
+    - conditionKey: playerHasDied
+      text: Pero solo seras invulnerable durante unos momentos.

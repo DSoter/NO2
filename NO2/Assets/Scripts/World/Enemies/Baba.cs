@@ -1,13 +1,16 @@
 using System.Collections;
+using TMPro;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Baba : Enemy
 {
-    [Header("Patroll")] 
+    [Header("Agent")] 
     [SerializeField] private Transform[] _patrollPoints;
     private int _currentPatrollPoint = 0;
+    [SerializeField] private float _secondsBetweenDestinations = 0.75f;
+    private Vector3 _lastDestination = Vector3.zero;
 
     [Space(5)]
     [Header("ScriptReferences")]
@@ -54,6 +57,7 @@ public class Baba : Enemy
 
     private Coroutine _burnCoroutine;
     private Coroutine _severeBurnCoroutine;
+    private Coroutine _destinationCoroutine;
 
     public override bool IsVulnerable => _state == BabaState.Charge;
 
@@ -99,7 +103,7 @@ public class Baba : Enemy
                 Vector3 targetPosition = _patrollPoints[_currentPatrollPoint].position;
 
                 CheckIfShouldFlip(targetPosition);
-                _agent.SetDestination(targetPosition);
+                SetDestination(targetPosition);
 
                 // If close enought to the current patroll point, move to the next one
                 if (Vector3.Distance(transform.position, targetPosition) < 0.5f)
@@ -114,7 +118,7 @@ public class Baba : Enemy
                 _cooldownTimer -= Time.deltaTime;
 
                 CheckIfShouldFlip(_player.transform.position);
-                _agent.SetDestination(_player.transform.position);
+                SetDestination(_player.transform.position);
 
                 if (Vector3.Distance(transform.position, _player.transform.position) > _backToPatrollRange)
                 {
@@ -147,6 +151,21 @@ public class Baba : Enemy
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
         }
+    }
+
+    private void SetDestination(Vector3 target) 
+    { 
+        if(target != _lastDestination && _destinationCoroutine == null)
+        {
+            _destinationCoroutine = StartCoroutine(DestinationCoroutine(target));
+        }
+    }
+
+    private IEnumerator DestinationCoroutine(Vector3 target) 
+    {
+        _agent.SetDestination(target);
+        yield return new WaitForSeconds(_secondsBetweenDestinations);
+        _destinationCoroutine = null;
     }
 
     public void OnAttackStartedAnimationEvent()

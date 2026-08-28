@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 5643359169273431226}
   - component: {fileID: 8589834819234733083}
   - component: {fileID: 1961687623752319823}
+  - component: {fileID: -1360761431400066842}
   m_Layer: 8
   m_Name: Baba
   m_TagString: Untagged
@@ -234,7 +235,7 @@ NavMeshAgent:
   m_Height: 1.1
   m_BaseOffset: 0.05
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!114 &7490324042507748272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,6 +264,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  _secondsBetweenDestinations: 0.75
   _detectionArea: {fileID: 3408969524423527280}
   _targetingProportion: 0.9
   _attackImpulse: 10
@@ -432,6 +434,18 @@ MonoBehaviour:
     DissipationDistance: 100
     PropagationSpeed: 343
   DefaultVelocity: {x: 0, y: -0.3, z: 0}
+--- !u!114 &-1360761431400066842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3385104020248448736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5194d6f03893b824daff6f41d0646c67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyCPU
 --- !u!1001 &8473588284204588597
 PrefabInstance:
   m_ObjectHideFlags: 0

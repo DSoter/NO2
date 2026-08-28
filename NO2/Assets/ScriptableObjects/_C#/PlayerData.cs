@@ -1,6 +1,7 @@
 using NUnit.Framework;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PlayerData", menuName = "Scriptable Objects/PlayerData")]
@@ -65,6 +66,15 @@ public class PlayerData : ScriptableObject
     [SerializeField] private string nameBadgeStrongHeart = "Corazon fuerte";
     [SerializeField] private string nameBadgeBigCharge = "Peso pesado";
 
+    private readonly Modifier strongHeartModifier = new Modifier(Modifier.ModifierType.Numeric, 10f);
+    private readonly Modifier hundredRollsModifier = new Modifier(Modifier.ModifierType.Numeric, 10f);
+    private readonly Modifier bigChargeMinModifier = new Modifier(Modifier.ModifierType.Numeric, 2f);
+    private readonly Modifier bigChargeMaxModifier = new Modifier(Modifier.ModifierType.Numeric, 2f);
+    private List<Modifier> maxHealthModifiers = new List<Modifier>();
+    private List<Modifier> maxStaminaModifiers = new List<Modifier>();
+    private List<Modifier> minStrongAttackDamageModifiers = new List<Modifier>();
+    private List<Modifier> maxStrongAttackDamageModifiers = new List<Modifier>();
+
     //references 
     private Action<string> onEquippedIncreaseHealthHandler;
     private Action<string> onUnequippedDecreaseHealthHandler;
@@ -72,6 +82,7 @@ public class PlayerData : ScriptableObject
     private Action<string> onUnequippedDecreaseStaminaHandler;
     private Action<string> onEquippedIncreaseStrongDamageHandler;
     private Action<string> onUnequippedDecreaseStrongDamageHandler;
+    private Action onBadgesResetHandler;
 
     // Events
 
@@ -127,7 +138,7 @@ public class PlayerData : ScriptableObject
 
     public float MaxHealth 
     { 
-        get {  return maxHealth;    }
+        get { return Modifier.ApplyModifiers(maxHealth, maxHealthModifiers); }
         set
         {
             maxHealth = value;
@@ -137,7 +148,7 @@ public class PlayerData : ScriptableObject
 
     public float MaxStamina
     {
-        get { return maxStamina; }
+        get { return Modifier.ApplyModifiers(maxStamina, maxStaminaModifiers); }
         set
         {
             maxStamina = value;
@@ -258,11 +269,11 @@ public class PlayerData : ScriptableObject
 
     public float MinStrongAttackDamage
     {
-        get { return minStrongAttackDamage; }
+        get {return Modifier.ApplyModifiers(minStrongAttackDamage, minStrongAttackDamageModifiers); }
     }
     public float MaxStrongAttackDamage
     {
-        get { return maxStrongAttackDamage; }
+        get { return Modifier.ApplyModifiers(maxStrongAttackDamage, maxStrongAttackDamageModifiers); }
     }
 
     public Flower EquipedFlower
@@ -299,6 +310,7 @@ public class PlayerData : ScriptableObject
         onUnequippedDecreaseStaminaHandler = (badgeName) => DecreaseMaxStamina(badgeName);
         onEquippedIncreaseStrongDamageHandler = (badgeName) => IncreaseStrongDamage(badgeName);
         onUnequippedDecreaseStrongDamageHandler = (badgeName) => DecreaseStrongDamage(badgeName);
+        onBadgesResetHandler = HandleBadgesReset;
 
         equippedBadges.OnEquipped += onEquippedIncreaseHealthHandler;
         equippedBadges.OnUnequipped += onUnequippedDecreaseHealthHandler;
@@ -306,6 +318,7 @@ public class PlayerData : ScriptableObject
         equippedBadges.OnUnequipped += onUnequippedDecreaseStaminaHandler;
         equippedBadges.OnEquipped += onEquippedIncreaseStrongDamageHandler;
         equippedBadges.OnUnequipped += onUnequippedDecreaseStrongDamageHandler;
+        equippedBadges.OnReset += onBadgesResetHandler;
     }
 
     private void UnsubscribeFromBadges()
@@ -324,14 +337,18 @@ public class PlayerData : ScriptableObject
             equippedBadges.OnEquipped -= onEquippedIncreaseStrongDamageHandler;
         if (onUnequippedDecreaseStaminaHandler != null) 
             equippedBadges.OnUnequipped -= onUnequippedDecreaseStrongDamageHandler;
+        if (onBadgesResetHandler != null)
+            equippedBadges.OnReset -= onBadgesResetHandler;
     }
 
     private void IncreaseMaxHealth(string badgeName)
     {
         if (nameBadgeStrongHeart == badgeName)
         {
-            MaxHealth = maxHealth + 10;
-            Health = health + 10;
+            if (!maxHealthModifiers.Contains(strongHeartModifier))
+                maxHealthModifiers.Add(strongHeartModifier);
+
+            OnMaxHealthChanged?.Invoke();
         }
     }
     private void DecreaseMaxHealth(string badgeName)
@@ -339,11 +356,12 @@ public class PlayerData : ScriptableObject
 
         if (nameBadgeStrongHeart == badgeName)
         {
-            MaxHealth = maxHealth - 10;
-            if(health > maxHealth)
+            maxHealthModifiers.Remove(strongHeartModifier);
+            if (health > MaxHealth)
             {
-                health=maxHealth;
+                health = MaxHealth;
             }
+            OnMaxHealthChanged?.Invoke();
         }
     }
 
@@ -351,8 +369,11 @@ public class PlayerData : ScriptableObject
     {
         if (nameBadgeHundredRolls == badgeName)
         {
-            MaxStamina = maxStamina + 10;
+            if (!maxStaminaModifiers.Contains(hundredRollsModifier))
+                maxStaminaModifiers.Add(hundredRollsModifier);
+
             Stamina = stamina + 10;
+            OnMaxStaminaChanged?.Invoke();
         }
     }
     private void DecreaseMaxStamina(string badgeName)
@@ -360,19 +381,23 @@ public class PlayerData : ScriptableObject
 
         if (nameBadgeHundredRolls == badgeName)
         {
-            MaxStamina = maxStamina - 10;
-            if (stamina > maxStamina)
+            maxStaminaModifiers.Remove(hundredRollsModifier);
+
+            if (stamina > MaxStamina)
             {
-                stamina = maxStamina;
+                stamina = MaxStamina;
             }
+            OnMaxStaminaChanged?.Invoke();
         }
     }
     private void IncreaseStrongDamage(string badgeName)
     {
         if (nameBadgeBigCharge == badgeName)
         {
-            minStrongAttackDamage = 2 + minStrongAttackDamage;
-            maxStrongAttackDamage = 2 + maxStrongAttackDamage;
+            if (!minStrongAttackDamageModifiers.Contains(bigChargeMinModifier))
+                minStrongAttackDamageModifiers.Add(bigChargeMinModifier);
+            if (!maxStrongAttackDamageModifiers.Contains(bigChargeMaxModifier))
+                maxStrongAttackDamageModifiers.Add(bigChargeMaxModifier);
         }
     }
     private void DecreaseStrongDamage(string badgeName)
@@ -380,9 +405,20 @@ public class PlayerData : ScriptableObject
 
         if (nameBadgeBigCharge == badgeName)
         {
-            minStrongAttackDamage = 2 + minStrongAttackDamage;
-            maxStrongAttackDamage = 2 + maxStrongAttackDamage;
+            minStrongAttackDamageModifiers.Remove(bigChargeMinModifier);
+            maxStrongAttackDamageModifiers.Remove(bigChargeMaxModifier);
         }
+    }
+    private void HandleBadgesReset()
+    {
+        maxHealthModifiers.Clear();
+        maxStaminaModifiers.Clear();
+
+        if (health > MaxHealth) health = MaxHealth;
+        if (stamina > MaxStamina) stamina = MaxStamina;
+
+        OnMaxHealthChanged?.Invoke();
+        OnMaxStaminaChanged?.Invoke();
     }
 
 

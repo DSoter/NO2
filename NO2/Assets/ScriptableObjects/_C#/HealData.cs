@@ -1,25 +1,28 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "HealData", menuName = "Scriptable Objects/HealData")]
 public class HealData : ScriptableObject
 {
-    [Header("Valores base")]
-    [SerializeField] private int baseMaxUses = 3;
-    [SerializeField] private int baseHealAmount = 30;
-    [SerializeField] private float baseCooldownSeconds = 2f;
-
-    private int maxUses;
-    private int remainingUses;
-    private int healAmount;
-    private float actualCooldownSeconds;
-    private float cooldownSeconds;
+    [SerializeField] private int maxUses;
+    [SerializeField] private int remainingUses;
+    [SerializeField] private int healAmount;
+    [SerializeField] private float actualCooldownSeconds;
+    [SerializeField] private float cooldownSeconds;
 
     [SerializeField] private EquippedBadges equippedBadges;
     private string fastPotionsName = "Curacion rapida";
 
+    // Modificador aplicado por la insignia (misma instancia reutilizada
+    // para poder añadirla/quitarla de la lista por referencia)
+    private readonly Modifier fastPotionsModifier = new Modifier(Modifier.ModifierType.Numeric, 2f);
+    private List<Modifier> maxUsesModifiers = new List<Modifier>();
+
+    // Referencias guardadas para poder desuscribirse correctamente
     private Action<string> onEquippedHandler;
     private Action<string> onUnequippedHandler;
+    private Action onBadgesResetHandler;
 
     public Action healUsesChanged;
     public Action actualCooldownChanged;
@@ -33,25 +36,23 @@ public class HealData : ScriptableObject
             healUsesChanged?.Invoke();
         }
     }
+
+    // El valor final se calcula aplicando los modificadores activos (insignias)
+    // sobre el valor base configurado en el inspector
     public int MaxUses
     {
-        get { return maxUses; }
-        set
-        {
-            maxUses = value;
-            healUsesChanged?.Invoke();
-            Save();
-        }
+        get { return Mathf.RoundToInt(Modifier.ApplyModifiers(maxUses, maxUsesModifiers)); }
     }
+
     public int HealAmount
     {
         get { return healAmount; }
-        set { healAmount = value; Save(); }
+        set { healAmount = value; }
     }
     public float CooldownSeconds
     {
         get { return cooldownSeconds; }
-        set { cooldownSeconds = value; Save(); }
+        set { cooldownSeconds = value; }
     }
     public float ActualCooldownSeconds
     {
@@ -63,18 +64,9 @@ public class HealData : ScriptableObject
         }
     }
 
-    private string SaveKey => name + "_healdata";
-
     private void OnEnable()
     {
-        if (equippedBadges != null)
-        {
-            onEquippedHandler = (badgeName) => IncreaseMaxPotions(badgeName);
-            onUnequippedHandler = (badgeName) => DecreaseMaxPotions(badgeName);
-
-            equippedBadges.OnEquipped += onEquippedHandler;
-            equippedBadges.OnUnequipped += onUnequippedHandler;
-        }
+        SubscribeToBadges();
     }
     private void OnDestroy()
     {
@@ -84,6 +76,20 @@ public class HealData : ScriptableObject
     {
         UnsubscribeFromBadges();
     }
+
+    private void SubscribeToBadges()
+    {
+        if (equippedBadges == null) return;
+
+        onEquippedHandler = (badgeName) => IncreaseMaxPotions(badgeName);
+        onUnequippedHandler = (badgeName) => DecreaseMaxPotions(badgeName);
+        onBadgesResetHandler = HandleBadgesReset;
+
+        equippedBadges.OnEquipped += onEquippedHandler;
+        equippedBadges.OnUnequipped += onUnequippedHandler;
+        equippedBadges.OnReset += onBadgesResetHandler;
+    }
+
     private void UnsubscribeFromBadges()
     {
         if (equippedBadges == null) return;
@@ -92,12 +98,17 @@ public class HealData : ScriptableObject
             equippedBadges.OnEquipped -= onEquippedHandler;
         if (onUnequippedHandler != null)
             equippedBadges.OnUnequipped -= onUnequippedHandler;
+        if (onBadgesResetHandler != null)
+            equippedBadges.OnReset -= onBadgesResetHandler;
     }
+
     private void IncreaseMaxPotions(string badgeName)
     {
         if (fastPotionsName == badgeName)
         {
-            MaxUses = maxUses + 2;
+            if (!maxUsesModifiers.Contains(fastPotionsModifier))
+                maxUsesModifiers.Add(fastPotionsModifier);
+
             RemainingUses = remainingUses + 2;
         }
     }
@@ -105,48 +116,14 @@ public class HealData : ScriptableObject
     {
         if (fastPotionsName == badgeName)
         {
-            MaxUses = maxUses - 2;
-            RemainingUses = maxUses;
+            maxUsesModifiers.Remove(fastPotionsModifier);
+            RemainingUses = MaxUses;
         }
     }
 
-    public void Save()
+    private void HandleBadgesReset()
     {
-        PlayerPrefs.SetInt(SaveKey + "_maxUses", maxUses);
-        PlayerPrefs.SetInt(SaveKey + "_remainingUses", remainingUses);
-        PlayerPrefs.SetInt(SaveKey + "_healAmount", healAmount);
-        PlayerPrefs.SetFloat(SaveKey + "_actualCooldownSeconds", actualCooldownSeconds);
-        PlayerPrefs.SetFloat(SaveKey + "_cooldownSeconds", cooldownSeconds);
-        PlayerPrefs.Save();
-    }
-
-    public bool Load()
-    {
-        if (!PlayerPrefs.HasKey(SaveKey + "_maxUses"))
-            return false;
-
-        maxUses = PlayerPrefs.GetInt(SaveKey + "_maxUses", baseMaxUses);
-        remainingUses = PlayerPrefs.GetInt(SaveKey + "_remainingUses", baseMaxUses);
-        healAmount = PlayerPrefs.GetInt(SaveKey + "_healAmount", baseHealAmount);
-        actualCooldownSeconds = PlayerPrefs.GetFloat(SaveKey + "_actualCooldownSeconds", baseCooldownSeconds);
-        cooldownSeconds = PlayerPrefs.GetFloat(SaveKey + "_cooldownSeconds", baseCooldownSeconds);
-
+        maxUsesModifiers.Clear();
         healUsesChanged?.Invoke();
-        actualCooldownChanged?.Invoke();
-        return true;
-    }
-
-    public void Reset()
-    {
-        maxUses = baseMaxUses;
-        remainingUses = baseMaxUses;
-        healAmount = baseHealAmount;
-        actualCooldownSeconds = baseCooldownSeconds;
-        cooldownSeconds = baseCooldownSeconds;
-
-        Save();
-
-        healUsesChanged?.Invoke();
-        actualCooldownChanged?.Invoke();
     }
 }

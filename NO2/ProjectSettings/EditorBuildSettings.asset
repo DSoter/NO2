@@ -32,5 +32,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Zona1Escena1.unity
     guid: c78f5c0f3dab45743971371aadf4b76e
+  - enabled: 1
+    path: Assets/Scenes/TutorialBossFight.unity
+    guid: ffb9002c67215b643972f035328ef094
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 043a9846c5f5f0944af9685d2de9a922, type: 3}

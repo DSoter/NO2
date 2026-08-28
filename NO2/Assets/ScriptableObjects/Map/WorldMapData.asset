@@ -13,15 +13,12 @@ MonoBehaviour:
   m_Name: WorldMapData
   m_EditorClassIdentifier: Assembly-CSharp::WorldMapData
   scenes:
-  - sceneName: PruebaTileMap
-    mapData: {fileID: 11400000, guid: d3c0ec49d37ef354892ba4b98074bfed, type: 2}
-    offsetInCells: {x: -20, y: 0}
-  - sceneName: PruebaSiguienteNivel
-    mapData: {fileID: 11400000, guid: e35f527127aa874479acf00ca6d6fcd3, type: 2}
-    offsetInCells: {x: -79, y: 33}
   - sceneName: Tutorial
     mapData: {fileID: 11400000, guid: beb976d8ca27d87458fc0c7e1a9b2b32, type: 2}
     offsetInCells: {x: 0, y: 0}
+  - sceneName: TutorialBoss
+    mapData: {fileID: 11400000, guid: 66dd05f3c6d9bb041969efadf7847646, type: 2}
+    offsetInCells: {x: -400, y: 0}
   gatePositions:
   - sceneName: PruebaTileMap
     gateId: 3

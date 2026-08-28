@@ -106,7 +106,7 @@ public class Baba : Enemy
                 SetDestination(targetPosition);
 
                 // If close enought to the current patroll point, move to the next one
-                if (Vector3.Distance(transform.position, targetPosition) < 0.5f)
+                if ((transform.position - targetPosition).sqrMagnitude < 0.5f)
                 {
                     _currentPatrollPoint = (_currentPatrollPoint + 1) % _patrollPoints.Length;
                 }
@@ -120,12 +120,12 @@ public class Baba : Enemy
                 CheckIfShouldFlip(_player.transform.position);
                 SetDestination(_player.transform.position);
 
-                if (Vector3.Distance(transform.position, _player.transform.position) > _backToPatrollRange)
+                if ((transform.position - _player.transform.position).sqrMagnitude > _backToPatrollRange)
                 {
                     Debug.Log("Baba - Player is too far away, going back to patrolling");
                     _state = BabaState.Patroll;
                 }
-                else if (Vector3.Distance(transform.position, _player.transform.position) < _attackRange && _cooldownTimer <= 0)
+                else if ((transform.position - _player.transform.position).sqrMagnitude < _attackRange && _cooldownTimer <= 0)
                 {
                     Debug.Log("Baba - Player is in attack range");
                     _state = BabaState.Charge;

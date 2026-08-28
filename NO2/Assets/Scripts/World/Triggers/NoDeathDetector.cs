@@ -12,10 +12,11 @@ public class NoDeathDetector : MonoBehaviour
             Debug.Log("patata");
             if (!equippedBadges.IsEquipped(nameBadgePrincipiante)) //el jugador no ha muerto
             {
-                Debug.Log("is locked");
                 switch (perfectZoneNumber)
                 {
                     case 0:
+
+                        Debug.Log("Ha entrado al cero");
                         GameManager.Instance.GetComponent<AchievementManager>().NotifyEvent("no_death_tutorial");
                         break;
                 }

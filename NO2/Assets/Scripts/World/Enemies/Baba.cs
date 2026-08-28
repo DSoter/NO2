@@ -232,6 +232,7 @@ public class Baba : Enemy
         //cosas insignia carga grande
         if (_player.HasToUnlockBadgeBigCharge)
         {
+            Debug.Log("se ha conseguido el logro");
             GameManager.Instance.GetComponent<AchievementManager>().NotifyEvent("big_charge");
             _player.HasToUnlockBadgeBigCharge=false;
         }

@@ -25,6 +25,10 @@ public class PlayerController : MonoBehaviour
     private bool _chargeReleased = false;
     private bool _rollInvulnerability = false;
     private bool _hurtInvulnerability = false;
+
+    private bool hasToUnlockBadgeBigCharge;
+    private float auxChargeTime;
+
     private bool _isInvulnerable => _rollInvulnerability || _hurtInvulnerability;
 
     private Coroutine _rollCoroutine;
@@ -85,7 +89,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int _fastHealCount = 3;
     private List<float> _recentHealTimestamps = new List<float>();
 
-    private bool hasToUnlockBadgeBigCharge;
+    
 
     public bool HasToUnlockBadgeBigCharge
     {
@@ -189,7 +193,7 @@ public class PlayerController : MonoBehaviour
                 UpdateLookDirectionWithMouse();
 
                 _chargeTime = Mathf.Min(_chargeTime + Time.deltaTime, _maxCharge);
-
+                auxChargeTime = auxChargeTime + Time.deltaTime;
                 if (_chargeTime >= _minCharge && _chargeReleased)
                 {
                     _animator.SetTrigger("StrongAttack");
@@ -198,12 +202,15 @@ public class PlayerController : MonoBehaviour
 
                     _state = PlayerState.StrongAttack;
                     _chargeReleased = false;
-                    if (_chargeTime >= 6.5f)
+                    
+                    if (auxChargeTime >= 6.5f)
                     {
                         hasToUnlockBadgeBigCharge = true;
                         
                     }
+                    
                     _chargeTime = 0f;
+                    auxChargeTime = 0f;
                 }
                 
 

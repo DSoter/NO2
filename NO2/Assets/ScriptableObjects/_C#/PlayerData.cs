@@ -63,6 +63,15 @@ public class PlayerData : ScriptableObject
     [SerializeField] private EquippedBadges equippedBadges;
     [SerializeField] private string nameBadgeHundredRolls = "Acrobata amateur";
     [SerializeField] private string nameBadgeStrongHeart = "Corazon fuerte";
+    [SerializeField] private string nameBadgeBigCharge = "Peso pesado";
+
+    //references 
+    private Action<string> onEquippedIncreaseHealthHandler;
+    private Action<string> onUnequippedDecreaseHealthHandler;
+    private Action<string> onEquippedIncreaseStaminaHandler;
+    private Action<string> onUnequippedDecreaseStaminaHandler;
+    private Action<string> onEquippedIncreaseStrongDamageHandler;
+    private Action<string> onUnequippedDecreaseStrongDamageHandler;
 
     // Events
 
@@ -262,35 +271,59 @@ public class PlayerData : ScriptableObject
         set { equipedFlower = value; }
     }
 
-    private void Awake()
-    {
-        equippedBadges.OnEquipped += (badgeName) => IncreaseMaxHealth(badgeName);
-        equippedBadges.OnUnequipped += (badgeName) => DecreaseMaxHealth(badgeName);
-        equippedBadges.OnEquipped += (badgeName) => IncreaseMaxStamina(badgeName);
-        equippedBadges.OnUnequipped += (badgeName) => DecreaseMaxStamina(badgeName);
-    }
     private void OnEnable()
     {
-        if(equippedBadges != null) {
-            equippedBadges.OnEquipped += (badgeName) => IncreaseMaxHealth(badgeName);
-            equippedBadges.OnUnequipped += (badgeName) => DecreaseMaxHealth(badgeName);
-            equippedBadges.OnEquipped += (badgeName) => IncreaseMaxStamina(badgeName);
-            equippedBadges.OnUnequipped += (badgeName) => DecreaseMaxStamina(badgeName);
-        }
+        SubscribeToBadges();
+
+        //if (!Load())
+        //{
+        //    Reset();
+        //}
     }
     private void OnDestroy()
     {
-        equippedBadges.OnEquipped -= (badgeName) => IncreaseMaxHealth(badgeName);
-        equippedBadges.OnUnequipped -= (badgeName) => DecreaseMaxHealth(badgeName);
-        equippedBadges.OnEquipped -= (badgeName) => IncreaseMaxStamina(badgeName);
-        equippedBadges.OnUnequipped -= (badgeName) => DecreaseMaxStamina(badgeName);
+        UnsubscribeFromBadges();
     }
     private void OnDisable()
     {
-        equippedBadges.OnEquipped -= (badgeName) => IncreaseMaxHealth(badgeName);
-        equippedBadges.OnUnequipped -= (badgeName) => DecreaseMaxHealth(badgeName);
-        equippedBadges.OnEquipped -= (badgeName) => IncreaseMaxStamina(badgeName);
-        equippedBadges.OnUnequipped -= (badgeName) => DecreaseMaxStamina(badgeName);
+        UnsubscribeFromBadges();
+    }
+
+    private void SubscribeToBadges()
+    {
+        if (equippedBadges == null) return;
+
+        onEquippedIncreaseHealthHandler = (badgeName) => IncreaseMaxHealth(badgeName);
+        onUnequippedDecreaseHealthHandler = (badgeName) => DecreaseMaxHealth(badgeName);
+        onEquippedIncreaseStaminaHandler = (badgeName) => IncreaseMaxStamina(badgeName);
+        onUnequippedDecreaseStaminaHandler = (badgeName) => DecreaseMaxStamina(badgeName);
+        onEquippedIncreaseStrongDamageHandler = (badgeName) => IncreaseStrongDamage(badgeName);
+        onUnequippedDecreaseStrongDamageHandler = (badgeName) => DecreaseStrongDamage(badgeName);
+
+        equippedBadges.OnEquipped += onEquippedIncreaseHealthHandler;
+        equippedBadges.OnUnequipped += onUnequippedDecreaseHealthHandler;
+        equippedBadges.OnEquipped += onEquippedIncreaseStaminaHandler;
+        equippedBadges.OnUnequipped += onUnequippedDecreaseStaminaHandler;
+        equippedBadges.OnEquipped += onEquippedIncreaseStrongDamageHandler;
+        equippedBadges.OnUnequipped += onUnequippedDecreaseStrongDamageHandler;
+    }
+
+    private void UnsubscribeFromBadges()
+    {
+        if (equippedBadges == null) return;
+
+        if (onEquippedIncreaseHealthHandler != null)
+            equippedBadges.OnEquipped -= onEquippedIncreaseHealthHandler;
+        if (onUnequippedDecreaseHealthHandler != null)
+            equippedBadges.OnUnequipped -= onUnequippedDecreaseHealthHandler;
+        if (onEquippedIncreaseStaminaHandler != null)
+            equippedBadges.OnEquipped -= onEquippedIncreaseStaminaHandler;
+        if (onUnequippedDecreaseStaminaHandler != null)
+            equippedBadges.OnUnequipped -= onUnequippedDecreaseStaminaHandler;
+        if (onEquippedIncreaseStaminaHandler != null)
+            equippedBadges.OnEquipped -= onEquippedIncreaseStrongDamageHandler;
+        if (onUnequippedDecreaseStaminaHandler != null) 
+            equippedBadges.OnUnequipped -= onUnequippedDecreaseStrongDamageHandler;
     }
 
     private void IncreaseMaxHealth(string badgeName)
@@ -332,6 +365,23 @@ public class PlayerData : ScriptableObject
             {
                 stamina = maxStamina;
             }
+        }
+    }
+    private void IncreaseStrongDamage(string badgeName)
+    {
+        if (nameBadgeBigCharge == badgeName)
+        {
+            minStrongAttackDamage = 2 + minStrongAttackDamage;
+            maxStrongAttackDamage = 2 + maxStrongAttackDamage;
+        }
+    }
+    private void DecreaseStrongDamage(string badgeName)
+    {
+
+        if (nameBadgeBigCharge == badgeName)
+        {
+            minStrongAttackDamage = 2 + minStrongAttackDamage;
+            maxStrongAttackDamage = 2 + maxStrongAttackDamage;
         }
     }
 

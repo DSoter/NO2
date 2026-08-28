@@ -12,6 +12,7 @@ public class EquippedBadges : ScriptableObject
     public event Action OnEquippedChanged;
     public event Action<string> OnEquipped;
     public event Action<string> OnUnequipped;
+    public event Action OnReset;
 
     private string SaveKey => name + "_equipped";
 
@@ -124,5 +125,6 @@ public class EquippedBadges : ScriptableObject
         PlayerPrefs.DeleteKey(SaveKey);
         PlayerPrefs.Save();
         OnEquippedChanged?.Invoke();
+        OnReset?.Invoke();
     }
 }

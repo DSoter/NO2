@@ -58,6 +58,8 @@ public class Pickup : MonoBehaviour
 
     private IEnumerator PullTowardsPlayer(Transform player)
     {
+        _collider.isTrigger = true;
+
         while (true)
         {
             Vector2 direction = (player.position - transform.position).normalized;

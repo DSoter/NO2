@@ -14,13 +14,13 @@ public abstract class Enemy : MonoBehaviour, IHitable, IEffectable, IVulnerable
 
     [Space(10)]
     [Header("AUDIO")]
-    [SerializeField] private AudioClip _onHitAudioClip;
-    [SerializeField][Range(0, 1)] private float _onHitVolume = 1;
-    [SerializeField] private float _onHitPitchVar = 0.3f;
+    [SerializeField] protected AudioClip _onHitAudioClip;
+    [SerializeField][Range(0, 1)] protected float _onHitVolume = 1;
+    [SerializeField] protected float _onHitPitchVar = 0.3f;
     [Space(5)]
-    [SerializeField] private AudioClip _onBreachAudioClip;
-    [SerializeField][Range(0, 1)] private float _onBreachVolume = 1;
-    [SerializeField] private float _onBreachPitchVar = 0.3f;
+    [SerializeField] protected AudioClip _onBreachAudioClip;
+    [SerializeField][Range(0, 1)] protected float _onBreachVolume = 1;
+    [SerializeField] protected float _onBreachPitchVar = 0.3f;
 
     public virtual bool IsVulnerable { get; set; } = false;
 

@@ -29,6 +29,8 @@ public class Nose : Enemy
         if (IsVulnerable && strength == AttackStrength.Strong)
         {
             _animator.SetTrigger("Death");
+            if (_onBreachAudioClip != null)
+                GameManager.Instance.audioManager.PlaySound(_onBreachAudioClip, _onBreachVolume, _onBreachPitchVar);
             SpawnContent(direction);
         }
     }

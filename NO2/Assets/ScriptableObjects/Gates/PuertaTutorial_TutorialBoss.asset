@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GateData
   sceneName1: Tutorial
   gateId1: 1
-  gateDirection1: {x: 1, y: 0}
+  gateDirection1: {x: -1, y: 0}
   sceneName2: TutorialBossFight
-  gateId2: 3
-  gateDirection2: {x: -1, y: 0}
+  gateId2: 1
+  gateDirection2: {x: 1, y: 0}

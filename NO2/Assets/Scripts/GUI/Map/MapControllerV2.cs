@@ -104,6 +104,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         GenerateWorldMapTexture();
         _targetScale = mapContainer.localScale.x;
         UpdatePlayerIcon(); 
+        CenterOnPlayer();
 
 
     }
@@ -670,6 +671,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
             case SceneMapData.MapTile.Floor: return floorColor;
             case SceneMapData.MapTile.Wall: return wallColor;
             case SceneMapData.MapTile.Oxygen: return oxygenColor;
+            case SceneMapData.MapTile.Empty: return emptyColor;
             default: return floorColor;
         }
     }
@@ -714,6 +716,22 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         mapContainer.localPosition = new Vector3(clamped.x, clamped.y, mapContainer.localPosition.z);
     }
 
+    private void CenterOnPlayer()
+    {
+        if (playerIcon == null || !playerIcon.gameObject.activeSelf) return;
+
+        // Posición del jugador en el espacio local de mapImage (ya calculada en UpdatePlayerIcon)
+        Vector3 playerLocalPos = playerIcon.rectTransform.localPosition;
+        float scale = mapContainer.localScale.x;
+
+        // Para centrarlo, mapContainer debe desplazarse lo contrario a esa posición, escalado
+        Vector3 desired = new Vector3(-playerLocalPos.x * scale, -playerLocalPos.y * scale, mapContainer.localPosition.z);
+
+        Vector2 clamped = ClampMapPosition(desired, scale);
+        mapContainer.localPosition = new Vector3(clamped.x, clamped.y, mapContainer.localPosition.z);
+
+        _velocity = Vector3.zero; // por si quedaba inercia de la vez anterior
+    }
     private Vector2 ClampMapPosition(Vector2 desiredPosition, float scale)
     {
         if (viewportRect == null || mapImage == null) return desiredPosition;

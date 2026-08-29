@@ -192,6 +192,11 @@ public class TilemapToScriptable : MonoBehaviour
 
         sceneMapData.Load();
         sceneMapData.MapMatrix = new SceneMapData.MapTile[heightWalls, widthWalls];
+
+        for (int row = 0; row < heightWalls; row++)
+            for (int col = 0; col < widthWalls; col++)
+                sceneMapData.MapMatrix[row, col] = SceneMapData.MapTile.Empty;
+
         int numberOfFloors = 0;
         for (int row = 0; row < heightWalls; row++)
         {

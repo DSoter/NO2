@@ -13,6 +13,7 @@ public class SceneMapData : ScriptableObject
         Campfire,
         Gate,
         Oxygen,
+        Empty,
 
     }
     private MapTile[,] mapMatrix;

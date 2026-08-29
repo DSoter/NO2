@@ -18,24 +18,25 @@ MonoBehaviour:
       text: Veo que ha habido un =#derrumbe#=, te han cortado el paso
     - conditionKey: 
       text: "/\xA1Estamos atrapados!/ \xBFQue vamos a hacer?"
-  - lines:
     - conditionKey: 
       text: "Se me olvidaba, yo simplemente soy un pu\xF1ado de $carteles$ "
     - conditionKey: 
-      text: "Pero si no hacemos nada... \xA1Te quedar\xE1s atrapado para  *siempre*!"
+      text: "\xA1Si no haces nada no podr\xE1s volver a #_casa_#!"
     - conditionKey: 
-      text: "\xA1No podr\xE1s volver a #_casa_#!"
-  - lines:
-    - conditionKey: 
-      text: "_Tranquilo_ tengo una soluci\xF3n"
-    - conditionKey: 
-      text: "\xBFTe acuerdas esa espada tuya? La puedes usar para *#destruir#* rocas "
-    - conditionKey: 
-      text: "Puedes utilizarla para destruir esas rocas y conseguir sacarnos de aqu\xED.
-        Bueno, yo no tengo piernas, pero me entiendes."
+      text: "_Tranquilo_ tengo una soluci\xF3n, puedes usar tu espada para *#destruir#*
+        rocas."
     - conditionKey: 
       text: "Para atacar con tu espada utiliza el clic izquierdo del rat\xF3n."
   repetitionTexts:
   - lines:
     - conditionKey: 
-      text: "Para atacar con tu espada utiliza el click izquierdo del rat\xF3n"
+      text: Veo que ha habido un =#derrumbe#=, te han cortado el paso
+    - conditionKey: 
+      text: "/\xA1Est\xE1s atrapado!/ \xBFQue vas a hacer?"
+    - conditionKey: 
+      text: "\xA1Si no haces nada no podr\xE1s volver a #_casa_#!"
+    - conditionKey: 
+      text: "_Tranquilo_ tengo una soluci\xF3n, puedes usar tu espada para *#destruir#*
+        rocas."
+    - conditionKey: 
+      text: "Para atacar con tu espada utiliza el clic izquierdo del rat\xF3n."

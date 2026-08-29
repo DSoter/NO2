@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogTextData
   listOfTexts:
   - lines:
-    - conditionKey: playerNeverDied
-      text: Veo que esos caracoles no han podido contigo.
+    - conditionKey: playerHasDied
+      text: TheGame.
     - conditionKey: 
       text: "Cuidado, adem\xE1s de tus amiguitos esta #*cueva*# est\xE1 llena de
         =peligros= como #=trampas=#."
@@ -34,15 +34,19 @@ MonoBehaviour:
       text: "Pero ten cuidado solo ser\xE1s invulnerable durante unos momentos."
   repetitionTexts:
   - lines:
-    - conditionKey: playerHasDied
-      text: "Veo que no te han quedado claras mis ense\xF1anzas.."
     - conditionKey: 
-      text: "Recuerda que puedes recuperar vida que hayas perdido utilizando las
-        pociones que tienes. Puedes beberte todas las que quieras, las recuperar\xE1s
-        al descansar en una /#hoguera#/."
+      text: "Cuidado, adem\xE1s de tus amiguitos esta #*cueva*# est\xE1 llena de
+        =peligros= como #=trampas=#."
+    - conditionKey: 
+      text: "Para llegar sano y salvo necesitar\xE1s algo m\xE1s que atacar a cualquier
+        cosa que se mueva."
+    - conditionKey: 
+      text: "Puedes recuperar vida que hayas perdido utilizando las pociones que
+        tienes. Puedes beberte todas las que quieras, las recuperar\xE1s al descansar
+        en una /#hoguera#/."
     - conditionKey: 
       text: Simplemente pulsa la tecla /F/ para consumir una.
     - conditionKey: 
-      text: Tambien puedes esquivar peligros usando la voltereta pulsando el /espacio/
+      text: Tambien puedes esquivar peligros usando la voltereta pulsando el /espacio/.
     - conditionKey: 
-      text: "Pero recuerda, solo ser\xE1s invulnerable durante unos momentos."
+      text: "Pero ten cuidado solo ser\xE1s invulnerable durante unos momentos."

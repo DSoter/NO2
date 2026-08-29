@@ -130,6 +130,9 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         _worldMinY = minY;
         _worldTotalCols = totalCols;
         _worldTotalRows = totalRows;
+
+        ApplyTextureAspect(totalCols * pixelsPerTile, totalRows * pixelsPerTile);
+
         if (!worldMapData.WorldMapNeedsUpdate && System.IO.File.Exists(path))
         {
             byte[] bytes = System.IO.File.ReadAllBytes(path);
@@ -334,6 +337,22 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         playerIcon.sprite = playerSprite;
         playerIcon.gameObject.SetActive(true);
         playerIcon.rectTransform.localPosition = new Vector3(localX, localY, 0f);
+    }
+    private void ApplyTextureAspect(int texWidth, int texHeight)
+    {
+        if (texWidth <= 0 || texHeight <= 0) return;
+
+        RectTransform mapRect = mapImage.rectTransform;
+        RectTransform fogRect = fogImage.rectTransform;
+
+        float aspect = (float)texWidth / texHeight;
+
+        // Usamos el ancho actual como referencia y recalculamos el alto según el aspect ratio real
+        float baseWidth = mapRect.rect.width > 0 ? mapRect.rect.width : texWidth;
+        float newHeight = baseWidth / aspect;
+
+        mapRect.sizeDelta = new Vector2(baseWidth, newHeight);
+        fogRect.sizeDelta = new Vector2(baseWidth, newHeight);
     }
 
     private string GetWorldMapTexturePath()

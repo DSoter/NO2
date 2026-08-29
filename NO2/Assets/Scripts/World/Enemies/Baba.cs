@@ -190,11 +190,17 @@ public class Baba : Enemy
     {
         if (transform.position.x - target.x > 0)
         {
-            transform.localScale = new Vector3(-1, 1, 1);
+            //transform.localScale = new Vector3(-1, 1, 1);
+            var aux = transform.localScale;
+            aux.x = - Mathf.Abs(aux.x);
+            transform.localScale = aux;
         }
         else
         {
-            transform.localScale = new Vector3(1, 1, 1);
+            //transform.localScale = new Vector3(1, 1, 1);
+            var aux = transform.localScale;
+            aux.x = Mathf.Abs(aux.x);
+            transform.localScale = aux;
         }
     }
 

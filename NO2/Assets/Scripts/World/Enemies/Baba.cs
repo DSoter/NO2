@@ -120,12 +120,12 @@ public class Baba : Enemy
                 CheckIfShouldFlip(_player.transform.position);
                 SetDestination(_player.transform.position);
 
-                if ((transform.position - _player.transform.position).sqrMagnitude > _backToPatrollRange)
+                if ((transform.position - _player.transform.position).sqrMagnitude > _backToPatrollRange * _backToPatrollRange)
                 {
                     Debug.Log("Baba - Player is too far away, going back to patrolling");
                     _state = BabaState.Patroll;
                 }
-                else if ((transform.position - _player.transform.position).sqrMagnitude < _attackRange && _cooldownTimer <= 0)
+                else if ((transform.position - _player.transform.position).sqrMagnitude < _attackRange * _attackRange && _cooldownTimer <= 0)
                 {
                     Debug.Log("Baba - Player is in attack range");
                     _state = BabaState.Charge;

@@ -193,6 +193,12 @@ MonoBehaviour:
   _maxForce: 6
   _healthPoints: 1
   _vulnerableMult: 1.5
+  _onHitAudioClip: {fileID: 8300000, guid: 9b2a1c8d6cb2bbb41ad779331553c8d2, type: 3}
+  _onHitVolume: 1
+  _onHitPitchVar: 0.3
+  _onBreachAudioClip: {fileID: 8300000, guid: fe79301dc10674949989280dd19f9183, type: 3}
+  _onBreachVolume: 1
+  _onBreachPitchVar: 0.3
 --- !u!1001 &4455253908134524025
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -259,6 +259,12 @@ MonoBehaviour:
   _maxForce: 6
   _healthPoints: 20
   _vulnerableMult: 1.5
+  _onHitAudioClip: {fileID: 8300000, guid: 9b2a1c8d6cb2bbb41ad779331553c8d2, type: 3}
+  _onHitVolume: 1
+  _onHitPitchVar: 0.3
+  _onBreachAudioClip: {fileID: 8300000, guid: fe79301dc10674949989280dd19f9183, type: 3}
+  _onBreachVolume: 1
+  _onBreachPitchVar: 0.3
   _patrollPoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -272,7 +278,6 @@ MonoBehaviour:
   _knockbackForce: 7
   _attackSeconds: 1
   _cooldownSeconds: 2
-  _disabledSecondsOnHit: 0.5
   _knockbackAmountOnHit: 5
   _burnColor: {r: 1, g: 0.82354385, b: 0.54905653, a: 1}
   _severeBurnColor: {r: 1, g: 0.52246994, b: 0.39811313, a: 1}

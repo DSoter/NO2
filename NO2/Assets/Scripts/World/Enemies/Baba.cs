@@ -32,7 +32,6 @@ public class Baba : Enemy
 
     [Space(5)]
     [Header("On Hit")]
-    [SerializeField] private float _disabledSecondsOnHit = 0.5f;
     [SerializeField] private float _knockbackAmountOnHit = 5f;
     [SerializeField] private Color _burnColor;
     [SerializeField] private Color _severeBurnColor;

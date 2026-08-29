@@ -106,7 +106,7 @@ public class Baba : Enemy
                 SetDestination(targetPosition);
 
                 // If close enought to the current patroll point, move to the next one
-                if ((transform.position - targetPosition).sqrMagnitude < 0.5f)
+                if ((transform.position - targetPosition).sqrMagnitude < 0.25f)
                 {
                     _currentPatrollPoint = (_currentPatrollPoint + 1) % _patrollPoints.Length;
                 }

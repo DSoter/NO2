@@ -16,5 +16,5 @@ MonoBehaviour:
   gateId1: 1
   gateDirection1: {x: 1, y: 0}
   sceneName2: TutorialBossFight
-  gateId2: 1
+  gateId2: 3
   gateDirection2: {x: -1, y: 0}

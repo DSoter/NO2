@@ -41,8 +41,24 @@ MonoBehaviour:
   repetitionTexts:
   - lines:
     - conditionKey: 
-      text: "Yo me voy a quedar aqu\xED, pero solo te queda ir hacia /arriba/."
+      text: _Enhorabuena_, has conseguido salir de esa *#cueva# horrible*
+    - conditionKey: playerNeverDied
+      text: Has conseguido que no te derroten esos caracoles.
+    - conditionKey: playerNeverDied
+      text: "Pero esto ha sido solo el principio, todav\xEDa debes de llegar a _#casa#_."
+    - conditionKey: playerHasDied
+      text: Al final lo conseguiste, has podido derrotar al reyaracol.
+    - conditionKey: playerHasDied
+      text: "Est\xE1s al lado de #_casa_#, si has podido salir podr\xE1s llegar a
+        casa."
     - conditionKey: 
-      text: "Recuerda, ten cuidado con las zonas sin #&ox\xEDgeno&#."
+      text: "Si pasas mucho tiempo en una zona sin vegetaci\xF3n #*morir\xE1s*# ya
+        que el aire es #=irrespirable=#."
     - conditionKey: 
-      text: Mucha #_suerte_# en tu viaje.
+      text: "Por culpa de #=La Corporaci\xF3n=# el aire est\xE1 contaminado, y de
+        no ser por tu _jard\xEDn_ tendr\xEDas que vivir en esta cueva para siempre. "
+    - conditionKey: 
+      text: "Si nadie hace nada, la fauna se encargar\xE1 de rematar el trabajo...
+        Pero ahora puedes _luchar_."
+    - conditionKey: 
+      text: "Yo me voy a quedar aqu\xED, pero seguo que te encuentras m\xE1s #_amigos_#"

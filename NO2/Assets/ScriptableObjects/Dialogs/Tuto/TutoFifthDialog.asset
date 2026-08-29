@@ -14,26 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogTextData
   listOfTexts:
   - lines:
-    - conditionKey: playerNeverDies
-      text: Veo que has salido ileso de la pelea.
     - conditionKey: 
       text: _#Bien hecho#_ has conseguido derrotar a uno de ellos.
     - conditionKey: 
-      text: Es inevitable, necesitas enfrentarte a ellos para defender tu casa.
-    - conditionKey: 
       text: Has hecho el primer paso, ahora solo te falta seguir avanzando.
-  - lines:
     - conditionKey: 
-      text: '!#&Cachis la mar salada &#, no podemos continuar!'
-    - conditionKey: 
-      text: Parece una roca... Pero creo que es una poderosa criatura.
-    - conditionKey: 
-      text: "\xBFPuedes despejar el paso?"
-  repetitionTexts:
-  - lines:
-    - conditionKey: 
-      text: "Fijate bien, hay un momento que tiene un borde naranja. Eso significa
-        que est\xE1 $vulnerable$."
+      text: '!#&Cachis la mar salada &#, no podemos continuar hasta que despejes
+        el paso!'
     - conditionKey: 
       text: "Cuando un enemigo est\xE9 vulnerable podr\xE1s hacer una #/ruptura/#.
         Simplemente deber\xE1s de golpearle para inflingirle da\xF1o extra."
@@ -46,5 +33,32 @@ MonoBehaviour:
     - conditionKey: 
       text: "Cuando sueltes el clic golpear\xE1s en la direcci\xF3n del rat\xF3n."
     - conditionKey: 
-      text: "Ten =#cuidado#=, no podr\xE1s moverte mientras cargues, pero si consigues
-        golpear a un enemigo en el momento clave, la espera merecer\xE1 la pena."
+      text: "Prueba a golpearle cuando est\xE9 $vulnerable. Cada enemigo se quedar\xE1
+        as\xED seg\xFAn distntas acciones, pero todos tendr\xE1n el borde $naranja$."
+    - conditionKey: 
+      text: "Es =dificil= hacerla pero la ruptura hace #/mucho da\xF1o/#."
+  repetitionTexts:
+  - lines:
+    - conditionKey: 
+      text: _#Bien hecho#_ has conseguido derrotar a uno de ellos.
+    - conditionKey: 
+      text: Has hecho el primer paso, ahora solo te falta seguir avanzando.
+    - conditionKey: 
+      text: '!#&Cachis la mar salada &#, no podemos continuar hasta que despejes
+        el paso!'
+    - conditionKey: 
+      text: "Cuando un enemigo est\xE9 vulnerable podr\xE1s hacer una #/ruptura/#.
+        Simplemente deber\xE1s de golpearle para inflingirle da\xF1o extra."
+    - conditionKey: 
+      text: "Pero con esa espadita no podr\xE1s hacer nada, tienes que usar tu #=mazo=#."
+    - conditionKey: 
+      text: "Mant\xE9n el #click derecho# para cargar un poderoso ataque, cuanto
+        m\xE1s lo cargues m\xE1s da\xF1o har\xE1s. Pero recuerda, cuando empieces
+        a parpadear significa que has cargado /a tope/"
+    - conditionKey: 
+      text: "Cuando sueltes el clic golpear\xE1s en la direcci\xF3n del rat\xF3n."
+    - conditionKey: 
+      text: "Prueba a golpearle cuando est\xE9 $vulnerable. Cada enemigo se quedar\xE1
+        as\xED seg\xFAn distntas acciones, pero todos tendr\xE1n el borde $naranja$."
+    - conditionKey: 
+      text: "Es =dificil= hacerla pero la ruptura hace #/mucho da\xF1o/#."

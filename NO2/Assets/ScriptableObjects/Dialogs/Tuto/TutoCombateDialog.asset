@@ -17,16 +17,28 @@ MonoBehaviour:
     - conditionKey: 
       text: "Cuidado, m\xE1s adelante hay uno de tus amiguitos cortandote el paso"
     - conditionKey: 
-      text: "Deber\xE1s enfrentarte a \xE9l. "
+      text: Es muy peligroso, se puede ver en sus ojos la #=sed de sangre=#.
     - conditionKey: 
-      text: O ella, estos dias nunca se sabe
+      text: "Si te quedas sin vida #=morir\xE1s=# pero no te preocupes, podr\xE1s
+        volver a intentarlo."
+    - conditionKey: 
+      text: Para sobrevivir estate atento a tu #/resistencia/#, la barra verde que
+        tienes en la pantalla.
+    - conditionKey: 
+      text: "Al hacer acciones como =#atacar#= o #_correr_# consumen tu resistencia
+        hasta que no podr\xE1s realizarlas."
+    - conditionKey: 
+      text: "Para correr simplemente debes de mantener la tecla /shift/ (a la izquierda
+        de la /Z/), pero consumir\xE1s resistencia."
+  repetitionTexts:
   - lines:
+    - conditionKey: 
+      text: "Cuidado, m\xE1s adelante hay uno de tus amiguitos cortandote el paso"
     - conditionKey: 
       text: Es muy peligroso, se puede ver en sus ojos la #=sed de sangre=#.
     - conditionKey: 
       text: "Si te quedas sin vida #=morir\xE1s=# pero no te preocupes, podr\xE1s
         volver a intentarlo."
-  - lines:
     - conditionKey: 
       text: Para sobrevivir estate atento a tu #/resistencia/#, la barra verde que
         tienes en la pantalla.
@@ -34,17 +46,5 @@ MonoBehaviour:
       text: "Al hacer acciones como =#atacar#= o #_correr_# consumen tu resistencia
         hasta que no podr\xE1s realizarlas."
     - conditionKey: 
-      text: "Se me ha olvidado completamente explicartelo, para correr simplemente
-        mant\xE9n la tecla /shift/, el icono a la izquierda de la tecla /z/, te mover\xE1s
-        m\xE1s r\xE1pido pero gastando resistencia."
-  repetitionTexts:
-  - lines:
-    - conditionKey: 
-      text: Para sobrevivir estate atento a tu #/resistencia/#, la barra verde que
-        tienes en la pantalla.
-    - conditionKey: 
-      text: "Al hacer acciones como =#atacar#= o #_correr_# consumen tu resistencia
-        hasta que no podr\xE1s realizarlas."
-    - conditionKey: 
-      text: "Recuerda que para correr simplemente debes de mantener la tecla /shift/,
-        pero consumir\xE1s resistencia."
+      text: "Para correr simplemente debes de mantener la tecla /shift/ (a la izquierda
+        de la /Z/), pero consumir\xE1s resistencia."

@@ -91,5 +91,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 014428943e4c4d642a4f938a074591f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NoDeathDetector
-  equippedBadges: {fileID: 11400000, guid: be93a51aa16842a4c85fa0af75138391, type: 2}
+  badgeCollection: {fileID: 11400000, guid: 40b829128fc4ee841bf6273a1be7eefa, type: 2}
+  badgePrincipiante: {fileID: 11400000, guid: 89b78baea4847b8438d68acc55ba9e34, type: 2}
   perfectZoneNumber: 0

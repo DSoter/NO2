@@ -17,8 +17,7 @@ MonoBehaviour:
     - conditionKey: 
       text: "\xBFHa sido f\xE1cil, no? Sabia que podr\xEDas llegar hasta aqu\xED. "
     - conditionKey: 
-      text: No se si lo recuerdas, pero encendiste esta hoguera para poder hacer
-        una parada en el camino.
+      text: Mira, una #=hoguera=#.
     - conditionKey: 
       text: "Permitete #/descansar/#, podr\xE1s recuperar vida y guardar tu progreso."
     - conditionKey: 
@@ -26,6 +25,10 @@ MonoBehaviour:
         descansando en el fuego hasta volver a pulsarla.
   repetitionTexts:
   - lines:
+    - conditionKey: 
+      text: "\xBFHa sido f\xE1cil, no? Sabia que podr\xEDas llegar hasta aqu\xED. "
+    - conditionKey: 
+      text: Mira, una #=hoguera=#.
     - conditionKey: 
       text: "Permitete #/descansar/#, podr\xE1s recuperar vida y guardar tu progreso."
     - conditionKey: 

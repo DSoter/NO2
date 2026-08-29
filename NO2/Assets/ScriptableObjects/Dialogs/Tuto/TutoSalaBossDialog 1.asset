@@ -14,6 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogTextData
   listOfTexts:
   - lines:
+    - conditionKey: playerNeverDied
+      text: "Has conseguido llegar hasta aqu\xED sin morir, venga que ya queda poco."
+    - conditionKey: playerHasDIed
+      text: "Aunque esta cueva pueda contigo no impedir\xE1 que llegues a casa."
     - conditionKey: 
       text: "Estamos muy cerca de la #salida#, por fin podr\xE1s volver a casa."
     - conditionKey: 
@@ -28,3 +32,11 @@ MonoBehaviour:
       text: "Has conseguido llegar hasta aqu\xED sin morir, venga que ya queda poco."
     - conditionKey: playerHasDIed
       text: "Aunque esta cueva pueda contigo no impedir\xE1 que llegues a casa."
+    - conditionKey: 
+      text: "Estamos muy cerca de la #salida#, por fin podr\xE1s volver a casa."
+    - conditionKey: 
+      text: "Igual tus amiguitos se est\xE1n dando un fest\xEDn con tu jard\xEDn."
+    - conditionKey: 
+      text: "\xA1Date prisa! Espero que no te encuentres con el rey caracol..."
+    - conditionKey: 
+      text: "#/Prep\xE1rate/#, solo por si acaso."

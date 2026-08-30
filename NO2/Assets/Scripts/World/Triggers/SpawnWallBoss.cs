@@ -21,7 +21,7 @@ public class SpawnWallBoss : MonoBehaviour
         {
             //"matamos" al boss
             boss.SetActive(false);
-            enabled = false; 
+            Destroy(gameObject);
         }
     }
 
@@ -42,7 +42,7 @@ public class SpawnWallBoss : MonoBehaviour
 
             PlayerPrefs.SetInt(saveKey, 1);
             PlayerPrefs.Save();
-            enabled = false;
+            Destroy(gameObject);
         }
     }
 }

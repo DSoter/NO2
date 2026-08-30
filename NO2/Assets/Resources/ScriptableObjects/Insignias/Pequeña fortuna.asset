@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Badge
   badgeName: "Peque\xF1a fortuna"
   achievement: {fileID: 11400000, guid: 7328f90b88ea48f458b9a350325bec3e, type: 2}
-  description: "Has empezado a amasar una peque\xF1a fortuna"
+  description: "Has empezado a amasar una peque\xF1a fortuna, al tenerla equipada
+    tienes una peque\xF1a probabilidad de duplicar el numero de monedas obteidas
+    cada vez que consigues cualquier cantidad."
   icon: {fileID: 21300000, guid: 28538f2701c9872418b913c771ff3c3c, type: 3}
   slotsSize: 1
   effect:

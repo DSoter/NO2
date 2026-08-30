@@ -18,7 +18,7 @@ MonoBehaviour:
     offsetInCells: {x: 0, y: 0}
   - sceneName: TutorialBossFight
     mapData: {fileID: 11400000, guid: 66dd05f3c6d9bb041969efadf7847646, type: 2}
-    offsetInCells: {x: -400, y: 0}
+    offsetInCells: {x: 302, y: 20}
   gatePositions:
   - sceneName: PruebaTileMap
     gateId: 3
@@ -35,3 +35,12 @@ MonoBehaviour:
   - sceneName: Tutorial
     gateId: 3
     worldPosition: {x: 332.9, y: -49.2}
+  - sceneName: Tutorial
+    gateId: 1
+    worldPosition: {x: 332.9, y: -49.2}
+  - sceneName: TutorialBossFight
+    gateId: 1
+    worldPosition: {x: 34.78, y: -42.18}
+  - sceneName: TutorialBossFight
+    gateId: 3
+    worldPosition: {x: 60.9, y: 49.88}

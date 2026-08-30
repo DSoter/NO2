@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static SceneMapData;
+using static UnityEngine.Rendering.DebugUI.Table;
 
 public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandler,
                            IPointerUpHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
@@ -166,11 +167,13 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
             int cols = entry.mapData.MapMatrix.GetLength(1);
             int offsetX = entry.offsetInCells.x - minX;
             int offsetY = entry.offsetInCells.y - minY;
-
+            Debug.Log("La esquina arriba izquierda es...");
+            Debug.Log(entry.mapData.MapMatrix[0, 0]);
             for (int row = 0; row < rows; row++)
                 for (int col = 0; col < cols; col++)
                 {
                     Color color = GetTileColor(entry.mapData.MapMatrix[row, col]);
+                    
                     FillTile(_mapTexture, offsetX + col, offsetY + row, color);
                 }
 
@@ -196,7 +199,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         foreach (WorldMapData.SceneMapEntry entry in worldMapData.scenes)
             if (entry.mapData != null && entry.mapData.IsVisibleMatrix != null && entry.mapData.FogTextureHasToUpdate)
                 anyDirty = true;
-        Debug.Log($"Any  dirty es {anyDirty}");
+
         if (!anyDirty && System.IO.File.Exists(path))
         {
             byte[] bytes = System.IO.File.ReadAllBytes(path);
@@ -218,49 +221,30 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         _fogTexture = new Texture2D(texWidth, texHeight, TextureFormat.RGBA32, false);
         _fogTexture.filterMode = FilterMode.Point;
 
-        Color[] blackPixels = new Color[texWidth * texHeight];
-        for (int i = 0; i < blackPixels.Length; i++) blackPixels[i] = Color.black;
-        _fogTexture.SetPixels(blackPixels);
+        Color32 black = Color.black;
+        Color32 clear = Color.clear;
+
+        Color32[] pixels = new Color32[texWidth * texHeight];
+        for (int i = 0; i < pixels.Length; i++) pixels[i] = black; // todo oculto por defecto
 
         foreach (WorldMapData.SceneMapEntry entry in worldMapData.scenes)
         {
-            if (entry.mapData?.IsVisibleMatrix == null)
-            {
-                Debug.Log("Una matriz de visibilidad es nula");
-                continue;
-            }
-            int trues2 = 0;
-            for (int r = 0; r < entry.mapData.IsVisibleMatrix.GetLength(0); r++)
-                for (int c = 0; c < entry.mapData.IsVisibleMatrix.GetLength(1); c++)
-                    if (entry.mapData.IsVisibleMatrix[r, c]) trues2++;
-            Debug.Log($"IsVisibleMatrix en GenerateWorldFog escena {entry.sceneName} — Visibles: {trues2}");
+            if (entry.mapData?.IsVisibleMatrix == null) continue;
 
             int rows = entry.mapData.IsVisibleMatrix.GetLength(0);
             int cols = entry.mapData.IsVisibleMatrix.GetLength(1);
             int offsetX = entry.offsetInCells.x - minX;
             int offsetY = entry.offsetInCells.y - minY;
-            int trues = 0;
-            int falses =0;
+
             for (int row = 0; row < rows; row++)
                 for (int col = 0; col < cols; col++)
-                {
-                    Color fogColor = entry.mapData.IsVisibleMatrix[row, col]
-                        ? Color.clear
-                        : Color.black;
                     if (entry.mapData.IsVisibleMatrix[row, col])
-                    {
-                        trues++;
-                    }
-                    else
-                    {
-                        falses++;
-                    }
-                        FillTile(_fogTexture, offsetX + col, offsetY + row, fogColor);
-                }
+                        FillTileInBuffer(pixels, texWidth, texHeight, offsetX + col, offsetY + row, clear);
+
             entry.mapData.FogTextureHasToUpdate = false;
-            //entry.mapData.Save();
         }
 
+        _fogTexture.SetPixels32(pixels);
         _fogTexture.Apply();
         fogImage.texture = _fogTexture;
         System.IO.File.WriteAllBytes(path, _fogTexture.EncodeToPNG());
@@ -334,7 +318,30 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         float localX = (normX - 0.5f) * mapRect.rect.width;
         float localY = (normY - 0.5f) * mapRect.rect.height;
 
-        
+        float unitsPerTexturePixel = mapRect.rect.width / texWidth;
+        int totalPixels = iconTileSize * pixelsPerTile;
+
+        float spriteAspect = (float)playerSprite.texture.width / playerSprite.texture.height;
+        if (playerSprite.textureRect.width > 0 && playerSprite.textureRect.height > 0)
+            spriteAspect = playerSprite.textureRect.width / playerSprite.textureRect.height;
+
+        float drawWidthPx, drawHeightPx;
+        if (spriteAspect >= 1f)
+        {
+            drawWidthPx = totalPixels;
+            drawHeightPx = totalPixels / spriteAspect;
+        }
+        else
+        {
+            drawHeightPx = totalPixels;
+            drawWidthPx = totalPixels * spriteAspect;
+        }
+
+        playerIcon.rectTransform.sizeDelta = new Vector2(
+            drawWidthPx * unitsPerTexturePixel,
+            drawHeightPx * unitsPerTexturePixel
+        );
+
         playerIcon.sprite = playerSprite;
         playerIcon.gameObject.SetActive(true);
         playerIcon.rectTransform.localPosition = new Vector3(localX, localY, 0f);
@@ -484,26 +491,21 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
 
         int rows = visible.GetLength(0);
         int cols = visible.GetLength(1);
+        int texWidth = _fogTexture.width;
+        int texHeight = _fogTexture.height;
 
-
-        int trues = 0, falses = 0;
-        for (int row = 0; row < rows; row++)
-            for (int col = 0; col < cols; col++)
-                if (visible[row, col]) trues++; else falses++;
-
-        Debug.Log($"UpdateFogTexture — Visibles: {trues} No visibles: {falses}");
+        Color32[] pixels = new Color32[texWidth * texHeight];
+        Color32 black = Color.black;
+        for (int i = 0; i < pixels.Length; i++) pixels[i] = black;
 
         for (int row = 0; row < rows; row++)
-        {
             for (int col = 0; col < cols; col++)
-            {
-                Color fogColor = visible[row, col] ? Color.clear : Color.black;
-                FillTile(_fogTexture, col, row, fogColor);
-            }
-        }
+                if (visible[row, col])
+                    FillTileInBuffer(pixels, texWidth, texHeight, col, row, Color.clear);
 
+        _fogTexture.SetPixels32(pixels);
         _fogTexture.Apply();
-        
+
     }
     public void UpdateMapData()
     {
@@ -614,6 +616,23 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
             {
                 tex.SetPixel(px, py, color);
             }
+        }
+    }
+    private void FillTileInBuffer(Color32[] buffer, int texWidth, int texHeight, int col, int row, Color32 color)
+    {
+        int startX = col * pixelsPerTile;
+        int startY = row * pixelsPerTile;
+
+        if (startX < 0 || startY < 0 || startX >= texWidth || startY >= texHeight) return;
+
+        int endX = Mathf.Min(startX + pixelsPerTile, texWidth);
+        int endY = Mathf.Min(startY + pixelsPerTile, texHeight);
+
+        for (int py = startY; py < endY; py++)
+        {
+            int rowStart = py * texWidth;
+            for (int px = startX; px < endX; px++)
+                buffer[rowStart + px] = color;
         }
     }
 

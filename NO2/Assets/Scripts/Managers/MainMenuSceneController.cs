@@ -30,6 +30,9 @@ public class MainMenuSceneManager : MonoBehaviour
     [SerializeField] private MoneyData moneyData;
     [SerializeField] private RespawnData respawnData;
 
+    [Header("Claves de bosses")]
+    [SerializeField] private string saveKeySnailBoss = "SnailKingIsDead";
+
 
 
 
@@ -80,6 +83,9 @@ public class MainMenuSceneManager : MonoBehaviour
         GameManager.Instance.GetComponent<AchievementManager>().ResetAll();
         respawnData.Reset();
 
+        ResetBossKilled();
+
+
         flowerCollection.Load();
         flowerCollection.Reset();
         badgeCollection.Load();
@@ -100,6 +106,11 @@ public class MainMenuSceneManager : MonoBehaviour
         playerData.Oxygen = playerData.MaxOxygen;
         playerData.Stamina = playerData.MaxStamina;
 
+    }
+    private void ResetBossKilled()
+    {
+        PlayerPrefs.SetInt(saveKeySnailBoss, 0);
+        PlayerPrefs.Save();
     }
 
     public bool HasSavedGame()

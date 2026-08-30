@@ -19,12 +19,13 @@ public class MoneyData : ScriptableObject
         {
             if (equippedBadges.IsEquipped(nameBadgeHundredCoins))
             {
-                
-                if (UnityEngine.Random.value <= 0.05f)
-                {
+                if(value-money > 0) { 
+                    if (UnityEngine.Random.value <= 0.05f)
+                    {
 
-                    Debug.Log("Tocó la loteria");
-                    value = value + (value-money);
+                        Debug.Log("Tocó la loteria");
+                        value = value + (value-money);
+                    }
                 }
             }
             
@@ -42,41 +43,8 @@ public class MoneyData : ScriptableObject
             Save();
         }
     }
-    private void Awake()
-    {
-        equippedBadges.OnEquipped += (badgeName) => IncreaseMoney(badgeName);
-        equippedBadges.OnUnequipped += (badgeName) => DecreaseMoney(badgeName);
-    }
-    private void OnEnable()
-    {
-        equippedBadges.OnEquipped += (badgeName) => IncreaseMoney(badgeName);
-        equippedBadges.OnUnequipped += (badgeName) => DecreaseMoney(badgeName);
-    }
-    private void OnDestroy()
-    {
-        equippedBadges.OnEquipped -= (badgeName) => IncreaseMoney(badgeName);
-        equippedBadges.OnUnequipped -= (badgeName) => DecreaseMoney(badgeName);
-    }
-    private void OnDisable()
-    {
-        equippedBadges.OnEquipped -= (badgeName) => IncreaseMoney(badgeName);
-        equippedBadges.OnUnequipped -= (badgeName) => DecreaseMoney(badgeName);
-    }
-    private void IncreaseMoney(string badgeName) {
-        if (nameBadgeHundredCoins == badgeName) {
-            Debug.Log("Gana dinero");
-            Money = money + 50;
-        }
-    }
-    private void DecreaseMoney(string badgeName)
-    {
-        
-        if (nameBadgeHundredCoins == badgeName)
-        {
-            Debug.Log("Pierde dinero");
-            Money = money - 50;
-        }
-    }
+
+
 
     private string SaveKey => "actual_money";
 

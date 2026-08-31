@@ -23,7 +23,7 @@ MonoBehaviour:
     - conditionKey: 
       text: "Igual tus amiguitos se est\xE1n dando un fest\xEDn con tu jard\xEDn."
     - conditionKey: 
-      text: "\xA1Date prisa! Espero que no te encuentres con la madre caracol..."
+      text: "\xA1Date prisa! Espero que no te encuentres con el rey caracol..."
     - conditionKey: 
       text: "#/Prep\xE1rate/#, solo por si acaso."
   repetitionTexts:

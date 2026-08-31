@@ -33,7 +33,7 @@ MonoBehaviour:
     - conditionKey: 
       text: "Cuando sueltes el clic golpear\xE1s en la direcci\xF3n del rat\xF3n."
     - conditionKey: 
-      text: "Prueba a golpearle cuando est\xE9 $vulnerable. Cada enemigo se quedar\xE1
+      text: "Prueba a golpearle cuando est\xE9 $vulnerable&. Cada enemigo se quedar\xE1
         as\xED seg\xFAn distntas acciones, pero todos tendr\xE1n el borde $naranja$."
     - conditionKey: 
       text: "Es =dificil= hacerla pero la ruptura hace #/mucho da\xF1o/#."

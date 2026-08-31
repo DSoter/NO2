@@ -21,7 +21,7 @@ MonoBehaviour:
     offsetInCells: {x: 302, y: 20}
   - sceneName: Zona1Escena1
     mapData: {fileID: 11400000, guid: d3c0ec49d37ef354892ba4b98074bfed, type: 2}
-    offsetInCells: {x: 302, y: 100}
+    offsetInCells: {x: 249, y: 96}
   gatePositions:
   - sceneName: PruebaTileMap
     gateId: 3
@@ -46,4 +46,7 @@ MonoBehaviour:
     worldPosition: {x: 34.78, y: -42.18}
   - sceneName: TutorialBossFight
     gateId: 3
-    worldPosition: {x: 60.9, y: 49.88}
+    worldPosition: {x: 61.02, y: 20.09}
+  - sceneName: Zona1Escena1
+    gateId: 3
+    worldPosition: {x: 3.5599976, y: -107.53}

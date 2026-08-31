@@ -133,8 +133,6 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         _worldTotalCols = totalCols;
         _worldTotalRows = totalRows;
 
-        ApplyTextureAspect(totalCols * pixelsPerTile, totalRows * pixelsPerTile);
-
         if (!worldMapData.WorldMapNeedsUpdate && System.IO.File.Exists(path))
         {
             byte[] bytes = System.IO.File.ReadAllBytes(path);
@@ -142,7 +140,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
             _mapTexture.filterMode = FilterMode.Point;
             _mapTexture.LoadImage(bytes);
             mapImage.texture = _mapTexture;
-            
+
             return;
         }
 
@@ -155,9 +153,9 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         _mapTexture = new Texture2D(texWidth, texHeight, TextureFormat.RGBA32, false);
         _mapTexture.filterMode = FilterMode.Point;
 
-        Color[] clearPixels = new Color[texWidth * texHeight];
-        for (int i = 0; i < clearPixels.Length; i++) clearPixels[i] = Color.clear;
-        _mapTexture.SetPixels(clearPixels);
+        Color32[] pixels = new Color32[texWidth * texHeight];
+        Color32 clear = Color.clear;
+        for (int i = 0; i < pixels.Length; i++) pixels[i] = clear;
 
         foreach (WorldMapData.SceneMapEntry entry in worldMapData.scenes)
         {
@@ -167,14 +165,12 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
             int cols = entry.mapData.MapMatrix.GetLength(1);
             int offsetX = entry.offsetInCells.x - minX;
             int offsetY = entry.offsetInCells.y - minY;
-            Debug.Log("La esquina arriba izquierda es...");
-            Debug.Log(entry.mapData.MapMatrix[0, 0]);
+
             for (int row = 0; row < rows; row++)
                 for (int col = 0; col < cols; col++)
                 {
-                    Color color = GetTileColor(entry.mapData.MapMatrix[row, col]);
-                    
-                    FillTile(_mapTexture, offsetX + col, offsetY + row, color);
+                    Color32 color = GetTileColor(entry.mapData.MapMatrix[row, col]);
+                    FillTileInBuffer(pixels, texWidth, texHeight, offsetX + col, offsetY + row, color);
                 }
 
             for (int row = 0; row < rows; row++)
@@ -182,10 +178,11 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
                 {
                     Sprite icon = GetTileIcon(entry.mapData.MapMatrix[row, col]);
                     if (icon != null)
-                        DrawIcon(_mapTexture, offsetX + col, offsetY + row, icon);
+                        DrawIconInBuffer(pixels, texWidth, texHeight, offsetX + col, offsetY + row, icon);
                 }
         }
 
+        _mapTexture.SetPixels32(pixels);
         _mapTexture.Apply();
         mapImage.texture = _mapTexture;
         System.IO.File.WriteAllBytes(path, _mapTexture.EncodeToPNG());
@@ -679,6 +676,49 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
                 Color c = iconTex.GetPixelBilinear(u, v);
                 if (c.a > 0.1f)
                     tex.SetPixel(texX, texY, c);
+            }
+        }
+    }
+    private void DrawIconInBuffer(Color32[] buffer, int texWidth, int texHeight, int col, int row, Sprite sprite)
+    {
+        Texture2D iconTex = sprite.texture;
+        Rect spriteRect = sprite.textureRect;
+
+        int totalPixels = iconTileSize * pixelsPerTile;
+
+        float spriteAspect = spriteRect.width / spriteRect.height;
+        int drawWidth, drawHeight;
+
+        if (spriteAspect >= 1f)
+        {
+            drawWidth = totalPixels;
+            drawHeight = Mathf.RoundToInt(totalPixels / spriteAspect);
+        }
+        else
+        {
+            drawHeight = totalPixels;
+            drawWidth = Mathf.RoundToInt(totalPixels * spriteAspect);
+        }
+
+        int startX = col * pixelsPerTile + pixelsPerTile / 2 - drawWidth / 2;
+        int startY = row * pixelsPerTile + pixelsPerTile / 2 - drawHeight / 2;
+
+        for (int px = 0; px < drawWidth; px++)
+        {
+            for (int py = 0; py < drawHeight; py++)
+            {
+                int texX = startX + px;
+                int texY = startY + py;
+
+                if (texX < 0 || texX >= texWidth || texY < 0 || texY >= texHeight)
+                    continue;
+
+                float u = spriteRect.x / iconTex.width + (float)px / drawWidth * (spriteRect.width / iconTex.width);
+                float v = spriteRect.y / iconTex.height + (float)py / drawHeight * (spriteRect.height / iconTex.height);
+
+                Color c = iconTex.GetPixelBilinear(u, v);
+                if (c.a > 0.1f)
+                    buffer[texY * texWidth + texX] = c;
             }
         }
     }

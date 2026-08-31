@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9966bd1d59cbaf043b7857b759b9bf63, type: 3}
+  m_Name: PuertaZona1Escena1-2
+  m_EditorClassIdentifier: Assembly-CSharp::GateData
+  sceneName1: Zona1Escena1
+  gateId1: 2
+  gateDirection1: {x: 1, y: 0}
+  sceneName2: Zona1Escena2
+  gateId2: 2
+  gateDirection2: {x: -1, y: 0}

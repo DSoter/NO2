@@ -301,6 +301,7 @@ MonoBehaviour:
   badgeCollection: {fileID: 11400000, guid: 40b829128fc4ee841bf6273a1be7eefa, type: 2}
   moneyData: {fileID: 11400000, guid: e75e14bc5463f9747b495a397649266e, type: 2}
   respawnData: {fileID: 11400000, guid: 1f379699d1594d340b10590f5a87a506, type: 2}
+  saveKeySnailBoss: SnailKingIsDead
 --- !u!4 &127887843
 Transform:
   m_ObjectHideFlags: 0
@@ -389,6 +390,10 @@ PrefabInstance:
     - target: {fileID: 410176089906247750, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 410176089906247750, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1075975825043648962, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
       propertyPath: OutputAudioMixerGroup
@@ -1310,7 +1315,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1175537312631035883, guid: e4cb207a5644d1e46b91785d0dd41bfd, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1317575325558646713, guid: e4cb207a5644d1e46b91785d0dd41bfd, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1606,15 +1611,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8537134619148213485, guid: e4cb207a5644d1e46b91785d0dd41bfd, type: 3}
       propertyPath: m_Color.b
-      value: 0.45274484
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8537134619148213485, guid: e4cb207a5644d1e46b91785d0dd41bfd, type: 3}
       propertyPath: m_Color.g
-      value: 0.16664293
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8537134619148213485, guid: e4cb207a5644d1e46b91785d0dd41bfd, type: 3}
       propertyPath: m_Color.r
-      value: 0.5849056
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8601456328208825153, guid: e4cb207a5644d1e46b91785d0dd41bfd, type: 3}
       propertyPath: m_AnchorMax.x

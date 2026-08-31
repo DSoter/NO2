@@ -50,18 +50,18 @@ public class SceneController : MonoBehaviour
 
     }
 
-    void OnGUI()
-    {
-        if (GUI.Button(new Rect(20, 20, 80, 20), "SpawnPlayer"))
-        {
-            spawnPlayerEditor=true;
-        }
+    //void OnGUI()
+    //{
+    //    if (GUI.Button(new Rect(20, 20, 80, 20), "SpawnPlayer"))
+    //    {
+    //        spawnPlayerEditor=true;
+    //    }
 
-        if (GUI.Button(new Rect(160, 20, 80, 20), "DestroyPlayer"))
-        {
-            Destroy(player);
-        }
-    }
+    //    if (GUI.Button(new Rect(160, 20, 80, 20), "DestroyPlayer"))
+    //    {
+    //        Destroy(player);
+    //    }
+    //}
     void Start()
     {
 

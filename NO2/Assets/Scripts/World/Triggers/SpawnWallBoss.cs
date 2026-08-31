@@ -6,6 +6,7 @@ public class SpawnWallBoss : MonoBehaviour
     [SerializeField] private GameObject wallUp;
     [SerializeField] private GameObject boss;
     [SerializeField] private string saveKey = "SnailKingIsDead";
+    [SerializeField] private int bossNumber = 0;
     private void Awake()
     {
         if (boss == null)
@@ -37,6 +38,13 @@ public class SpawnWallBoss : MonoBehaviour
     {
         if (!boss.activeSelf)
         {
+            switch (bossNumber)
+            {
+                case 0:
+                    GameManager.Instance.GetComponent<AchievementManager>().NotifyEvent("snail_slayer");
+                    break;
+            }
+
             wallDown.SetActive(false);
             wallUp.SetActive(false);
 

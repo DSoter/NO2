@@ -795,6 +795,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   deathSound: {fileID: 8300000, guid: 635a0038b9b863f409947d5d641440f1, type: 3}
+  refillSound: {fileID: 8300000, guid: 578979bdb7707114f9889caf6658a351, type: 3}
   hurtSound: {fileID: 8300000, guid: ee8bcb308c6a6fa44a23174129dec16d, type: 3}
   hurtVolume: 1
   hurtPitchVar: 0.3

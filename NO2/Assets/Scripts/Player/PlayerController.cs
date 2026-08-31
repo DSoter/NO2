@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
     // References
     [Header("Sonidos")]
     [SerializeField] private AudioClip deathSound;
+    [SerializeField] private AudioClip refillSound;
     [SerializeField] private AudioClip hurtSound;
     [SerializeField] [Range(0, 1)] private float hurtVolume = 1f;
     [SerializeField] private float hurtPitchVar = 0.3f;
@@ -676,7 +677,8 @@ public class PlayerController : MonoBehaviour
     [ContextMenu("EnterOxigenZone")]
     public void EnterOxigenZone()
     {
-        // Play Oxigen Refilling COMPLETAR
+        GameManager.Instance.audioManager.PlaySound(refillSound);
+
         _isOnOxigenZone = true;
 
         _oxygenData.LastOxygenTimer = 0;

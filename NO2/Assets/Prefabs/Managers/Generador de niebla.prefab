@@ -151,8 +151,8 @@ MonoBehaviour:
   sceneMapData: {fileID: 0}
   worldMapData: {fileID: 11400000, guid: b759603f51b9ccc4d8641177dd487650, type: 2}
   tilemapToScriptable: {fileID: 0}
-  fogScale: 4
-  separation: 4
+  fogScale: 6
+  separation: 6
 --- !u!1 &6782209289164606863
 GameObject:
   m_ObjectHideFlags: 0

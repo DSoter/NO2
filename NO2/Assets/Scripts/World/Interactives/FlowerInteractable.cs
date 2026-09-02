@@ -21,6 +21,8 @@ public class FlowerInteractable : Interactable
         {
             GameManager.Instance.GetComponent<AchievementManager>().NotifyCounter("unlock_1_flower", 1);
             GameManager.Instance.GetComponent<AchievementManager>().NotifyCounter("unlock_3_flowers", 1);
+
+            GameManager.Instance.GetComponent<CheckpointManager>().PlayerReference.GetComponent<PlayerController>()._PlayerData.EquipedFlower = flowerReference;
             flowerCollection.unlockedFlowers[flowerReference] = true;
             flowerCollection.Save();
             Destroy(gameObject);

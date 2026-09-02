@@ -156,9 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeakDestructible
   _content:
-  - {fileID: 4435767342414228798, guid: 16e7345272885af408f3c264add47d47, type: 3}
   - {fileID: 3663132289988127502, guid: 377c0e45af85eaf429ecaf3c9cbc2bf5, type: 3}
-  - {fileID: 1573407195479064595, guid: f9e812d83878b0840b9b88d3c82d7fcb, type: 3}
   - {fileID: 1235764300591374923, guid: 1dc1dd2819237a144a367bafbb37d9c1, type: 3}
   _maxAngleDegrees: 30
   _minForce: 2

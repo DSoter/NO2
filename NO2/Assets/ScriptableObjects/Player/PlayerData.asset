@@ -16,7 +16,7 @@ MonoBehaviour:
   maxHealth: 60
   healthRegenerationSpeed: 40
   healthDropingSpeed: 20
-  stamina: 50
+  stamina: 45.19998
   maxStamina: 50
   secondsUntilStaminaRegeneration: 1
   staminaRegenerationSpeed: 30
@@ -29,8 +29,8 @@ MonoBehaviour:
   oxygenDropingSpeed: 1
   oxygenRegenerationSpeed: 60
   lastOxygenSeconds: 4
-  walkingSpeed: 4
-  runningSpeed: 6
+  walkingSpeed: 5
+  runningSpeed: 7
   iniRollingSpeed: 16
   endRollingSpeed: 2
   iniRollingSeconds: 0.4

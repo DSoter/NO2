@@ -11,6 +11,10 @@ public class RespawnObjectsManager : MonoBehaviour
 
     private void Awake()
     {
+        if (objectsOnScene == null)
+        {
+            return;
+        }
         objectsOnScene.Load();
         PersistentRespawnObject[] objects = FindObjectsByType<PersistentRespawnObject>();
 

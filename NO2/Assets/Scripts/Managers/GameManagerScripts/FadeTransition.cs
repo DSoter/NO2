@@ -38,6 +38,9 @@ public class FadeTransition : MonoBehaviour
     private IEnumerator FadeAndLoad(string sceneName)
     {
         yield return StartCoroutine(FadeTo(1f));
+
+        AIManager ai = GameManager.Instance.GetComponent<AIManager>();
+        ai.ResetList();
         SceneManager.LoadSceneAsync(sceneName);
         //yield return StartCoroutine(FadeTo(0f));
     }

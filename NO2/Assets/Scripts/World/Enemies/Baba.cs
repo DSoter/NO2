@@ -90,6 +90,7 @@ public class Baba : Enemy
 
     void Update()
     {
+        //Debug.Log($"{name} state={_state} onMesh={_agent.isOnNavMesh} enabled={_agent.enabled} remaining={_agent.remainingDistance} coroutine={_destinationCoroutine != null}");
         switch (_state)
         {
             case BabaState.Patroll:
@@ -142,6 +143,16 @@ public class Baba : Enemy
                 break;
         }
     }
+    private void OnDisable()
+    {
+        _destinationCoroutine = null;
+    }
+    private void OnEnable()
+    {
+        _destinationCoroutine = null;
+        _state = BabaState.Patroll;
+        if (_agent != null && _agent.enabled) EnsureOnNavMesh();
+    }
 
     private void LateUpdate()
     {
@@ -152,12 +163,28 @@ public class Baba : Enemy
     }
 
     private void SetDestination(Vector3 target) 
-    { 
-        if(_destinationCoroutine == null)
+    {
+        if (!EnsureOnNavMesh()) return;
+        if (_destinationCoroutine == null)
         {
             _destinationCoroutine = StartCoroutine(DestinationCoroutine(target));
         }
     }
+    private bool EnsureOnNavMesh()
+    {
+        if (!_agent.enabled) return false;
+        if (_agent.isOnNavMesh) return true;
+
+        // Reengancha al punto navegable más cercano
+        if (NavMesh.SamplePosition(transform.position, out var hit, 2f, NavMesh.AllAreas))
+        {
+            _agent.Warp(hit.position);
+            return _agent.isOnNavMesh;
+        }
+        Debug.LogWarning($"Baba ({name}) fuera del NavMesh en {transform.position}", this);
+        return false;
+    }
+
 
     private IEnumerator DestinationCoroutine(Vector3 target) 
     {

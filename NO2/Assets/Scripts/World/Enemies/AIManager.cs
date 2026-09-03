@@ -82,6 +82,13 @@ public class AIManager : MonoBehaviour
         player = null;
     }
 
+    public void ResetList()
+    {
+        allEnemies.Clear();
+        currentIndex = 0;
+        player = null;
+    }
+
     private void OnDestroy()
     {
         // Good practice: Unsubscribe from the event if the game closes entirely

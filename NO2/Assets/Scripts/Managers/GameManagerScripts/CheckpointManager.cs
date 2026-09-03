@@ -147,6 +147,9 @@ public class CheckpointManager : MonoBehaviour
     public void StartScene(string sceneName)
     {
         hasToSpawnPlayer = true;
+
+        AIManager ai = GameManager.Instance.GetComponent<AIManager>();
+        ai.ResetList();
         SceneManager.LoadScene(sceneName);
         //FadeTransition.Instance.LoadSceneWithFade(sceneName);
     }

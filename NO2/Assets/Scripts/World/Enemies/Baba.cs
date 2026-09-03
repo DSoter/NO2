@@ -10,7 +10,6 @@ public class Baba : Enemy
     [SerializeField] private Transform[] _patrollPoints;
     private int _currentPatrollPoint = 0;
     [SerializeField] private float _secondsBetweenDestinations = 0.75f;
-    private Vector3 _lastDestination = Vector3.zero;
 
     [Space(5)]
     [Header("ScriptReferences")]
@@ -154,7 +153,7 @@ public class Baba : Enemy
 
     private void SetDestination(Vector3 target) 
     { 
-        if(target != _lastDestination && _destinationCoroutine == null)
+        if(_destinationCoroutine == null)
         {
             _destinationCoroutine = StartCoroutine(DestinationCoroutine(target));
         }
@@ -162,7 +161,6 @@ public class Baba : Enemy
 
     private IEnumerator DestinationCoroutine(Vector3 target) 
     {
-        _lastDestination = target;
         _agent.SetDestination(target);
         yield return new WaitForSeconds(_secondsBetweenDestinations);
         _destinationCoroutine = null;

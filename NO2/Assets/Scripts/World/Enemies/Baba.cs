@@ -162,6 +162,7 @@ public class Baba : Enemy
 
     private IEnumerator DestinationCoroutine(Vector3 target) 
     {
+        _lastDestination = target;
         _agent.SetDestination(target);
         yield return new WaitForSeconds(_secondsBetweenDestinations);
         _destinationCoroutine = null;

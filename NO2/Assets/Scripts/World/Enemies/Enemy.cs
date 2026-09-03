@@ -70,14 +70,24 @@ public abstract class Enemy : MonoBehaviour, IHitable, IEffectable, IVulnerable
     }
 
     // Añade un factor aleatorio a la dirección y fuerza con la que salen disparados los pickups
-    protected Vector2 AddNoise(Vector2 direction, float maxAngleDegrees, float minForce, float maxForce)
+    protected Vector2 AddNoise(Vector2 direction, float maxAngleDegrees, float minForce, float maxForce, float omniNoiseAmount = 0.3f)
     {
+        Vector2 randomOffset = Random.insideUnitCircle * omniNoiseAmount;
+        Vector2 baseDirection = direction + randomOffset;
+
+        if (baseDirection.sqrMagnitude < 0.0001f)
+        {
+            baseDirection = Random.insideUnitCircle;
+        }
+
+        baseDirection.Normalize();
+
         float noise = Random.Range(-maxAngleDegrees, maxAngleDegrees);
         float rad = noise * Mathf.Deg2Rad;
 
         Vector2 noisyDirection = new Vector2(
-            direction.x * Mathf.Cos(rad) - direction.y * Mathf.Sin(rad),
-            direction.x * Mathf.Sin(rad) + direction.y * Mathf.Cos(rad)
+            baseDirection.x * Mathf.Cos(rad) - baseDirection.y * Mathf.Sin(rad),
+            baseDirection.x * Mathf.Sin(rad) + baseDirection.y * Mathf.Cos(rad)
         ).normalized;
 
         return noisyDirection * Random.Range(minForce, maxForce);

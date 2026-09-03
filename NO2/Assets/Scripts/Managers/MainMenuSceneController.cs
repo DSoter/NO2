@@ -59,6 +59,8 @@ public class MainMenuSceneManager : MonoBehaviour
         cm.SceneWhereRespawn = respawnData.SceneWhereRespawn;
         cm.IdRespawn = respawnData.CheckpointId;
         cm.HasToSpawnPlayerAfterDeath = true;
+        cm.ResetAllDeathRespawns();
+        cm.ResetAllRestRespawns();
 
         //GameManager.Instance.GetComponent<CheckpointManager>().StartSceneWithFade(nameFirstScene);
         FadeTransition.Instance.LoadSceneWithFade(respawnData.SceneWhereRespawn);

@@ -16,6 +16,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -3001479746529436847, guid: 4185a569edaf03b448686e2f614ff549, type: 3}
+    - target: {fileID: 3125256223716801397, guid: 9b94d7f463ba3324591fec78979da612, type: 3}
+      propertyPath: neverRespawn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3125256223716801397, guid: 9b94d7f463ba3324591fec78979da612, type: 3}
+      propertyPath: respawnAfterRest
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5074108657232431721, guid: 9b94d7f463ba3324591fec78979da612, type: 3}
       propertyPath: _content.Array.size
       value: 4

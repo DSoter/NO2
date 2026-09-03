@@ -15,11 +15,10 @@ MonoBehaviour:
   listOfTexts:
   - lines:
     - conditionKey: 
-      text: Hola, encantado de /verte/
+      text: "#_Buenos d\xEDas_#, me alegro de ver caras nuevas por aqu\xED. Soy $Theo$,
+        un amante de las flores. "
     - conditionKey: 
-      text: Soy #rigoberto#, un placer
-    - conditionKey: 
-      text: Soy un explorador y me dedico a llegar a sitios exoticos
+      text: Me dedico a explorar
     - conditionKey: 
       text: Me alegro de ver caras nuevas por aqui
   - lines:

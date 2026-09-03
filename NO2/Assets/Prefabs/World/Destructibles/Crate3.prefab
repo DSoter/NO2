@@ -70,11 +70,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6182571106600752587, guid: 03e63f18a1ea35f4383a3e8fa7d78306, type: 3}
       propertyPath: neverRespawn
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6182571106600752587, guid: 03e63f18a1ea35f4383a3e8fa7d78306, type: 3}
       propertyPath: respawnAfterRest
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6434108626781780358, guid: 03e63f18a1ea35f4383a3e8fa7d78306, type: 3}
       propertyPath: m_Sprite

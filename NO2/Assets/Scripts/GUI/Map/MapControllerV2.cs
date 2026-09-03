@@ -42,10 +42,16 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     [SerializeField] private float inertiaDeceleration = 5f;
     [SerializeField] private int pixelsPerTile = 16;
 
+    [Header("Centrado en jugador")]
+    [SerializeField] private float panMarginPercent = 0.3f;      // margen extra permitido más allá del borde real del mapa (% del viewport)
+    [SerializeField] private float centerScaleMultiplier = 1.15f; // cuánto se acerca el zoom al centrar en el jugador
+
     [Header("Jugador")]
     [SerializeField] private Image playerIcon;
     [SerializeField] private Sprite playerSprite;
     [SerializeField] private TilemapToScriptable tilemapToScriptable;
+
+
 
 
     private Texture2D _mapTexture;
@@ -779,17 +785,17 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     {
         if (playerIcon == null || !playerIcon.gameObject.activeSelf) return;
 
-        // Posición del jugador en el espacio local de mapImage (ya calculada en UpdatePlayerIcon)
-        Vector3 playerLocalPos = playerIcon.rectTransform.localPosition;
-        float scale = mapContainer.localScale.x;
+        float scale = Mathf.Clamp(_targetScale * centerScaleMultiplier, minScale, maxScale);
+        _targetScale = scale;
 
-        // Para centrarlo, mapContainer debe desplazarse lo contrario a esa posición, escalado
+        Vector3 playerLocalPos = playerIcon.rectTransform.localPosition;
+
         Vector3 desired = new Vector3(-playerLocalPos.x * scale, -playerLocalPos.y * scale, mapContainer.localPosition.z);
 
         Vector2 clamped = ClampMapPosition(desired, scale);
         mapContainer.localPosition = new Vector3(clamped.x, clamped.y, mapContainer.localPosition.z);
 
-        _velocity = Vector3.zero; // por si quedaba inercia de la vez anterior
+        _velocity = Vector3.zero; // reiniciar inercia
     }
     private Vector2 ClampMapPosition(Vector2 desiredPosition, float scale)
     {
@@ -809,7 +815,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
             clampedX = 0f;
         else
         {
-            float maxX = (scaledMapWidth - viewportWidth) / 2f;
+            float maxX = (scaledMapWidth - viewportWidth) / 2f + viewportWidth * panMarginPercent;
             clampedX = Mathf.Clamp(desiredPosition.x, -maxX, maxX);
         }
 
@@ -818,7 +824,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
             clampedY = 0f;
         else
         {
-            float maxY = (scaledMapHeight - viewportHeight) / 2f;
+            float maxY = (scaledMapHeight - viewportHeight) / 2f + viewportHeight * panMarginPercent;
             clampedY = Mathf.Clamp(desiredPosition.y, -maxY, maxY);
         }
 

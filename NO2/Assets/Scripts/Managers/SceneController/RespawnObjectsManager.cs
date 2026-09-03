@@ -50,6 +50,10 @@ public class RespawnObjectsManager : MonoBehaviour
     public void UpdateRest()
     {
         Debug.Log("Respawn all rest things");
+        if (objectsOnScene == null)
+        {
+            return;
+        }
         if (objectsOnScene.ObjectsRespawnAfterRest == null)
         {
             objectsOnScene.ObjectsRespawnAfterRest = new Dictionary<string, bool>();
@@ -60,9 +64,15 @@ public class RespawnObjectsManager : MonoBehaviour
         List<string> keys = new List<string>(objectsOnScene.ObjectsRespawnAfterRest.Keys);
         foreach (string objeto in keys)
         {
+            Debug.Log($"{objeto}");
             objectsOnScene.ObjectsRespawnAfterRest[objeto] = true;
-            if (respawnObjects.ContainsKey(objeto))
+            if (respawnObjects.ContainsKey(objeto)) { 
                 respawnObjects[objeto].gameObject.SetActive(true);
+                if (respawnObjects[objeto].gameObject.TryGetComponent<Enemy>(out Enemy enemy))
+                {
+                        enemy.Respawn();
+                }
+            }
         }
 
         objectsOnScene.Save();
@@ -72,6 +82,11 @@ public class RespawnObjectsManager : MonoBehaviour
     public void UpdateDeath()
     {
         Debug.Log("Respawn all death things");
+        if (objectsOnScene == null)
+        {
+            return;
+        }
+
         if (objectsOnScene.ObjectsRespawnAfterDeath == null)
         {
             objectsOnScene.ObjectsRespawnAfterRest = new Dictionary<string, bool>();
@@ -84,7 +99,14 @@ public class RespawnObjectsManager : MonoBehaviour
         {
             objectsOnScene.ObjectsRespawnAfterDeath[objeto] = true;
             if (respawnObjects.ContainsKey(objeto))
+            {
                 respawnObjects[objeto].gameObject.SetActive(true);
+
+                if (respawnObjects[objeto].gameObject.TryGetComponent<Enemy>(out Enemy enemy))
+                {
+                    enemy.Respawn();
+                }
+            }
         }
 
         objectsOnScene.Save();

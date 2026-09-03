@@ -15,18 +15,13 @@ MonoBehaviour:
   listOfTexts:
   - lines:
     - conditionKey: 
-      text: Hola, soy  $Rusell$, el mejor #boy scout# de la comarca
-    - conditionKey: 
-      text: "\xBFComo te llamas?"
-  - lines:
-    - conditionKey: 
-      text: "\xBFTienes alguna insignia? $!Son lo m\xE1s!$"
+      text: 
     - conditionKey: anyBadgeUnlocked
-      text: '!No sabia que eras $scout$!'
+      text: 
     - conditionKey: anyBadgeUnlocked
-      text: Parece que he encontrado un valiente explorador
-    - conditionKey: anyBadgeUnlockedAndThenUnlockFirstBadge
-      text: "Toma, no ser\xE1 nada para ti pero te la mereces"
+      text: 
+    - conditionKey: 
+      text: 
     - conditionKey: noneBadgeUnlocked
       text: Veo que no has conseguido ninguna insignia que muestre tu valia
     - conditionKey: noneBadgeUnlocked

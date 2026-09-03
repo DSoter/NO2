@@ -337,6 +337,12 @@ public class Baba : Enemy
             _player = player;
         }
     }
+    public override void Respawn()
+    {
+        base.Respawn();
+        _state = BabaState.Patroll;
+        
+    }
 
 
     private void OnDrawGizmos()

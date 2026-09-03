@@ -181,6 +181,10 @@ PrefabInstance:
       value: Baba
       objectReference: {fileID: 0}
     - target: {fileID: 7490324042507748272, guid: 564675f96f88d5946894e576d3c28097, type: 3}
+      propertyPath: _maxHealthPoints
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490324042507748272, guid: 564675f96f88d5946894e576d3c28097, type: 3}
       propertyPath: _patrollPoints.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -195,10 +199,34 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3385104020248448736, guid: 564675f96f88d5946894e576d3c28097, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3683332480200065542}
   m_SourcePrefab: {fileID: 100100000, guid: 564675f96f88d5946894e576d3c28097, type: 3}
 --- !u!4 &1684213038337759654 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1311522069880595684, guid: 564675f96f88d5946894e576d3c28097, type: 3}
   m_PrefabInstance: {fileID: 390951745156906306}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3140907391667844002 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3385104020248448736, guid: 564675f96f88d5946894e576d3c28097, type: 3}
+  m_PrefabInstance: {fileID: 390951745156906306}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3683332480200065542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3140907391667844002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ecb66432b0e33468960a743ba61dd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PersistentRespawnObject
+  respawnAfterRest: 1
+  respawnAfterDeath: 1
+  neverRespawn: 0
+  guid: 1a6db751-23bc-4c9c-8fb0-c94457392677

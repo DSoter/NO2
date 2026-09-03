@@ -259,6 +259,7 @@ MonoBehaviour:
   _maxAngleDegrees: 30
   _minForce: 2
   _maxForce: 6
+  _maxHealthPoints: 20
   _healthPoints: 20
   _vulnerableMult: 1.5
   _onHitAudioClip: {fileID: 8300000, guid: 9b2a1c8d6cb2bbb41ad779331553c8d2, type: 3}

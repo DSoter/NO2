@@ -9,6 +9,7 @@ public abstract class Enemy : MonoBehaviour, IHitable, IEffectable, IVulnerable
     [SerializeField] protected float _maxForce = 6f;
 
     [Header("Health")]
+    [SerializeField] protected float _maxHealthPoints = 1;
     [SerializeField] protected float _healthPoints = 1;
     [SerializeField] protected float _vulnerableMult = 1.5f;
 
@@ -67,6 +68,10 @@ public abstract class Enemy : MonoBehaviour, IHitable, IEffectable, IVulnerable
                 rb.AddForce(force, ForceMode2D.Impulse);
             }
         }
+    }
+    public virtual void Respawn()
+    {
+        _healthPoints = _maxHealthPoints;
     }
 
     // Añade un factor aleatorio a la dirección y fuerza con la que salen disparados los pickups

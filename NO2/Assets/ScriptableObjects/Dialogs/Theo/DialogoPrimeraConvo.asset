@@ -18,16 +18,16 @@ MonoBehaviour:
       text: "#_Buenos d\xEDas_#, me alegro de ver caras nuevas por aqu\xED. Soy $Theo$,
         un amante de las flores. "
     - conditionKey: 
-      text: Me dedico a explorar
-    - conditionKey: 
-      text: Me alegro de ver caras nuevas por aqui
-  - lines:
-    - conditionKey: 
-      text: Estoy buscando _flores_ raras
-    - conditionKey: 
-      text: Te permiten obtener poderes de la naturaleza
-    - conditionKey: 
-      text: "\xBFMe puedes mostrar alguna?"
+      text: "Me dedico a explorar lugares #&remotos&# buscando flora extra\xF1a. "
+    - conditionKey: noneFlowerUnlocked
+      text: "\xDAltimamente hay rumores de una #=flor ardiente=# en la zona."
+    - conditionKey: noneFlowerUnlocked
+      text: "\xBFPuedes investigarlo? Si la encuentras ven a verme porfa, debe de
+        ser muy valiosa cient\xEDficamente."
+    - conditionKey: anyFlowerUnlocked
+      text: "\xA1Has encontrado la =#flor de fuego#=! \xA1Incre\xEDble!"
+    - conditionKey: anyFlowerUnlocked
+      text: "Me ayudar\xE1 en mis investigaciones, muchas grac\xEDas."
   repetitionTexts:
   - lines:
     - conditionKey: anyFlowerUnlockedAndTheoFirstDialogFinished
@@ -36,13 +36,14 @@ MonoBehaviour:
     - conditionKey: anyFlowerUnlockedAndTheoFirstDialogFinished
       text: '#Buena _suerte_# en tu $viaje$.'
     - conditionKey: anyFlowerUnlockedAndNotTheoFirstDialogFinished
-      text: OSTIAS TO GUAPA
+      text: Veo que has encontrado una flor muy bonita, quema todo lo que toca.
     - conditionKey: noneFlowerUnlocked
       text: Veo que todavia no has encontrado ninguna flor
     - conditionKey: noneFlowerUnlocked
       text: Recuerda que suelen estar en sitios apartados
     - conditionKey: noneFlowerUnlocked
-      text: Para agarrarla debes de interactuar con ella con la tecla /E/
+      text: "Seguramente haya una por aqu\xED cerca, cuando te la recojas conseguir\xE1s
+        $poderes m\xE1gicos$"
     - conditionKey: anyFlowerUnlockedAndNotTheoFirstDialogFinished
       text: No habia visto ninguna parecida a esta
     - conditionKey: anyFlowerUnlockedAndNotTheoFirstDialogFinished
@@ -56,6 +57,3 @@ MonoBehaviour:
       text: Cada flor tiene unas cualidades distintas
     - conditionKey: anyFlowerUnlockedThenTheoFirstDialogFinished
       text: "Muchas gracias, voy a continuar mis viajes. Espero verte por ah\xED"
-    - conditionKey: 
-      text: "\xBAPrueba de la, tiny wwave a ver si se ve bien, y tambien probar lo
-        de los puntos. Se notar\xE1 m\xE1s... con los suspensivos...\xBA"

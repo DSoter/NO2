@@ -303,7 +303,10 @@ public class CheckpointManager : MonoBehaviour
 
         }
         RespawnObjectsManager rom = GameObject.FindGameObjectWithTag("SceneController").GetComponent<RespawnObjectsManager>();
-        rom.UpdateRest();
+        if (rom != null)
+        {
+            rom.UpdateRest();
+        }
 
     }
 
@@ -326,7 +329,10 @@ public class CheckpointManager : MonoBehaviour
         MarkAllScenesForDeathRespawn();
 
         RespawnObjectsManager rom = GameObject.FindGameObjectWithTag("SceneController").GetComponent<RespawnObjectsManager>();
-        rom.UpdateDeath();
+        if (rom != null) 
+        {
+            rom.UpdateDeath();
+        }
     }
 
 }

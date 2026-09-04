@@ -45,6 +45,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     [Header("Centrado en jugador")]
     [SerializeField] private float panMarginPercent = 0.3f;      // margen extra permitido más allá del borde real del mapa (% del viewport)
     [SerializeField] private float centerScaleMultiplier = 1.15f; // cuánto se acerca el zoom al centrar en el jugador
+    private bool _zoomTowardsPlayer;
 
     [Header("Jugador")]
     [SerializeField] private Image playerIcon;
@@ -770,7 +771,19 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         float currentScale = mapContainer.localScale.x;
         float newScale = Mathf.Lerp(currentScale, _targetScale, Time.unscaledDeltaTime * 10f);
         mapContainer.localScale = new Vector3(newScale, newScale, 1f);
+        if (_zoomTowardsPlayer && playerIcon != null && playerIcon.gameObject.activeSelf)
+        {
+            Vector3 playerLocalPos = playerIcon.rectTransform.localPosition;
+            Vector3 desired = new Vector3(-playerLocalPos.x * newScale, -playerLocalPos.y * newScale, mapContainer.localPosition.z);
 
+            Vector2 clampedZoom = ClampMapPosition(desired, newScale);
+            mapContainer.localPosition = new Vector3(clampedZoom.x, clampedZoom.y, mapContainer.localPosition.z);
+
+            if (Mathf.Abs(newScale - _targetScale) < 0.001f)
+                _zoomTowardsPlayer = false;
+
+            return; 
+        }
         if (!_isDragging && _velocity != Vector3.zero)
         {
             mapContainer.localPosition += _velocity;
@@ -855,6 +868,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         if (!_isHovered) return;
         float scroll = eventData.scrollDelta.y;
         _targetScale = Mathf.Clamp(_targetScale + scroll * scrollSensitivity, minScale, maxScale);
+        _zoomTowardsPlayer = true;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -871,6 +885,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     {
         if (eventData.button == PointerEventData.InputButton.Left && _isHovered)
             _isDragging = true;
+            _zoomTowardsPlayer = false;
     }
 
     public void OnPointerUp(PointerEventData eventData)

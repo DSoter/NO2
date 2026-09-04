@@ -19,7 +19,7 @@ MonoBehaviour:
     - conditionKey: 
       text: "/\xA1Estamos atrapados!/ \xBFQue vamos a hacer?"
     - conditionKey: 
-      text: 'Se me olvidaba, yo simplemente soy un  $cartel$ '
+      text: 'Se me olvidaba, yo simplemente soy un  $cartel$. '
     - conditionKey: 
       text: "\xA1Si no haces nada no podr\xE1s volver a #_casa_#!"
     - conditionKey: 

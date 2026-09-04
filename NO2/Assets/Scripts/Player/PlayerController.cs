@@ -569,7 +569,7 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(InvulnerabilityCoroutine());
             StartCoroutine(HurtCoroutine());
 
-            _playerData.Health -= damage;
+            _playerData.Health -= _playerData.CalculateReceivedDamage(damage);
 
             if (_playerData.Health <= 0)
             {

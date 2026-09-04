@@ -24,7 +24,7 @@ MonoBehaviour:
     offsetInCells: {x: 249, y: 96}
   - sceneName: Zona1Escena2
     mapData: {fileID: 11400000, guid: d39ef55fc9db903469bb5de801b51cc1, type: 2}
-    offsetInCells: {x: 102, y: 130}
+    offsetInCells: {x: 103, y: 127}
   - sceneName: Zona1Escena3
     mapData: {fileID: 11400000, guid: ea06d77b5f39c51448961d8ec4337f35, type: 2}
     offsetInCells: {x: 295, y: 250}

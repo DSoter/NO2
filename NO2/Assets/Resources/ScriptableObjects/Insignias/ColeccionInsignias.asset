@@ -14,8 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BadgeCollection
   allBadges:
   - {fileID: 11400000, guid: 45815594045d83448a67431f7b0eb7bb, type: 2}
-  - {fileID: 11400000, guid: 978077053bed7884694278684d70715b, type: 2}
-  - {fileID: 11400000, guid: fe7af704876d46442b64253b59a54724, type: 2}
   - {fileID: 11400000, guid: d62694c603613bc4faaa0e84210f053c, type: 2}
   - {fileID: 11400000, guid: 3c1209672f060074faf439823c185044, type: 2}
   - {fileID: 11400000, guid: e6857e18694ca574baf60df25bf5034e, type: 2}

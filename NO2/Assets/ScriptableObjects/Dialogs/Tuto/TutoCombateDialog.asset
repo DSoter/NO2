@@ -25,8 +25,8 @@ MonoBehaviour:
       text: Para sobrevivir estate atento a tu #/resistencia/#, la barra verde que
         tienes en la pantalla.
     - conditionKey: 
-      text: "Al hacer acciones como =#atacar#= o #_correr_# consumen tu resistencia
-        hasta que no podr\xE1s realizarlas."
+      text: "Al hacer =#atacar#= o #_correr_# consumen tu resistencia hasta que no
+        podr\xE1s realizarlas."
     - conditionKey: 
       text: "Para correr simplemente debes de mantener la tecla /shift/ (a la izquierda
         de la /Z/), pero consumir\xE1s resistencia."

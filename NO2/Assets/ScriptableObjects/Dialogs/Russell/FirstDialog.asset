@@ -15,17 +15,19 @@ MonoBehaviour:
   listOfTexts:
   - lines:
     - conditionKey: 
-      text: 
+      text: Hola, encantado de conocerte, soy #/Rusell/#, el mejor $boy scout$ de
+        la comarca.
     - conditionKey: anyBadgeUnlocked
-      text: 
+      text: "Veo que has conseguido alguna #/insignia/#, \xA1no sab\xEDa que eras
+        _explorador_!"
     - conditionKey: anyBadgeUnlocked
-      text: 
-    - conditionKey: 
-      text: 
+      text: "Para ti no ser\xE1 mucho, pero tengo el honor de poder otorgar insignias."
+    - conditionKey: anyBadgeUnlockedAndThenUnlockFirstBadge
+      text: Toma, te la #_mereces_#.
     - conditionKey: noneBadgeUnlocked
       text: Veo que no has conseguido ninguna insignia que muestre tu valia
     - conditionKey: noneBadgeUnlocked
-      text: Estas de #_suerte_#, tengo el honor de poder otorgar insignias
+      text: Estas de #_suerte_#, tengo el honor de poder otorgar insignias.
     - conditionKey: noneBadgeUnlockedAndThenUnlockFirstBadge
       text: "Para ti, ser\xE1 la primera de muchas"
   repetitionTexts:

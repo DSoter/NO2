@@ -33,6 +33,8 @@ public class MainMenuSceneManager : MonoBehaviour
     [Header("Claves de bosses")]
     [SerializeField] private string saveKeySnailBoss = "SnailKingIsDead";
 
+    private string gameStarted = "HasSavedGame";
+
 
 
 
@@ -87,6 +89,7 @@ public class MainMenuSceneManager : MonoBehaviour
 
         ResetBossKilled();
 
+        PlayerPrefs.SetInt(gameStarted, 1);
 
         flowerCollection.Load();
         flowerCollection.Reset();
@@ -117,7 +120,7 @@ public class MainMenuSceneManager : MonoBehaviour
 
     public bool HasSavedGame()
     {
-        return worldMapDataRegister.HasSavedGame();
+        return PlayerPrefs.GetInt(gameStarted, 0) ==1 ;
     }
     public void QuitGame()
     {

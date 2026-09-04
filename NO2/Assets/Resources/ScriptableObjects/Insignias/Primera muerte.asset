@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Badge
   badgeName: Principiante
   achievement: {fileID: 11400000, guid: 422ea870531919641af5c2b1056fe0cd, type: 2}
-  description: Has muerto por primera vez
+  description: Has muerto por primera vez, al ternerla equipada consigues un reducido
+    aumento de defensa
   icon: {fileID: 21300000, guid: d5a0dffdf2274fb46ba19dd89f9df75a, type: 3}
   slotsSize: 1
   effect:

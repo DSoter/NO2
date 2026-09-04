@@ -86,8 +86,8 @@ public class PlayerController : MonoBehaviour
 
     [Space(5)]
     [Header("Achievement fast potions")]
-    [SerializeField] private float _fastHealWindowSeconds = 6f;
-    [SerializeField] private int _fastHealCount = 3;
+    [SerializeField] private float _fastHealWindowSeconds = 3f;
+    [SerializeField] private int _fastHealCount = 2;
     private List<float> _recentHealTimestamps = new List<float>();
 
     
@@ -204,7 +204,7 @@ public class PlayerController : MonoBehaviour
                     _state = PlayerState.StrongAttack;
                     _chargeReleased = false;
                     
-                    if (auxChargeTime >= 6.5f)
+                    if (auxChargeTime >= 3f)
                     {
                         hasToUnlockBadgeBigCharge = true;
                         

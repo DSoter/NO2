@@ -27,9 +27,9 @@ public class VolumeOptionsManager : MonoBehaviour
     void Start()
     {
         // Cargar valores guardados (o usar los de por defecto)
-        float savedMasterMusic = PlayerPrefs.GetFloat("MasterVolume", 1f);
-        float savedMusic = PlayerPrefs.GetFloat("MusicVolume", 0.7f);
-        float savedSFX = PlayerPrefs.GetFloat("SFXVolume", 0.7f);
+        float savedMasterMusic = PlayerPrefs.GetFloat("MasterVolume", 0.8f);
+        float savedMusic = PlayerPrefs.GetFloat("MusicVolume", 1f);
+        float savedSFX = PlayerPrefs.GetFloat("SFXVolume", 0.4f);
 
         inputManager = GameManager.Instance.gameObject.GetComponent<InputManager>();
 

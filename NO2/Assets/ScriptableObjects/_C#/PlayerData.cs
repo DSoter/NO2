@@ -71,18 +71,21 @@ public class PlayerData : ScriptableObject
     [SerializeField] private string nameBadgeBigCharge = "Peso pesado";
     [SerializeField] private string nameBadgeNormalDefense = "Principiante";
     [SerializeField] private string nameBadgeMaxHealthDefense = "Tutorial impecable";
+    [SerializeField] private string nameBadgeNO2 = "NO2";
 
     private readonly Modifier strongHeartModifier = new Modifier(Modifier.ModifierType.Numeric, 10f);
     private readonly Modifier hundredRollsModifier = new Modifier(Modifier.ModifierType.Numeric, 10f);
     private readonly Modifier bigChargeMinModifier = new Modifier(Modifier.ModifierType.Numeric, 2f);
     private readonly Modifier bigChargeMaxModifier = new Modifier(Modifier.ModifierType.Numeric, 2f);
-    private readonly Modifier amateurDefenseModifier = new Modifier(Modifier.ModifierType.Percentage, 3f);
+    private readonly Modifier amateurDefenseModifier = new Modifier(Modifier.ModifierType.Percentage, 5f);
     private readonly Modifier fullHealthDefenseModifier = new Modifier(Modifier.ModifierType.Percentage, 70f);
+    private readonly Modifier no2Modifier = new Modifier(Modifier.ModifierType.Numeric, 20f);
     private List<Modifier> maxHealthModifiers = new List<Modifier>();
     private List<Modifier> maxStaminaModifiers = new List<Modifier>();
     private List<Modifier> minStrongAttackDamageModifiers = new List<Modifier>();
     private List<Modifier> maxStrongAttackDamageModifiers = new List<Modifier>();
     private List<Modifier> defenseModifiers = new List<Modifier>();
+    private List<Modifier> maxOxygenModifiers = new List<Modifier>();
     private bool fullHealthDefenseBadgeEquipped;
 
     //references 
@@ -94,6 +97,8 @@ public class PlayerData : ScriptableObject
     private Action<string> onUnequippedDecreaseStrongDamageHandler;
     private Action<string> onEquippedIncreaseDefenseHandler;
     private Action<string> onUnequippedDecreaseDefenseHandler;
+    private Action<string> onEquippedIncreaseOxygenHandler;
+    private Action<string> onUnequippedDecreaseOxygenHandler;
     private Action onBadgesResetHandler;
 
     // Events
@@ -113,7 +118,7 @@ public class PlayerData : ScriptableObject
     {
         get { return health; }
         set {
-            if( health <= 1 && 0 < health && value > 1){
+            if( health <= 5 && 0 < health && value > 10){
                 GameManager.Instance.GetComponent<AchievementManager>().NotifyEvent("strong_heart");
             }
             health = Mathf.Clamp(value, 0, maxHealth);
@@ -170,7 +175,7 @@ public class PlayerData : ScriptableObject
 
     public float MaxOxygen
     {
-        get { return maxOxygen; }
+        get { return Modifier.ApplyModifiers(maxOxygen, maxOxygenModifiers); }
         set
         {
             maxOxygen = value;
@@ -356,6 +361,8 @@ public class PlayerData : ScriptableObject
         equippedBadges.OnUnequipped += onUnequippedDecreaseStaminaHandler;
         equippedBadges.OnEquipped += onEquippedIncreaseStrongDamageHandler;
         equippedBadges.OnUnequipped += onUnequippedDecreaseStrongDamageHandler;
+        equippedBadges.OnEquipped += onEquippedIncreaseOxygenHandler;
+        equippedBadges.OnUnequipped += onUnequippedDecreaseOxygenHandler;
         equippedBadges.OnReset += onBadgesResetHandler;
     }
 
@@ -379,6 +386,10 @@ public class PlayerData : ScriptableObject
             equippedBadges.OnEquipped -= onEquippedIncreaseDefenseHandler;
         if (onUnequippedDecreaseDefenseHandler != null)
             equippedBadges.OnUnequipped -= onUnequippedDecreaseDefenseHandler;
+        if (onEquippedIncreaseOxygenHandler != null)
+            equippedBadges.OnEquipped -= onEquippedIncreaseOxygenHandler;
+        if (onUnequippedDecreaseOxygenHandler != null)
+            equippedBadges.OnUnequipped -= onUnequippedDecreaseOxygenHandler;
         if (onBadgesResetHandler != null)
             equippedBadges.OnReset -= onBadgesResetHandler;
     }
@@ -475,16 +486,45 @@ public class PlayerData : ScriptableObject
             fullHealthDefenseBadgeEquipped = false;
         }
     }
+        private void IncreaseMaxOxygen(string badgeName)
+    {
+        if (nameBadgeNO2 == badgeName)
+        {
+            if (maxOxygenModifiers.Contains(no2Modifier)) return;
+
+            maxOxygenModifiers.Add(no2Modifier);
+            Oxygen = oxygen; // reclamp por si el aumento de MaxOxygen debe reflejarse, y dispara OnOxygenChanged
+            OnMaxOxygenChanged?.Invoke();
+        }
+    }
+    private void DecreaseMaxOxygen(string badgeName)
+    {
+        if (nameBadgeNO2 == badgeName)
+        {
+            maxOxygenModifiers.Remove(no2Modifier);
+
+            if (oxygen > MaxOxygen)
+            {
+                oxygen = MaxOxygen;
+            }
+            OnMaxOxygenChanged?.Invoke();
+        }
+    }
+    
     private void HandleBadgesReset()
     {
         maxHealthModifiers.Clear();
         maxStaminaModifiers.Clear();
+        defenseModifiers.Clear();
+        maxOxygenModifiers.Clear();
+        fullHealthDefenseBadgeEquipped = false;
 
         if (health > MaxHealth) health = MaxHealth;
         if (stamina > MaxStamina) stamina = MaxStamina;
-
+        if (oxygen > MaxOxygen) oxygen = MaxOxygen;
         OnMaxHealthChanged?.Invoke();
         OnMaxStaminaChanged?.Invoke();
+        OnMaxOxygenChanged?.Invoke();
     }
 
 

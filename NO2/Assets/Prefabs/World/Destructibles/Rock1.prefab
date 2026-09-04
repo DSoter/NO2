@@ -121,7 +121,7 @@ MonoBehaviour:
   _onHitClip: {fileID: 8300000, guid: 4171a2a98eb512b40bcd0086c1869d57, type: 3}
   _onHitVolume: 1
   _onHitPitchVariation: 0.3
-  _hitPoints: 3
+  _hitPoints: 2
   _hitImpulse: {fileID: 8299146908168598192}
   _destructImpulse: {fileID: 9100872222575639493}
 --- !u!60 &8869248633299056498

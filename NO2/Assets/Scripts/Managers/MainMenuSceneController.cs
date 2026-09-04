@@ -120,7 +120,7 @@ public class MainMenuSceneManager : MonoBehaviour
 
     public bool HasSavedGame()
     {
-        return PlayerPrefs.GetInt(gameStarted, 0) ==1 ;
+        return PlayerPrefs.GetInt(gameStarted, 0) == 1 ;
     }
     public void QuitGame()
     {

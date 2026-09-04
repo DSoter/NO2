@@ -18,49 +18,49 @@ public class AIManager : MonoBehaviour
 
     private void Awake()
     {
-        SceneManager.sceneUnloaded += OnSceneCleanUp;
+        //SceneManager.sceneUnloaded += OnSceneCleanUp;
     }
 
     void Start()
     {
-        // Precalculate the squared distance to save CPU performance (avoids costly square roots)
-        disableDistanceSqr = disableDistance * disableDistance;
+        //// Precalculate the squared distance to save CPU performance (avoids costly square roots)
+        //disableDistanceSqr = disableDistance * disableDistance;
 
-        if (player == null)
-        {
-            FindPlayer();
-        }
+        //if (player == null)
+        //{
+        //    FindPlayer();
+        //}
     }
 
     void Update()
     {
-        if (player == null)
-        {
-            FindPlayer();
-            return;
-        }
+        //if (player == null)
+        //{
+        //    FindPlayer();
+        //    return;
+        //}
 
-        if (allEnemies.Count == 0) return;
+        //if (allEnemies.Count == 0) return;
 
-        for (int i = 0; i < enemiesPerFrame; i++)
-        {
-            if (currentIndex >= allEnemies.Count)
-            {
-                currentIndex = 0;
-            }
+        //for (int i = 0; i < enemiesPerFrame; i++)
+        //{
+        //    if (currentIndex >= allEnemies.Count)
+        //    {
+        //        currentIndex = 0;
+        //    }
 
-            EnemyCPU enemy = allEnemies[currentIndex];
+        //    EnemyCPU enemy = allEnemies[currentIndex];
 
-            if (enemy != null)
-            {
-                float distanceSqr = (enemy.transform.position - player.position).sqrMagnitude;
-                bool isInRange = distanceSqr < disableDistanceSqr;
+        //    if (enemy != null)
+        //    {
+        //        float distanceSqr = (enemy.transform.position - player.position).sqrMagnitude;
+        //        bool isInRange = distanceSqr < disableDistanceSqr;
 
-                enemy.ToggleAI(isInRange);
-            }
+        //        enemy.ToggleAI(isInRange);
+        //    }
 
-            currentIndex++;
-        }
+        //    currentIndex++;
+        //}
     }
 
     private void FindPlayer()
@@ -75,23 +75,23 @@ public class AIManager : MonoBehaviour
     // Automatically triggered by Unity right before the scene reloads
     private void OnSceneCleanUp(Scene currentScene)
     {
-        allEnemies.Clear();
-        currentIndex = 0;
+        //allEnemies.Clear();
+        //currentIndex = 0;
 
-        // Force the manager to find the new player instance in the newly loaded scene
-        player = null;
+        //// Force the manager to find the new player instance in the newly loaded scene
+        //player = null;
     }
 
     public void ResetList()
     {
-        allEnemies.Clear();
-        currentIndex = 0;
-        player = null;
+        //allEnemies.Clear();
+        //currentIndex = 0;
+        //player = null;
     }
 
     private void OnDestroy()
     {
         // Good practice: Unsubscribe from the event if the game closes entirely
-        SceneManager.sceneUnloaded -= OnSceneCleanUp;
+        //SceneManager.sceneUnloaded -= OnSceneCleanUp;
     }
 }

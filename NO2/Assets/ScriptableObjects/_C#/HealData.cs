@@ -109,7 +109,6 @@ public class HealData : ScriptableObject
             if (!maxUsesModifiers.Contains(fastPotionsModifier))
                 maxUsesModifiers.Add(fastPotionsModifier);
 
-            RemainingUses = remainingUses + 2;
         }
     }
     private void DecreaseMaxPotions(string badgeName)
@@ -117,7 +116,7 @@ public class HealData : ScriptableObject
         if (fastPotionsName == badgeName)
         {
             maxUsesModifiers.Remove(fastPotionsModifier);
-            RemainingUses = MaxUses;
+            RemainingUses = Mathf.RoundToInt(Modifier.ApplyModifiers(maxUses, maxUsesModifiers));
         }
     }
 

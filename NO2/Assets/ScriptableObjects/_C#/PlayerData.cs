@@ -67,8 +67,8 @@ public class PlayerData : ScriptableObject
     [SerializeField] private EquippedBadges equippedBadges;
     [SerializeField] private string nameBadgeHundredRolls = "Acrobata amateur";
     [SerializeField] private string nameBadgeStrongHeart = "Corazon fuerte";
-    [SerializeField] private string nameBadgeToughSkin = "Piel dura";
-    [SerializeField] private string nameBadgeFullHealthDefense = "Vida plena";
+    [SerializeField] private string nameBadgeToughSkin = "Principiante";
+    [SerializeField] private string nameBadgeFullHealthDefense = "Tutorial implecable";
     [SerializeField] private string nameBadgeNO2 = "NO2";
     [SerializeField] private string nameBadgeSnailSlayer = "Snail slayer";
     [SerializeField] private string nameBadgeScoutPrincipiante = "Scout principiante";
@@ -82,22 +82,20 @@ public class PlayerData : ScriptableObject
     // Modificadores activos por insignias (no se persisten: se reconstruyen a partir de EquippedBadges)
     private readonly Modifier strongHeartModifier = new Modifier(Modifier.ModifierType.Numeric, 10f);
     private readonly Modifier hundredRollsModifier = new Modifier(Modifier.ModifierType.Numeric, 10f);
-    private readonly Modifier toughSkinModifier = new Modifier(Modifier.ModifierType.Percentage, 3f);
+    private readonly Modifier toughSkinModifier = new Modifier(Modifier.ModifierType.Percentage, 5f);
     private readonly Modifier fullHealthDefenseModifier = new Modifier(Modifier.ModifierType.Percentage, 70f);
-    private readonly Modifier no2Modifier = new Modifier(Modifier.ModifierType.Percentage, 20f);
+    private readonly Modifier no2Modifier = new Modifier(Modifier.ModifierType.Multiplier, 20f);
 
-    // ASUNCIÓN: +20% de velocidad (a pie y corriendo) mientras se cumpla la condición de cada insignia.
-    private readonly Modifier snailSlayerSpeedModifier = new Modifier(Modifier.ModifierType.Percentage, 20f);
-    private readonly Modifier primeraInsigniaSpeedModifier = new Modifier(Modifier.ModifierType.Percentage, 20f);
+    private readonly Modifier snailSlayerSpeedModifier = new Modifier(Modifier.ModifierType.Multiplier, 20f);
+    private readonly Modifier primeraInsigniaSpeedModifier = new Modifier(Modifier.ModifierType.Multiplier, 20f);
 
     // Valor exacto que pediste: +2 de daño plano en cada uno de los tres ataques
     private readonly Modifier scoutPrincipianteDamageModifier = new Modifier(Modifier.ModifierType.Numeric, 2f);
 
-    // Valor exacto que pediste: +10% del oxígeno ganado en cada recogida
-    private readonly Modifier boxSlayerOxygenGainModifier = new Modifier(Modifier.ModifierType.Percentage, 10f);
+    private readonly Modifier boxSlayerOxygenGainModifier = new Modifier(Modifier.ModifierType.Multiplier, 10f);
 
-    // ASUNCIÓN: +30% de velocidad de regeneración de resistencia
-    private readonly Modifier expertAcrobatStaminaRegenModifier = new Modifier(Modifier.ModifierType.Percentage, 30f);
+
+    private readonly Modifier expertAcrobatStaminaRegenModifier = new Modifier(Modifier.ModifierType.Multiplier, 20f);
 
     private List<Modifier> maxHealthModifiers = new List<Modifier>();
     private List<Modifier> maxStaminaModifiers = new List<Modifier>();
@@ -147,7 +145,7 @@ public class PlayerData : ScriptableObject
         get { return health; }
         set
         {
-            if (health <= 1 && 0 < health && value > 1)
+            if (health <= 10 && 0 < health && value > 10)
             {
                 GameManager.Instance.GetComponent<AchievementManager>().NotifyEvent("strong_heart");
             }
@@ -222,9 +220,6 @@ public class PlayerData : ScriptableObject
         }
     }
 
-    // Defensa: arranca en baseDefense (1) y sube por porcentaje con las insignias.
-    // "Vida plena" solo se suma mientras la vida esté al máximo, por eso se
-    // comprueba en cada get en vez de guardarse siempre en defenseModifiers.
     public float Defense
     {
         get
@@ -234,17 +229,16 @@ public class PlayerData : ScriptableObject
                 List<Modifier> withFullHealthBonus = new List<Modifier>(defenseModifiers) { fullHealthDefenseModifier };
                 return Modifier.ApplyModifiers(baseDefense, withFullHealthBonus);
             }
-
+            Debug.Log(Modifier.ApplyModifiers(baseDefense, defenseModifiers));
             return Modifier.ApplyModifiers(baseDefense, defenseModifiers);
         }
     }
 
-    // Aplica la defensa actual a un daño bruto y devuelve el daño final a restar de Health
     public float CalculateReceivedDamage(float rawDamage)
     {
         float defense = Defense;
         if (defense <= 0f) return rawDamage;
-        return rawDamage / defense;
+        return rawDamage - (rawDamage * (1-defense));
     }
 
     // Read only properties
@@ -254,7 +248,7 @@ public class PlayerData : ScriptableObject
         get { return secondsUntilStaminaRegeneration; }
     }
 
-    // "Acróbata experto": bonus permanente mientras esté equipada, no depende de ninguna condición
+
     public float StaminaRegenerationSpeed
     {
         get { return Modifier.ApplyModifiers(staminaRegenerationSpeed, staminaRegenerationSpeedModifiers); }
@@ -300,9 +294,6 @@ public class PlayerData : ScriptableObject
         set { lastOxygenSeconds = value; }
     }
 
-    // "Snail slayer" (vida <= 25%) y "Primera insignia" (oxígeno <= 25%) suman
-    // su bonus de velocidad aquí. Al evaluarse en el get, se activan/desactivan
-    // automáticamente según cambie la vida o el oxígeno, sin necesitar más eventos.
     public float WalkingSpeed
     {
         get { return Modifier.ApplyModifiers(walkingSpeed, GetActiveSpeedModifiers()); }
@@ -492,7 +483,7 @@ public class PlayerData : ScriptableObject
             if (maxHealthModifiers.Contains(strongHeartModifier)) return;
 
             maxHealthModifiers.Add(strongHeartModifier);
-            Health = health + 10;
+            Health = Modifier.ApplyModifiers(maxHealth, maxHealthModifiers);
             OnMaxHealthChanged?.Invoke();
         }
     }
@@ -502,9 +493,9 @@ public class PlayerData : ScriptableObject
         {
             maxHealthModifiers.Remove(strongHeartModifier);
 
-            if (health > MaxHealth)
+            if (health > Modifier.ApplyModifiers(maxHealth, maxHealthModifiers))
             {
-                health = MaxHealth;
+                health = Modifier.ApplyModifiers(maxHealth, maxHealthModifiers);
             }
             OnMaxHealthChanged?.Invoke();
         }
@@ -517,7 +508,7 @@ public class PlayerData : ScriptableObject
             if (maxStaminaModifiers.Contains(hundredRollsModifier)) return;
 
             maxStaminaModifiers.Add(hundredRollsModifier);
-            Stamina = stamina + 10;
+            Stamina = Modifier.ApplyModifiers(maxStamina, maxStaminaModifiers);
             OnMaxStaminaChanged?.Invoke();
         }
     }
@@ -527,9 +518,9 @@ public class PlayerData : ScriptableObject
         {
             maxStaminaModifiers.Remove(hundredRollsModifier);
 
-            if (stamina > MaxStamina)
+            if (stamina > Modifier.ApplyModifiers(maxStamina, maxStaminaModifiers))
             {
-                stamina = MaxStamina;
+                stamina = Modifier.ApplyModifiers(maxStamina, maxStaminaModifiers);
             }
             OnMaxStaminaChanged?.Invoke();
         }

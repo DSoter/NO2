@@ -15,7 +15,7 @@ MonoBehaviour:
   badgeName: Codicioso
   achievement: {fileID: 11400000, guid: 2ae29bf6fa2635648b422d7d0bd24403, type: 2}
   description: Obtienes una mayor cantidad de monedas de cajas y enemigos.
-  icon: {fileID: 21300000, guid: 16762529b326cf448a59f5ace780639b, type: 3}
+  icon: {fileID: 21300000, guid: 28538f2701c9872418b913c771ff3c3c, type: 3}
   slotsSize: 1
   effect:
     m_PersistentCalls:

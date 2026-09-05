@@ -29,11 +29,11 @@ MonoBehaviour:
         m\xE1s lo cargues m\xE1s fuerte ser\xE1."
     - conditionKey: 
       text: "Cuando empieces a parpadear significa que has cargado /a tope/. Al soltar
-        el clic golpear\xE1s en la posici\xF3n del cursor."
+        el clic golpear\xE1s en la posici\xD3n del cursor."
     - conditionKey: 
       text: "Golpeale cuando est\xE9 $vulnerable$, indicado porqu\xE9 tendr\xE1 el
         borde rojo. Cada enemigo se quedar\xE1 as\xED seg\xFAn distintas acciones
-        por lo que deber\xE1s estar atento de como hacer la #/ruptura/#"
+        por lo que deber\xE1s estar atento de como hacer la #/ruptura/#."
   repetitionTexts:
   - lines:
     - conditionKey: 
@@ -51,8 +51,8 @@ MonoBehaviour:
         m\xE1s lo cargues m\xE1s fuerte ser\xE1."
     - conditionKey: 
       text: "Cuando empieces a parpadear significa que has cargado /a tope/. Al soltar
-        el clic golpear\xE1s en la posici\xF3n del cursor."
+        el clic golpear\xE1s en la posici\xD3n del cursor."
     - conditionKey: 
       text: "Golpeale cuando est\xE9 $vulnerable$, indicado porqu\xE9 tendr\xE1 el
         borde rojo. Cada enemigo se quedar\xE1 as\xED seg\xFAn distintas acciones
-        por lo que deber\xE1s estar atento de como hacer la #/ruptura/#"
+        por lo que deber\xE1s estar atento de como hacer la #/ruptura/#."

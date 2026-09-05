@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Codicioso
   m_EditorClassIdentifier: Assembly-CSharp::Achievement
   achievementName: 5000_money
-  description: Has conseguido cinco mil monedas
+  description: Has conseguido mil monedas
   isCounter: 0
   targetCount: 0

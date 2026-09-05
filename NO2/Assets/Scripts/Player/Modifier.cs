@@ -8,7 +8,8 @@ public class Modifier
     public enum ModifierType
     {
         Numeric,
-        Percentage
+        Percentage,
+        Multiplier
     }
 
     [SerializeField] private ModifierType type;
@@ -32,32 +33,43 @@ public class Modifier
                 return baseValue + value;
             case ModifierType.Percentage:
                 return baseValue * (1f + value / 100f);
+            case ModifierType.Multiplier:
+                return baseValue * (1f + value / 100f);
             default:
                 return baseValue;
         }
     }
 
-    // Aplica una lista de modificadores sobre un valor base:
-    // primero se suman todos los numéricos, después se multiplican todos los
-    // porcentuales entre sí y se aplican como un único multiplicador.
-
+    // Aplica una lista de modificadores sobre un valor base, en este orden:
+    // 1) Se suman todos los numéricos.
+    // 2) Se suman entre sí todos los porcentuales y se aplican como UN único
+    //    multiplicador (p.ej. dos badges de +10% de defensa dan +20%, no +21%).
+    // 3) Cada Multiplier se aplica de manera INDEPENDIENTE y compuesta, uno
+    //    detrás de otro (p.ej. dos badges de +20% de velocidad dan
+    //    1.2 * 1.2 = 1.44, no 1.4).
     public static float ApplyModifiers(float baseValue, List<Modifier> modifiers)
     {
         if (modifiers == null || modifiers.Count == 0) return baseValue;
 
         float result = baseValue;
-        float percentageMult = 1f;
+        float percentageSum = 0f;
 
         foreach (Modifier modifier in modifiers)
         {
             if (modifier.type == ModifierType.Numeric)
                 result += modifier.value;
             else if (modifier.type == ModifierType.Percentage)
-                percentageMult *= (1 + modifier.value / 100);
+                percentageSum += modifier.value;
         }
 
-        if (percentageMult != 0f)
-            result *= percentageMult ;
+        if (percentageSum != 0f)
+            result *= (1f + percentageSum / 100f);
+
+        foreach (Modifier modifier in modifiers)
+        {
+            if (modifier.type == ModifierType.Multiplier)
+                result = modifier.ApplyModifier(result);
+        }
 
         return result;
     }

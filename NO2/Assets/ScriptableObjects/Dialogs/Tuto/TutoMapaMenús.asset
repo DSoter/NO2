@@ -12,5 +12,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e2bb7e4f927c16469fb8e20a9d08185, type: 3}
   m_Name: "TutoMapaMen\xFAs"
   m_EditorClassIdentifier: Assembly-CSharp::DialogTextData
-  listOfTexts: []
-  repetitionTexts: []
+  listOfTexts:
+  - lines:
+    - conditionKey: 
+      text: Te has dado una buena vuelta por esta cueva. Hay algunos sitios por los
+        que es facil perderse, pero puedes usar tu #/mapa/#
+    - conditionKey: 
+      text: Para abrir el /mapa/ simplemente debes de pulsar la tecla /M/, no te
+        preocupes si ves que no hace nada, tarda un poco en cargar.
+    - conditionKey: 
+      text: "Podr\xE1s ver las zonas que has _explorado_ y posibles caminos que faltan
+        por explorar."
+    - conditionKey: 
+      text: "Para desplazarte por el mapa puedes clicar y arrastrar o utilizar la
+        rueda del rat\xF3n para hacer #&zoom&#."
+    - conditionKey: 
+      text: "Ver\xE1s que tienes otros men\xFAs, a los que puedes acceder pulsando
+        las teclas /Q/ o /E/. Yo no puedo decirte como funcionan, aunque un #_pajarito_#
+        me ha dicho que solo se pueden usar en una =hoguera=."
+  repetitionTexts:
+  - lines:
+    - conditionKey: 
+      text: Te has dado una buena vuelta por esta cueva. Hay algunos sitios por los
+        que es facil perderse, pero puedes usar tu #/mapa/#
+    - conditionKey: 
+      text: Para abrir el /mapa/ simplemente debes de pulsar la tecla /M/, no te
+        preocupes si ves que no hace nada, tarda un poco en cargar.
+    - conditionKey: 
+      text: "Podr\xE1s ver las zonas que has _explorado_ y posibles caminos que faltan
+        por explorar."
+    - conditionKey: 
+      text: "Para desplazarte por el mapa puedes clicar y arrastrar o utilizar la
+        rueda del rat\xF3n para hacer #&zoom&#."
+    - conditionKey: 
+      text: "Ver\xE1s que tienes otros men\xFAs, a los que puedes acceder pulsando
+        las teclas /Q/ o /E/. Yo no puedo decirte como funcionan, aunque un #_pajarito_#
+        me ha dicho que solo se pueden usar en una =hoguera=."

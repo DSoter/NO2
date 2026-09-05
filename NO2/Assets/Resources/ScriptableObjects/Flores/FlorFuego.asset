@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FlorFuego
   m_EditorClassIdentifier: Assembly-CSharp::Flower
   objectName: Flor de fuego
-  description: La "Papaver rhoeas" posee la esencia del sol causando quemaduras a
-    quien ose tocarla
+  description: "Al golpear a los enemigos les infliges una quemadura que hace da\xF1o
+    durante unos segundos. Al hacer una ruptura los quemar\xE1s gravemente."
   flowerIcon: {fileID: -5257907116096501005, guid: aca4077c00978ed4ba025b5f6d3fb31e, type: 3}
   flowerEffect: {fileID: 11400000, guid: 2e9867b25d30dab47ad96152fc1d8704, type: 2}

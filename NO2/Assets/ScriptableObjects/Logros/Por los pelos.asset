@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Por los pelos
   m_EditorClassIdentifier: Assembly-CSharp::Achievement
   achievementName: strong_heart
-  description: "Te has curado despu\xE9s de sobrevivir a uno de vida"
+  description: "Te has curado despu\xE9s de sobrevivir a poca vida"
   isCounter: 0
   targetCount: 0

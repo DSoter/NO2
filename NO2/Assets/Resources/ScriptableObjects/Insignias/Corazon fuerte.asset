@@ -15,7 +15,7 @@ MonoBehaviour:
   badgeName: Corazon fuerte
   achievement: {fileID: 11400000, guid: e552257212b713a43a5b2d14ea327b4d, type: 2}
   description: "Obtienes mayor vida m\xE1xima."
-  icon: {fileID: 21300000, guid: 69fcc81662a08a74ba5fdbbb8072aef6, type: 3}
+  icon: {fileID: 3884813598998267534, guid: 149afc915b9eb664c9543fc2c6e19cde, type: 3}
   slotsSize: 1
   effect:
     m_PersistentCalls:

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cefcbd99b00b4c14eab78afd4ec1278b, type: 3}
-  m_Name: estudioso
+  m_Name: Primera insignia
   m_EditorClassIdentifier: Assembly-CSharp::Badge
-  badgeName: Primera medalla
+  badgeName: Primera insignia
   achievement: {fileID: 11400000, guid: 8362e8652bbaaa548a8a29519a67853b, type: 2}
   description: "Al tener poco ox\xEDgeno te mueves m\xE1s r\xE1pido."
   icon: {fileID: 21300000, guid: 2cd23962c2ef8d54c97f214037660b6e, type: 3}

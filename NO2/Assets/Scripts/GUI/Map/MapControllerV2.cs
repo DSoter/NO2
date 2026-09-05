@@ -61,6 +61,10 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     private Vector3 _velocity;
     private bool _isDragging;
     private bool _isHovered;
+    private bool _hasMoved;
+    private bool _zoomTowardsCenter;
+    private bool _zoomTowardsCursor;
+    private Vector2 _zoomAnchorLocalPos;
     private string sceneControllerTag = "SceneController";
     private int _worldMinX, _worldMinY, _worldTotalCols, _worldTotalRows;
 
@@ -770,20 +774,57 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     {
         float currentScale = mapContainer.localScale.x;
         float newScale = Mathf.Lerp(currentScale, _targetScale, Time.unscaledDeltaTime * 10f);
-        mapContainer.localScale = new Vector3(newScale, newScale, 1f);
+
+        if (_zoomTowardsCursor)
+        {
+            mapContainer.localScale = new Vector3(newScale, newScale, 1f);
+
+            float ratio = (currentScale > 0.0001f) ? newScale / currentScale : 1f;
+            Vector2 pos = mapContainer.localPosition;
+            Vector2 newPos = _zoomAnchorLocalPos - (_zoomAnchorLocalPos - pos) * ratio;
+
+            Vector2 clampedZoom = ClampMapPosition(newPos, newScale);
+            mapContainer.localPosition = new Vector3(clampedZoom.x, clampedZoom.y, mapContainer.localPosition.z);
+
+            if (Mathf.Abs(newScale - _targetScale) < 0.001f)
+                _zoomTowardsCursor = false;
+
+            return;
+        }
         if (_zoomTowardsPlayer && playerIcon != null && playerIcon.gameObject.activeSelf)
         {
+            mapContainer.localScale = new Vector3(newScale, newScale, 1f);
+
             Vector3 playerLocalPos = playerIcon.rectTransform.localPosition;
             Vector3 desired = new Vector3(-playerLocalPos.x * newScale, -playerLocalPos.y * newScale, mapContainer.localPosition.z);
-
             Vector2 clampedZoom = ClampMapPosition(desired, newScale);
             mapContainer.localPosition = new Vector3(clampedZoom.x, clampedZoom.y, mapContainer.localPosition.z);
 
             if (Mathf.Abs(newScale - _targetScale) < 0.001f)
                 _zoomTowardsPlayer = false;
 
-            return; 
+            return;
         }
+
+        if (_zoomTowardsCenter)
+        {
+            float ratio = (currentScale > 0.0001f) ? newScale / currentScale : 1f;
+            mapContainer.localScale = new Vector3(newScale, newScale, 1f);
+
+            // Al escalar la posición actual proporcionalmente, el punto que hoy está
+            // en el centro del viewport se mantiene fijo mientras el resto se acerca/aleja
+            Vector3 scaledPos = mapContainer.localPosition * ratio;
+            Vector2 clampedZoom = ClampMapPosition(scaledPos, newScale);
+            mapContainer.localPosition = new Vector3(clampedZoom.x, clampedZoom.y, mapContainer.localPosition.z);
+
+            if (Mathf.Abs(newScale - _targetScale) < 0.001f)
+                _zoomTowardsCenter = false;
+
+            return;
+        }
+
+        mapContainer.localScale = new Vector3(newScale, newScale, 1f);
+
         if (!_isDragging && _velocity != Vector3.zero)
         {
             mapContainer.localPosition += _velocity;
@@ -793,7 +834,6 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         Vector2 clamped = ClampMapPosition(mapContainer.localPosition, newScale);
         mapContainer.localPosition = new Vector3(clamped.x, clamped.y, mapContainer.localPosition.z);
     }
-
     private void CenterOnPlayer()
     {
         if (playerIcon == null || !playerIcon.gameObject.activeSelf) return;
@@ -809,6 +849,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         mapContainer.localPosition = new Vector3(clamped.x, clamped.y, mapContainer.localPosition.z);
 
         _velocity = Vector3.zero; // reiniciar inercia
+        _hasMoved = false;
     }
     private Vector2 ClampMapPosition(Vector2 desiredPosition, float scale)
     {
@@ -868,12 +909,33 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         if (!_isHovered) return;
         float scroll = eventData.scrollDelta.y;
         _targetScale = Mathf.Clamp(_targetScale + scroll * scrollSensitivity, minScale, maxScale);
-        _zoomTowardsPlayer = true;
-    }
 
+        RectTransform parentRect = mapContainer.parent as RectTransform;
+        bool cursorOverTexture = RectTransformUtility.RectangleContainsScreenPoint(mapImage.rectTransform, eventData.position, null);
+
+        if (cursorOverTexture && parentRect != null &&
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(parentRect, eventData.position, null, out Vector2 localPoint))
+        {
+            _zoomAnchorLocalPos = localPoint;
+            _zoomTowardsCursor = true;
+            _zoomTowardsCenter = false;
+            _zoomTowardsPlayer = false;
+        }
+        else if (_hasMoved)
+        {
+            _zoomTowardsCenter = true;
+            _zoomTowardsCursor = false;
+        }
+        else
+        {
+            _zoomTowardsPlayer = true;
+            _zoomTowardsCursor = false;
+        }
+    }
     public void OnDrag(PointerEventData eventData)
     {
         if (!_isDragging) return;
+        _hasMoved = true;
         float scaleRatio = mapContainer.localScale.x / maxScale;
         _velocity = new Vector3(eventData.delta.x, eventData.delta.y, 0f) * panSensitivity * scaleRatio;
         Vector3 desired = mapContainer.localPosition + _velocity;
@@ -884,8 +946,12 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     public void OnPointerDown(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left && _isHovered)
+        {
             _isDragging = true;
             _zoomTowardsPlayer = false;
+            _zoomTowardsCenter = false;
+            _zoomTowardsCursor = false;
+        }
     }
 
     public void OnPointerUp(PointerEventData eventData)

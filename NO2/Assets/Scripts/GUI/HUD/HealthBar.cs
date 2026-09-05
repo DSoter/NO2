@@ -47,7 +47,11 @@ public class HealthBar : MonoBehaviour
 
     public void UpdateMaxHealth()
     {
-        _rectTransform.sizeDelta = new Vector2(_playerData.MaxHealth, _startingHeight);
+        if (_rectTransform!=null)
+        {
+            _rectTransform.sizeDelta = new Vector2(_playerData.MaxHealth, _startingHeight);
+        }
+        
     }
 
     public void UpdateCurrentHealth()

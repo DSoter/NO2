@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Badge
   badgeName: Corazon fuerte
   achievement: {fileID: 11400000, guid: e552257212b713a43a5b2d14ea327b4d, type: 2}
-  description: "Tienes un fuerte corazon despu\xE9s de sobrevivir a uno de vida"
+  description: "Obtienes mayor vida m\xE1xima."
   icon: {fileID: 21300000, guid: 69fcc81662a08a74ba5fdbbb8072aef6, type: 3}
   slotsSize: 1
   effect:

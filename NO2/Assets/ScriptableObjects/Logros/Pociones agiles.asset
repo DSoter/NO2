@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Pociones agiles
   m_EditorClassIdentifier: Assembly-CSharp::Achievement
   achievementName: fast_potions
-  description: Tomate tres pociones en seis segundos
+  description: "Tomate dos pociones muy r\xE1pido"
   isCounter: 0
   targetCount: 0

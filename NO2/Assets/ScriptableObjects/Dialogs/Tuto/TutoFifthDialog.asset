@@ -15,48 +15,44 @@ MonoBehaviour:
   listOfTexts:
   - lines:
     - conditionKey: 
-      text: _#Bien hecho#_ has conseguido derrotar a uno de ellos.
+      text: _#Bien hecho#_, has hecho el primer paso derrotando a esa malvada criatura,
+        ahora solo te falta seguir avanzando.
     - conditionKey: 
-      text: Has hecho el primer paso, ahora solo te falta seguir avanzando.
+      text: "!#&Cachis la mar salada &#, no podr\xE1s continuar hasta que despejes
+        el paso!"
     - conditionKey: 
-      text: '!#&Cachis la mar salada &#, no podemos continuar hasta que despejes
-        el paso!'
+      text: "Parece que es muy resistente, deber\xE1s hacer una #/ruptura/#. Simplemente
+        deber\xE1s de golpearle cuando sea #/vulnerable/# para quitarle m\xE1s vida."
     - conditionKey: 
-      text: "Cuando un enemigo est\xE9 vulnerable podr\xE1s hacer una #/ruptura/#.
-        Simplemente deber\xE1s de golpearle para quitarl m\xE1s vida."
+      text: "Pero con esa espadita no podr\xE1s hacer nada, tienes que usar tu #=mazo=#.
+        Mant\xE9n el #click derecho# para cargar un ataque devastador que cuanto
+        m\xE1s lo cargues m\xE1s fuerte ser\xE1."
     - conditionKey: 
-      text: "Pero con esa espadita no podr\xE1s hacer nada, tienes que usar tu #=mazo=#."
+      text: "Cuando empieces a parpadear significa que has cargado /a tope/. Al soltar
+        el clic golpear\xE1s en la posici\xF3n del cursor."
     - conditionKey: 
-      text: "Mant\xE9n el #click derecho# para cargar un poderoso ataque, cuanto
-        m\xE1s lo cargues m\xE1s fuerte ser\xE1. Pero recuerda, cuando empieces a
-        parpadear significa que has cargado /a tope/."
-    - conditionKey: 
-      text: "Cuando sueltes el clic golpear\xE1s en la direcci\xF3n del rat\xF3n."
-    - conditionKey: 
-      text: "Prueba a golpearle cuando est\xE9 $vulnerable$. Cada enemigo se quedar\xE1
-        as\xED seg\xFAn distintas acciones, pero todos tendr\xE1n el borde $naranja$.
-        Es =dificil= hacer la rutura pero merece la #/pena/#."
+      text: "Golpeale cuando est\xE9 $vulnerable$, indicado porqu\xE9 tendr\xE1 el
+        borde rojo. Cada enemigo se quedar\xE1 as\xED seg\xFAn distintas acciones
+        por lo que deber\xE1s estar atento de como hacer la #/ruptura/#"
   repetitionTexts:
   - lines:
     - conditionKey: 
-      text: _#Bien hecho#_ has conseguido derrotar a uno de ellos.
+      text: _#Bien hecho#_, has hecho el primer paso derrotando a esa malvada criatura,
+        ahora solo te falta seguir avanzando.
     - conditionKey: 
-      text: Has hecho el primer paso, ahora solo te falta seguir avanzando.
+      text: "!#&Cachis la mar salada &#, no podr\xE1s continuar hasta que despejes
+        el paso!"
     - conditionKey: 
-      text: '!#&Cachis la mar salada &#, no podemos continuar hasta que despejes
-        el paso!'
+      text: "Parece que es muy resistente, deber\xE1s hacer una #/ruptura/#. Simplemente
+        deber\xE1s de golpearle cuando sea #/vulnerable/# para quitarle m\xE1s vida."
     - conditionKey: 
-      text: "Cuando un enemigo est\xE9 vulnerable podr\xE1s hacer una #/ruptura/#.
-        Simplemente deber\xE1s de golpearle para quitarle m\xE1s vida."
+      text: "Pero con esa espadita no podr\xE1s hacer nada, tienes que usar tu #=mazo=#.
+        Mant\xE9n el #click derecho# para cargar un ataque devastador que cuanto
+        m\xE1s lo cargues m\xE1s fuerte ser\xE1."
     - conditionKey: 
-      text: "Pero con esa espadita no podr\xE1s hacer nada, tienes que usar tu #=mazo=#."
+      text: "Cuando empieces a parpadear significa que has cargado /a tope/. Al soltar
+        el clic golpear\xE1s en la posici\xF3n del cursor."
     - conditionKey: 
-      text: "Mant\xE9n el #click derecho# para cargar un poderoso ataque, cuanto
-        m\xE1s lo cargues m\xE1s da\xF1o har\xE1s. Pero recuerda, cuando empieces
-        a parpadear significa que has cargado /a tope/."
-    - conditionKey: 
-      text: "Cuando sueltes el clic golpear\xE1s en la direcci\xF3n del rat\xF3n."
-    - conditionKey: 
-      text: "Prueba a golpearle cuando est\xE9 $vulnerable$. Cada enemigo se quedar\xE1
-        as\xED seg\xFAn distntas acciones, pero todos tendr\xE1n el borde $naranja$.
-        Es =dificil= hacer la rutura pero merece la #/pena/#."
+      text: "Golpeale cuando est\xE9 $vulnerable$, indicado porqu\xE9 tendr\xE1 el
+        borde rojo. Cada enemigo se quedar\xE1 as\xED seg\xFAn distintas acciones
+        por lo que deber\xE1s estar atento de como hacer la #/ruptura/#"

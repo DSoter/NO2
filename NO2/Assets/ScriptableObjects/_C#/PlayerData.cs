@@ -1,7 +1,6 @@
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
-using System.Linq;
+using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PlayerData", menuName = "Scriptable Objects/PlayerData")]
@@ -68,37 +67,66 @@ public class PlayerData : ScriptableObject
     [SerializeField] private EquippedBadges equippedBadges;
     [SerializeField] private string nameBadgeHundredRolls = "Acrobata amateur";
     [SerializeField] private string nameBadgeStrongHeart = "Corazon fuerte";
-    [SerializeField] private string nameBadgeBigCharge = "Peso pesado";
-    [SerializeField] private string nameBadgeNormalDefense = "Principiante";
-    [SerializeField] private string nameBadgeMaxHealthDefense = "Tutorial impecable";
+    [SerializeField] private string nameBadgeToughSkin = "Piel dura";
+    [SerializeField] private string nameBadgeFullHealthDefense = "Vida plena";
     [SerializeField] private string nameBadgeNO2 = "NO2";
+    [SerializeField] private string nameBadgeSnailSlayer = "Snail slayer";
+    [SerializeField] private string nameBadgeScoutPrincipiante = "Scout principiante";
+    [SerializeField] private string nameBadgeBoxSlayer = "Box slayer";
+    [SerializeField] private string nameBadgePrimeraInsignia = "Primera insignia";
+    [SerializeField] private string nameBadgeExpertAcrobat = "Acróbata experto";
 
+    // Umbral compartido para las condiciones "un cuarto o menos de X máximo"
+    private const float LowResourceThreshold = 0.25f;
+
+    // Modificadores activos por insignias (no se persisten: se reconstruyen a partir de EquippedBadges)
     private readonly Modifier strongHeartModifier = new Modifier(Modifier.ModifierType.Numeric, 10f);
     private readonly Modifier hundredRollsModifier = new Modifier(Modifier.ModifierType.Numeric, 10f);
-    private readonly Modifier bigChargeMinModifier = new Modifier(Modifier.ModifierType.Numeric, 2f);
-    private readonly Modifier bigChargeMaxModifier = new Modifier(Modifier.ModifierType.Numeric, 2f);
-    private readonly Modifier amateurDefenseModifier = new Modifier(Modifier.ModifierType.Percentage, 5f);
+    private readonly Modifier toughSkinModifier = new Modifier(Modifier.ModifierType.Percentage, 3f);
     private readonly Modifier fullHealthDefenseModifier = new Modifier(Modifier.ModifierType.Percentage, 70f);
-    private readonly Modifier no2Modifier = new Modifier(Modifier.ModifierType.Numeric, 20f);
+    private readonly Modifier no2Modifier = new Modifier(Modifier.ModifierType.Percentage, 20f);
+
+    // ASUNCIÓN: +20% de velocidad (a pie y corriendo) mientras se cumpla la condición de cada insignia.
+    private readonly Modifier snailSlayerSpeedModifier = new Modifier(Modifier.ModifierType.Percentage, 20f);
+    private readonly Modifier primeraInsigniaSpeedModifier = new Modifier(Modifier.ModifierType.Percentage, 20f);
+
+    // Valor exacto que pediste: +2 de daño plano en cada uno de los tres ataques
+    private readonly Modifier scoutPrincipianteDamageModifier = new Modifier(Modifier.ModifierType.Numeric, 2f);
+
+    // Valor exacto que pediste: +10% del oxígeno ganado en cada recogida
+    private readonly Modifier boxSlayerOxygenGainModifier = new Modifier(Modifier.ModifierType.Percentage, 10f);
+
+    // ASUNCIÓN: +30% de velocidad de regeneración de resistencia
+    private readonly Modifier expertAcrobatStaminaRegenModifier = new Modifier(Modifier.ModifierType.Percentage, 30f);
+
     private List<Modifier> maxHealthModifiers = new List<Modifier>();
     private List<Modifier> maxStaminaModifiers = new List<Modifier>();
-    private List<Modifier> minStrongAttackDamageModifiers = new List<Modifier>();
-    private List<Modifier> maxStrongAttackDamageModifiers = new List<Modifier>();
     private List<Modifier> defenseModifiers = new List<Modifier>();
     private List<Modifier> maxOxygenModifiers = new List<Modifier>();
+    private List<Modifier> staminaRegenerationSpeedModifiers = new List<Modifier>();
     private bool fullHealthDefenseBadgeEquipped;
+    private bool snailSlayerBadgeEquipped;
+    private bool scoutPrincipianteBadgeEquipped;
+    private bool boxSlayerBadgeEquipped;
+    private bool primeraInsigniaBadgeEquipped;
 
-    //references 
+    // Referencias guardadas para poder desuscribirse correctamente
     private Action<string> onEquippedIncreaseHealthHandler;
     private Action<string> onUnequippedDecreaseHealthHandler;
     private Action<string> onEquippedIncreaseStaminaHandler;
     private Action<string> onUnequippedDecreaseStaminaHandler;
-    private Action<string> onEquippedIncreaseStrongDamageHandler;
-    private Action<string> onUnequippedDecreaseStrongDamageHandler;
     private Action<string> onEquippedIncreaseDefenseHandler;
     private Action<string> onUnequippedDecreaseDefenseHandler;
     private Action<string> onEquippedIncreaseOxygenHandler;
     private Action<string> onUnequippedDecreaseOxygenHandler;
+    private Action<string> onEquippedConditionalSpeedHandler;
+    private Action<string> onUnequippedConditionalSpeedHandler;
+    private Action<string> onEquippedConditionalDamageHandler;
+    private Action<string> onUnequippedConditionalDamageHandler;
+    private Action<string> onEquippedOxygenGainBonusHandler;
+    private Action<string> onUnequippedOxygenGainBonusHandler;
+    private Action<string> onEquippedStaminaRegenHandler;
+    private Action<string> onUnequippedStaminaRegenHandler;
     private Action onBadgesResetHandler;
 
     // Events
@@ -117,11 +145,13 @@ public class PlayerData : ScriptableObject
     public float Health
     {
         get { return health; }
-        set {
-            if( health <= 5 && 0 < health && value > 10){
+        set
+        {
+            if (health <= 1 && 0 < health && value > 1)
+            {
                 GameManager.Instance.GetComponent<AchievementManager>().NotifyEvent("strong_heart");
             }
-            health = Mathf.Clamp(value, 0, maxHealth);
+            health = Mathf.Clamp(value, 0, MaxHealth);
             OnHealthChanged?.Invoke();
         }
     }
@@ -131,7 +161,7 @@ public class PlayerData : ScriptableObject
         get { return stamina; }
         set
         {
-            stamina = Mathf.Clamp(value, 0, maxStamina);
+            stamina = Mathf.Clamp(value, 0, MaxStamina);
             OnStaminaChanged?.Invoke();
         }
     }
@@ -139,22 +169,31 @@ public class PlayerData : ScriptableObject
     public float Oxygen
     {
         get { return oxygen; }
-        set 
+        set
         {
             var aux = oxygen;
+            float incomingValue = value;
 
-            oxygen = Mathf.Clamp(value, 0, maxOxygen);
+            if (boxSlayerBadgeEquipped && incomingValue > aux)
+            {
+                float gain = incomingValue - aux;
+                gain = boxSlayerOxygenGainModifier.ApplyModifier(gain);
+                incomingValue = aux + gain;
+            }
+
+            oxygen = Mathf.Clamp(incomingValue, 0, MaxOxygen);
             OnOxygenChanged?.Invoke();
 
-            if(value > aux)
+            if (incomingValue > aux)
             {
                 OnOxygenIncreased?.Invoke();
             }
         }
     }
 
-    public float MaxHealth 
-    { 
+    // El getter aplica los modificadores activos (insignias) sobre el valor base serializado
+    public float MaxHealth
+    {
         get { return Modifier.ApplyModifiers(maxHealth, maxHealthModifiers); }
         set
         {
@@ -183,6 +222,9 @@ public class PlayerData : ScriptableObject
         }
     }
 
+    // Defensa: arranca en baseDefense (1) y sube por porcentaje con las insignias.
+    // "Vida plena" solo se suma mientras la vida esté al máximo, por eso se
+    // comprueba en cada get en vez de guardarse siempre en defenseModifiers.
     public float Defense
     {
         get
@@ -212,9 +254,10 @@ public class PlayerData : ScriptableObject
         get { return secondsUntilStaminaRegeneration; }
     }
 
+    // "Acróbata experto": bonus permanente mientras esté equipada, no depende de ninguna condición
     public float StaminaRegenerationSpeed
     {
-        get { return staminaRegenerationSpeed; }
+        get { return Modifier.ApplyModifiers(staminaRegenerationSpeed, staminaRegenerationSpeedModifiers); }
     }
     public float HealthRegenerationSpeed
     {
@@ -257,14 +300,30 @@ public class PlayerData : ScriptableObject
         set { lastOxygenSeconds = value; }
     }
 
+    // "Snail slayer" (vida <= 25%) y "Primera insignia" (oxígeno <= 25%) suman
+    // su bonus de velocidad aquí. Al evaluarse en el get, se activan/desactivan
+    // automáticamente según cambie la vida o el oxígeno, sin necesitar más eventos.
     public float WalkingSpeed
     {
-        get { return walkingSpeed; }
+        get { return Modifier.ApplyModifiers(walkingSpeed, GetActiveSpeedModifiers()); }
     }
 
     public float RunningSpeed
     {
-        get { return runningSpeed; }
+        get { return Modifier.ApplyModifiers(runningSpeed, GetActiveSpeedModifiers()); }
+    }
+
+    private List<Modifier> GetActiveSpeedModifiers()
+    {
+        List<Modifier> active = new List<Modifier>();
+
+        if (snailSlayerBadgeEquipped && health <= MaxHealth * LowResourceThreshold)
+            active.Add(snailSlayerSpeedModifier);
+
+        if (primeraInsigniaBadgeEquipped && oxygen <= MaxOxygen * LowResourceThreshold)
+            active.Add(primeraInsigniaSpeedModifier);
+
+        return active;
     }
 
     public float IniRollingSpeed
@@ -301,18 +360,29 @@ public class PlayerData : ScriptableObject
         get { return hurtSeconds; }
     }
 
+    // "Scout principiante" (oxígeno <= 25%): +2 de daño plano en los tres ataques
     public float WeakAttackDamage
     {
-        get { return weakAttackDamage; }
+        get { return Modifier.ApplyModifiers(weakAttackDamage, GetActiveScoutDamageModifiers()); }
     }
 
     public float MinStrongAttackDamage
     {
-        get {return Modifier.ApplyModifiers(minStrongAttackDamage, minStrongAttackDamageModifiers); }
+        get { return Modifier.ApplyModifiers(minStrongAttackDamage, GetActiveScoutDamageModifiers()); }
     }
     public float MaxStrongAttackDamage
     {
-        get { return Modifier.ApplyModifiers(maxStrongAttackDamage, maxStrongAttackDamageModifiers); }
+        get { return Modifier.ApplyModifiers(maxStrongAttackDamage, GetActiveScoutDamageModifiers()); }
+    }
+
+    private List<Modifier> GetActiveScoutDamageModifiers()
+    {
+        List<Modifier> active = new List<Modifier>();
+
+        if (scoutPrincipianteBadgeEquipped && oxygen <= MaxOxygen * LowResourceThreshold)
+            active.Add(scoutPrincipianteDamageModifier);
+
+        return active;
     }
 
     public Flower EquipedFlower
@@ -324,11 +394,6 @@ public class PlayerData : ScriptableObject
     private void OnEnable()
     {
         SubscribeToBadges();
-
-        //if (!Load())
-        //{
-        //    Reset();
-        //}
     }
     private void OnDestroy()
     {
@@ -347,22 +412,36 @@ public class PlayerData : ScriptableObject
         onUnequippedDecreaseHealthHandler = (badgeName) => DecreaseMaxHealth(badgeName);
         onEquippedIncreaseStaminaHandler = (badgeName) => IncreaseMaxStamina(badgeName);
         onUnequippedDecreaseStaminaHandler = (badgeName) => DecreaseMaxStamina(badgeName);
-        onEquippedIncreaseStrongDamageHandler = (badgeName) => IncreaseStrongDamage(badgeName);
-        onUnequippedDecreaseStrongDamageHandler = (badgeName) => DecreaseStrongDamage(badgeName);
         onEquippedIncreaseDefenseHandler = (badgeName) => IncreaseDefense(badgeName);
         onUnequippedDecreaseDefenseHandler = (badgeName) => DecreaseDefense(badgeName);
-        equippedBadges.OnEquipped += onEquippedIncreaseDefenseHandler;
-        equippedBadges.OnUnequipped += onUnequippedDecreaseDefenseHandler;
+        onEquippedIncreaseOxygenHandler = (badgeName) => IncreaseMaxOxygen(badgeName);
+        onUnequippedDecreaseOxygenHandler = (badgeName) => DecreaseMaxOxygen(badgeName);
+        onEquippedConditionalSpeedHandler = (badgeName) => EquipConditionalSpeedBadge(badgeName);
+        onUnequippedConditionalSpeedHandler = (badgeName) => UnequipConditionalSpeedBadge(badgeName);
+        onEquippedConditionalDamageHandler = (badgeName) => EquipConditionalDamageBadge(badgeName);
+        onUnequippedConditionalDamageHandler = (badgeName) => UnequipConditionalDamageBadge(badgeName);
+        onEquippedOxygenGainBonusHandler = (badgeName) => EquipOxygenGainBonusBadge(badgeName);
+        onUnequippedOxygenGainBonusHandler = (badgeName) => UnequipOxygenGainBonusBadge(badgeName);
+        onEquippedStaminaRegenHandler = (badgeName) => IncreaseStaminaRegenSpeed(badgeName);
+        onUnequippedStaminaRegenHandler = (badgeName) => DecreaseStaminaRegenSpeed(badgeName);
         onBadgesResetHandler = HandleBadgesReset;
 
         equippedBadges.OnEquipped += onEquippedIncreaseHealthHandler;
         equippedBadges.OnUnequipped += onUnequippedDecreaseHealthHandler;
         equippedBadges.OnEquipped += onEquippedIncreaseStaminaHandler;
         equippedBadges.OnUnequipped += onUnequippedDecreaseStaminaHandler;
-        equippedBadges.OnEquipped += onEquippedIncreaseStrongDamageHandler;
-        equippedBadges.OnUnequipped += onUnequippedDecreaseStrongDamageHandler;
+        equippedBadges.OnEquipped += onEquippedIncreaseDefenseHandler;
+        equippedBadges.OnUnequipped += onUnequippedDecreaseDefenseHandler;
         equippedBadges.OnEquipped += onEquippedIncreaseOxygenHandler;
         equippedBadges.OnUnequipped += onUnequippedDecreaseOxygenHandler;
+        equippedBadges.OnEquipped += onEquippedConditionalSpeedHandler;
+        equippedBadges.OnUnequipped += onUnequippedConditionalSpeedHandler;
+        equippedBadges.OnEquipped += onEquippedConditionalDamageHandler;
+        equippedBadges.OnUnequipped += onUnequippedConditionalDamageHandler;
+        equippedBadges.OnEquipped += onEquippedOxygenGainBonusHandler;
+        equippedBadges.OnUnequipped += onUnequippedOxygenGainBonusHandler;
+        equippedBadges.OnEquipped += onEquippedStaminaRegenHandler;
+        equippedBadges.OnUnequipped += onUnequippedStaminaRegenHandler;
         equippedBadges.OnReset += onBadgesResetHandler;
     }
 
@@ -378,10 +457,6 @@ public class PlayerData : ScriptableObject
             equippedBadges.OnEquipped -= onEquippedIncreaseStaminaHandler;
         if (onUnequippedDecreaseStaminaHandler != null)
             equippedBadges.OnUnequipped -= onUnequippedDecreaseStaminaHandler;
-        if (onEquippedIncreaseStaminaHandler != null)
-            equippedBadges.OnEquipped -= onEquippedIncreaseStrongDamageHandler;
-        if (onUnequippedDecreaseStaminaHandler != null) 
-            equippedBadges.OnUnequipped -= onUnequippedDecreaseStrongDamageHandler;
         if (onEquippedIncreaseDefenseHandler != null)
             equippedBadges.OnEquipped -= onEquippedIncreaseDefenseHandler;
         if (onUnequippedDecreaseDefenseHandler != null)
@@ -390,6 +465,22 @@ public class PlayerData : ScriptableObject
             equippedBadges.OnEquipped -= onEquippedIncreaseOxygenHandler;
         if (onUnequippedDecreaseOxygenHandler != null)
             equippedBadges.OnUnequipped -= onUnequippedDecreaseOxygenHandler;
+        if (onEquippedConditionalSpeedHandler != null)
+            equippedBadges.OnEquipped -= onEquippedConditionalSpeedHandler;
+        if (onUnequippedConditionalSpeedHandler != null)
+            equippedBadges.OnUnequipped -= onUnequippedConditionalSpeedHandler;
+        if (onEquippedConditionalDamageHandler != null)
+            equippedBadges.OnEquipped -= onEquippedConditionalDamageHandler;
+        if (onUnequippedConditionalDamageHandler != null)
+            equippedBadges.OnUnequipped -= onUnequippedConditionalDamageHandler;
+        if (onEquippedOxygenGainBonusHandler != null)
+            equippedBadges.OnEquipped -= onEquippedOxygenGainBonusHandler;
+        if (onUnequippedOxygenGainBonusHandler != null)
+            equippedBadges.OnUnequipped -= onUnequippedOxygenGainBonusHandler;
+        if (onEquippedStaminaRegenHandler != null)
+            equippedBadges.OnEquipped -= onEquippedStaminaRegenHandler;
+        if (onUnequippedStaminaRegenHandler != null)
+            equippedBadges.OnUnequipped -= onUnequippedStaminaRegenHandler;
         if (onBadgesResetHandler != null)
             equippedBadges.OnReset -= onBadgesResetHandler;
     }
@@ -398,18 +489,19 @@ public class PlayerData : ScriptableObject
     {
         if (nameBadgeStrongHeart == badgeName)
         {
-            if (!maxHealthModifiers.Contains(strongHeartModifier))
-                maxHealthModifiers.Add(strongHeartModifier);
+            if (maxHealthModifiers.Contains(strongHeartModifier)) return;
 
+            maxHealthModifiers.Add(strongHeartModifier);
+            Health = health + 10;
             OnMaxHealthChanged?.Invoke();
         }
     }
     private void DecreaseMaxHealth(string badgeName)
     {
-
         if (nameBadgeStrongHeart == badgeName)
         {
             maxHealthModifiers.Remove(strongHeartModifier);
+
             if (health > MaxHealth)
             {
                 health = MaxHealth;
@@ -422,16 +514,15 @@ public class PlayerData : ScriptableObject
     {
         if (nameBadgeHundredRolls == badgeName)
         {
-            if (!maxStaminaModifiers.Contains(hundredRollsModifier))
-                maxStaminaModifiers.Add(hundredRollsModifier);
+            if (maxStaminaModifiers.Contains(hundredRollsModifier)) return;
 
+            maxStaminaModifiers.Add(hundredRollsModifier);
             Stamina = stamina + 10;
             OnMaxStaminaChanged?.Invoke();
         }
     }
     private void DecreaseMaxStamina(string badgeName)
     {
-
         if (nameBadgeHundredRolls == badgeName)
         {
             maxStaminaModifiers.Remove(hundredRollsModifier);
@@ -443,50 +534,32 @@ public class PlayerData : ScriptableObject
             OnMaxStaminaChanged?.Invoke();
         }
     }
-    private void IncreaseStrongDamage(string badgeName)
-    {
-        if (nameBadgeBigCharge == badgeName)
-        {
-            if (!minStrongAttackDamageModifiers.Contains(bigChargeMinModifier))
-                minStrongAttackDamageModifiers.Add(bigChargeMinModifier);
-            if (!maxStrongAttackDamageModifiers.Contains(bigChargeMaxModifier))
-                maxStrongAttackDamageModifiers.Add(bigChargeMaxModifier);
-        }
-    }
-    private void DecreaseStrongDamage(string badgeName)
-    {
-
-        if (nameBadgeBigCharge == badgeName)
-        {
-            minStrongAttackDamageModifiers.Remove(bigChargeMinModifier);
-            maxStrongAttackDamageModifiers.Remove(bigChargeMaxModifier);
-        }
-    }
 
     private void IncreaseDefense(string badgeName)
     {
-        if (nameBadgeNormalDefense == badgeName)
+        if (nameBadgeToughSkin == badgeName)
         {
-            if (defenseModifiers.Contains(amateurDefenseModifier)) return;
-            defenseModifiers.Add(amateurDefenseModifier);
+            if (defenseModifiers.Contains(toughSkinModifier)) return;
+            defenseModifiers.Add(toughSkinModifier);
         }
-        else if (nameBadgeMaxHealthDefense == badgeName)
+        else if (nameBadgeFullHealthDefense == badgeName)
         {
             fullHealthDefenseBadgeEquipped = true;
         }
     }
     private void DecreaseDefense(string badgeName)
     {
-        if (nameBadgeNormalDefense == badgeName)
+        if (nameBadgeToughSkin == badgeName)
         {
-            defenseModifiers.Remove(amateurDefenseModifier);
+            defenseModifiers.Remove(toughSkinModifier);
         }
-        else if (nameBadgeMaxHealthDefense == badgeName)
+        else if (nameBadgeFullHealthDefense == badgeName)
         {
             fullHealthDefenseBadgeEquipped = false;
         }
     }
-        private void IncreaseMaxOxygen(string badgeName)
+
+    private void IncreaseMaxOxygen(string badgeName)
     {
         if (nameBadgeNO2 == badgeName)
         {
@@ -510,22 +583,96 @@ public class PlayerData : ScriptableObject
             OnMaxOxygenChanged?.Invoke();
         }
     }
-    
+
+    private void EquipConditionalSpeedBadge(string badgeName)
+    {
+        if (nameBadgeSnailSlayer == badgeName)
+        {
+            snailSlayerBadgeEquipped = true;
+        }
+        else if (nameBadgePrimeraInsignia == badgeName)
+        {
+            primeraInsigniaBadgeEquipped = true;
+        }
+    }
+    private void UnequipConditionalSpeedBadge(string badgeName)
+    {
+        if (nameBadgeSnailSlayer == badgeName)
+        {
+            snailSlayerBadgeEquipped = false;
+        }
+        else if (nameBadgePrimeraInsignia == badgeName)
+        {
+            primeraInsigniaBadgeEquipped = false;
+        }
+    }
+
+    private void EquipConditionalDamageBadge(string badgeName)
+    {
+        if (nameBadgeScoutPrincipiante == badgeName)
+        {
+            scoutPrincipianteBadgeEquipped = true;
+        }
+    }
+    private void UnequipConditionalDamageBadge(string badgeName)
+    {
+        if (nameBadgeScoutPrincipiante == badgeName)
+        {
+            scoutPrincipianteBadgeEquipped = false;
+        }
+    }
+
+    private void EquipOxygenGainBonusBadge(string badgeName)
+    {
+        if (nameBadgeBoxSlayer == badgeName)
+        {
+            boxSlayerBadgeEquipped = true;
+        }
+    }
+    private void UnequipOxygenGainBonusBadge(string badgeName)
+    {
+        if (nameBadgeBoxSlayer == badgeName)
+        {
+            boxSlayerBadgeEquipped = false;
+        }
+    }
+
+    private void IncreaseStaminaRegenSpeed(string badgeName)
+    {
+        if (nameBadgeExpertAcrobat == badgeName)
+        {
+            if (staminaRegenerationSpeedModifiers.Contains(expertAcrobatStaminaRegenModifier)) return;
+            staminaRegenerationSpeedModifiers.Add(expertAcrobatStaminaRegenModifier);
+        }
+    }
+    private void DecreaseStaminaRegenSpeed(string badgeName)
+    {
+        if (nameBadgeExpertAcrobat == badgeName)
+        {
+            staminaRegenerationSpeedModifiers.Remove(expertAcrobatStaminaRegenModifier);
+        }
+    }
+
     private void HandleBadgesReset()
     {
         maxHealthModifiers.Clear();
         maxStaminaModifiers.Clear();
         defenseModifiers.Clear();
         maxOxygenModifiers.Clear();
+        staminaRegenerationSpeedModifiers.Clear();
         fullHealthDefenseBadgeEquipped = false;
+        snailSlayerBadgeEquipped = false;
+        scoutPrincipianteBadgeEquipped = false;
+        boxSlayerBadgeEquipped = false;
+        primeraInsigniaBadgeEquipped = false;
 
         if (health > MaxHealth) health = MaxHealth;
         if (stamina > MaxStamina) stamina = MaxStamina;
         if (oxygen > MaxOxygen) oxygen = MaxOxygen;
+
         OnMaxHealthChanged?.Invoke();
         OnMaxStaminaChanged?.Invoke();
         OnMaxOxygenChanged?.Invoke();
     }
-
 
 }

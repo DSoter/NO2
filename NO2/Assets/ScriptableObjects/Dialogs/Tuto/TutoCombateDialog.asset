@@ -15,36 +15,38 @@ MonoBehaviour:
   listOfTexts:
   - lines:
     - conditionKey: 
-      text: "Cuidado, m\xE1s adelante hay uno de tus amiguitos cortandote el paso"
+      text: "Cuidado, m\xE1s adelante hay uno de tus amiguitos cortandote el paso."
     - conditionKey: 
-      text: Es muy peligroso, se puede ver en sus ojos la #=sed de sangre=#.
+      text: Es muy peligroso, se puede ver la #=sed de sangre=# en sus ojos.
     - conditionKey: 
       text: "Si te quedas sin vida #=morir\xE1s=# pero no te preocupes, podr\xE1s
-        volver a intentarlo."
+        volver a intentarlo hasta que te canses."
     - conditionKey: 
-      text: Para sobrevivir estate atento a tu #/resistencia/#, la barra verde que
-        tienes en la pantalla.
+      text: "Para sobrevivir debes estar atento a tu #/resistencia/#, la barra verde
+        que tienes en la pantalla. Del &#ox\xEDgeno#& no debes preocuparte, en esta
+        cueva hay de sobra."
     - conditionKey: 
-      text: "Al hacer =#atacar#= o #_correr_# consumen tu resistencia hasta que no
-        podr\xE1s realizarlas."
+      text: "Al =#atacar#= o #_correr_# consumes tu resistencia. Sin ella, no podr\xE1s
+        ni atacar ni esquivar."
     - conditionKey: 
-      text: "Para correr simplemente debes de mantener la tecla /shift/ (a la izquierda
-        de la /Z/), pero consumir\xE1s resistencia."
+      text: "Para correr simplemente debes de mantener la tecla /shift/ pero consumir\xE1s
+        resistencia."
   repetitionTexts:
   - lines:
     - conditionKey: 
-      text: "Cuidado, m\xE1s adelante hay uno de tus amiguitos cortandote el paso"
+      text: "Cuidado, m\xE1s adelante hay uno de tus amiguitos cortandote el paso."
     - conditionKey: 
-      text: Es muy peligroso, se puede ver en sus ojos la #=sed de sangre=#.
+      text: Es muy peligroso, se puede ver la #=sed de sangre=# en sus ojos.
     - conditionKey: 
       text: "Si te quedas sin vida #=morir\xE1s=# pero no te preocupes, podr\xE1s
-        volver a intentarlo."
+        volver a intentarlo hasta que te canses."
     - conditionKey: 
-      text: Para sobrevivir estate atento a tu #/resistencia/#, la barra verde que
-        tienes en la pantalla.
+      text: "Para sobrevivir debes estar atento a tu #/resistencia/#, la barra verde
+        que tienes en la pantalla. Del &#ox\xEDgeno#& no debes preocuparte, en esta
+        cueva hay de sobra."
     - conditionKey: 
-      text: "Al hacer acciones como =#atacar#= o #_correr_# consumen tu resistencia
-        hasta que no podr\xE1s realizarlas."
+      text: "Al =#atacar#= o #_correr_# consumes tu resistencia. Sin ella, no podr\xE1s
+        ni atacar ni esquivar."
     - conditionKey: 
-      text: "Para correr simplemente debes de mantener la tecla /shift/ (a la izquierda
-        de la /Z/), pero consumir\xE1s resistencia."
+      text: "Para correr simplemente debes de mantener la tecla /shift/ pero consumir\xE1s
+        resistencia."

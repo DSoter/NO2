@@ -15,5 +15,5 @@ MonoBehaviour:
   money: 811
   maxAmount: 99999999
   equippedBadges: {fileID: 11400000, guid: be93a51aa16842a4c85fa0af75138391, type: 2}
-  nameBadgeHundredCoins: "Peque\xF1a fortuna"
+  nameBadgeHundredCoins: Calderilla
   nameBadgeFiveThousandCoins: Codicioso

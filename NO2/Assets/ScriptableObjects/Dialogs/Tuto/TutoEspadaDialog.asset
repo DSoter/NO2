@@ -15,28 +15,24 @@ MonoBehaviour:
   listOfTexts:
   - lines:
     - conditionKey: 
-      text: Veo que ha habido un =#derrumbe#=, te han cortado el paso
+      text: Veo que ha habido un =#derrumbe#=, te han cortado el paso.
     - conditionKey: 
-      text: "/\xA1Estamos atrapados!/ \xBFQue vamos a hacer?"
+      text: "\xA1Est\xE1s #*atrapado*#! Si no haces nada no podr\xE1s volver a #_casa_#."
     - conditionKey: 
-      text: 'Se me olvidaba, yo simplemente soy un  $cartel$. '
+      text: "Pero _tranquilo_ tengo una soluci\xF3n. Puedes usar tu espada para *#destruir#*
+        rocas. solo necesitas utilizar el clic izquierdo.del rat\xF3n."
     - conditionKey: 
-      text: "\xA1Si no haces nada no podr\xE1s volver a #_casa_#!"
-    - conditionKey: 
-      text: "_Tranquilo_ tengo una soluci\xF3n, puedes usar tu espada para *#destruir#*
-        rocas."
-    - conditionKey: 
-      text: "Para atacar con tu espada utiliza el clic izquierdo del rat\xF3n."
+      text: "Debes apuntar utilizando el rat\xD3n, golpear\xE1s en la direcci\xF3n
+        del cursor."
   repetitionTexts:
   - lines:
     - conditionKey: 
-      text: Veo que ha habido un =#derrumbe#=, te han cortado el paso
+      text: Veo que ha habido un =#derrumbe#=, te han cortado el paso.
     - conditionKey: 
-      text: "/\xA1Est\xE1s atrapado!/ \xBFQue vas a hacer?"
+      text: "\xA1Est\xE1s #*atrapado*#! Si no haces nada no podr\xE1s volver a #_casa_#."
     - conditionKey: 
-      text: "\xA1Si no haces nada no podr\xE1s volver a #_casa_#!"
+      text: "Pero _tranquilo_ tengo una soluci\xF3n. Puedes usar tu espada para *#destruir#*
+        rocas. solo necesitas utilizar el clic izquierdo.del rat\xF3n."
     - conditionKey: 
-      text: "_Tranquilo_ tengo una soluci\xF3n, puedes usar tu espada para *#destruir#*
-        rocas."
-    - conditionKey: 
-      text: "Para atacar con tu espada utiliza el clic izquierdo del rat\xF3n."
+      text: "Debes apuntar utilizando el rat\xD3n, golpear\xE1s en la direcci\xF3n
+        del cursor."

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Badge
   badgeName: Acrobata experto
   achievement: {fileID: 11400000, guid: e835fcff27d5d604db7c6b9575196bda, type: 2}
-  description: Ya eres un expero voltereun volteretista experto
+  description: "Recuperas la resistencia m\xE1s r\xE1pido."
   icon: {fileID: 6408713674569499924, guid: 2ccd57835bd6e294ba4dfd60e63cc0ec, type: 3}
   slotsSize: 1
   effect:

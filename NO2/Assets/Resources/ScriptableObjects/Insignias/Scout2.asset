@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Badge
   badgeName: Scout principiante
   achievement: {fileID: 11400000, guid: f984561aab277844f89e0b0270d8d4d5, type: 2}
-  description: Has demostrado tu valia diversas veces adquiriendo un total de 5 insignias
+  description: "Cuando tienes poco ox\xEDgeno consigues un aumento del ataque."
   icon: {fileID: 4260968908813130095, guid: 151ae6d17271cc645a564d3a11c23a27, type: 3}
   slotsSize: 1
   effect:

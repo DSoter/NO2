@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Volteretista experto
   m_EditorClassIdentifier: Assembly-CSharp::Achievement
   achievementName: 1000_rolls
-  description: Has realizado mil volteretas mil volteretas
+  description: Has realizado 250 volteretas
   isCounter: 1
-  targetCount: 1000
+  targetCount: 250

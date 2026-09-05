@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Badge
   badgeName: Primera flor
   achievement: {fileID: 11400000, guid: 496642cd1706f4a49ace1270bbc01025, type: 2}
-  description: Has descubierto las flores y como utilizarlas. Mejora ligeramente
-    la efectividad de la flor equipada
+  description: Mejora ligeramente la efectividad de la flor equipada.
   icon: {fileID: 21300000, guid: a1198ff664e257f458834ac5171c2be4, type: 3}
   slotsSize: 1
   effect:

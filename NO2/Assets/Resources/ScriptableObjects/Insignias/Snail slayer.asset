@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Badge
   badgeName: Snail slayer
   achievement: {fileID: 11400000, guid: c04d37b56f37c41418d567f9980bc5f8, type: 2}
-  description: Has derrotado al rey caracol
+  description: "Cuando tienes poca vida te mueves m\xE1s r\xE1pido."
   icon: {fileID: 21300000, guid: 51ce033add6f3d447ad70c0d7fc6fca4, type: 3}
   slotsSize: 1
   effect:

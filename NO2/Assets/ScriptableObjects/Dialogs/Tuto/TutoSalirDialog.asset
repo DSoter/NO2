@@ -17,15 +17,11 @@ MonoBehaviour:
     - conditionKey: 
       text: _Enhorabuena_, has conseguido salir de esa *#cueva# horrible*
     - conditionKey: playerNeverDied
-      text: Has conseguido que no te derroten esos caracoles.
-    - conditionKey: playerNeverDied
-      text: "Pero esto ha sido solo el principio, todav\xEDa debes de llegar a _#casa#_."
+      text: "Has conseguido que no te derroten esos caracoles, pero esto ha sido
+        solo el principio, todav\xEDa debes de llegar a _#casa#_."
     - conditionKey: playerHasDied
-      text: Al final lo conseguiste, has podido derrotar a la madre caracol.
-    - conditionKey: playerHasDied
-      text: "Est\xE1s al lado de #_casa_#, si has podido salir podr\xE1s llegar a
-        casa."
-  - lines:
+      text: "Al final lo conseguiste, has conseguido derrotar al rey caracol. Est\xE1s
+        al lado de #_casa_#, si has podido salir podr\xE1s llegar."
     - conditionKey: 
       text: "Pero ten cuidado, tus amiguitos han estado #=comiendo=# la hierba y
         hay zonas sin #&ox\xEDgeno&#, no podr\xE1s estar mucho tiempo en ellas."
@@ -37,20 +33,24 @@ MonoBehaviour:
         no ser por tu _jard\xEDn_ tendr\xEDas que vivir en esta cueva para siempre. "
     - conditionKey: 
       text: "Si nadie hace nada, la fauna se encargar\xE1 de rematar el trabajo...
-        Pero ahora puedes _luchar_."
+        Pero ahora puedes _luchar_ y cambiar las cosas."
+    - conditionKey: 
+      text: "Podr\xE1s conseguir burbujas de ox\xEDgeno al derrotar a cualquier enemigo
+        o rompiendo cajas, cr\xE9eme que te haran falta. Mucha suerte en tu viaje
+        #_dormil\xF3n_#"
   repetitionTexts:
   - lines:
     - conditionKey: 
       text: _Enhorabuena_, has conseguido salir de esa *#cueva# horrible*
     - conditionKey: playerNeverDied
-      text: Has conseguido que no te derroten esos caracoles.
-    - conditionKey: playerNeverDied
-      text: "Pero esto ha sido solo el principio, todav\xEDa debes de llegar a _#casa#_."
+      text: "Has conseguido que no te derroten esos caracoles, pero esto ha sido
+        solo el principio, todav\xEDa debes de llegar a _#casa#_."
     - conditionKey: playerHasDied
-      text: Al final lo conseguiste, has podido derrotar al reyaracol.
-    - conditionKey: playerHasDied
-      text: "Est\xE1s al lado de #_casa_#, si has podido salir podr\xE1s llegar a
-        casa."
+      text: "Al final lo conseguiste, has conseguido derrotar al rey caracol. Est\xE1s
+        al lado de #_casa_#, si has podido salir podr\xE1s llegar a casa."
+    - conditionKey: 
+      text: "Pero ten cuidado, tus amiguitos han estado #=comiendo=# la hierba y
+        hay zonas sin #&ox\xEDgeno&#, no podr\xE1s estar mucho tiempo en ellas."
     - conditionKey: 
       text: "Si pasas mucho tiempo en una zona sin vegetaci\xF3n #*morir\xE1s*# ya
         que el aire es #=irrespirable=#."
@@ -59,6 +59,4 @@ MonoBehaviour:
         no ser por tu _jard\xEDn_ tendr\xEDas que vivir en esta cueva para siempre. "
     - conditionKey: 
       text: "Si nadie hace nada, la fauna se encargar\xE1 de rematar el trabajo...
-        Pero ahora puedes _luchar_."
-    - conditionKey: 
-      text: "Yo me voy a quedar aqu\xED, pero seguo que te encuentras m\xE1s #_amigos_#"
+        Pero ahora puedes _luchar_ y cambiar las cosas."

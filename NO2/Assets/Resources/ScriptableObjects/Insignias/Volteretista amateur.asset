@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Badge
   badgeName: Acrobata amateur
   achievement: {fileID: 11400000, guid: 3bbf5c260532cfa4491265ae08007d25, type: 2}
-  description: Has iniciado el camino del volteretista
+  description: "Consigues m\xE1s resistencia m\xE1xima."
   icon: {fileID: -5302832074135301694, guid: d8e19f05792651f448d296dc4311fa6f, type: 3}
   slotsSize: 1
   effect:

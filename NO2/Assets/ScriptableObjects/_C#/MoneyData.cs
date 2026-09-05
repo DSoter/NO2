@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using Unity.Mathematics;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "MoneyData", menuName = "Scriptable Objects/MoneyData")]
 public class MoneyData : ScriptableObject
@@ -12,28 +13,40 @@ public class MoneyData : ScriptableObject
     [SerializeField] private string nameBadgeFiveThousandCoins = "Codicioso";
     public event Action OnMoneyChanged;
 
+
+    private readonly Modifier fiveThousandCoinsModifier = new Modifier(Modifier.ModifierType.Percentage, 51f);
+
     public int Money
     {
         get { return money; }
         set
         {
-            if (equippedBadges.IsEquipped(nameBadgeHundredCoins))
+            int gain = value - money;
+
+            if (gain > 0 && equippedBadges != null && equippedBadges.IsEquipped(nameBadgeFiveThousandCoins))
             {
-                if(value-money > 0) { 
+                gain = Mathf.RoundToInt(fiveThousandCoinsModifier.ApplyModifier(gain));
+                value = money + gain;
+            }
+
+            if (equippedBadges != null && equippedBadges.IsEquipped(nameBadgeHundredCoins))
+            {
+                if (value - money > 0)
+                {
                     if (UnityEngine.Random.value <= 0.05f)
                     {
 
                         Debug.Log("Tocó la loteria");
-                        value = value + (value-money);
+                        value = value + (value - money);
                     }
                 }
             }
-            
+
             money = Mathf.Clamp(value, 0, maxAmount);
             if (money >= 100)
             {
                 GameManager.Instance.GetComponent<AchievementManager>().NotifyEvent("100_money");
-                if (money >= 5000)
+                if (money >= 1000)
                 {
                     GameManager.Instance.GetComponent<AchievementManager>().NotifyEvent("5000_money");
 

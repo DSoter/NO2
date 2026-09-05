@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Volteretista amateur
   m_EditorClassIdentifier: Assembly-CSharp::Achievement
   achievementName: 100_rolls
-  description: Has realizado cien volteretas
+  description: Has realizado 25 volteretas.
   isCounter: 1
-  targetCount: 100
+  targetCount: 25

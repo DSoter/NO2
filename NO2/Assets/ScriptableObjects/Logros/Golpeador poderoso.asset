@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Golpeador poderoso
   m_EditorClassIdentifier: Assembly-CSharp::Achievement
   achievementName: big_charge
-  description: Has ejecutado un golpe tras cargar unos 6 o 7 segundos
+  description: Has ejecutado un golpe tras cargar mucho tiempo.
   isCounter: 0
   targetCount: 0

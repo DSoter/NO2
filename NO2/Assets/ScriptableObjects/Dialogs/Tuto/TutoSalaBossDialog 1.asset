@@ -19,9 +19,8 @@ MonoBehaviour:
     - conditionKey: playerHasDIed
       text: "Aunque esta cueva pueda contigo no impedir\xE1 que llegues a casa."
     - conditionKey: 
-      text: "Estamos muy cerca de la #salida#, por fin podr\xE1s volver a casa."
-    - conditionKey: 
-      text: "Igual tus amiguitos se est\xE1n dando un fest\xEDn con tu jard\xEDn."
+      text: "Estamos muy cerca de la #salida#, por fin podr\xE1s volver a casa, pero
+        igual tus amiguitos se est\xE1n dando un fest\xEDn con tu jard\xEDn."
     - conditionKey: 
       text: "\xA1Date prisa! Espero que no te encuentres con el rey caracol..."
     - conditionKey: 
@@ -33,9 +32,8 @@ MonoBehaviour:
     - conditionKey: playerHasDIed
       text: "Aunque esta cueva pueda contigo no impedir\xE1 que llegues a casa."
     - conditionKey: 
-      text: "Estamos muy cerca de la #salida#, por fin podr\xE1s volver a casa."
-    - conditionKey: 
-      text: "Igual tus amiguitos se est\xE1n dando un fest\xEDn con tu jard\xEDn."
+      text: "Estamos muy cerca de la #salida#, por fin podr\xE1s volver a casa, pero
+        igual tus amiguitos se est\xE1n dando un fest\xEDn con tu jard\xEDn."
     - conditionKey: 
       text: "\xA1Date prisa! Espero que no te encuentres con el rey caracol..."
     - conditionKey: 

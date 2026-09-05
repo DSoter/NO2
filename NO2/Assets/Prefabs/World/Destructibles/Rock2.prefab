@@ -56,6 +56,14 @@ PrefabInstance:
       propertyPath: _hitPoints
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7789973294424299220, guid: 3a74a1db8fb11834d9a4047602847287, type: 3}
+      propertyPath: _content.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7789973294424299220, guid: 3a74a1db8fb11834d9a4047602847287, type: 3}
+      propertyPath: '_content.Array.data[0]'
+      value: 
+      objectReference: {fileID: 4435767342414228798, guid: 16e7345272885af408f3c264add47d47, type: 3}
     - target: {fileID: 7824745739554196600, guid: 3a74a1db8fb11834d9a4047602847287, type: 3}
       propertyPath: m_Sprite
       value: 

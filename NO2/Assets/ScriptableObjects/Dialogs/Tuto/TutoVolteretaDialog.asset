@@ -14,39 +14,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogTextData
   listOfTexts:
   - lines:
-    - conditionKey: playerHasDied
-      text: TheGame.
     - conditionKey: 
       text: "Cuidado, adem\xE1s de tus amiguitos esta #*cueva*# est\xE1 llena de
-        =peligros= como #=trampas=#."
+        #=trampas=#."
     - conditionKey: 
       text: "Para llegar sano y salvo necesitar\xE1s algo m\xE1s que atacar a cualquier
         cosa que se mueva."
     - conditionKey: 
-      text: "Puedes recuperar vida que hayas perdido utilizando las pociones que
-        tienes. Puedes beberte todas las que quieras, las recuperar\xE1s al descansar
-        en una /#hoguera#/, adem\xE1s saben a fresa. "
+      text: Puedes recuperar vida que hayas perdido utilizando las pociones que tienes,
+        simplemente pulsa la tecla /F/ para consumir una.
     - conditionKey: 
-      text: Simplemente pulsa la tecla /F/ para consumir una.
+      text: "Tambien puedes esquivar peligros usando la voltereta pulsando el /espacio/,
+        lanzandote en la direcci\xF3n que te est\xE9s moviendo."
     - conditionKey: 
-      text: Tambien puedes esquivar peligros usando la voltereta pulsando el /espacio/.
-    - conditionKey: 
-      text: "Pero ten cuidado solo ser\xE1s invulnerable durante unos momentos."
+      text: "Pero ten cuidado solo ser\xE1s invulnerable durante unos momentos, adem\xE1s
+        de dejarte indefenso momentaneamente tras realizarla."
   repetitionTexts:
   - lines:
     - conditionKey: 
       text: "Cuidado, adem\xE1s de tus amiguitos esta #*cueva*# est\xE1 llena de
-        =peligros= como #=trampas=#."
+        #=trampas=#."
     - conditionKey: 
       text: "Para llegar sano y salvo necesitar\xE1s algo m\xE1s que atacar a cualquier
         cosa que se mueva."
     - conditionKey: 
-      text: "Puedes recuperar vida que hayas perdido utilizando las pociones que
-        tienes. Puedes beberte todas las que quieras, las recuperar\xE1s al descansar
-        en una /#hoguera#/."
+      text: Puedes recuperar vida que hayas perdido utilizando las pociones que tienes,
+        simplemente pulsa la tecla /F/ para consumir una.
     - conditionKey: 
-      text: Simplemente pulsa la tecla /F/ para consumir una.
+      text: "Tambien puedes esquivar peligros usando la voltereta pulsando el /espacio/,
+        lanzandote en la direcci\xF3n que te est\xE9s moviendo."
     - conditionKey: 
-      text: Tambien puedes esquivar peligros usando la voltereta pulsando el /espacio/.
-    - conditionKey: 
-      text: "Pero ten cuidado solo ser\xE1s invulnerable durante unos momentos."
+      text: "Pero ten cuidado solo ser\xE1s invulnerable durante unos momentos, adem\xE1s
+        de dejarte indefenso momentaneamente tras realizarla."

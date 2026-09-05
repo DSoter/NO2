@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cefcbd99b00b4c14eab78afd4ec1278b, type: 3}
   m_Name: "Peque\xF1a fortuna"
   m_EditorClassIdentifier: Assembly-CSharp::Badge
-  badgeName: "Peque\xF1a fortuna"
+  badgeName: Calderilla
   achievement: {fileID: 11400000, guid: 7328f90b88ea48f458b9a350325bec3e, type: 2}
-  description: "Al tenerla equipada tienes una peque\xF1a probabilidad de duplicar
-    el numero de monedas obteidas cada vez que consigues cualquier cantidad."
+  description: Al obtener monedas de enemigos o cajas hay una probabilidad de duplicar
+    la cantidad.
   icon: {fileID: 21300000, guid: 16700cec42fcb594e9c872161712b3f9, type: 3}
   slotsSize: 1
   effect:

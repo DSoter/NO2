@@ -19,7 +19,8 @@ MonoBehaviour:
     - conditionKey: 
       text: Mira, una #=hoguera=#.
     - conditionKey: 
-      text: "Permitete #/descansar/#, podr\xE1s recuperar vida y guardar tu progreso."
+      text: "Permitete #/descansar/#, podr\xE1s curarte, recargar tus pociones y
+        guardar tu progreso."
     - conditionKey: 
       text: Puedes sentarte igual que hablas conmigo, con la tecla /E/, quedandote
         descansando en el fuego hasta volver a pulsarla.
@@ -30,7 +31,8 @@ MonoBehaviour:
     - conditionKey: 
       text: Mira, una #=hoguera=#.
     - conditionKey: 
-      text: "Permitete #/descansar/#, podr\xE1s recuperar vida y guardar tu progreso."
+      text: "Permitete #/descansar/#, podr\xE1s curarte, recargar tus pociones y
+        guardar tu progreso."
     - conditionKey: 
       text: Puedes sentarte igual que hablas conmigo, con la tecla /E/, quedandote
         descansando en el fuego hasta volver a pulsarla.

@@ -15,7 +15,7 @@ MonoBehaviour:
   listOfTexts:
   - lines:
     - conditionKey: 
-      text: "Buenos d\xEDas, dormil\xF3n."
+      text: "Buenos d\xEDas, #/dormil\xD3n/#."
     - conditionKey: 
       text: Ya he visto que anoche te escabulliste para dormir en tu #refugio secreto#.
     - conditionKey: 
@@ -29,11 +29,11 @@ MonoBehaviour:
         una charla. Y esta vez ni tu #refugio secreto# te salvar\xE1."
     - conditionKey: 
       text: "Por cierto, puede que se nos hayan escapado algunos de nuestros... #=problemas=#
-        hacia el interior de la cueva. Ten cuidado dormil\xF3n."
+        hacia el interior de la cueva. Ten cuidado #/dormil\xD3n/#."
   repetitionTexts:
   - lines:
     - conditionKey: playerNeverDied
-      text: "Buenos d\xEDas, dormil\xF3n."
+      text: "Buenos d\xEDas, #/dormil\xD3n/#."
     - conditionKey: playerNeverDied
       text: Ya he visto que anoche te escabulliste para dormir en tu alijo secreto.
     - conditionKey: playerNeverDied
@@ -53,4 +53,4 @@ MonoBehaviour:
     - conditionKey: playerHasDied
       text: Veo que no has podido con nuestros problemillas que ocupan esta cueva.
     - conditionKey: playerHasDied
-      text: Pero puedes volver a intentarlo
+      text: "Pero puedes volver a intentarlo. Ten cuidado #/dormil\xD3n/#."

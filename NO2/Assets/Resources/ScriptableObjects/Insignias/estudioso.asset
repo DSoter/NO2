@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Badge
   badgeName: Primera medalla
   achievement: {fileID: 11400000, guid: 8362e8652bbaaa548a8a29519a67853b, type: 2}
-  description: Para aprender debes lograr un aprendizaje logrado
+  description: "Al tener poco ox\xEDgeno te mueves m\xE1s r\xE1pido."
   icon: {fileID: 21300000, guid: 2cd23962c2ef8d54c97f214037660b6e, type: 3}
   slotsSize: 1
   effect:

@@ -812,8 +812,8 @@ MonoBehaviour:
   _attackImpulse: 2
   _minCharge: 0.5
   _maxCharge: 1.5
-  _fastHealWindowSeconds: 6
-  _fastHealCount: 3
+  _fastHealWindowSeconds: 4
+  _fastHealCount: 2
 --- !u!50 &1363480059194287446
 Rigidbody2D:
   serializedVersion: 5

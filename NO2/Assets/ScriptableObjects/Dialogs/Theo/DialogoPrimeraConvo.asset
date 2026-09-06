@@ -22,8 +22,8 @@ MonoBehaviour:
     - conditionKey: noneFlowerUnlocked
       text: "\xDAltimamente hay rumores de una #=flor ardiente=# en la zona."
     - conditionKey: noneFlowerUnlocked
-      text: "\xBFPuedes investigarlo? Si la encuentras ven a verme porfa, debe de
-        ser muy valiosa cient\xEDficamente."
+      text: "\xBFPuedes investigarlo? Si la encuentras traemela por favor, debe de
+        ser muy valiosa cient\xEDficamente. No te preocupes, te la devolver\xE9."
     - conditionKey: anyFlowerUnlocked
       text: "\xA1Has encontrado la =#flor de fuego#=! \xA1Incre\xEDble!"
     - conditionKey: anyFlowerUnlocked

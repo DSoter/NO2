@@ -25,36 +25,32 @@ MonoBehaviour:
     - conditionKey: anyBadgeUnlockedAndThenUnlockFirstBadge
       text: Toma, te la #_mereces_#.
     - conditionKey: noneBadgeUnlocked
-      text: Veo que no has conseguido ninguna insignia que muestre tu valia
+      text: Veo que no has conseguido ninguna insignia que muestre tu valia.
     - conditionKey: noneBadgeUnlocked
       text: Estas de #_suerte_#, tengo el honor de poder otorgar insignias.
     - conditionKey: noneBadgeUnlockedAndThenUnlockFirstBadge
-      text: "Para ti, ser\xE1 la primera de muchas"
+      text: "Para ti, ser\xE1 la primera de muchas."
   repetitionTexts:
   - lines:
-    - conditionKey: notFiveBadgesUnlocked
-      text: Para equiparte una medalla primero debes de ir a una hoguera y descansar
-    - conditionKey: notFiveBadgesUnlocked
-      text: "Abre el men\xFA de insignias con la \"I\" y ver\xE1s tu banda scout
-        junto a tus insignias coleccionadas"
-    - conditionKey: notFiveBadgesUnlocked
-      text: Simplemente arrastra la insignia que quieras a tu banda para equiparla
-    - conditionKey: notFiveBadgesUnlocked
-      text: "/Cuidado/ solo tienes 4 huecos, en los que puedes ponerte 4 insignias
-        peque\xF1as, dos grandes o una #gigante#"
-    - conditionKey: notFiveBadgesUnlocked
-      text: "Buscame cuando hayas demostrado tu valia y conseguido m\xE1s insignias"
     - conditionKey: fiveBadgeUnlockedAndNotRusellFirstDialogFinished
-      text: SIUUUUUUUUU
+      text: Enhorabuena, ya tienes $cinco insignias$.
     - conditionKey: fiveBadgeUnlockedAndNotRusellFirstDialogFinished
-      text: Vas siendo tan capaz como yo
-    - conditionKey: fiveBadgeUnlockedAndNotRusellFirstDialogFinished
-      text: Enhorabuena
+      text: Vas siendo tan capaz como yo.
     - conditionKey: fiveBadgeUnlockedAndNotRusellFirstDialogFinishedThenGiveSecondBadge
-      text: Toma, te la mereces
+      text: Toma, te la mereces.
     - conditionKey: fiveBadgesUnlockedThenRusellFirstDialogFinished
-      text: Yo tambien soy $scout$, debo ponerme las pilas y conseguir mas insignias
+      text: Yo tambien soy $scout$, debo ponerme las pilas y conseguir mas insignias.
     - conditionKey: fiveBadgesUnlockedAndRusellFirstDialogFinished
-      text: "Cuando volvamos a vernos tendr\xE9 mas insignias"
-    - conditionKey: fiveBadgesUnlockedAndRusellFirstDialogFinished
-      text: "Ser\xE9 mejor $scout$"
+      text: "Cuando volvamos a vernos tendr\xE9 mas insignias, ser\xE9 mejor $scout$."
+    - conditionKey: 
+      text: Para equiparte una insignia primero debes de ir a una hoguera y descansar.
+    - conditionKey: 
+      text: "Abre el men\xFA de insignias con la \"I\" y ver\xE1s tu banda scout
+        junto a tus insignias coleccionadas."
+    - conditionKey: 
+      text: Simplemente arrastra la insignia que quieras a tu banda para equiparla.
+    - conditionKey: 
+      text: "/Cuidado/ solo tienes 4 huecos, en los que puedes ponerte 4 insignias
+        peque\xF1as, dos grandes o una #gigante#."
+    - conditionKey: notFiveBadgesUnlocked
+      text: "Buscame cuando hayas demostrado tu valia y conseguido m\xE1s insignias."

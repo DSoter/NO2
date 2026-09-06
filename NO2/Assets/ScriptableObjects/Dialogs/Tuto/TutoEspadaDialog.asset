@@ -20,9 +20,9 @@ MonoBehaviour:
       text: "\xA1Est\xE1s #*atrapado*#! Si no haces nada no podr\xE1s volver a #_casa_#."
     - conditionKey: 
       text: "Pero _tranquilo_ tengo una soluci\xF3n. Puedes usar tu espada para *#destruir#*
-        rocas. Solo necesitas utilizar el clic izquierdo.del rat\xD3n."
+        rocas. Solo necesitas utilizar el clic izquierdo del rat\xD3n."
     - conditionKey: 
-      text: "Debes apuntar utilizando el rat\xD3n, golpear\xE1s en la direcci\xF3n
+      text: "Debes apuntar utilizando el rat\xD3n, golpear\xE1s en la direcci\xD3n
         del cursor."
   repetitionTexts:
   - lines:
@@ -32,7 +32,7 @@ MonoBehaviour:
       text: "\xA1Est\xE1s #*atrapado*#! Si no haces nada no podr\xE1s volver a #_casa_#."
     - conditionKey: 
       text: "Pero _tranquilo_ tengo una soluci\xF3n. Puedes usar tu espada para *#destruir#*
-        rocas. Solo necesitas utilizar el clic izquierdo.del rat\xD3n."
+        rocas. Solo necesitas utilizar el clic izquierdo del rat\xD3n."
     - conditionKey: 
-      text: "Debes apuntar utilizando el rat\xD3n, golpear\xE1s en la direcci\xF3n
+      text: "Debes apuntar utilizando el rat\xD3n, golpear\xE1s en la direcci\xD3n
         del cursor."

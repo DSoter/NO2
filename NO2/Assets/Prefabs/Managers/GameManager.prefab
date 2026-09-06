@@ -1014,7 +1014,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 40.224, y: 21.921}
+  m_AnchoredPosition: {x: 40.224, y: 21.920998}
   m_SizeDelta: {x: 177.6849, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4015072382303029752
@@ -1045,10 +1045,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Progreso Scout
+  m_text: 'Progreso '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0fc6ff7601b15cf4db238ad3ea678301, type: 2}
-  m_sharedMaterial: {fileID: -8473603090039966257, guid: 0fc6ff7601b15cf4db238ad3ea678301, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 524525b155cd02847a12d19788153a2d, type: 2}
+  m_sharedMaterial: {fileID: -8624792438648299625, guid: 524525b155cd02847a12d19788153a2d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1072,15 +1072,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26.04
-  m_fontSizeBase: 26.04
+  m_fontSize: 13
+  m_fontSizeBase: 13
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_characterHorizontalScale: 1
@@ -1352,8 +1352,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 40.224, y: -27.4}
-  m_SizeDelta: {x: 183.2063, y: 41.442}
+  m_AnchoredPosition: {x: 40.224, y: -32.45}
+  m_SizeDelta: {x: 183.2063, y: 35.026}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1799277286299138309
 CanvasRenderer:
@@ -1383,10 +1383,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Prueba para ver el tamano de letra para ver cuantas lineas
+  m_text: Prueba para ver un logro asi larguillo que ocupe bastante
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0fc6ff7601b15cf4db238ad3ea678301, type: 2}
-  m_sharedMaterial: {fileID: -8473603090039966257, guid: 0fc6ff7601b15cf4db238ad3ea678301, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 524525b155cd02847a12d19788153a2d, type: 2}
+  m_sharedMaterial: {fileID: -8624792438648299625, guid: 524525b155cd02847a12d19788153a2d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1410,15 +1410,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
-  m_fontSizeBase: 10
+  m_fontSize: 4.8
+  m_fontSizeBase: 4.8
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_characterHorizontalScale: 1

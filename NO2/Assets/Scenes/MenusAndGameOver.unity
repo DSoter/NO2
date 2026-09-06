@@ -2768,7 +2768,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -33}
-  m_SizeDelta: {x: 350, y: 73.3728}
+  m_SizeDelta: {x: 420, y: 73.3728}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &555407313
 MonoBehaviour:
@@ -2792,8 +2792,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Nombre insignia
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0fc6ff7601b15cf4db238ad3ea678301, type: 2}
-  m_sharedMaterial: {fileID: -8473603090039966257, guid: 0fc6ff7601b15cf4db238ad3ea678301, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 524525b155cd02847a12d19788153a2d, type: 2}
+  m_sharedMaterial: {fileID: -8624792438648299625, guid: 524525b155cd02847a12d19788153a2d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2817,8 +2817,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 18.7
+  m_fontSizeBase: 18.7
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -10302,8 +10302,8 @@ MonoBehaviour:
   m_text: Pitas pitas pitas wenamechindesama tumajarsinbaum blahy blah no se me ocurre
     ninguna descripcion de insignia
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0fc6ff7601b15cf4db238ad3ea678301, type: 2}
-  m_sharedMaterial: {fileID: -8473603090039966257, guid: 0fc6ff7601b15cf4db238ad3ea678301, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 524525b155cd02847a12d19788153a2d, type: 2}
+  m_sharedMaterial: {fileID: -8624792438648299625, guid: 524525b155cd02847a12d19788153a2d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -10327,8 +10327,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

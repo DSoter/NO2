@@ -108,7 +108,7 @@ public class HealData : ScriptableObject
         {
             if (!maxUsesModifiers.Contains(fastPotionsModifier))
                 maxUsesModifiers.Add(fastPotionsModifier);
-
+                healUsesChanged?.Invoke();
         }
     }
     private void DecreaseMaxPotions(string badgeName)

@@ -15,7 +15,7 @@ MonoBehaviour:
   listOfTexts:
   - lines:
     - conditionKey: 
-      text: _Enhorabuena_, has conseguido salir de esa *#cueva# horrible*
+      text: _Enhorabuena_, has conseguido salir de esa *#cueva# horrible*.
     - conditionKey: playerNeverDied
       text: "Has conseguido que no te derroten esos caracoles, pero esto ha sido
         solo el principio, todav\xEDa debes de llegar a _#casa#_."
@@ -37,7 +37,7 @@ MonoBehaviour:
     - conditionKey: 
       text: "Podr\xE1s conseguir burbujas de ox\xEDgeno al derrotar a cualquier enemigo
         o rompiendo cajas, cr\xE9eme que te haran falta. Mucha suerte en tu viaje
-        #_dormil\xF3n_#"
+        #_dormil\xF3n_#."
   repetitionTexts:
   - lines:
     - conditionKey: 

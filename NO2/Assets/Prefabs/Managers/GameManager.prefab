@@ -1014,8 +1014,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 40.224, y: 11.378998}
-  m_SizeDelta: {x: 177.6849, y: 50}
+  m_AnchoredPosition: {x: 40.224, y: 13.389}
+  m_SizeDelta: {x: 177.6849, y: 45.9797}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4015072382303029752
 CanvasRenderer:
@@ -1045,7 +1045,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Progreso '
+  m_text: Progreso scout
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 524525b155cd02847a12d19788153a2d, type: 2}
   m_sharedMaterial: {fileID: -8624792438648299625, guid: 524525b155cd02847a12d19788153a2d, type: 2}
@@ -1352,7 +1352,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 40.224, y: -32.45}
+  m_AnchoredPosition: {x: 40.224, y: -31}
   m_SizeDelta: {x: 183.2063, y: 35.026}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1799277286299138309

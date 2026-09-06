@@ -296,7 +296,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.5, y: 412}
+  m_AnchoredPosition: {x: 0, y: 435}
   m_SizeDelta: {x: 63, y: -946}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &20078177
@@ -1962,8 +1962,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 180.56891, y: -112}
-  m_SizeDelta: {x: 361.13782, y: 0}
+  m_AnchoredPosition: {x: 142.93732, y: -112}
+  m_SizeDelta: {x: 285.87463, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &263854284
 MonoBehaviour:
@@ -2609,8 +2609,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 178.12103, y: -56}
-  m_SizeDelta: {x: 356.24207, y: 0}
+  m_AnchoredPosition: {x: 140.48944, y: -56}
+  m_SizeDelta: {x: 280.97888, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &540327806
 MonoBehaviour:
@@ -3991,7 +3991,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -4398,7 +4398,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -5319,8 +5319,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 178.12103, y: 0}
-  m_SizeDelta: {x: 356.24207, y: 0}
+  m_AnchoredPosition: {x: 140.48944, y: 0}
+  m_SizeDelta: {x: 280.97888, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &927129777
 MonoBehaviour:
@@ -5804,8 +5804,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 178.12103, y: -112}
-  m_SizeDelta: {x: 356.24207, y: 0}
+  m_AnchoredPosition: {x: 140.48944, y: -112}
+  m_SizeDelta: {x: 280.97888, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1092793655
 MonoBehaviour:
@@ -6719,7 +6719,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -7471,8 +7471,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 180.56891, y: 0}
-  m_SizeDelta: {x: 361.13782, y: 0}
+  m_AnchoredPosition: {x: 142.93732, y: 0}
+  m_SizeDelta: {x: 285.87463, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1340413795
 MonoBehaviour:
@@ -7965,8 +7965,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 180.56891, y: -168}
-  m_SizeDelta: {x: 361.13782, y: 0}
+  m_AnchoredPosition: {x: 142.93732, y: -168}
+  m_SizeDelta: {x: 285.87463, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1463318871
 MonoBehaviour:
@@ -8055,7 +8055,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -552, y: -272.5}
-  m_SizeDelta: {x: -1334.1254, y: -671.2615}
+  m_SizeDelta: {x: -1334.1254, y: -712}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1468579664
 MonoBehaviour:
@@ -9009,8 +9009,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 180.56891, y: -56}
-  m_SizeDelta: {x: 361.13782, y: 0}
+  m_AnchoredPosition: {x: 142.93732, y: -56}
+  m_SizeDelta: {x: 285.87463, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1623290844
 MonoBehaviour:
@@ -9590,7 +9590,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1738815942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9624,7 +9624,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -10591,7 +10591,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -13.5, y: 412}
+  m_AnchoredPosition: {x: -13.5, y: 439}
   m_SizeDelta: {x: 1741, y: 160.47198}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2005797261
@@ -12137,7 +12137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9111437335633168119, guid: 4394a4bc523e7a449a88992024ca27f2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 7.5043
+      value: 7.5042725
       objectReference: {fileID: 0}
     - target: {fileID: 9163991850694551807, guid: 4394a4bc523e7a449a88992024ca27f2, type: 3}
       propertyPath: m_Controller

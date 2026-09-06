@@ -413,14 +413,6 @@ PrefabInstance:
       propertyPath: OutputAudioMixerGroup
       value: 
       objectReference: {fileID: 5540070779579784222, guid: f1bfdd064f4bc6b4aa0edfba122e967a, type: 2}
-    - target: {fileID: 1337410440378803461, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 42.985
-      objectReference: {fileID: 0}
-    - target: {fileID: 1337410440378803461, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -15.1
-      objectReference: {fileID: 0}
     - target: {fileID: 2929802053841653526, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
       propertyPath: m_UpdateMode
       value: 2
@@ -440,14 +432,6 @@ PrefabInstance:
     - target: {fileID: 6601171147944881775, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -569
-      objectReference: {fileID: 0}
-    - target: {fileID: 7276645715900383269, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 26.379
-      objectReference: {fileID: 0}
-    - target: {fileID: 7276645715900383269, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 21.01
       objectReference: {fileID: 0}
     - target: {fileID: 7459610150170198263, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
       propertyPath: OutputAudioMixerGroup

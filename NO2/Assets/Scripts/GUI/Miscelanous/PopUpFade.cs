@@ -40,6 +40,7 @@ public class PopUpFade : MonoBehaviour
             Color buttonColorIn = textoBoton.color;
             buttonColorIn.a += Time.deltaTime / animationDurationOnSeconds;
             textoBoton.color = buttonColorIn;
+            confirmButton.image.color = buttonColorIn;
 
             Color messageColorIn = messageText.color;
             messageColorIn.a += Time.deltaTime / animationDurationOnSeconds;
@@ -56,6 +57,7 @@ public class PopUpFade : MonoBehaviour
 
                 buttonColorIn.a = 1.0f;
                 textoBoton.color = buttonColorIn;
+                confirmButton.image.color = buttonColorIn;
 
                 messageColorIn.a = 1.0f;
                 messageText.color = messageColorIn;
@@ -71,6 +73,7 @@ public class PopUpFade : MonoBehaviour
             Color buttonColorOut = textoBoton.color;
             buttonColorOut.a -= Time.unscaledDeltaTime / animationDurationOnSeconds;
             textoBoton.color = buttonColorOut;
+            confirmButton.image.color = buttonColorOut;
 
             Color messageColorOut = messageText.color;
             messageColorOut.a -= Time.unscaledDeltaTime / animationDurationOnSeconds;

@@ -57,6 +57,7 @@ public class DialogBox : MonoBehaviour
 
         GameManager.Instance.gameObject.GetComponent<InputManager>().onInteract += ConfirmWithInteractButton;
         GameManager.Instance.gameObject.GetComponent<InputManager>().onLeftClick += Confirm;
+        GameManager.Instance.gameObject.GetComponent<InputManager>().onConfirm += Confirm;
         dialogPanel.SetActive(false);
         continueIndicator.SetActive(false);
         colorMap = new Dictionary<char, UnityEngine.Color>();

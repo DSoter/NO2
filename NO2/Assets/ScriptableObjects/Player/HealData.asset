@@ -15,6 +15,6 @@ MonoBehaviour:
   maxUses: 3
   remainingUses: 3
   healAmount: 20
-  actualCooldownSeconds: 2
-  cooldownSeconds: 2
+  actualCooldownSeconds: 0.5
+  cooldownSeconds: 0.5
   equippedBadges: {fileID: 11400000, guid: be93a51aa16842a4c85fa0af75138391, type: 2}

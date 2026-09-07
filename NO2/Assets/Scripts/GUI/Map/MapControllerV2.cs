@@ -373,18 +373,22 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
 
     private string GetWorldMapTexturePath()
     {
-        return System.IO.Path.Combine(
+        string path =System.IO.Path.Combine(
             Application.persistentDataPath,
             worldMapData.name + "_worldMap.png"
         );
+        Debug.Log($"Ruta textura de mapa (mundo): {path}");
+        return path;
     }
 
     private string GetWorldFogTexturePath()
     {
-        return System.IO.Path.Combine(
+        string path = System.IO.Path.Combine(
             Application.persistentDataPath,
             worldMapData.name + "_worldFog.png"
         );
+        Debug.Log($"Ruta textura de niebla (mundo): {path}");
+        return path;
     }
 
     [ContextMenu("Clear World Map Cache")]

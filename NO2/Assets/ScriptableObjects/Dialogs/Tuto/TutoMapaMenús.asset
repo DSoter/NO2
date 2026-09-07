@@ -16,7 +16,7 @@ MonoBehaviour:
   - lines:
     - conditionKey: 
       text: Te has dado una buena vuelta por esta cueva. Hay algunos sitios por los
-        que es facil perderse, pero puedes usar tu #/mapa/#
+        que es facil perderse, pero puedes usar tu #/mapa/#.
     - conditionKey: 
       text: Para abrir el /mapa/ simplemente debes de pulsar la tecla /M/, no te
         preocupes si ves que no hace nada, tarda un poco en cargar.
@@ -34,7 +34,7 @@ MonoBehaviour:
   - lines:
     - conditionKey: 
       text: Te has dado una buena vuelta por esta cueva. Hay algunos sitios por los
-        que es facil perderse, pero puedes usar tu #/mapa/#
+        que es facil perderse, pero puedes usar tu #/mapa/#.
     - conditionKey: 
       text: Para abrir el /mapa/ simplemente debes de pulsar la tecla /M/, no te
         preocupes si ves que no hace nada, tarda un poco en cargar.

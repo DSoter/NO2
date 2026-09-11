@@ -9318,8 +9318,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -8.5, y: -63.27002}
-  m_SizeDelta: {x: 451, y: 653.46}
+  m_AnchoredPosition: {x: -8.5, y: -95.48001}
+  m_SizeDelta: {x: 451, y: 612.96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1687610169
 MonoBehaviour:
@@ -9341,7 +9341,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Todavia no has desbloqueado esta flor
+  m_text: "Al golpear a los enemigos les infliges una quemadura que les hace perder
+    vida durante unos segundos. Al hacer una ruptura los quemar\xE1s gravemente."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 524525b155cd02847a12d19788153a2d, type: 2}
   m_sharedMaterial: {fileID: -8624792438648299625, guid: 524525b155cd02847a12d19788153a2d, type: 2}
@@ -9381,7 +9382,7 @@ MonoBehaviour:
   m_characterSpacing: 0
   m_characterHorizontalScale: 1
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: -22
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -12097,7 +12098,7 @@ PrefabInstance:
       objectReference: {fileID: -586208809, guid: d7a6609bd78173e46a0b1119ed07940d, type: 3}
     - target: {fileID: 4892964516798505973, guid: 4394a4bc523e7a449a88992024ca27f2, type: 3}
       propertyPath: m_Color.a
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4892964516798505973, guid: 4394a4bc523e7a449a88992024ca27f2, type: 3}
       propertyPath: m_Color.b
@@ -12142,7 +12143,7 @@ PrefabInstance:
     - target: {fileID: 9163991850694551807, guid: 4394a4bc523e7a449a88992024ca27f2, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 2ce9fe4e640979044a9829ec1296c186, type: 2}
+      objectReference: {fileID: 9100000, guid: 45ad80455de0ed7479ab07465793b94f, type: 2}
     m_RemovedComponents:
     - {fileID: 3321131864227294997, guid: 4394a4bc523e7a449a88992024ca27f2, type: 3}
     m_RemovedGameObjects: []

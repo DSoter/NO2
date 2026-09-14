@@ -156,7 +156,7 @@ public class PlayerData : ScriptableObject
         get { return health; }
         set
         {
-            if (health <= 1 && 0 < health && value > 1)
+            if (health <= 10 && 0 < health && value > 10)
             {
                 GameManager.Instance.GetComponent<AchievementManager>().NotifyEvent("strong_heart");
             }

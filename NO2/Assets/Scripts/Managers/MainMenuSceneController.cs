@@ -55,6 +55,8 @@ public class MainMenuSceneManager : MonoBehaviour
 
         flowerCollection.Load();
 
+        moneyData.Load();
+
         respawnData.Load();
 
         CheckpointManager cm = GameManager.Instance.GetComponent<CheckpointManager>();

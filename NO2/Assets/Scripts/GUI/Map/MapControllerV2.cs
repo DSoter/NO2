@@ -2,6 +2,7 @@ using System.IO;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static SceneMapData;
@@ -401,6 +402,19 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         worldMapData.WorldMapNeedsUpdate = true;
         Debug.Log("Caché de mapa mundial eliminada");
     }
+
+    public void ResetAllScenesMapData()
+    {
+        foreach (WorldMapData.SceneMapEntry entry in worldMapData.scenes)
+        {
+            if (entry.mapData == null) continue;
+            entry.mapData.Reset(); // borra _map, _visible, _fog, _rows, _cols de esa escena
+        }
+
+        ClearWorldMapCache(); // invalida el PNG global para que no siga sirviendo el mapa antiguo cacheado
+        Debug.Log("PlayerPrefs de todas las escenas reseteados.");
+    }
+
     public void GenerateMapTexture()
     {
         SceneMapData previousMapData = _lastMapData;
@@ -776,6 +790,11 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     // Zoom y movimiento
     private void Update()
     {
+
+        //if (Keyboard.current != null && Keyboard.current.kKey.wasPressedThisFrame)
+        //{
+        //    ResetAllScenesMapData();
+        //}
         float currentScale = mapContainer.localScale.x;
         float newScale = Mathf.Lerp(currentScale, _targetScale, Time.unscaledDeltaTime * 10f);
 

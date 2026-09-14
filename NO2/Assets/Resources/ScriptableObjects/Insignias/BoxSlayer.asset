@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Badge
   badgeName: Box slayer
   achievement: {fileID: 11400000, guid: d1ab7005b90738d47a46a02b922a655e, type: 2}
-  description: "Consigues m\xE1s \xF3xigeno de cajas y enemigos."
+  description: "Consigues m\xE1s ox\xEDgeno de cajas y enemigos."
   icon: {fileID: 21300000, guid: c42824dc75c979f4894e5722292d5ead, type: 3}
   slotsSize: 1
   effect:

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Badge
   badgeName: Tutorial implecable
   achievement: {fileID: 11400000, guid: 180356dc69e063e4c92992a39986d12e, type: 2}
-  description: Al tener la vida al completo, omites una gran cantidade de la vida
+  description: Al tener la vida al completo, omites una gran cantidad de la vida
     perdida.
   icon: {fileID: 21300000, guid: b6965f5dbe5c41a4cb35150a5a9ec0f7, type: 3}
   slotsSize: 1

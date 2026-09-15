@@ -101,25 +101,6 @@ public class EquippedBadges : ScriptableObject
             if (names[i] == "null") continue;
             slots[i] = collection.allBadges.Find(b => b.name == names[i]);
         }
-
-        NotifyEquippedFromLoad();
-    }
-
-    // Dispara OnEquipped por cada insignia ya equipada tras el Load,
-    // para que los modificadores (PlayerData, HealData...) se reconstruyan
-    // aunque la insignia ya estuviera equipada antes de suscribirse.
-    // Se deduplica porque una insignia grande puede ocupar varios huecos.
-    private void NotifyEquippedFromLoad()
-    {
-        HashSet<Badge> notified = new HashSet<Badge>();
-        foreach (Badge badge in slots)
-        {
-            if (badge == null) continue;
-            if (notified.Contains(badge)) continue;
-
-            notified.Add(badge);
-            OnEquipped?.Invoke(badge.badgeName);
-        }
     }
 
     public void Reset()

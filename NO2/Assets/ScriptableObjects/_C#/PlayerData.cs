@@ -65,27 +65,12 @@ public class PlayerData : ScriptableObject
     [Space(5)]
     [Header("Logros")]
     [SerializeField] private EquippedBadges equippedBadges;
-    [SerializeField] private string nameBadgeHundredRolls = "Acrobata amateur";
-    [SerializeField] private string nameBadgeStrongHeart = "Corazon fuerte";
-    [SerializeField] private string nameBadgeToughSkin = "Piel dura";
-    [SerializeField] private string nameBadgeFullHealthDefense = "Vida plena";
-    [SerializeField] private string nameBadgeNO2 = "NO2";
-    [SerializeField] private string nameBadgeSnailSlayer = "Snail slayer";
-    [SerializeField] private string nameBadgeScoutPrincipiante = "Scout principiante";
-    [SerializeField] private string nameBadgeBoxSlayer = "Box slayer";
-    [SerializeField] private string nameBadgePrimeraInsignia = "Primera insignia";
-    [SerializeField] private string nameBadgeExpertAcrobat = "Acróbata experto";
-    [SerializeField] private string nameBadgeBigCharge = "Peso pesado";
 
     // Umbral compartido para las condiciones "un cuarto o menos de X máximo"
     private const float LowResourceThreshold = 0.25f;
 
     // Modificadores activos por insignias (no se persisten: se reconstruyen a partir de EquippedBadges)
-    private readonly Modifier strongHeartModifier = new Modifier(Modifier.ModifierType.Numeric, 10f);
-    private readonly Modifier hundredRollsModifier = new Modifier(Modifier.ModifierType.Numeric, 10f);
-    private readonly Modifier toughSkinModifier = new Modifier(Modifier.ModifierType.Percentage, 3f);
     private readonly Modifier fullHealthDefenseModifier = new Modifier(Modifier.ModifierType.Percentage, 70f);
-    private readonly Modifier no2Modifier = new Modifier(Modifier.ModifierType.Percentage, 20f);
 
     // Velocidad condicional: tipo Multiplier, se compone en cadena en vez de sumarse
     private readonly Modifier snailSlayerSpeedModifier = new Modifier(Modifier.ModifierType.Multiplier, 20f);
@@ -94,15 +79,9 @@ public class PlayerData : ScriptableObject
     // "Scout principiante": +2 de daño plano en los tres ataques, solo con oxígeno bajo
     private readonly Modifier scoutPrincipianteDamageModifier = new Modifier(Modifier.ModifierType.Numeric, 2f);
 
-    // "Peso pesado": +2 de daño plano en el ataque fuerte (mínimo y máximo), permanente mientras esté equipada
-    private readonly Modifier bigChargeMinModifier = new Modifier(Modifier.ModifierType.Numeric, 2f);
-    private readonly Modifier bigChargeMaxModifier = new Modifier(Modifier.ModifierType.Numeric, 2f);
 
     // "Box slayer": +10% del oxígeno ganado en cada recogida
     private readonly Modifier boxSlayerOxygenGainModifier = new Modifier(Modifier.ModifierType.Percentage, 10f);
-
-    // "Acróbata experto": +30% de velocidad de regeneración de resistencia
-    private readonly Modifier expertAcrobatStaminaRegenModifier = new Modifier(Modifier.ModifierType.Percentage, 30f);
 
     private List<Modifier> maxHealthModifiers = new List<Modifier>();
     private List<Modifier> maxStaminaModifiers = new List<Modifier>();
@@ -117,26 +96,6 @@ public class PlayerData : ScriptableObject
     private bool boxSlayerBadgeEquipped;
     private bool primeraInsigniaBadgeEquipped;
 
-    // Referencias guardadas para poder desuscribirse correctamente
-    private Action<string> onEquippedIncreaseHealthHandler;
-    private Action<string> onUnequippedDecreaseHealthHandler;
-    private Action<string> onEquippedIncreaseStaminaHandler;
-    private Action<string> onUnequippedDecreaseStaminaHandler;
-    private Action<string> onEquippedIncreaseDefenseHandler;
-    private Action<string> onUnequippedDecreaseDefenseHandler;
-    private Action<string> onEquippedIncreaseOxygenHandler;
-    private Action<string> onUnequippedDecreaseOxygenHandler;
-    private Action<string> onEquippedConditionalSpeedHandler;
-    private Action<string> onUnequippedConditionalSpeedHandler;
-    private Action<string> onEquippedConditionalDamageHandler;
-    private Action<string> onUnequippedConditionalDamageHandler;
-    private Action<string> onEquippedOxygenGainBonusHandler;
-    private Action<string> onUnequippedOxygenGainBonusHandler;
-    private Action<string> onEquippedStaminaRegenHandler;
-    private Action<string> onUnequippedStaminaRegenHandler;
-    private Action<string> onEquippedStrongDamageHandler;
-    private Action<string> onUnequippedStrongDamageHandler;
-    private Action onBadgesResetHandler;
 
     // Events
 
@@ -148,6 +107,9 @@ public class PlayerData : ScriptableObject
     public event Action OnOxygenChanged;
     public event Action OnOxygenIncreased;
 
+
+    public enum PlayerBadgeStat { MaxHealth, MaxStamina, Defense, MaxOxygen, StaminaRegenSpeed }
+    public enum PlayerBadgeFlag { FullHealthDefense, SnailSlayerSpeed, ScoutPrincipianteDamage, BoxSlayerOxygenGain, PrimeraInsigniaSpeed }
 
 
     // Read and write properties
@@ -410,296 +372,91 @@ public class PlayerData : ScriptableObject
         set { equipedFlower = value; }
     }
 
-    private void OnEnable()
+    // Enums públicos para que BadgeManager pida el efecto sin conocer los campos internos
+    
+  
+    public void AddBadgeModifier(PlayerBadgeStat stat, Modifier modifier)
     {
-        SubscribeToBadges();
-    }
-    private void OnDestroy()
-    {
-        UnsubscribeFromBadges();
-    }
-    private void OnDisable()
-    {
-        UnsubscribeFromBadges();
-    }
+        List<Modifier> list = GetModifierList(stat);
+        if (list == null || list.Contains(modifier)) return;
+        list.Add(modifier);
 
-    private void SubscribeToBadges()
-    {
-        if (equippedBadges == null) return;
-
-        onEquippedIncreaseHealthHandler = (badgeName) => IncreaseMaxHealth(badgeName);
-        onUnequippedDecreaseHealthHandler = (badgeName) => DecreaseMaxHealth(badgeName);
-        onEquippedIncreaseStaminaHandler = (badgeName) => IncreaseMaxStamina(badgeName);
-        onUnequippedDecreaseStaminaHandler = (badgeName) => DecreaseMaxStamina(badgeName);
-        onEquippedIncreaseDefenseHandler = (badgeName) => IncreaseDefense(badgeName);
-        onUnequippedDecreaseDefenseHandler = (badgeName) => DecreaseDefense(badgeName);
-        onEquippedIncreaseOxygenHandler = (badgeName) => IncreaseMaxOxygen(badgeName);
-        onUnequippedDecreaseOxygenHandler = (badgeName) => DecreaseMaxOxygen(badgeName);
-        onEquippedConditionalSpeedHandler = (badgeName) => EquipConditionalSpeedBadge(badgeName);
-        onUnequippedConditionalSpeedHandler = (badgeName) => UnequipConditionalSpeedBadge(badgeName);
-        onEquippedConditionalDamageHandler = (badgeName) => EquipConditionalDamageBadge(badgeName);
-        onUnequippedConditionalDamageHandler = (badgeName) => UnequipConditionalDamageBadge(badgeName);
-        onEquippedOxygenGainBonusHandler = (badgeName) => EquipOxygenGainBonusBadge(badgeName);
-        onUnequippedOxygenGainBonusHandler = (badgeName) => UnequipOxygenGainBonusBadge(badgeName);
-        onEquippedStaminaRegenHandler = (badgeName) => IncreaseStaminaRegenSpeed(badgeName);
-        onUnequippedStaminaRegenHandler = (badgeName) => DecreaseStaminaRegenSpeed(badgeName);
-        onEquippedStrongDamageHandler = (badgeName) => IncreaseStrongDamage(badgeName);
-        onUnequippedStrongDamageHandler = (badgeName) => DecreaseStrongDamage(badgeName);
-        onBadgesResetHandler = HandleBadgesReset;
-
-        equippedBadges.OnEquipped += onEquippedIncreaseHealthHandler;
-        equippedBadges.OnUnequipped += onUnequippedDecreaseHealthHandler;
-        equippedBadges.OnEquipped += onEquippedIncreaseStaminaHandler;
-        equippedBadges.OnUnequipped += onUnequippedDecreaseStaminaHandler;
-        equippedBadges.OnEquipped += onEquippedIncreaseDefenseHandler;
-        equippedBadges.OnUnequipped += onUnequippedDecreaseDefenseHandler;
-        equippedBadges.OnEquipped += onEquippedIncreaseOxygenHandler;
-        equippedBadges.OnUnequipped += onUnequippedDecreaseOxygenHandler;
-        equippedBadges.OnEquipped += onEquippedConditionalSpeedHandler;
-        equippedBadges.OnUnequipped += onUnequippedConditionalSpeedHandler;
-        equippedBadges.OnEquipped += onEquippedConditionalDamageHandler;
-        equippedBadges.OnUnequipped += onUnequippedConditionalDamageHandler;
-        equippedBadges.OnEquipped += onEquippedOxygenGainBonusHandler;
-        equippedBadges.OnUnequipped += onUnequippedOxygenGainBonusHandler;
-        equippedBadges.OnEquipped += onEquippedStaminaRegenHandler;
-        equippedBadges.OnUnequipped += onUnequippedStaminaRegenHandler;
-        equippedBadges.OnEquipped += onEquippedStrongDamageHandler;
-        equippedBadges.OnUnequipped += onUnequippedStrongDamageHandler;
-        equippedBadges.OnReset += onBadgesResetHandler;
-    }
-
-    private void UnsubscribeFromBadges()
-    {
-        if (equippedBadges == null) return;
-
-        if (onEquippedIncreaseHealthHandler != null)
-            equippedBadges.OnEquipped -= onEquippedIncreaseHealthHandler;
-        if (onUnequippedDecreaseHealthHandler != null)
-            equippedBadges.OnUnequipped -= onUnequippedDecreaseHealthHandler;
-        if (onEquippedIncreaseStaminaHandler != null)
-            equippedBadges.OnEquipped -= onEquippedIncreaseStaminaHandler;
-        if (onUnequippedDecreaseStaminaHandler != null)
-            equippedBadges.OnUnequipped -= onUnequippedDecreaseStaminaHandler;
-        if (onEquippedIncreaseDefenseHandler != null)
-            equippedBadges.OnEquipped -= onEquippedIncreaseDefenseHandler;
-        if (onUnequippedDecreaseDefenseHandler != null)
-            equippedBadges.OnUnequipped -= onUnequippedDecreaseDefenseHandler;
-        if (onEquippedIncreaseOxygenHandler != null)
-            equippedBadges.OnEquipped -= onEquippedIncreaseOxygenHandler;
-        if (onUnequippedDecreaseOxygenHandler != null)
-            equippedBadges.OnUnequipped -= onUnequippedDecreaseOxygenHandler;
-        if (onEquippedConditionalSpeedHandler != null)
-            equippedBadges.OnEquipped -= onEquippedConditionalSpeedHandler;
-        if (onUnequippedConditionalSpeedHandler != null)
-            equippedBadges.OnUnequipped -= onUnequippedConditionalSpeedHandler;
-        if (onEquippedConditionalDamageHandler != null)
-            equippedBadges.OnEquipped -= onEquippedConditionalDamageHandler;
-        if (onUnequippedConditionalDamageHandler != null)
-            equippedBadges.OnUnequipped -= onUnequippedConditionalDamageHandler;
-        if (onEquippedOxygenGainBonusHandler != null)
-            equippedBadges.OnEquipped -= onEquippedOxygenGainBonusHandler;
-        if (onUnequippedOxygenGainBonusHandler != null)
-            equippedBadges.OnUnequipped -= onUnequippedOxygenGainBonusHandler;
-        if (onEquippedStaminaRegenHandler != null)
-            equippedBadges.OnEquipped -= onEquippedStaminaRegenHandler;
-        if (onUnequippedStaminaRegenHandler != null)
-            equippedBadges.OnUnequipped -= onUnequippedStaminaRegenHandler;
-        if (onEquippedStrongDamageHandler != null)
-            equippedBadges.OnEquipped -= onEquippedStrongDamageHandler;
-        if (onUnequippedStrongDamageHandler != null)
-            equippedBadges.OnUnequipped -= onUnequippedStrongDamageHandler;
-        if (onBadgesResetHandler != null)
-            equippedBadges.OnReset -= onBadgesResetHandler;
-    }
-
-    private void IncreaseMaxHealth(string badgeName)
-    {
-        if (nameBadgeStrongHeart == badgeName)
+        if (stat == PlayerBadgeStat.MaxHealth)
         {
-            if (maxHealthModifiers.Contains(strongHeartModifier)) return;
-
-            maxHealthModifiers.Add(strongHeartModifier);
-            Health = health + 10;
+            Health = health + 10; 
             OnMaxHealthChanged?.Invoke();
         }
-    }
-    private void DecreaseMaxHealth(string badgeName)
-    {
-        if (nameBadgeStrongHeart == badgeName)
+        else if (stat == PlayerBadgeStat.MaxStamina)
         {
-            maxHealthModifiers.Remove(strongHeartModifier);
-
-            if (health > MaxHealth)
-            {
-                health = MaxHealth;
-            }
-            OnMaxHealthChanged?.Invoke();
-        }
-    }
-
-    private void IncreaseMaxStamina(string badgeName)
-    {
-        if (nameBadgeHundredRolls == badgeName)
-        {
-            if (maxStaminaModifiers.Contains(hundredRollsModifier)) return;
-
-            maxStaminaModifiers.Add(hundredRollsModifier);
             Stamina = stamina + 10;
             OnMaxStaminaChanged?.Invoke();
         }
-    }
-    private void DecreaseMaxStamina(string badgeName)
-    {
-        if (nameBadgeHundredRolls == badgeName)
+        else if (stat == PlayerBadgeStat.MaxOxygen)
         {
-            maxStaminaModifiers.Remove(hundredRollsModifier);
+            Oxygen = oxygen; 
+            OnMaxOxygenChanged?.Invoke();
+        }
+    }
 
-            if (stamina > MaxStamina)
-            {
-                stamina = MaxStamina;
-            }
+    public void RemoveBadgeModifier(PlayerBadgeStat stat, Modifier modifier)
+    {
+        List<Modifier> list = GetModifierList(stat);
+        list?.Remove(modifier);
+
+        if (stat == PlayerBadgeStat.MaxHealth)
+        {
+            if (health > MaxHealth) health = MaxHealth;
+            OnMaxHealthChanged?.Invoke();
+        }
+        else if (stat == PlayerBadgeStat.MaxStamina)
+        {
+            if (stamina > MaxStamina) stamina = MaxStamina;
             OnMaxStaminaChanged?.Invoke();
         }
-    }
-
-    private void IncreaseDefense(string badgeName)
-    {
-        if (nameBadgeToughSkin == badgeName)
+        else if (stat == PlayerBadgeStat.MaxOxygen)
         {
-            if (defenseModifiers.Contains(toughSkinModifier)) return;
-            defenseModifiers.Add(toughSkinModifier);
-        }
-        else if (nameBadgeFullHealthDefense == badgeName)
-        {
-            fullHealthDefenseBadgeEquipped = true;
-        }
-    }
-    private void DecreaseDefense(string badgeName)
-    {
-        if (nameBadgeToughSkin == badgeName)
-        {
-            defenseModifiers.Remove(toughSkinModifier);
-        }
-        else if (nameBadgeFullHealthDefense == badgeName)
-        {
-            fullHealthDefenseBadgeEquipped = false;
-        }
-    }
-
-    private void IncreaseMaxOxygen(string badgeName)
-    {
-        if (nameBadgeNO2 == badgeName)
-        {
-            if (maxOxygenModifiers.Contains(no2Modifier)) return;
-
-            maxOxygenModifiers.Add(no2Modifier);
-            Oxygen = oxygen; // reclamp por si el aumento de MaxOxygen debe reflejarse, y dispara OnOxygenChanged
-            OnMaxOxygenChanged?.Invoke();
-        }
-    }
-    private void DecreaseMaxOxygen(string badgeName)
-    {
-        if (nameBadgeNO2 == badgeName)
-        {
-            maxOxygenModifiers.Remove(no2Modifier);
-
-            if (oxygen > MaxOxygen)
-            {
-                oxygen = MaxOxygen;
-            }
+            if (oxygen > MaxOxygen) oxygen = MaxOxygen;
             OnMaxOxygenChanged?.Invoke();
         }
     }
 
-    private void EquipConditionalSpeedBadge(string badgeName)
+    private List<Modifier> GetModifierList(PlayerBadgeStat stat)
     {
-        if (nameBadgeSnailSlayer == badgeName)
+        switch (stat)
         {
-            snailSlayerBadgeEquipped = true;
-        }
-        else if (nameBadgePrimeraInsignia == badgeName)
-        {
-            primeraInsigniaBadgeEquipped = true;
-        }
-    }
-    private void UnequipConditionalSpeedBadge(string badgeName)
-    {
-        if (nameBadgeSnailSlayer == badgeName)
-        {
-            snailSlayerBadgeEquipped = false;
-        }
-        else if (nameBadgePrimeraInsignia == badgeName)
-        {
-            primeraInsigniaBadgeEquipped = false;
+            case PlayerBadgeStat.MaxHealth: return maxHealthModifiers;
+            case PlayerBadgeStat.MaxStamina: return maxStaminaModifiers;
+            case PlayerBadgeStat.Defense: return defenseModifiers;
+            case PlayerBadgeStat.MaxOxygen: return maxOxygenModifiers;
+            case PlayerBadgeStat.StaminaRegenSpeed: return staminaRegenerationSpeedModifiers;
+            default: return null;
         }
     }
 
-    private void EquipConditionalDamageBadge(string badgeName)
+    public void SetBadgeFlag(PlayerBadgeFlag flag, bool equipped)
     {
-        if (nameBadgeScoutPrincipiante == badgeName)
+        switch (flag)
         {
-            scoutPrincipianteBadgeEquipped = true;
-        }
-    }
-    private void UnequipConditionalDamageBadge(string badgeName)
-    {
-        if (nameBadgeScoutPrincipiante == badgeName)
-        {
-            scoutPrincipianteBadgeEquipped = false;
+            case PlayerBadgeFlag.FullHealthDefense: fullHealthDefenseBadgeEquipped = equipped; break;
+            case PlayerBadgeFlag.SnailSlayerSpeed: snailSlayerBadgeEquipped = equipped; break;
+            case PlayerBadgeFlag.ScoutPrincipianteDamage: scoutPrincipianteBadgeEquipped = equipped; break;
+            case PlayerBadgeFlag.BoxSlayerOxygenGain: boxSlayerBadgeEquipped = equipped; break;
+            case PlayerBadgeFlag.PrimeraInsigniaSpeed: primeraInsigniaBadgeEquipped = equipped; break;
         }
     }
 
-    private void EquipOxygenGainBonusBadge(string badgeName)
+    public void AddStrongAttackDamageModifiers(Modifier minModifier, Modifier maxModifier)
     {
-        if (nameBadgeBoxSlayer == badgeName)
-        {
-            boxSlayerBadgeEquipped = true;
-        }
+        if (!minStrongAttackDamageModifiers.Contains(minModifier)) minStrongAttackDamageModifiers.Add(minModifier);
+        if (!maxStrongAttackDamageModifiers.Contains(maxModifier)) maxStrongAttackDamageModifiers.Add(maxModifier);
     }
-    private void UnequipOxygenGainBonusBadge(string badgeName)
+    public void RemoveStrongAttackDamageModifiers(Modifier minModifier, Modifier maxModifier)
     {
-        if (nameBadgeBoxSlayer == badgeName)
-        {
-            boxSlayerBadgeEquipped = false;
-        }
+        minStrongAttackDamageModifiers.Remove(minModifier);
+        maxStrongAttackDamageModifiers.Remove(maxModifier);
     }
 
-    private void IncreaseStaminaRegenSpeed(string badgeName)
-    {
-        if (nameBadgeExpertAcrobat == badgeName)
-        {
-            if (staminaRegenerationSpeedModifiers.Contains(expertAcrobatStaminaRegenModifier)) return;
-            staminaRegenerationSpeedModifiers.Add(expertAcrobatStaminaRegenModifier);
-        }
-    }
-    private void DecreaseStaminaRegenSpeed(string badgeName)
-    {
-        if (nameBadgeExpertAcrobat == badgeName)
-        {
-            staminaRegenerationSpeedModifiers.Remove(expertAcrobatStaminaRegenModifier);
-        }
-    }
-
-    private void IncreaseStrongDamage(string badgeName)
-    {
-        if (nameBadgeBigCharge == badgeName)
-        {
-            if (!minStrongAttackDamageModifiers.Contains(bigChargeMinModifier))
-                minStrongAttackDamageModifiers.Add(bigChargeMinModifier);
-            if (!maxStrongAttackDamageModifiers.Contains(bigChargeMaxModifier))
-                maxStrongAttackDamageModifiers.Add(bigChargeMaxModifier);
-        }
-    }
-    private void DecreaseStrongDamage(string badgeName)
-    {
-        if (nameBadgeBigCharge == badgeName)
-        {
-            minStrongAttackDamageModifiers.Remove(bigChargeMinModifier);
-            maxStrongAttackDamageModifiers.Remove(bigChargeMaxModifier);
-        }
-    }
-
-    private void HandleBadgesReset()
+    public void ClearAllBadgeModifiers()
     {
         maxHealthModifiers.Clear();
         maxStaminaModifiers.Clear();

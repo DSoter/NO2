@@ -41,6 +41,7 @@ public class BadgeUIManager : MonoBehaviour
         infoIcon.transform.localScale = Vector3.one;
         badgeCollection.Load();
         equippedBadges.Load(badgeCollection);
+        GameManager.Instance.GetComponent<BadgeManager>().ResyncModifiers();
 
         CheckpointManager cm = GameManager.Instance.GetComponent<CheckpointManager>();
 

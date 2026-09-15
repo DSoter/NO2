@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6ba87a4b3f8a146b4139e434e936c4, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
-  health: 18.4
+  health: 14.117645
   maxHealth: 50
   healthRegenerationSpeed: 40
   healthDropingSpeed: 20
@@ -24,7 +24,7 @@ MonoBehaviour:
   rollingStaminaCost: 10
   weakAttackStaminaCost: 5
   strongAttackStaminaCost: 15
-  oxygen: 60
+  oxygen: 77.34557
   maxOxygen: 60
   oxygenDropingSpeed: 1
   oxygenRegenerationSpeed: 60

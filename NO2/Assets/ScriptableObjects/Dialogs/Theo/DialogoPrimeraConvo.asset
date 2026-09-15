@@ -18,7 +18,7 @@ MonoBehaviour:
       text: "#_Buenos d\xEDas_#, me alegro de ver caras nuevas por aqu\xED. Soy $Theo$,
         un amante de las flores. "
     - conditionKey: 
-      text: "Me dedico a explorar lugares #&remotos&# buscando flora extra\xF1a. "
+      text: 'Me dedico a explorar lugares #&remotos&# buscando flora peculiar. '
     - conditionKey: noneFlowerUnlocked
       text: "\xDAltimamente hay rumores de una #=flor ardiente=# en la zona."
     - conditionKey: noneFlowerUnlocked
@@ -27,33 +27,33 @@ MonoBehaviour:
     - conditionKey: anyFlowerUnlocked
       text: "\xA1Has encontrado la =#flor de fuego#=! \xA1Incre\xEDble!"
     - conditionKey: anyFlowerUnlocked
-      text: "Me ayudar\xE1 en mis investigaciones, muchas grac\xEDas."
+      text: "Me ayudar\xE1 en mis investigaciones, muchas gracias."
   repetitionTexts:
   - lines:
     - conditionKey: anyFlowerUnlockedAndTheoFirstDialogFinished
-      text: "Recuerda: en una hoguera abrir el men\xFA (O), confirmar (espacio) y
-        elegir la flor que desees. Se equipar\xE1 confirmando o cerrando el men\xFA"
+      text: "Recuerda: en una hoguera abrir el men\xFA (/O/), confirmar (/espacio/)
+        y elegir la flor que desees. Se equipar\xE1 confirmando o cerrando el men\xFA."
     - conditionKey: anyFlowerUnlockedAndTheoFirstDialogFinished
       text: '#Buena _suerte_# en tu $viaje$.'
     - conditionKey: anyFlowerUnlockedAndNotTheoFirstDialogFinished
       text: Veo que has encontrado una flor muy bonita, quema todo lo que toca.
     - conditionKey: noneFlowerUnlocked
-      text: Veo que todavia no has encontrado ninguna flor
+      text: Veo que todavia no has encontrado ninguna flor.
     - conditionKey: noneFlowerUnlocked
-      text: Recuerda que suelen estar en sitios apartados
+      text: Recuerda que suelen estar en sitios apartados.
     - conditionKey: noneFlowerUnlocked
       text: "Seguramente haya una por aqu\xED cerca, cuando te la recojas conseguir\xE1s
-        $poderes m\xE1gicos$"
+        $poderes m\xE1gicos$."
     - conditionKey: anyFlowerUnlockedAndNotTheoFirstDialogFinished
-      text: No habia visto ninguna parecida a esta
+      text: No habia visto ninguna parecida a esta.
     - conditionKey: anyFlowerUnlockedAndNotTheoFirstDialogFinished
-      text: Para usarla debes de descansar en una hoguera como la que tengo al lado
+      text: Para usarla debes de descansar en una hoguera como la que tengo al lado.
     - conditionKey: anyFlowerUnlockedAndNotTheoFirstDialogFinished
-      text: "Despues abre el men\xFA de flores con la \"O\""
+      text: "Despues abre el men\xFA de flores con la tecla /O/."
     - conditionKey: anyFlowerUnlockedAndNotTheoFirstDialogFinished
       text: "Al confirmar con la tecla espacio activar\xE1s el men\xFA y podr\xE1s
-        moverte con las flechas o W S"
+        moverte con las flechas o las teclas /W/ y /S/."
     - conditionKey: anyFlowerUnlockedAndNotTheoFirstDialogFinished
-      text: Cada flor tiene unas cualidades distintas
+      text: Cada flor tiene unas cualidades distintas.
     - conditionKey: anyFlowerUnlockedThenTheoFirstDialogFinished
-      text: "Muchas gracias, voy a continuar mis viajes. Espero verte por ah\xED"
+      text: "Muchas gracias, voy a continuar mis viajes. Espero verte por ah\xED."

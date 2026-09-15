@@ -19,13 +19,11 @@ public class HealData : ScriptableObject
     private readonly Modifier fastPotionsModifier = new Modifier(Modifier.ModifierType.Numeric, 2f);
     private List<Modifier> maxUsesModifiers = new List<Modifier>();
 
-    // Referencias guardadas para poder desuscribirse correctamente
-    private Action<string> onEquippedHandler;
-    private Action<string> onUnequippedHandler;
-    private Action onBadgesResetHandler;
 
     public Action healUsesChanged;
     public Action actualCooldownChanged;
+
+    public enum HealBadgeStat { MaxUses }
 
     public int RemainingUses
     {
@@ -64,63 +62,22 @@ public class HealData : ScriptableObject
         }
     }
 
-    private void OnEnable()
+    public void AddBadgeModifier(HealBadgeStat stat, Modifier modifier)
     {
-        SubscribeToBadges();
-    }
-    private void OnDestroy()
-    {
-        UnsubscribeFromBadges();
-    }
-    private void OnDisable()
-    {
-        UnsubscribeFromBadges();
+        if (stat != HealBadgeStat.MaxUses) return;
+        if (maxUsesModifiers.Contains(modifier)) return;
+        maxUsesModifiers.Add(modifier);
+        healUsesChanged?.Invoke();
     }
 
-    private void SubscribeToBadges()
+    public void RemoveBadgeModifier(HealBadgeStat stat, Modifier modifier)
     {
-        if (equippedBadges == null) return;
-
-        onEquippedHandler = (badgeName) => IncreaseMaxPotions(badgeName);
-        onUnequippedHandler = (badgeName) => DecreaseMaxPotions(badgeName);
-        onBadgesResetHandler = HandleBadgesReset;
-
-        equippedBadges.OnEquipped += onEquippedHandler;
-        equippedBadges.OnUnequipped += onUnequippedHandler;
-        equippedBadges.OnReset += onBadgesResetHandler;
+        if (stat != HealBadgeStat.MaxUses) return;
+        maxUsesModifiers.Remove(modifier);
+        RemainingUses = Mathf.RoundToInt(Modifier.ApplyModifiers(maxUses, maxUsesModifiers));
     }
 
-    private void UnsubscribeFromBadges()
-    {
-        if (equippedBadges == null) return;
-
-        if (onEquippedHandler != null)
-            equippedBadges.OnEquipped -= onEquippedHandler;
-        if (onUnequippedHandler != null)
-            equippedBadges.OnUnequipped -= onUnequippedHandler;
-        if (onBadgesResetHandler != null)
-            equippedBadges.OnReset -= onBadgesResetHandler;
-    }
-
-    private void IncreaseMaxPotions(string badgeName)
-    {
-        if (fastPotionsName == badgeName)
-        {
-            if (!maxUsesModifiers.Contains(fastPotionsModifier))
-                maxUsesModifiers.Add(fastPotionsModifier);
-                healUsesChanged?.Invoke();
-        }
-    }
-    private void DecreaseMaxPotions(string badgeName)
-    {
-        if (fastPotionsName == badgeName)
-        {
-            maxUsesModifiers.Remove(fastPotionsModifier);
-            RemainingUses = Mathf.RoundToInt(Modifier.ApplyModifiers(maxUses, maxUsesModifiers));
-        }
-    }
-
-    private void HandleBadgesReset()
+    public void ClearAllBadgeModifiers()
     {
         maxUsesModifiers.Clear();
         healUsesChanged?.Invoke();

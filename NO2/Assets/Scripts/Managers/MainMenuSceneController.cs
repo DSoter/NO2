@@ -27,6 +27,7 @@ public class MainMenuSceneManager : MonoBehaviour
     [SerializeField] private AchievementCollection achievementCollection;
     [SerializeField] private FlowerCollection flowerCollection;
     [SerializeField] private BadgeCollection badgeCollection;
+    [SerializeField] private EquippedBadges equippedBadges;
     [SerializeField] private MoneyData moneyData;
     [SerializeField] private RespawnData respawnData;
 
@@ -97,8 +98,11 @@ public class MainMenuSceneManager : MonoBehaviour
         flowerCollection.Reset();
         badgeCollection.Load();
         badgeCollection.Reset();
+        equippedBadges.Reset();
         moneyData.Reset();
         playerData.EquipedFlower = null;
+
+        GameManager.Instance.GetComponent<BadgeManager>().ClearAllModifiers();
 
         Debug.Log("Nueva partida iniciada: progreso reseteado, layout de mapas conservado.");
 

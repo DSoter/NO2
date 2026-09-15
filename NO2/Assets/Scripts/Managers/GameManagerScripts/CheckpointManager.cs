@@ -155,6 +155,8 @@ public class CheckpointManager : MonoBehaviour
     }
     public void StartSceneWithFade(string sceneName)
     {
+        AIManager ai = GameManager.Instance.GetComponent<AIManager>();
+        ai.ResetList();
         hasToSpawnPlayer = true;
         FadeTransition.Instance.LoadSceneWithFade(sceneName);
     }
@@ -243,7 +245,7 @@ public class CheckpointManager : MonoBehaviour
             }
             else 
             {
-                SceneManager.LoadScene(sceneWhereRespawn);
+                FadeTransition.Instance.LoadSceneWithFade(sceneWhereRespawn);
             }
                 
         }

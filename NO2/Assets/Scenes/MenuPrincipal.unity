@@ -300,6 +300,7 @@ MonoBehaviour:
   achievementCollection: {fileID: 11400000, guid: 057c01e4530c778458fe249d8a2d4345, type: 2}
   flowerCollection: {fileID: 11400000, guid: 8e1da91b1283cf54ebdcdf0b4a85e26a, type: 2}
   badgeCollection: {fileID: 11400000, guid: 40b829128fc4ee841bf6273a1be7eefa, type: 2}
+  equippedBadges: {fileID: 11400000, guid: be93a51aa16842a4c85fa0af75138391, type: 2}
   moneyData: {fileID: 11400000, guid: e75e14bc5463f9747b495a397649266e, type: 2}
   respawnData: {fileID: 11400000, guid: 1f379699d1594d340b10590f5a87a506, type: 2}
   saveKeySnailBoss: SnailKingIsDead
@@ -460,14 +461,17 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 410176089906247750, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1661331020}
   m_SourcePrefab: {fileID: 100100000, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
 --- !u!114 &843141668 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8459440560862438701, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
   m_PrefabInstance: {fileID: 843141662}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1661331008}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 794cbdb95cc76094484a121c4cc47318, type: 3}
@@ -1158,6 +1162,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+--- !u!1 &1661331008 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 410176089906247750, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
+  m_PrefabInstance: {fileID: 843141662}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1661331020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1661331008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7459758923a34be42b2b511f0f0bd79f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BadgeManager
+  equippedBadges: {fileID: 11400000, guid: be93a51aa16842a4c85fa0af75138391, type: 2}
+  playerData: {fileID: 11400000, guid: 707aa1a40a1bb064193fd4f6f25fcc6a, type: 2}
+  healData: {fileID: 11400000, guid: ccc02f2f8da643c4db2030f236d9a261, type: 2}
+  nameBadgeStrongHeart: Corazon fuerte
+  nameBadgeHundredRolls: Acrobata amateur
+  nameBadgeToughSkin: Piel dura
+  nameBadgeFullHealthDefense: Vida plena
+  nameBadgeNO2: NO2
+  nameBadgeSnailSlayer: Snail slayer
+  nameBadgeScoutPrincipiante: Scout principiante
+  nameBadgeBoxSlayer: Box slayer
+  nameBadgePrimeraInsignia: Primera insignia
+  nameBadgeExpertAcrobat: "Acr\xF3bata experto"
+  nameBadgeBigCharge: Peso pesado
+  nameBadgeFastPotions: Curacion rapida
 --- !u!114 &1840611228 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7179792591464108003, guid: e4cb207a5644d1e46b91785d0dd41bfd, type: 3}

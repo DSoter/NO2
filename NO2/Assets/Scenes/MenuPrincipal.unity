@@ -447,6 +447,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 1f379699d1594d340b10590f5a87a506, type: 2}
     - target: {fileID: 7521091902895558689, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
+      propertyPath: worldMapData
+      value: 
+      objectReference: {fileID: 11400000, guid: b759603f51b9ccc4d8641177dd487650, type: 2}
+    - target: {fileID: 7521091902895558689, guid: ea84c98d90b00d54a906151f7a5502bd, type: 3}
       propertyPath: gateTransitionSeconds
       value: 1
       objectReference: {fileID: 0}

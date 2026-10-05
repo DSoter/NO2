@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,7 +13,7 @@ public class FadeTransition : MonoBehaviour
 
     private void Awake()
     {
-        // Singleton simple para poder llamarlo desde cualquier botón sin arrastrar referencias
+        // Singleton simple para poder llamarlo desde cualquier botï¿½n sin arrastrar referencias
         if (instance != null && instance != this)
         {
             Destroy(gameObject);
@@ -39,6 +39,10 @@ public class FadeTransition : MonoBehaviour
     {
         yield return StartCoroutine(FadeTo(1f));
 
+        // Pantalla ya tapada y escena anterior todavia cargada: se actualiza la niebla del mapa
+        yield return null; // se dibuja el fotograma totalmente opaco antes de hacer el trabajo
+        GameManager.Instance.GetComponent<CheckpointManager>().UpdateWorldFogTexture();
+
         AIManager ai = GameManager.Instance.GetComponent<AIManager>();
         ai.ResetList();
         SceneManager.LoadSceneAsync(sceneName);
@@ -53,7 +57,7 @@ public class FadeTransition : MonoBehaviour
 
     private IEnumerator FadeTo(float targetAlpha)
     {
-        // Bloquea clics durante toda la animación, tanto al oscurecer como al aclarar
+        // Bloquea clics durante toda la animaciï¿½n, tanto al oscurecer como al aclarar
         canvasGroup.blocksRaycasts = true;
         canvasGroup.interactable = true;
 
@@ -62,7 +66,7 @@ public class FadeTransition : MonoBehaviour
 
         while (t < fadeDuration)
         {
-            t += Time.unscaledDeltaTime; // unscaledDeltaTime por si el juego pausa el timeScale al abrir el menú
+            t += Time.unscaledDeltaTime; // unscaledDeltaTime por si el juego pausa el timeScale al abrir el menï¿½
             canvasGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, t / fadeDuration);
             yield return null;
         }

@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -26,7 +26,7 @@ public class DiverseMenusManager : MonoBehaviour
     }
     public void SetMenuType(MenuType menuType)
     {
-        _menuType= menuType;
+        _menuType = menuType;
     }
 
     public enum MenuType
@@ -76,7 +76,8 @@ public class DiverseMenusManager : MonoBehaviour
     public bool DialogIsOpen
     {
         get { return dialogIsOpen; }
-        set {
+        set
+        {
             dialogIsOpen = value;
             dialogOpened?.Invoke();
         }
@@ -98,15 +99,16 @@ public class DiverseMenusManager : MonoBehaviour
         }
         if (_wantsToOpen)
         {
-            _wantsToOpen= false;
+            _wantsToOpen = false;
             OpenMenus();
         }
-        
+
     }
 
     public void OpenMenus()
     {
-        if(CanOpenInCurrentScene()) {
+        if (CanOpenInCurrentScene())
+        {
             _isOpen = !_isOpen;
 
             if (_isOpen)
@@ -122,9 +124,11 @@ public class DiverseMenusManager : MonoBehaviour
                 {
                     Time.timeScale = 1f;
                     SceneManager.UnloadSceneAsync(menusSceneName);
+                    GameManager.Instance.GetComponent<CheckpointManager>().UpdateWorldFogTexture();
                     SceneManager.LoadScene("MenuPrincipal");
                 }
-                else {
+                else
+                {
                     //if (exitPauseSound != null)
                     //    GameManager.Instance.audioManager.PlaySound(exitPauseSound);
                     CloseFlowers();
@@ -140,26 +144,26 @@ public class DiverseMenusManager : MonoBehaviour
     public void ChangeMenus()
     {
         //if (!CanOpenInCurrentScene()) { return; }
-        if (!_isOpen || _menuType == _futureMenuType)//Si no hay menu abierto o el menú que está abierto es el mismo se llama a open menus 
+        if (!_isOpen || _menuType == _futureMenuType)//Si no hay menu abierto o el menï¿½ que estï¿½ abierto es el mismo se llama a open menus 
         {
             _menuType = _futureMenuType;
-            OpenMenus();    
+            OpenMenus();
         }
         else
         {
             MenusHandler mh = FindAnyObjectByType<MenusHandler>();
-            if (mh == null) 
+            if (mh == null)
             {
                 Debug.Log("No se ha encontrado el menu handler");
                 return;
             }
             if (_menuType == MenuType.Gameover)
             {
-                Debug.Log("Se ha intentado abrir un menú estando gameOver, no se cierra");
+                Debug.Log("Se ha intentado abrir un menï¿½ estando gameOver, no se cierra");
             }
             //_menuType = _futureMenuType; //esto no hace falta
             switch (_menuType)
-            {     
+            {
                 case MenuType.Map:
                     switch (_futureMenuType)
                     {
@@ -178,7 +182,8 @@ public class DiverseMenusManager : MonoBehaviour
                             break;
                         case MenuType.Map:
                             SlideLeft(); break;
-                    }break;
+                    }
+                    break;
                 case MenuType.Flowers:
 
                     CloseFlowers();
@@ -204,8 +209,8 @@ public class DiverseMenusManager : MonoBehaviour
 
         string escenaActiva = SceneManager.GetActiveScene().name;
         Scene scene = SceneManager.GetSceneByName("PauseMenu");
-        
-        // Comprobar si la escena está cargada (incluyendo modo Additive)
+
+        // Comprobar si la escena estï¿½ cargada (incluyendo modo Additive)
         if (scene.isLoaded) { return false; }
 
         return escenaActiva != "MenuPrincipal" && escenaActiva != "Splash";
@@ -215,6 +220,7 @@ public class DiverseMenusManager : MonoBehaviour
     {
         _isOpen = false;
         Time.timeScale = 1f;
+        GameManager.Instance.GetComponent<CheckpointManager>().UpdateWorldFogTexture();
         SceneManager.LoadScene("MenuPrincipal");
     }
 
@@ -236,23 +242,23 @@ public class DiverseMenusManager : MonoBehaviour
 
 
 
-    
 
 
 
-    //Alpargata hacer que si está en el mapa y se pulsa flores 
+
+    //Alpargata hacer que si estï¿½ en el mapa y se pulsa flores 
     public void OnMap()
     {
         _futureMenuType = MenuType.Map;
         ChangeMenus();
 
     }
-    
+
     public void OnFlower()
     {
         _futureMenuType = MenuType.Flowers;
         ChangeMenus();
-        
+
     }
     public void OnBadge()
     {
@@ -263,7 +269,7 @@ public class DiverseMenusManager : MonoBehaviour
     {
         if (_isOpen)
         {
-            SlideLeft();                
+            SlideLeft();
         }
     }
     public void OnNavigateRight()
@@ -272,13 +278,13 @@ public class DiverseMenusManager : MonoBehaviour
         {
             SlideRight();
         }
- 
+
     }
     public void OnConfirm()
     {
         if (_isOpen)
         {
-            switch (_menuType) 
+            switch (_menuType)
             {
                 case MenuType.Map:
                     //ya veremos que se hace
@@ -291,9 +297,9 @@ public class DiverseMenusManager : MonoBehaviour
                     //ya veremos que se hace
                     break;
             }
-                    
+
         }
-        
+
     }
     private void OnActivateFlowers()
     {
@@ -339,7 +345,7 @@ public class DiverseMenusManager : MonoBehaviour
             }
 
         }
-        
+
     }
     public void OnGoLeft()
     {
@@ -359,7 +365,7 @@ public class DiverseMenusManager : MonoBehaviour
             }
 
         }
-        
+
     }
 
     public void OnGoRight()
@@ -464,8 +470,8 @@ public class DiverseMenusManager : MonoBehaviour
         {
             cf.DeactivateMenu();
         }
-        
-        
+
+
     }
     private void GoUpFlowers()
     {
@@ -486,16 +492,16 @@ public class DiverseMenusManager : MonoBehaviour
 
     private void DisposeActions()
     {
-            inputManager.onMap -= OnMap;
-            inputManager.onFlower -= OnFlower;
-            inputManager.onBadge  -= OnBadge;
-            inputManager.onNavigateLeft -= OnNavigateLeft;
-            inputManager.onNavigateRight -= OnNavigateRight;
-            inputManager.onConfirm -= OnConfirm;
-            inputManager.onGoUp -= OnGoUp;
-            inputManager.onGoDown -= OnGoDown;
-            inputManager.onGoRight -= OnGoRight;
-            inputManager.onGoLeft -= OnGoLeft;
+        inputManager.onMap -= OnMap;
+        inputManager.onFlower -= OnFlower;
+        inputManager.onBadge -= OnBadge;
+        inputManager.onNavigateLeft -= OnNavigateLeft;
+        inputManager.onNavigateRight -= OnNavigateRight;
+        inputManager.onConfirm -= OnConfirm;
+        inputManager.onGoUp -= OnGoUp;
+        inputManager.onGoDown -= OnGoDown;
+        inputManager.onGoRight -= OnGoRight;
+        inputManager.onGoLeft -= OnGoLeft;
     }
 
     private void EnableActions()

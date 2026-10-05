@@ -26,7 +26,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     [SerializeField] private Sprite campfireSprite;
     [SerializeField] private Sprite gateSprite;
     [SerializeField] private int iconSize = 16;
-    [SerializeField] private int iconTileSize = 3; 
+    [SerializeField] private int iconTileSize = 3;
 
     [Header("Colores")]
     [SerializeField] private Color floorColor = Color.gray;
@@ -58,6 +58,12 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
 
     private Texture2D _mapTexture;
     private Texture2D _fogTexture;
+
+    // Texturas del mapa mundial. Son estáticas para que sigan en memoria aunque se descargue la escena
+    // de menús (DiverseMenusManager la descarga al cerrar) y no haya que releer los PNG en cada apertura.
+    // Si Unity las hubiera destruido, valen null y se vuelven a cargar de disco o a generar.
+    private static Texture2D s_worldMapTexture;
+    private static Texture2D s_worldFogTexture;
     private float _targetScale = 1f;
     private Vector3 _velocity;
     private bool _isDragging;
@@ -107,8 +113,8 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         Instance = this;
     }
     private void OnEnable()
-    { 
-        
+    {
+
         mapData.Save();
         UpdateMapData();
 
@@ -116,7 +122,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         Debug.Log(mapData.FogTextureHasToUpdate);
         GenerateWorldMapTexture();
         _targetScale = mapContainer.localScale.x;
-        UpdatePlayerIcon(); 
+        UpdatePlayerIcon();
         CenterOnPlayer();
 
 
@@ -128,42 +134,95 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     }
     public void GenerateWorldMapTexture()
     {
-        EnsureAllScenesLoaded();
+        EnsureAllScenesLoaded(worldMapData);
         GenerateWorldMap();
-        GenerateWorldFog();
+        RefreshWorldFog(worldMapData);
+        if (s_worldFogTexture != null) fogImage.texture = s_worldFogTexture;
+
+        // El rect del mapa y el de la niebla toman la proporción del mundo para que las casillas salgan cuadradas
+        ApplyTextureAspect(_worldTotalCols * pixelsPerTile, _worldTotalRows * pixelsPerTile);
         RecalculateMinScale();
+    }
+
+    /// <summary>
+    /// Actualiza la textura global de niebla (en memoria y en el PNG) si alguna escena tiene niebla pendiente.
+    /// Es estático: no necesita que el mapa esté abierto ni que exista el objeto del mapa, así que se puede
+    /// llamar desde la pantalla de carga. No genera la textura del mapa ni toca la interfaz.
+    /// Antes guarda en PlayerPrefs la visibilidad de las escenas con niebla revelada pendiente.
+    /// </summary>
+    public static void UpdateWorldFogTexture(WorldMapData worldMapData)
+    {
+        if (worldMapData == null) return;
+
+        SavePendingVisibility(worldMapData);
+        EnsureAllScenesLoaded(worldMapData);
+        RefreshWorldFog(worldMapData);
+    }
+
+    // La textura (PNG) y la visibilidad (PlayerPrefs, SceneMapData.Save) se guardan por separado.
+    // FogManager.Start recarga la visibilidad de PlayerPrefs al entrar en la escena, así que hay que
+    // guardarla aquí o se perdería lo revelado. Va antes de EnsureAllScenesLoaded para tocar solo las
+    // escenas que ya estaban en memoria, y antes de RefreshWorldFog, que limpia FogTextureHasToUpdate.
+    private static void SavePendingVisibility(WorldMapData worldMapData)
+    {
+        foreach (WorldMapData.SceneMapEntry entry in worldMapData.scenes)
+        {
+            SceneMapData data = entry.mapData;
+            if (data == null || data.MapMatrix == null || data.IsVisibleMatrix == null) continue;
+
+            if (data.FogTextureHasToUpdate)
+                data.Save();
+        }
     }
 
 
 
     private void GenerateWorldMap()
     {
-        string path = GetWorldMapTexturePath();
-        (int minX, int minY, int totalCols, int totalRows) = CalculateWorldBounds();
+        string path = GetWorldMapTexturePath(worldMapData);
+        (int minX, int minY, int totalCols, int totalRows) = CalculateWorldBounds(worldMapData);
         _worldMinX = minX;
         _worldMinY = minY;
         _worldTotalCols = totalCols;
         _worldTotalRows = totalRows;
 
-        if (!worldMapData.WorldMapNeedsUpdate && System.IO.File.Exists(path))
-        {
-            byte[] bytes = System.IO.File.ReadAllBytes(path);
-            _mapTexture = new Texture2D(2, 2, TextureFormat.RGBA32, false);
-            _mapTexture.filterMode = FilterMode.Point;
-            _mapTexture.LoadImage(bytes);
-            mapImage.texture = _mapTexture;
+        int texWidth = totalCols * pixelsPerTile;
+        int texHeight = totalRows * pixelsPerTile;
 
-            return;
+        // Una textura guardada solo vale si tiene el tamaño actual del mundo. Si no (se han añadido
+        // escenas, se ha editado un tilemap, ha cambiado pixelsPerTile...) se vería estirada: se regenera.
+        if (!worldMapData.WorldMapNeedsUpdate)
+        {
+            // Ya está en memoria de una apertura anterior: no se vuelve a leer el PNG
+            if (HasSize(s_worldMapTexture, texWidth, texHeight))
+            {
+                mapImage.texture = s_worldMapTexture;
+                return;
+            }
+
+            if (System.IO.File.Exists(path))
+            {
+                byte[] bytes = System.IO.File.ReadAllBytes(path);
+                Texture2D loaded = new Texture2D(2, 2, TextureFormat.RGBA32, false);
+                loaded.filterMode = FilterMode.Point;
+
+                // true: no se guarda copia en RAM, solo en GPU
+                if (loaded.LoadImage(bytes, true) && HasSize(loaded, texWidth, texHeight))
+                {
+                    DestroyTexture(ref s_worldMapTexture);
+                    s_worldMapTexture = loaded;
+                    mapImage.texture = s_worldMapTexture;
+                    return;
+                }
+                DestroyTexture(ref loaded);
+            }
         }
 
         if (totalCols <= 0 || totalRows <= 0) return;
 
-        int texWidth = totalCols * pixelsPerTile;
-        int texHeight = totalRows * pixelsPerTile;
-
-        if (_mapTexture != null) Destroy(_mapTexture);
-        _mapTexture = new Texture2D(texWidth, texHeight, TextureFormat.RGBA32, false);
-        _mapTexture.filterMode = FilterMode.Point;
+        DestroyTexture(ref s_worldMapTexture);
+        s_worldMapTexture = new Texture2D(texWidth, texHeight, TextureFormat.RGBA32, false);
+        s_worldMapTexture.filterMode = FilterMode.Point;
 
         Color32[] pixels = new Color32[texWidth * texHeight];
         Color32 clear = Color.clear;
@@ -194,80 +253,123 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
                 }
         }
 
-        _mapTexture.SetPixels32(pixels);
-        _mapTexture.Apply();
-        mapImage.texture = _mapTexture;
-        System.IO.File.WriteAllBytes(path, _mapTexture.EncodeToPNG());
+        s_worldMapTexture.SetPixels32(pixels);
+        s_worldMapTexture.Apply();
+        mapImage.texture = s_worldMapTexture;
+        System.IO.File.WriteAllBytes(path, s_worldMapTexture.EncodeToPNG());
+        s_worldMapTexture.Apply(false, true); // ya guardada en disco: se libera la copia en RAM
         worldMapData.WorldMapNeedsUpdate = false;
     }
 
-    private void GenerateWorldFog()
+    // La niebla es un valor por casilla, así que la textura usa 1 píxel por casilla (no pixelsPerTile).
+    // Con FilterMode.Point y estirada sobre el mismo rect que el mapa se ve igual que antes.
+    private static void RefreshWorldFog(WorldMapData worldMapData)
     {
-        string path = GetWorldFogTexturePath();
+        (int minX, int minY, int totalCols, int totalRows) = CalculateWorldBounds(worldMapData);
+        if (totalCols <= 0 || totalRows <= 0) return;
+
         bool anyDirty = false;
         foreach (WorldMapData.SceneMapEntry entry in worldMapData.scenes)
             if (entry.mapData != null && entry.mapData.IsVisibleMatrix != null && entry.mapData.FogTextureHasToUpdate)
                 anyDirty = true;
 
-        if (!anyDirty && System.IO.File.Exists(path))
+        string path = GetWorldFogTexturePath(worldMapData);
+
+        if (!anyDirty)
         {
-            byte[] bytes = System.IO.File.ReadAllBytes(path);
-            if (_fogTexture != null) Destroy(_fogTexture);
-            _fogTexture = new Texture2D(2, 2, TextureFormat.RGBA32, false);
-            _fogTexture.filterMode = FilterMode.Point;
-            _fogTexture.LoadImage(bytes);
-            fogImage.texture = _fogTexture;
-            return;
+            // Ya está en memoria y con el tamaño actual del mundo: no hay nada que hacer
+            if (HasSize(s_worldFogTexture, totalCols, totalRows)) return;
+
+            if (System.IO.File.Exists(path))
+            {
+                byte[] bytes = System.IO.File.ReadAllBytes(path);
+                Texture2D loaded = new Texture2D(2, 2, TextureFormat.RGBA32, false);
+                loaded.filterMode = FilterMode.Point;
+
+                // Solo vale si coincide con el tamaño actual del mundo. Un PNG antiguo (a pixelsPerTile
+                // por casilla) o de un mundo con otras dimensiones se descarta y se regenera abajo.
+                if (loaded.LoadImage(bytes) && HasSize(loaded, totalCols, totalRows))
+                {
+                    DestroyTexture(ref s_worldFogTexture);
+                    s_worldFogTexture = loaded;
+                    return;
+                }
+                DestroyTexture(ref loaded);
+            }
         }
 
-        (int minX, int minY, int totalCols, int totalRows) = CalculateWorldBounds();
-        if (totalCols <= 0 || totalRows <= 0) return;
-
-        int texWidth = totalCols * pixelsPerTile;
-        int texHeight = totalRows * pixelsPerTile;
-
-        if (_fogTexture != null) Destroy(_fogTexture);
-        _fogTexture = new Texture2D(texWidth, texHeight, TextureFormat.RGBA32, false);
-        _fogTexture.filterMode = FilterMode.Point;
+        if (!HasSize(s_worldFogTexture, totalCols, totalRows))
+        {
+            DestroyTexture(ref s_worldFogTexture);
+            s_worldFogTexture = new Texture2D(totalCols, totalRows, TextureFormat.RGBA32, false);
+            s_worldFogTexture.filterMode = FilterMode.Point;
+        }
 
         Color32 black = Color.black;
         Color32 clear = Color.clear;
 
-        Color32[] pixels = new Color32[texWidth * texHeight];
+        Color32[] pixels = new Color32[totalCols * totalRows];
         for (int i = 0; i < pixels.Length; i++) pixels[i] = black; // todo oculto por defecto
 
         foreach (WorldMapData.SceneMapEntry entry in worldMapData.scenes)
         {
             if (entry.mapData?.IsVisibleMatrix == null) continue;
 
-            int rows = entry.mapData.IsVisibleMatrix.GetLength(0);
-            int cols = entry.mapData.IsVisibleMatrix.GetLength(1);
+            bool[,] visible = entry.mapData.IsVisibleMatrix;
+            int rows = visible.GetLength(0);
+            int cols = visible.GetLength(1);
             int offsetX = entry.offsetInCells.x - minX;
             int offsetY = entry.offsetInCells.y - minY;
 
             for (int row = 0; row < rows; row++)
-                for (int col = 0; col < cols; col++)
-                    if (entry.mapData.IsVisibleMatrix[row, col])
-                        FillTileInBuffer(pixels, texWidth, texHeight, offsetX + col, offsetY + row, clear);
+            {
+                int y = offsetY + row;
+                if (y < 0 || y >= totalRows) continue;
 
-            entry.mapData.FogTextureHasToUpdate = false;
+                for (int col = 0; col < cols; col++)
+                {
+                    if (!visible[row, col]) continue;
+
+                    int x = offsetX + col;
+                    if (x < 0 || x >= totalCols) continue;
+
+                    pixels[y * totalCols + x] = clear;
+                }
+            }
+
+            // El setter escribe PlayerPrefs en disco: solo se toca si realmente estaba pendiente
+            if (entry.mapData.FogTextureHasToUpdate)
+                entry.mapData.FogTextureHasToUpdate = false;
         }
 
-        _fogTexture.SetPixels32(pixels);
-        _fogTexture.Apply();
-        fogImage.texture = _fogTexture;
-        System.IO.File.WriteAllBytes(path, _fogTexture.EncodeToPNG());
-
+        s_worldFogTexture.SetPixels32(pixels);
+        s_worldFogTexture.Apply();
+        System.IO.File.WriteAllBytes(path, s_worldFogTexture.EncodeToPNG());
     }
 
-    private (int minX, int minY, int totalCols, int totalRows) CalculateWorldBounds()
+    private static bool HasSize(Texture2D tex, int width, int height)
+    {
+        return tex != null && tex.width == width && tex.height == height;
+    }
+
+    private static void DestroyTexture(ref Texture2D tex)
+    {
+        if (tex != null)
+        {
+            if (Application.isPlaying) Destroy(tex);
+            else DestroyImmediate(tex); // ClearWorldMapCache se puede lanzar desde el menú contextual sin estar en Play
+        }
+        tex = null;
+    }
+
+    private static (int minX, int minY, int totalCols, int totalRows) CalculateWorldBounds(WorldMapData worldMapData)
     {
         int minX = int.MaxValue, minY = int.MaxValue;
         int maxX = int.MinValue, maxY = int.MinValue;
 
         foreach (WorldMapData.SceneMapEntry entry in worldMapData.scenes)
         {
-            if(entry.mapData?.MapMatrix == null) { Debug.Log($"[Bounds] {entry.sceneName} SIN CARGAR"); continue; }
+            if (entry.mapData?.MapMatrix == null) { Debug.Log($"[Bounds] {entry.sceneName} SIN CARGAR"); continue; }
             int rows = entry.mapData.MapMatrix.GetLength(0);
             int cols = entry.mapData.MapMatrix.GetLength(1);
 
@@ -308,11 +410,11 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
 
         // Posición en celdas locales
         Vector2Int gridPos = tts.WorldToGrid(playerTransform.position);
-        
+
         // Convertir a coordenadas globales
         int globalCol = currentEntry.offsetInCells.x - minX + gridPos.x;
         int globalRow = currentEntry.offsetInCells.y - minY + gridPos.y;
-        
+
 
         int texWidth = totalCols * pixelsPerTile;
         int texHeight = totalRows * pixelsPerTile;
@@ -365,16 +467,21 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         float aspect = (float)texWidth / texHeight;
 
         // Usamos el ancho actual como referencia y recalculamos el alto según el aspect ratio real
-        float baseWidth = mapRect.rect.width > 0 ? mapRect.rect.width : texWidth;
+        float baseWidth = mapRect.rect.width;
+        if (baseWidth <= 0f) return; // layout todavía sin calcular: no se toca nada
         float newHeight = baseWidth / aspect;
 
-        mapRect.sizeDelta = new Vector2(baseWidth, newHeight);
-        fogRect.sizeDelta = new Vector2(baseWidth, newHeight);
+        // SetSizeWithCurrentAnchors deja el rect con el tamaño pedido sean cuales sean sus anchors
+        // (sizeDelta solo equivale al tamaño cuando los anchors no están estirados)
+        mapRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, baseWidth);
+        mapRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, newHeight);
+        fogRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, baseWidth);
+        fogRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, newHeight);
     }
 
-    private string GetWorldMapTexturePath()
+    private static string GetWorldMapTexturePath(WorldMapData worldMapData)
     {
-        string path =System.IO.Path.Combine(
+        string path = System.IO.Path.Combine(
             Application.persistentDataPath,
             worldMapData.name + "_worldMap.png"
         );
@@ -382,7 +489,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         return path;
     }
 
-    private string GetWorldFogTexturePath()
+    private static string GetWorldFogTexturePath(WorldMapData worldMapData)
     {
         string path = System.IO.Path.Combine(
             Application.persistentDataPath,
@@ -395,10 +502,13 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
     [ContextMenu("Clear World Map Cache")]
     public void ClearWorldMapCache()
     {
-        string path = GetWorldMapTexturePath();
+        string path = GetWorldMapTexturePath(worldMapData);
         if (System.IO.File.Exists(path)) System.IO.File.Delete(path);
-        string fogPath = GetWorldFogTexturePath();
+        string fogPath = GetWorldFogTexturePath(worldMapData);
         if (System.IO.File.Exists(fogPath)) System.IO.File.Delete(fogPath);
+        // También se descartan las copias en memoria; si no, se seguirían mostrando las antiguas
+        DestroyTexture(ref s_worldMapTexture);
+        DestroyTexture(ref s_worldFogTexture);
         worldMapData.WorldMapNeedsUpdate = true;
         Debug.Log("Caché de mapa mundial eliminada");
     }
@@ -446,7 +556,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
         if (matrix == null) return;
 
 
-        
+
 
 
         Debug.Log($"Rows: {matrix.GetLength(0)} Cols: {matrix.GetLength(1)}");
@@ -589,7 +699,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
             Debug.LogError("IsVisibleMatrix es null");
             return;
         }
-        
+
 
         string path = GetFogTexturePath();
 
@@ -775,7 +885,7 @@ public class MapControllerV2 : MonoBehaviour, IScrollHandler, IPointerDownHandle
             default: return null;
         }
     }
-    private void EnsureAllScenesLoaded()
+    private static void EnsureAllScenesLoaded(WorldMapData worldMapData)
     {
         foreach (WorldMapData.SceneMapEntry entry in worldMapData.scenes)
         {

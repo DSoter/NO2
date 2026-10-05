@@ -24,6 +24,9 @@ public class CheckpointManager : MonoBehaviour
 
     [SerializeField] private RespawnData respawnData;
 
+    [Header("Mapa")]
+    [SerializeField] private WorldMapData worldMapData; // para actualizar la niebla del mapa antes de cambiar de escena
+
     private SceneController sc;
     private DiverseMenusManager _menusManager;
     private bool managerPaused;
@@ -41,7 +44,7 @@ public class CheckpointManager : MonoBehaviour
     public int IdRespawn
     {
         get { return idRespawn; }
-        set {  idRespawn = value; }
+        set { idRespawn = value; }
     }
     public int IdSpawn
     {
@@ -60,7 +63,7 @@ public class CheckpointManager : MonoBehaviour
     }
     public bool HasToSpawnPlayerAfterDeath
     {
-        get {return hasToSpawnPlayerAfterDeath; }
+        get { return hasToSpawnPlayerAfterDeath; }
         set { hasToSpawnPlayerAfterDeath = value; }
     }
     public float GateTransitionSeconds
@@ -72,7 +75,7 @@ public class CheckpointManager : MonoBehaviour
         get { return playerReference; }
         set { playerReference = value; }
     }
-    
+
 
     public TilemapToScriptable TilemapToScriptable
     {
@@ -102,14 +105,14 @@ public class CheckpointManager : MonoBehaviour
 
     public bool CameraLockedPlayer
     {
-        get { return  cameraLockedPlayer; }
+        get { return cameraLockedPlayer; }
         set { cameraLockedPlayer = value; }
     }
 
     public Dictionary<string, bool> ScenesHasToRespawn
     {
         get { return scenesHasToRespawn; }
-        set {  scenesHasToRespawn = value;}
+        set { scenesHasToRespawn = value; }
     }
     public Dictionary<string, bool> ScenesHasToRespawnAfterDeath
     {
@@ -123,7 +126,7 @@ public class CheckpointManager : MonoBehaviour
         nextScene = sceneName;
         idSpawn = newSpawnPoint;
         StartCoroutine(NextSceneCoroutine(gateTransitionSeconds));
-        
+
     }
     private IEnumerator NextSceneCoroutine(float waitDurationSeconds)
     {
@@ -134,7 +137,7 @@ public class CheckpointManager : MonoBehaviour
         }
 
 
-        PlayerController playerScript= playerReference.gameObject.GetComponent<PlayerController>();
+        PlayerController playerScript = playerReference.gameObject.GetComponent<PlayerController>();
         playerScript.ExitScene(enterGateDirection * (-1), waitDurationSeconds);
 
 
@@ -147,16 +150,11 @@ public class CheckpointManager : MonoBehaviour
     public void StartScene(string sceneName)
     {
         hasToSpawnPlayer = true;
-
-        AIManager ai = GameManager.Instance.GetComponent<AIManager>();
-        ai.ResetList();
         SceneManager.LoadScene(sceneName);
         //FadeTransition.Instance.LoadSceneWithFade(sceneName);
     }
     public void StartSceneWithFade(string sceneName)
     {
-        AIManager ai = GameManager.Instance.GetComponent<AIManager>();
-        ai.ResetList();
         hasToSpawnPlayer = true;
         FadeTransition.Instance.LoadSceneWithFade(sceneName);
     }
@@ -166,7 +164,7 @@ public class CheckpointManager : MonoBehaviour
         if (nextScene is null)
         {
             nextScene = SceneManager.GetActiveScene().name;
-        }   
+        }
         if (CheckIsActiveScene(nextScene))
         {
             if (ExistsSceneController())
@@ -175,11 +173,24 @@ public class CheckpointManager : MonoBehaviour
             }
         }
         else
-        {            
+        {
             hasToSpawnPlayer = true;
+            UpdateWorldFogTexture();
             SceneManager.LoadScene(nextScene);
         }
 
+    }
+
+    // Actualiza la textura de niebla del mapa mundial. Pensado para llamarse con la pantalla ya tapada,
+    // justo antes de cambiar de escena. No necesita que el mapa esté abierto ni cargar su escena.
+    public void UpdateWorldFogTexture()
+    {
+        if (worldMapData == null)
+        {
+            Debug.LogWarning("WorldMapData no asignado en CheckpointManager: no se actualiza la niebla del mapa");
+            return;
+        }
+        MapControllerV2.UpdateWorldFogTexture(worldMapData);
     }
 
     public void RespawnPlayer()
@@ -209,9 +220,9 @@ public class CheckpointManager : MonoBehaviour
 
         OpenGameOver();
 
-        
 
-        
+
+
     }
     private IEnumerator RespawnAfterNoOxygenCoroutine()
     {
@@ -229,30 +240,40 @@ public class CheckpointManager : MonoBehaviour
 
     public void RespawnAfterGameOver()
     {
-        
+
 
         _menusManager.OpenMenus();//Para cerrar el menú
 
+        ResetAllDeathRespawns();
 
-        if (sceneWhereRespawn != null && !sceneWhereRespawn.Equals(""))
+        if (sceneWhereRespawn != null)
         {
-            MarkAllScenesForDeathRespawn();
-
-            hasToSpawnPlayerAfterDeath = true;
-            if (sceneWhereRespawn.Equals(SceneManager.GetActiveScene().name))
+            if (sceneWhereRespawn.Equals(""))
             {
-                FadeTransition.Instance.LoadSceneWithFade(sceneWhereRespawn);
+                if (ExistsSceneController())
+                {
+                    sc.RespawnPlayer();
+                }
             }
-            else 
+            else
             {
-                FadeTransition.Instance.LoadSceneWithFade(sceneWhereRespawn);
+                if (!CheckIsActiveScene(sceneWhereRespawn))
+                {
+                    hasToSpawnPlayerAfterDeath = true;
+                    UpdateWorldFogTexture();
+                    SceneManager.LoadScene(sceneWhereRespawn);
+                }
+                else
+                {
+                    if (ExistsSceneController())
+                    {
+                        sc.RespawnPlayer();
+                    }
+                }
             }
-                
         }
         else
         {
-            ResetAllDeathRespawns();
-
             if (ExistsSceneController())
             {
                 sc.RespawnPlayer();
@@ -295,7 +316,7 @@ public class CheckpointManager : MonoBehaviour
 
     public void ResetAllRestRespawns()
     {
-        
+
         if (scenesHasToRespawn == null)
         {
             scenesHasToRespawn = new Dictionary<string, bool>();
@@ -304,18 +325,15 @@ public class CheckpointManager : MonoBehaviour
         List<string> keys = new List<string>(scenesHasToRespawn.Keys);
         foreach (string name in keys)
         {
-             scenesHasToRespawn[name] = true;
+            scenesHasToRespawn[name] = true;
 
         }
         RespawnObjectsManager rom = GameObject.FindGameObjectWithTag("SceneController").GetComponent<RespawnObjectsManager>();
-        if (rom != null)
-        {
-            rom.UpdateRest();
-        }
+        rom.UpdateRest();
 
     }
 
-    public void MarkAllScenesForDeathRespawn()
+    public void ResetAllDeathRespawns()
     {
         if (scenesHasToRespawnAfterDeath == null)
         {
@@ -327,17 +345,9 @@ public class CheckpointManager : MonoBehaviour
         {
             scenesHasToRespawnAfterDeath[name] = true;
         }
-    }
-
-    public void ResetAllDeathRespawns()
-    {
-        MarkAllScenesForDeathRespawn();
 
         RespawnObjectsManager rom = GameObject.FindGameObjectWithTag("SceneController").GetComponent<RespawnObjectsManager>();
-        if (rom != null) 
-        {
-            rom.UpdateDeath();
-        }
+        rom.UpdateDeath();
     }
 
 }

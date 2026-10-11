@@ -43,10 +43,10 @@ public class MoneyData : ScriptableObject
             }
 
             money = Mathf.Clamp(value, 0, maxAmount);
-            if (money >= 100)
+            if (money >= 1000)
             {
                 GameManager.Instance.GetComponent<AchievementManager>().NotifyEvent("100_money");
-                if (money >= 1000)
+                if (money >= 5000)
                 {
                     GameManager.Instance.GetComponent<AchievementManager>().NotifyEvent("5000_money");
 

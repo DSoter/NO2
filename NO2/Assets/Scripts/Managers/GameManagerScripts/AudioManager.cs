@@ -9,7 +9,7 @@ public class AudioManager : MonoBehaviour
 
     [Space(5)]
     [Header("SFX Pool")]
-    [SerializeField] private ObjectPool<AudioSource> _sfxPool;
+    private ObjectPool<AudioSource> _sfxPool;
     [SerializeField] private AudioSource _sfxPrefab;
     [SerializeField] private int _defaultCapacity = 10;
     [SerializeField] private int _maxSize = 20;

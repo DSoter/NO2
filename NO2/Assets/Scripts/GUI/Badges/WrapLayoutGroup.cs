@@ -37,7 +37,7 @@ public class WrapLayoutGroup : LayoutGroup
     public override void CalculateLayoutInputVertical()
     {
         calculatePositionsAndRequiredSize();
-        SetLayoutInputForAxis(calculatedHeight, calculatedHeight, -1, 1);
+        SetLayoutInputForAxis(calculatedHeight, calculatedHeight, -1, 1,1); // REVISAR
     }
 
     public override void SetLayoutHorizontal() { }

@@ -385,7 +385,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 760672825303884530, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.099999905
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 1269435438582452286, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
       propertyPath: m_SizeDelta.x
@@ -653,20 +653,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5208446558343180469, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
       propertyPath: m_fontSize
-      value: 3
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5208446558343180469, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
+      propertyPath: m_margin.w
+      value: 9.321832
+      objectReference: {fileID: 0}
+    - target: {fileID: 5208446558343180469, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
+      propertyPath: m_margin.y
+      value: 0.50388336
       objectReference: {fileID: 0}
     - target: {fileID: 5208446558343180469, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 524525b155cd02847a12d19788153a2d, type: 2}
+      objectReference: {fileID: 11400000, guid: 9a14a8a1184c5f14fbce3338ea4d7a35, type: 2}
     - target: {fileID: 5208446558343180469, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
       propertyPath: m_fontSizeBase
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5208446558343180469, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -8624792438648299625, guid: 524525b155cd02847a12d19788153a2d, type: 2}
+      objectReference: {fileID: 1260715531048141648, guid: 9a14a8a1184c5f14fbce3338ea4d7a35, type: 2}
+    - target: {fileID: 5208446558343180469, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 5208446558343180469, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
@@ -749,7 +761,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6902873448760933548, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1.5
+      value: -3.8
       objectReference: {fileID: 0}
     - target: {fileID: 7153687122700670448, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
       propertyPath: m_Material
@@ -761,8 +773,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7387059664408405488, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
       propertyPath: m_fontSize
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 7387059664408405488, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 9a14a8a1184c5f14fbce3338ea4d7a35, type: 2}
     - target: {fileID: 7387059664408405488, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
       propertyPath: m_fontColor.b
       value: 0.09233888
@@ -777,8 +793,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7387059664408405488, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
       propertyPath: m_fontSizeBase
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 7387059664408405488, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 1260715531048141648, guid: 9a14a8a1184c5f14fbce3338ea4d7a35, type: 2}
     - target: {fileID: 7387059664408405488, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4279774303
@@ -786,6 +806,10 @@ PrefabInstance:
     - target: {fileID: 7387059664408405488, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
       propertyPath: m_VerticalAlignment
       value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 7387059664408405488, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7657151157033484641, guid: 05a834dac8ae77040a538ad92e1f0f32, type: 3}
       propertyPath: m_Sprite

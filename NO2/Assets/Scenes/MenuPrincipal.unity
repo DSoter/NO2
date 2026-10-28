@@ -721,6 +721,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -67.93602
       objectReference: {fileID: 0}
+    - target: {fileID: 1818253908980527335, guid: 22b6e14101003474495177f3323053f6, type: 3}
+      propertyPath: m_text
+      value: OPCIONES
+      objectReference: {fileID: 0}
     - target: {fileID: 2035432137889784664, guid: 22b6e14101003474495177f3323053f6, type: 3}
       propertyPath: m_RenderMode
       value: 0
@@ -945,6 +949,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -213.00002
       objectReference: {fileID: 0}
+    - target: {fileID: 8810767497367482462, guid: 22b6e14101003474495177f3323053f6, type: 3}
+      propertyPath: m_text
+      value: SALIR
+      objectReference: {fileID: 0}
     - target: {fileID: 9083940110671397606, guid: 22b6e14101003474495177f3323053f6, type: 3}
       propertyPath: m_Type
       value: 0
@@ -1001,6 +1009,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1288395301}
     m_Modifications:
+    - target: {fileID: 1721846603914988617, guid: f9484fbf7bfd23640b43cde916c632a9, type: 3}
+      propertyPath: m_text
+      value: NUEVA PARTIDA
+      objectReference: {fileID: 0}
     - target: {fileID: 1782051244287317021, guid: f9484fbf7bfd23640b43cde916c632a9, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

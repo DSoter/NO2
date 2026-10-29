@@ -118,7 +118,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -133,9 +133,9 @@ TextureImporter:
       name: player_walks_back_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 11
         y: 6
-        width: 32
+        width: 10
         height: 20
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -155,10 +155,10 @@ TextureImporter:
       name: player_walks_back_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 43
         y: 6
-        width: 32
-        height: 20
+        width: 10
+        height: 19
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -177,10 +177,10 @@ TextureImporter:
       name: player_walks_back_2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 75
         y: 6
-        width: 32
-        height: 20
+        width: 11
+        height: 19
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -199,10 +199,10 @@ TextureImporter:
       name: player_walks_back_3
       rect:
         serializedVersion: 2
-        x: 96
+        x: 107
         y: 6
-        width: 32
-        height: 20
+        width: 11
+        height: 19
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,9 +221,9 @@ TextureImporter:
       name: player_walks_back_4
       rect:
         serializedVersion: 2
-        x: 128
+        x: 139
         y: 6
-        width: 32
+        width: 10
         height: 20
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -243,9 +243,9 @@ TextureImporter:
       name: player_walks_back_5
       rect:
         serializedVersion: 2
-        x: 160
+        x: 171
         y: 6
-        width: 32
+        width: 10
         height: 20
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -265,7 +265,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 28442e60576720840ba2f73729de8dba
+    spriteID: 1f3eefc0c4ba5d34d998b24c72178267
     internalID: 0
     vertices: []
     indices: 
@@ -275,7 +275,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       player_walks_back_0: -3850874790809074764
       player_walks_back_1: -9214063159669327063

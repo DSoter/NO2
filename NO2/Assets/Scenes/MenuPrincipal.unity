@@ -893,6 +893,26 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: QuitGame
       objectReference: {fileID: 0}
+    - target: {fileID: 4021599328124698426, guid: 22b6e14101003474495177f3323053f6, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4220488623031472542, guid: 22b6e14101003474495177f3323053f6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4220488623031472542, guid: 22b6e14101003474495177f3323053f6, type: 3}
+      propertyPath: m_Color.b
+      value: 0.09433961
+      objectReference: {fileID: 0}
+    - target: {fileID: 4220488623031472542, guid: 22b6e14101003474495177f3323053f6, type: 3}
+      propertyPath: m_Color.g
+      value: 0.019757919
+      objectReference: {fileID: 0}
+    - target: {fileID: 4220488623031472542, guid: 22b6e14101003474495177f3323053f6, type: 3}
+      propertyPath: m_Color.r
+      value: 0.037515458
+      objectReference: {fileID: 0}
     - target: {fileID: 4817413587080923628, guid: 22b6e14101003474495177f3323053f6, type: 3}
       propertyPath: m_Controller
       value: 
@@ -929,6 +949,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 212
       objectReference: {fileID: 0}
+    - target: {fileID: 6407585157204453001, guid: 22b6e14101003474495177f3323053f6, type: 3}
+      propertyPath: m_Color.a
+      value: 0.101960786
+      objectReference: {fileID: 0}
     - target: {fileID: 6967760236606590789, guid: 22b6e14101003474495177f3323053f6, type: 3}
       propertyPath: m_ScreenMatchMode
       value: 0
@@ -953,6 +977,10 @@ PrefabInstance:
       propertyPath: m_text
       value: SALIR
       objectReference: {fileID: 0}
+    - target: {fileID: 8914823400885209925, guid: 22b6e14101003474495177f3323053f6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3d231a790156f9445bff9fb4e9ca6442, type: 3}
     - target: {fileID: 9083940110671397606, guid: 22b6e14101003474495177f3323053f6, type: 3}
       propertyPath: m_Type
       value: 0
